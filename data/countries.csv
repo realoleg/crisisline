@@ -1,0 +1,51 @@
+iso2,name_en,who_region,lang,city_en,country_local,city_local,lang_group,has_crisis_line
+GB,United Kingdom,EUR,en,London,United Kingdom,London,en,true
+IE,Ireland,EUR,en,Dublin,Ireland,Dublin,en,true
+DE,Germany,EUR,de,Berlin,Deutschland,Berlin,,true
+FR,France,EUR,fr,Paris,France,Paris,fr,true
+ES,Spain,EUR,es,Madrid,España,Madrid,es,true
+IT,Italy,EUR,it,Rome,Italia,Roma,,true
+PL,Poland,EUR,pl,Warsaw,Polska,Warszawa,,true
+NL,Netherlands,EUR,nl,Amsterdam,Nederland,Amsterdam,,true
+SE,Sweden,EUR,sv,Stockholm,Sverige,Stockholm,,true
+PT,Portugal,EUR,pt,Lisbon,Portugal,Lisboa,pt,true
+GR,Greece,EUR,el,Athens,Ελλάδα,Αθήνα,,true
+UA,Ukraine,EUR,uk,Kyiv,Україна,Київ,,true
+RU,Russia,EUR,ru,Moscow,Россия,Москва,ru,true
+GE,Georgia,EUR,ka,Tbilisi,საქართველო,თბილისი,,false
+TR,Türkiye,EUR,tr,Ankara,Türkiye,Ankara,,false
+KZ,Kazakhstan,EUR,ru,Astana,Казахстан,Астана,ru,true
+RO,Romania,EUR,ro,Bucharest,România,București,,true
+US,United States,AMR,en,Washington,United States,Washington,en,true
+CA,Canada,AMR,en,Ottawa,Canada,Ottawa,en,true
+MX,Mexico,AMR,es,Mexico City,México,Ciudad de México,es,true
+BR,Brazil,AMR,pt,Brasília,Brasil,Brasília,pt,true
+AR,Argentina,AMR,es,Buenos Aires,Argentina,Buenos Aires,es,true
+CO,Colombia,AMR,es,Bogotá,Colombia,Bogotá,es,true
+CL,Chile,AMR,es,Santiago,Chile,Santiago,es,true
+PE,Peru,AMR,es,Lima,Perú,Lima,es,true
+EG,Egypt,EMR,ar,Cairo,مصر,القاهرة,ar,true
+SA,Saudi Arabia,EMR,ar,Riyadh,المملكة العربية السعودية,الرياض,ar,true
+MA,Morocco,EMR,ar,Rabat,المغرب,الرباط,ar,false
+LB,Lebanon,EMR,ar,Beirut,لبنان,بيروت,ar,true
+PK,Pakistan,EMR,ur,Islamabad,پاکستان,اسلام آباد,,true
+IR,Iran,EMR,fa,Tehran,ایران,تهران,,true
+NG,Nigeria,AFR,en,Abuja,Nigeria,Abuja,en,true
+ZA,South Africa,AFR,en,Pretoria,South Africa,Pretoria,en,true
+KE,Kenya,AFR,sw,Nairobi,Kenya,Nairobi,,true
+ET,Ethiopia,AFR,am,Addis Ababa,ኢትዮጵያ,አዲስ አበባ,,false
+GH,Ghana,AFR,en,Accra,Ghana,Accra,en,true
+SN,Senegal,AFR,fr,Dakar,Sénégal,Dakar,fr,false
+IN,India,SEAR,hi,New Delhi,भारत,नई दिल्ली,,true
+BD,Bangladesh,SEAR,bn,Dhaka,বাংলাদেশ,ঢাকা,,true
+ID,Indonesia,SEAR,id,Jakarta,Indonesia,Jakarta,,true
+TH,Thailand,SEAR,th,Bangkok,ประเทศไทย,กรุงเทพมหานคร,,true
+LK,Sri Lanka,SEAR,si,Colombo,ශ්‍රී ලංකාව,කොළඹ,,true
+CN,China,WPR,zh,Beijing,中国,北京,,true
+JP,Japan,WPR,ja,Tokyo,日本,東京,,true
+KR,South Korea,WPR,ko,Seoul,대한민국,서울,,true
+PH,Philippines,WPR,fil,Manila,Pilipinas,Maynila,,true
+VN,Vietnam,WPR,vi,Hanoi,Việt Nam,Hà Nội,,true
+MY,Malaysia,WPR,ms,Kuala Lumpur,Malaysia,Kuala Lumpur,,true
+AU,Australia,WPR,en,Canberra,Australia,Canberra,en,true
+NZ,New Zealand,WPR,en,Wellington,New Zealand,Wellington,en,true

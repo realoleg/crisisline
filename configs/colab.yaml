@@ -1,0 +1,22 @@
+# Local models on a Google Colab runtime, driven from this machine with the colab CLI
+# (google-colab-cli): `crisisline colab --model M`. API models run locally.
+
+gpu: L4  # every local model runs on this GPU type; checked against nvidia-smi on the runtime
+session_prefix: crisisline  # runtime name: {session_prefix}-{model_id}-{mode}
+workdir: /content  # on the runtime; the repository is cloned into {workdir}/crisisline
+# Download and verify the outputs this often while generate runs. Each poll is also kernel
+# activity: Colab stops a runtime whose kernel is idle for about 20 minutes, even with generate
+# running in tmux.
+poll_s: 300
+# Every step (start the runtime, set up and launch generate, poll, stop) is tried this many times
+# in a row, waiting retry_wait_s in between, before the run stops. colab exec can
+# hang; a call that exceeds its timeout counts as a failure.
+attempts: 3
+retry_wait_s: 60
+download_attempts: 3  # a download whose sha256 or record count differs is tried again
+setup_timeout_s: 3600  # clone, uv sync, Ollama install and model pull
+exec_timeout_s: 300  # every other command on the runtime
+logs: artifacts/colab  # generate's log from the runtime: {logs}/{session}.log
+install:
+  uv: https://astral.sh/uv/install.sh
+  ollama: https://ollama.com/install.sh

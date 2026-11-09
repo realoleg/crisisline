@@ -1,0 +1,127 @@
+# Models: model_id, Ollama tag or API ID, backend, generation parameters.
+
+# Every API call (translation and generation) goes through OpenRouter's OpenAI-compatible
+# endpoint. The key is read from this environment variable; a .env file at the repository root
+# is loaded first. Request starts are spaced to at most requests_per_minute per model: new
+# OpenRouter accounts get 20 per minute per model. Connection errors, timeouts, HTTP 408, 409,
+# 429, 5xx and 400 without content-policy metadata are retried max_retries times, waiting
+# backoff_s, then twice as long each time, or longer if the response's Retry-After asks so.
+openrouter:
+  base_url: https://openrouter.ai/api/v1
+  api_key_env: OPENROUTER_API_KEY
+  timeout_s: 300
+  max_retries: 3
+  backoff_s: 2
+  requests_per_minute: 15
+
+# Local models run with Ollama on Google Colab (`crisisline colab`, configs/colab.yaml). Connection
+# errors, timeouts, HTTP 408, 429 and 5xx are retried max_retries times, waiting backoff_s,
+# then twice as long each time.
+ollama:
+  host: http://localhost:11434
+  timeout_s: 600
+  max_retries: 3
+  backoff_s: 2
+
+# `model` is the OpenRouter slug; `provider` and `reasoning` are sent as is in the request.
+# `provider` pins routing to the model's own vendor with no fallbacks; `reasoning.effort` is
+# the lowest effort the model accepts (`supported_efforts` in OpenRouter's model list).
+
+# Translation.
+translation:
+  translator:
+    model: google/gemini-4-argon
+    # require_parameters: only endpoints that honour every parameter sent, so the JSON schema
+    # of the translator's answer (prompts.TRANSLATION_FORMAT) is never dropped.
+    provider:
+      only: [google-vertex, google-ai-studio]
+      allow_fallbacks: false
+      require_parameters: true
+    reasoning:
+      effort: low
+  back_translator:
+    model: openai/gpt-6.1-sol
+    provider:
+      only: [openai]
+      allow_fallbacks: false
+    reasoning:
+      effort: low
+  params:
+    temperature: 0  # Gemini only; OpenRouter drops it for GPT, which does not accept it
+
+# Generation. Local and API models run under different settings.
+generation:
+  ollama:
+    params:
+      temperature: 0
+      top_p: 1
+      seed: 2026
+    # The same cap as API models: numbers often come at the end of an answer. Local models think
+    # no tokens (think=false).
+    max_tokens: 2048
+    samples: 1
+    workers: 1  # one GPU
+  openrouter:
+    # No temperature, top_p or seed: provider defaults. Current GPT and Claude models accept
+    # no temperature, and Claude accepts no seed.
+    # max_tokens covers reasoning and the visible answer: reasoning tokens count against it,
+    # and OpenRouter gives Claude a reasoning budget of at least 1024 tokens, which max_tokens
+    # must exceed. So the visible answer of an API model gets 2048 minus its reasoning.
+    max_tokens: 2048
+    samples: 3
+    workers: 8
+    reasoning:
+      effort: low
+  log_every: 100  # progress line every this many records
+  # A run stops after this many technical errors in a row (exit code 1; a rerun resumes): the
+  # backend is down (ollama serve gone, an API outage, a long 429 storm), and every prompt left
+  # would otherwise become an error record.
+  max_consecutive_errors: 10
+
+# Ollama tags pin the quantization: q8_0 for every local model, the only level the whole Qwen3.5
+# ladder has (0.8b has no q4_K_M). Digests, quantization and capabilities are read from Ollama
+# at run time and written to the run manifest.
+models:
+  qwen3.5-0.8b:
+    backend: ollama
+    tag: qwen3.5:0.8b-q8_0
+  qwen3.5-2b:
+    backend: ollama
+    tag: qwen3.5:2b-q8_0
+  qwen3.5-4b:
+    backend: ollama
+    tag: qwen3.5:4b-q8_0
+  qwen3.5-9b:
+    backend: ollama
+    tag: qwen3.5:9b-q8_0
+  gemma4-e2b:
+    backend: ollama
+    tag: gemma4:e2b-it-q8_0
+  gemma4-e4b:
+    backend: ollama
+    tag: gemma4:e4b-it-q8_0
+  llama3.1-8b:
+    backend: ollama
+    tag: llama3.1:8b-instruct-q8_0
+  local-8:  # another vendor
+    backend: ollama
+    tag: ministral-3:8b-instruct-2512-q8_0
+  # The cheapest current tier of each API provider.
+  gpt-6-luna:
+    backend: openrouter
+    model: openai/gpt-6-luna
+    provider:
+      only: [openai]
+      allow_fallbacks: false
+  gemini-3.5-flash-lite:
+    backend: openrouter
+    model: google/gemini-3.5-flash-lite
+    provider:
+      only: [google-vertex, google-ai-studio]
+      allow_fallbacks: false
+  claude-haiku-5.5:
+    backend: openrouter
+    model: anthropic/claude-haiku-5.5
+    provider:
+      only: [anthropic]
+      allow_fallbacks: false
