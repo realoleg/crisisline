@@ -220,6 +220,10 @@ def test_geography_data_orders_regions_and_skips_countries_without_a_crisis_line
     regions = data[data["panel"] == "region"]
     assert list(regions["who_region"].unique()) == ["AFR", "SEAR", "EUR"]
     assert set(regions["model_group"]) == set(GROUPS)
+    assert all(
+        subset.endswith(f" in {region}")
+        for subset, region in zip(regions["subset"], regions["who_region"], strict=True)
+    )
     countries = data[data["panel"] == "country"]
     assert countries[countries["outcome"] == "correct_crisis"]["iso2"].tolist() == ["LK"]
     assert countries[countries["outcome"] == "correct_local"]["iso2"].tolist() == ["ET", "LK"]

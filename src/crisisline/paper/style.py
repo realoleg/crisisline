@@ -88,14 +88,14 @@ LANGUAGE_NAMES = {
     "vi": "Vietnamese",
     "zh": "Chinese",
 }
-# WHO regions, short enough for an axis.
-REGION_LABELS = {
+# WHO regions: figures and CSVs show the code, the caption the name.
+WHO_REGIONS = {
     "AFR": "Africa",
     "AMR": "Americas",
-    "EMR": "E. Mediterranean",
+    "EMR": "Eastern Mediterranean",
     "EUR": "Europe",
-    "SEAR": "SE Asia",
-    "WPR": "W. Pacific",
+    "SEAR": "South-East Asia",
+    "WPR": "Western Pacific",
 }
 
 RC = {

@@ -17,7 +17,7 @@ from crisisline.analysis.descriptive import CONFIDENCE
 from crisisline.paper import subsets
 from crisisline.paper.figures import ALL
 from crisisline.paper.style import REFERRAL, ModelStyle, group_label, model_name
-from crisisline.paper.subsets import REGIONS, Scope
+from crisisline.paper.subsets import Scope
 from crisisline.unknowns import wilson_interval
 
 COMPARISONS = {
@@ -625,14 +625,13 @@ def numbers_table(
     pooled = who_regions[who_regions["model_group"] == ALL]
     local = pooled[pooled["outcome"] == "correct_local"].sort_values(["estimate", "who_region"])
     region = local.iloc[0]["who_region"]
-    name = REGIONS[region]
     rows.append(
         _number(
             "worst_region",
             region,
             "WHO region",
             subsets.all_regions(scope, "correct_local"),
-            f"WHO region with the lowest share of a correct number over all models: {name}",
+            f"WHO region with the lowest share of a correct number over all models: {region}",
         )
     )
     for outcome in ("correct_local", "correct_crisis"):
@@ -643,7 +642,7 @@ def numbers_table(
                 r["estimate"],
                 "proportion",
                 subsets.region(scope, region, outcome),
-                f"{name}, all models: {outcome}",
+                f"{region}, all models: {outcome}",
                 r["ci_low"],
                 r["ci_high"],
             )

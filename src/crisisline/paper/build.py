@@ -187,5 +187,7 @@ def build(config: dict[str, Any]) -> int:
         ignore_index=True,
     )
     _write(numbers, out / "numbers.csv")
+    regions = pd.DataFrame(style.WHO_REGIONS.items(), columns=["who_region", "name"])
+    _write(regions, out / "who_regions.csv")
     logger.info("Paper -> %s", out)
     return 0

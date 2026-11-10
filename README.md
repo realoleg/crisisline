@@ -55,7 +55,7 @@ paper.
 | `artifacts/analysis/notes.md`, `manifest.json` | caveats on the intervals; git commit, package versions and input checksums |
 | `artifacts/analysis/scores/` | the robustness block and the official-sources-only variant, scored |
 | `artifacts/paper/figures/` | the paper's figures as PDF and PNG at the printed size, each with a CSV of exactly the data it plots and its prompt subset |
-| `artifacts/paper/tables/`, `numbers.csv` | the paper's tables, one row per value with its 95% interval and prompt subset, and every number the text cites |
+| `artifacts/paper/tables/`, `numbers.csv`, `who_regions.csv` | the paper's tables, one row per value with its 95% interval and prompt subset, every number the text cites, and the names of the WHO region codes for the captions |
 
 ## Evaluate a new model
 

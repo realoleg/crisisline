@@ -17,7 +17,7 @@ from matplotlib.ticker import FixedLocator, NullLocator
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
 from crisisline.paper import style, subsets
-from crisisline.paper.style import LANGUAGE_NAMES, REGION_LABELS, ModelStyle
+from crisisline.paper.style import LANGUAGE_NAMES, WHO_REGIONS, ModelStyle
 from crisisline.paper.subsets import Scope
 
 CONDITIONS = {
@@ -513,7 +513,7 @@ def draw_geography(data: pd.DataFrame, groups: Groups, path: Path) -> None:
                     color=colour,
                     **style.ERRORBAR,
                 )
-            ax.set_yticks(range(len(region_order)), [REGION_LABELS[r] for r in region_order])
+            ax.set_yticks(range(len(region_order)), region_order)
             ax.set_ylim(len(region_order) - 0.5, -0.5)
             ax.set_title(f"({letter}) {title}")
         axes[1].tick_params(axis="y", labelleft=False)
@@ -662,7 +662,7 @@ def _region_labels(ax: Axes, regions: pd.Series, order: Sequence[str], line: str
         ax.text(
             (first + last) / 2,
             1.01,
-            REGION_LABELS[region],
+            region,
             transform=ax.get_xaxis_transform(),
             ha="center",
             va="bottom",
@@ -743,7 +743,7 @@ def who_gets_help_data(
     order = _models_by_margin(margin["share"], styles)
     pooled = countries[countries["model_group"] == ALL].set_index("iso2")
     columns = []
-    for region in REGION_LABELS:
+    for region in WHO_REGIONS:
         with_line = [c for c in scope.countries if c.region == region and c.crisis_line]
         columns += sorted(with_line, key=lambda c: (-pooled.loc[c.iso2, "estimate"], c.iso2))
     shares = cells.set_index(["model_id", "iso2"])
@@ -813,7 +813,7 @@ def who_gets_help_data(
                     "subset": subsets.country(country.name),
                 }
             )
-    for region in REGION_LABELS:
+    for region in WHO_REGIONS:
         for country in sorted(
             (c for c in scope.countries if c.region == region and not c.crisis_line),
             key=lambda c: c.iso2,
@@ -923,13 +923,6 @@ def _breaks(labels: Sequence[str]) -> list[float]:
     return [k - 0.5 for k in range(1, len(labels)) if labels[k] != labels[k - 1]]
 
 
-def _widest_tick_label(ax: Axes) -> float:
-    """The width of the widest y tick label, in points."""
-    fig = ax.get_figure()
-    fig.draw_without_rendering()
-    return max(t.get_window_extent().width for t in ax.get_yticklabels()) * 72 / fig.dpi
-
-
 def _share_grid(
     cells: pd.DataFrame,
     model_margin: pd.DataFrame,
@@ -941,13 +934,12 @@ def _share_grid(
     names: Mapping[str, str] | None = None,
     height: float = 2.4,
 ) -> None:
-    """Rows: models next to their group's name; columns: ``column``, by their ``names`` if given,
-    under the name of their section if ``sections`` (one per column); colour: the share. A margin
-    column per model and a margin row per column; a dark line between sections, through both."""
+    """Rows: models; columns: ``column``, by their ``names`` if given, under their section if
+    ``sections`` (one per column); colour: the share. A margin column per model and a margin row
+    per column; a dark line between sections, through both."""
     models = list(dict.fromkeys(cells["model_id"]))
     columns = list(dict.fromkeys(cells[column]))
     matrix = cells.pivot(index="model_id", columns=column, values="share").loc[models, columns]
-    groups = cells.drop_duplicates("model_id")["model_group"].tolist()
     with style.paper_style():
         fig = style.new_figure(style.FULL, height)
         fig.get_layout_engine().set(h_pad=0.01, w_pad=0.01, hspace=0.0, wspace=0.0)
@@ -970,7 +962,7 @@ def _share_grid(
                     coordsA=ax.transData,
                     coordsB=bottom.transData,
                     color=style.DARK_GREY,
-                    linewidth=0.6,
+                    linewidth=1.2,
                 )
                 separator.set_in_layout(False)
                 fig.add_artist(separator)
@@ -979,7 +971,7 @@ def _share_grid(
             centres = [
                 float(np.mean([k for k, s in enumerate(sections) if s == name])) for name in blocks
             ]
-            top.set_xticks(centres, [REGION_LABELS[n] for n in blocks])
+            top.set_xticks(centres, blocks)
             top.tick_params(length=0, labelsize=SMALL, pad=1)
             top.spines["top"].set_visible(False)
         ax.set_yticks(range(len(models)), [style.model_name(m) for m in models])
@@ -992,21 +984,6 @@ def _share_grid(
         bottom.set_xticks(range(len(columns)), ticks, rotation=90, fontsize=TINY)
         bottom.tick_params(axis="both", length=0, labelsize=SMALL, pad=2)
         bottom.tick_params(axis="x", labelsize=TINY)
-        offset = _widest_tick_label(ax) + 3
-        for group in dict.fromkeys(groups):
-            rows = [k for k, g in enumerate(groups) if g == group]
-            ax.annotate(
-                style.group_label(group),
-                (0, (rows[0] + rows[-1]) / 2),
-                xycoords=ax.get_yaxis_transform(),
-                xytext=(-offset, 0),
-                textcoords="offset points",
-                rotation=90,
-                ha="right",
-                va="center",
-                fontsize=TINY,
-                color=style.GREY,
-            )
         colourbar = fig.colorbar(
             image, ax=[bottom], location="bottom", shrink=0.24, aspect=18, pad=0.0
         )

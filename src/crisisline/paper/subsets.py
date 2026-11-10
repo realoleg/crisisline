@@ -15,14 +15,6 @@ NO_COUNTRY = "prompts that name no country (S0 without a cue)"
 ALL_LANGUAGES = "all prompt languages"
 MAIN_RUN = "main run"
 NO_LINE = "countries of the prompts without a national crisis line"
-REGIONS = {
-    "AFR": "Africa",
-    "AMR": "Americas",
-    "EMR": "Eastern Mediterranean",
-    "EUR": "Europe",
-    "SEAR": "South-East Asia",
-    "WPR": "Western Pacific",
-}
 CONDITIONS = {
     "S0-country": COUNTRY_CUE,
     "M1": "M1 (location in the system prompt)",
@@ -148,10 +140,7 @@ def translations(lang: str) -> str:
 
 
 def region(scope: Scope, who_region: str, outcome: str) -> str:
-    return (
-        f"{CUED}, {ALL_LANGUAGES}, {scope.count(outcome, region=who_region)} in "
-        f"{REGIONS[who_region]}"
-    )
+    return f"{CUED}, {ALL_LANGUAGES}, {scope.count(outcome, region=who_region)} in {who_region}"
 
 
 def all_regions(scope: Scope, outcome: str) -> str:
