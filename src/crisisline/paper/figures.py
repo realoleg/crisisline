@@ -10,8 +10,8 @@ from pathlib import Path
 import matplotlib as mpl
 import numpy as np
 import pandas as pd
-from matplotlib import patheffects
 from matplotlib.axes import Axes
+from matplotlib.figure import Figure
 from matplotlib.image import AxesImage
 from matplotlib.lines import Line2D
 from matplotlib.patches import ConnectionPatch, Patch, PathPatch
@@ -36,7 +36,7 @@ CORRECT_AXIS = "Correct number (%)"
 CRISIS_AXIS = "Correct crisis line (%)"
 SMALL = 8  # points: direct labels and dense tick labels, the smallest size the template allows
 TINY = 7  # points: the percentages inside bars and the codes of the dense grids
-SEPARATOR_RISE = 6  # points: how far the lines between sections rise above a grid
+SEPARATOR_RISE = 4  # points: how far the separators of a grid reach beyond it
 
 Groups = Mapping[str, tuple[str, str]]
 
@@ -942,13 +942,17 @@ def _share_grid(
 ) -> None:
     """Rows: models; columns: ``column``, by their ``names`` if given, under their section if
     ``sections`` (one per column); colour: the share. A margin column per model and a margin row
-    per column; a black line between sections, through both and rising above the grid."""
+    per column; lines between sections and before the margin row if ``sections``."""
     models = list(dict.fromkeys(cells["model_id"]))
     columns = list(dict.fromkeys(cells[column]))
     matrix = cells.pivot(index="model_id", columns=column, values="share").loc[models, columns]
     with style.paper_style():
         fig = style.new_figure(style.FULL, height)
-        fig.get_layout_engine().set(h_pad=0.01, w_pad=0.01, hspace=0.0, wspace=0.0)
+        # Room on the right for the separator that reaches past the margin column.
+        right_edge = 1 - SEPARATOR_RISE / 72 / style.FULL if sections is not None else 1
+        fig.get_layout_engine().set(
+            h_pad=0.01, w_pad=0.01, hspace=0.0, wspace=0.0, rect=(0, 0, right_edge, 1)
+        )
         grid = fig.add_gridspec(
             2, 2, width_ratios=(len(columns), 1.6), height_ratios=(len(models), 1.0)
         )
@@ -961,22 +965,6 @@ def _share_grid(
         pooled = column_margin.set_index(column).loc[columns, ["share"]]
         _share_cells(bottom, pooled.to_numpy(dtype=float).T)
         if sections is not None:
-            # From a little above the grid, between the section names, to the foot of the margin
-            # row: black with a thin white edge.
-            above = ax.transData + ScaledTranslation(0, SEPARATOR_RISE / 72, fig.dpi_scale_trans)
-            for x in _breaks(sections):
-                separator = ConnectionPatch(
-                    (x, -0.5),
-                    (x, 0.5),
-                    coordsA=above,
-                    coordsB=bottom.transData,
-                    color="black",
-                    linewidth=1.0,
-                    capstyle="butt",
-                    path_effects=[patheffects.withStroke(linewidth=2.0, foreground="white")],
-                )
-                separator.set_in_layout(False)
-                fig.add_artist(separator)
             top = ax.secondary_xaxis("top")
             blocks = list(dict.fromkeys(sections))
             centres = [
@@ -1011,7 +999,37 @@ def _share_grid(
             va="center",
             fontsize=SMALL,
         )
+        if sections is not None:
+            _separators(fig, (ax, right, bottom), _breaks(sections))
         style.save(fig, path)
+
+
+def _separators(fig: Figure, axes: tuple[Axes, Axes, Axes], breaks: Sequence[float]) -> None:
+    """Black lines with a thin white edge: one between sections, from a little above the grid to
+    a little below the margin row, and one between the grid and the margin row, a little wider
+    than both. All white edges first, so that crossings stay black. Call once the figure is laid
+    out: the lines take no part in the layout."""
+    ax, right, bottom = axes
+    rise = SEPARATOR_RISE / 72
+    up = ax.transData + ScaledTranslation(0, rise, fig.dpi_scale_trans)
+    down = bottom.transData + ScaledTranslation(0, -rise, fig.dpi_scale_trans)
+    fig.draw_without_rendering()
+    gap = (ax.get_position().y0 + bottom.get_position().y1) / 2
+    wide = rise / fig.get_figwidth()
+    span = [ax.get_position().x0 - wide, right.get_position().x1 + wide]
+    for colour, width, zorder in (("white", 2.0, 3), ("black", 1.0, 4)):
+        line = {"color": colour, "linewidth": width, "zorder": zorder}
+        for x in breaks:
+            vertical = ConnectionPatch(
+                (x, -0.5), (x, 0.5), coordsA=up, coordsB=down, capstyle="butt", **line
+            )
+            vertical.set_in_layout(False)
+            fig.add_artist(vertical)
+        horizontal = Line2D(
+            span, [gap, gap], transform=fig.transFigure, solid_capstyle="butt", **line
+        )
+        horizontal.set_in_layout(False)
+        fig.add_artist(horizontal)
 
 
 def draw_who_gets_help(data: pd.DataFrame, path: Path) -> None:
