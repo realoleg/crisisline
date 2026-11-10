@@ -124,6 +124,13 @@ def language_by_model(scope: Scope, prompt_language: str) -> str:
     )
 
 
+def language_by_model_pair(subset: str) -> str:
+    """The English-minus-local difference over the subset of one of its two arms."""
+    return subset.removesuffix(", English prompts").removesuffix(", local-language prompts") + (
+        ", English minus local-language prompts"
+    )
+
+
 def language(lang: str, n: int) -> str:
     return f"{CUED}, prompts in {lang}, {countries(n)} where it is the local language"
 

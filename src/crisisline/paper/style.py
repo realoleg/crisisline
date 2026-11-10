@@ -10,7 +10,9 @@ from pathlib import Path
 
 import matplotlib as mpl
 from matplotlib.axes import Axes
+from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.figure import Figure
+from matplotlib.text import Text
 from matplotlib.ticker import NullLocator
 
 COLUMN = 3.03  # inches
@@ -35,6 +37,33 @@ REFERRAL = {
 GROUP_COLOURS = (PALETTE[2], PALETTE[3], PALETTE[4])
 GROUP_MARKERS = ("o", "s", "^")
 MODEL_MARKERS = ("o", "s", "^", "D", "v", "P")
+# The share of the crisis line: red at none, near-white at half, green at all.
+CRISIS_MAP = LinearSegmentedColormap.from_list("crisis", (MUTED_RED, "#F7F7F7", PALETTE[0]))
+NO_LINE = LIGHT_GREY  # cells of countries without a crisis line, hatched
+
+# Display names of the models in every figure and label column; model_id stays the key.
+MODEL_NAMES = {
+    "gpt-6-luna": "GPT-6 Luna",
+    "gemini-3.5-flash-lite": "Gemini 3.5 Flash-Lite",
+    "claude-haiku-5.5": "Claude Haiku 5.5",
+    "gemma4-e4b": "Gemma 4 E4B",
+    "gemma4-e2b": "Gemma 4 E2B",
+    "qwen3.5-9b": "Qwen3.5 9B",
+    "qwen3.5-4b": "Qwen3.5 4B",
+    "qwen3.5-2b": "Qwen3.5 2B",
+    "qwen3.5-0.8b": "Qwen3.5 0.8B",
+    "llama3.1-8b": "Llama 3.1 8B",
+    "local-8": "Ministral 3 8B",
+}
+# WHO regions, short enough for an axis.
+REGION_LABELS = {
+    "AFR": "Africa",
+    "AMR": "Americas",
+    "EMR": "E. Mediterranean",
+    "EUR": "Europe",
+    "SEAR": "SE Asia",
+    "WPR": "W. Pacific",
+}
 
 RC = {
     "font.family": "serif",
@@ -49,9 +78,12 @@ RC = {
     "ytick.labelsize": 8.5,
     "legend.fontsize": 8.5,
     "legend.frameon": False,
-    "legend.handlelength": 1.6,
-    "legend.handletextpad": 0.5,
-    "legend.columnspacing": 1.2,
+    "legend.handlelength": 1.4,
+    "legend.handletextpad": 0.4,
+    "legend.columnspacing": 1.0,
+    "legend.labelspacing": 0.3,
+    "legend.borderpad": 0.2,
+    "legend.borderaxespad": 0.2,
     "text.color": DARK_GREY,
     "axes.edgecolor": DARK_GREY,
     "axes.labelcolor": DARK_GREY,
@@ -86,6 +118,28 @@ def group_label(group: str) -> str:
     return group[:1].upper() + group[1:]
 
 
+def model_name(model: str) -> str:
+    return MODEL_NAMES.get(model, model)
+
+
+def percent(share: float) -> str:
+    return f"{100 * share:.0f}%"
+
+
+def spread(values: Sequence[float], gap: float) -> list[float]:
+    """``values`` moved apart, in their order, until neighbours are at least ``gap`` apart: the
+    positions of direct labels that would otherwise overlap."""
+    order = sorted(range(len(values)), key=lambda k: values[k])
+    placed = [float(values[k]) for k in order]
+    for k in range(1, len(placed)):
+        placed[k] = max(placed[k], placed[k - 1] + gap)
+    shift = (sum(placed) - sum(values[k] for k in order)) / len(placed)
+    result = [0.0] * len(values)
+    for k, value in zip(order, placed, strict=True):
+        result[k] = value - shift
+    return result
+
+
 def model_styles(
     groups: Mapping[str, Sequence[str]], sizes: Mapping[str, float]
 ) -> dict[str, ModelStyle]:
@@ -107,6 +161,13 @@ def group_styles(groups: Sequence[str]) -> dict[str, tuple[str, str]]:
 @contextmanager
 def paper_style() -> Iterator[None]:
     with mpl.rc_context(RC):
+        yield
+
+
+@contextmanager
+def hatches() -> Iterator[None]:
+    """Thin grey hatching, for the cells of countries without a crisis line."""
+    with mpl.rc_context({"hatch.linewidth": 0.4, "hatch.color": GREY}):
         yield
 
 
@@ -141,8 +202,11 @@ ERRORBAR = {**MARKER, "elinewidth": 0.9, "capsize": 0}
 
 
 def save(fig: Figure, path: Path) -> None:
-    """``path``.pdf and ``path``.png at the figure's size; no creation date, so a rebuild gives
-    the same bytes."""
+    """``path``.pdf and ``path``.png at the figure's size, every multi-line text at single line
+    spacing; no creation date, so a rebuild gives the same bytes."""
     path.parent.mkdir(parents=True, exist_ok=True)
+    fig.draw_without_rendering()  # creates every tick label
+    for text in fig.findobj(Text):
+        text.set_linespacing(1.0)
     fig.savefig(path.with_suffix(".pdf"), metadata={"CreationDate": None})
     fig.savefig(path.with_suffix(".png"))

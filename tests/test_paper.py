@@ -10,6 +10,7 @@ from pathlib import Path
 import matplotlib.image as mpimg
 import pandas as pd
 import pytest
+from matplotlib.text import Text
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
 from crisisline.paper import figures, style, subsets, tables
@@ -152,6 +153,10 @@ def _language_inputs() -> tuple[pd.DataFrame, pd.DataFrame]:
                     for lang, value in (("en", 0.7), ("local", 0.5))
                     for suffix, shift in (("", 0.0), ("_ci_low", -0.1), ("_ci_high", 0.1))
                 },
+                "difference_en_minus_local": 0.2,
+                # The gap of q-1 excludes zero; that of every other model does not.
+                "difference_ci_low": 0.05 if m == "q-1" else -0.1,
+                "difference_ci_high": 0.3,
             }
             for m in MODELS
         ]
@@ -267,6 +272,95 @@ def test_countries_data_sorts_within_region_from_the_highest_pooled_share() -> N
 # Drawing.
 
 
+def _who_inputs(
+    lowest: int = 1,
+) -> tuple[
+    pd.DataFrame, pd.DataFrame, pd.DataFrame, dict[str, style.ModelStyle], subsets.Scope, int
+]:
+    shares = {"api-b": 0.9, "api-a": 0.95, "q-1": 0.1, "q-2": 0.3, "other": 0.2}
+    cells = pd.DataFrame(
+        [
+            {"model_id": m, "iso2": iso2, "responses": 24, **_ci(v)}
+            for m, v in shares.items()
+            for iso2 in ("AA", "BB")
+        ]
+    ).rename(columns={"estimate": "share"})
+    margins = cells.groupby("model_id", as_index=False).agg(
+        share=("share", "mean"),
+        ci_low=("ci_low", "mean"),
+        ci_high=("ci_high", "mean"),
+        responses=("responses", "sum"),
+    )
+    pooled = {
+        (figures.ALL, "AA"): 0.6,
+        (figures.ALL, "BB"): 0.5,
+        ("API", "AA"): 0.9,
+        ("API", "BB"): 0.9,
+        ("local", "AA"): 0.0,
+        ("local", "BB"): 0.0,
+    }
+    countries = pd.DataFrame(
+        [
+            {
+                "model_group": group,
+                "iso2": iso2,
+                "outcome": outcome,
+                "responses": 48,
+                **_ci(value if outcome == "correct_crisis" else 1 - value),
+            }
+            for (group, iso2), value in pooled.items()
+            for outcome in ("correct_crisis", "correct_local")
+        ]
+    )
+    return cells, margins, countries, STYLES, SCOPE, lowest
+
+
+def _fails() -> pd.DataFrame:
+    referral = figures.referral_data(_referral(), STYLES, SCOPE)
+    fabrication = pd.DataFrame(
+        [
+            {
+                "kind": "model",
+                "domain": m,
+                "measure": "numbers_fabricated",
+                "bound": bound,
+                "value": value,
+                "ci_low": value - 0.01,
+                "ci_high": value + 0.01,
+                "range_only": m == "api-a",
+            }
+            for m, (lower, upper) in {
+                "api-a": (0.01, 0.02),
+                "api-b": (0.05, 0.05),
+                "q-1": (0.5, 0.5),
+                "q-2": (0.3, 0.32),
+                "other": (0.2, 0.2),
+            }.items()
+            for bound, value in (("lower", lower), ("upper", upper))
+        ]
+    )
+    return figures.how_it_fails_data(referral, fabrication, "reader subset")
+
+
+def _grounding_with_steps() -> pd.DataFrame:
+    """The grounding table with the step from S0-country to M1 (it has M2 - M1 already)."""
+    steps = pd.DataFrame(
+        [
+            {
+                "model_group": figures.ALL,
+                "model_id": figures.ALL,
+                "measure": measure,
+                "outcome": "correct_crisis",
+                "estimate": value,
+                "ci_low": value - 0.05,
+                "ci_high": value + 0.05,
+            }
+            for measure, value in (("M1 - S0-country", 0.0),)
+        ]
+    )
+    return pd.concat([_grounding(), steps], ignore_index=True)
+
+
 def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
     referral = figures.referral_data(_referral(), STYLES, SCOPE)
     grounding = figures.grounding_data(_grounding(), list(GROUPS), SCOPE)
@@ -275,7 +369,7 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
     ladder = figures.ladder_data(_ladder(), SIZES, SCOPE)
     countries = figures.countries_data(_countries(), list(GROUPS))
     return {
-        "referral": (lambda p: figures.draw_referral(referral, p), style.COLUMN),
+        "referral": (lambda p: figures.draw_referral(referral, p), style.FULL),
         "grounding": (lambda p: figures.draw_grounding(grounding, GROUP_STYLES, p), style.FULL),
         "language": (
             lambda p: figures.draw_language(language, STYLES, GROUP_STYLES, p),
@@ -286,6 +380,31 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
         "countries": (
             lambda p: figures.draw_countries(countries, GROUP_STYLES, p),
             style.FULL,
+        ),
+        "who_gets_help": (
+            lambda p: figures.draw_who_gets_help(figures.who_gets_help_data(*_who_inputs()), p),
+            style.FULL,
+        ),
+        "how_it_fails": (
+            lambda p: figures.draw_how_it_fails(_fails(), p),
+            style.FULL,
+        ),
+        "native_language": (
+            lambda p: figures.draw_native_language(
+                figures.native_language_data(_language_inputs()[0], STYLES, SCOPE),
+                STYLES,
+                GROUP_STYLES,
+                p,
+            ),
+            style.COLUMN,
+        ),
+        "what_fixes": (
+            lambda p: figures.draw_what_fixes(
+                figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE),
+                GROUP_STYLES,
+                p,
+            ),
+            style.COLUMN,
         ),
     }
 
@@ -668,3 +787,96 @@ def test_pooled_template_contrasts_take_the_interval_of_the_grounding_step() -> 
     assert within["subset"].iloc[0].endswith(", template T1a")
     with pytest.raises(ValueError, match="differ"):
         tables.templates_table(*_template_inputs(-0.04), SCOPE)
+
+
+# The redesigned figures.
+
+
+def test_display_names_cover_unknown_models_and_label_columns() -> None:
+    assert style.model_name("qwen3.5-0.8b") == "Qwen3.5 0.8B"
+    assert style.model_name("local-8") == "Ministral 3 8B"
+    assert style.model_name("new-model") == "new-model"
+    data = figures.referral_data(_referral(), STYLES, SCOPE)
+    assert (data["model"] == data["model_id"]).all()  # the test models have no display name
+
+
+def test_spread_keeps_order_and_minimum_gap() -> None:
+    placed = style.spread([10.0, 11.0, 50.0], 4.0)
+    assert placed[1] - placed[0] == pytest.approx(4.0)
+    assert placed[2] > placed[1]
+    assert style.spread([1.0, 20.0], 4.0) == [1.0, 20.0]
+
+
+def test_who_gets_help_orders_models_by_strength_and_marks_tied_lowest_countries() -> None:
+    data = figures.who_gets_help_data(*_who_inputs())
+    cells = data[data["panel"] == "cell"]
+    assert list(dict.fromkeys(cells["model_id"])) == ["api-a", "api-b", "q-2", "other", "q-1"]
+    # AFR before EUR; within AFR from the highest all-model share; no line last.
+    assert list(dict.fromkeys(cells["iso2"])) == ["AA", "BB", "CC"]
+    no_line = cells[cells["iso2"] == "CC"]
+    assert no_line["share"].isna().all() and not no_line["has_crisis_line"].any()
+    # One lowest country asked for, two tied at zero: both are marked.
+    lowest = data[data["panel"] == "lowest"]
+    assert set(lowest["iso2"]) == {"AA", "BB"} and set(lowest["model_group"]) == {"local"}
+    margin = data[data["panel"] == "country share"].set_index("iso2")
+    assert margin.loc["AA", "share"] == 0.6 and pd.isna(margin.loc["CC", "share"])
+    assert data["n"].notna().sum() == len(cells) - len(no_line) + 5 + 2 + 2
+
+
+def test_how_it_fails_stacks_the_failures_from_zero_and_totals_them() -> None:
+    data = _fails()
+    failures = data[(data["panel"] == "failures") & (data["model_id"] == "q-2")].set_index(
+        "measure"
+    )
+    assert list(failures.index) == [*figures.FAILURES, "correct_local", "failure_total"]
+    stacked = failures.loc[list(figures.FAILURES)]
+    assert stacked["left"].tolist() == pytest.approx(
+        [0, *stacked["value"].cumsum().iloc[:-1].tolist()]
+    )
+    assert failures.loc["failure_total", "value"] == pytest.approx(
+        1 - failures.loc["correct_local", "value"]
+    )
+    numbers = data[data["panel"] == "numbers fabricated"].set_index("model_id")
+    assert numbers.loc["q-2", ["value", "upper"]].tolist() == [0.3, 0.32]
+    assert numbers.loc["api-a", "range_only"]
+    assert list(dict.fromkeys(data["model_id"])) == list(
+        dict.fromkeys(figures.referral_data(_referral(), STYLES, SCOPE)["model_id"])
+    )
+
+
+def test_native_language_flags_only_gaps_whose_interval_excludes_zero() -> None:
+    data = figures.native_language_data(_language_inputs()[0], STYLES, SCOPE)
+    flagged = set(data.loc[data["significant_gap"], "model_id"])
+    assert flagged == {"q-1"}
+
+
+def test_what_fixes_has_the_lines_and_the_two_steps_over_all_models() -> None:
+    data = figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE)
+    assert set(data.loc[data["panel"] == "line", "outcome"]) == {"correct_crisis"}
+    steps = data[data["panel"] == "step"]
+    assert steps["condition"].tolist() == list(figures.STEPS)
+    assert steps["subset"].str.contains("with a crisis line").all()
+
+
+def test_figure_numbers_hold_what_the_new_figures_write() -> None:
+    who = figures.who_gets_help_data(*_who_inputs())
+    native = figures.native_language_data(_language_inputs()[0], STYLES, SCOPE)
+    fixes = figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE)
+    numbers = tables.figure_numbers(who, _fails(), native, fixes).set_index("name")
+    assert numbers.loc["numbers_invented_one_in", "value"] == 2
+    assert numbers.loc["lowest_countries_crisis_line_local", "value"] == 2
+    assert {"en_prompt_q-1", "local_prompt_q-1", "en_minus_local_q-1"} <= set(numbers.index)
+    assert "en_minus_local_q-2" not in numbers.index
+    assert numbers.loc["correct_crisis_M2_minus_M1_all", "value"] == 0.5
+    assert numbers.index.is_unique
+    assert numbers["subset"].str.len().gt(0).all()
+
+
+def test_saved_text_is_single_spaced(tmp_path: Path) -> None:
+    with style.paper_style():
+        fig = style.new_figure(style.COLUMN, 1.5)
+        ax = fig.add_subplot()
+        ax.set_xticks([0, 1], ["two\nlines", "one"])
+        style.save(fig, tmp_path / "f")
+        multi_line = [t for t in fig.findobj(Text) if "\n" in t.get_text()]
+        assert multi_line and {t.get_linespacing() for t in multi_line} == {1.0}

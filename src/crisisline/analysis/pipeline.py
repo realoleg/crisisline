@@ -633,6 +633,21 @@ def analyze(config: dict[str, Any], variant_scores: Mapping[str, Path], run_boot
         ),
         out / "referral_outcomes.csv",
     )
+    _write(
+        pd.concat(
+            [
+                descriptive.share_table(
+                    frames.s0_cued(variants[v]),
+                    ["model_id", "iso2"],
+                    replicates,
+                    seed,
+                    ["correct_crisis"],
+                ).assign(version=v)
+                for v in ("v2", "v1")
+            ]
+        ),
+        out / "crisis_by_model_country.csv",
+    )
     _write(_model_table(config, variants["v2"], model_versions), out / "models.csv")
     examples_tests = examples.classes(
         {c["iso2"]: c["lang_group"] for c in country_rows},

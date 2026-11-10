@@ -16,7 +16,7 @@ from crisisline.analysis import fabrication
 from crisisline.analysis.descriptive import CONFIDENCE
 from crisisline.paper import subsets
 from crisisline.paper.figures import ALL
-from crisisline.paper.style import ModelStyle
+from crisisline.paper.style import ModelStyle, group_label, model_name
 from crisisline.paper.subsets import REGIONS, Scope
 from crisisline.unknowns import wilson_interval
 
@@ -39,6 +39,19 @@ def _wilson(hits: int, n: int) -> tuple[float, float]:
 
 def _name(*parts: str) -> str:
     return "_".join(p.replace(" - ", " minus ").replace(" ", "_").replace("/", "_") for p in parts)
+
+
+def _with_names(
+    table: pd.DataFrame, ids: str = "model_id", where: pd.Series | None = None
+) -> pd.DataFrame:
+    """``table`` with a ``model`` column right after ``ids``: the display name of each model, empty
+    where ``where`` is false or the id is not a model."""
+    names = table[ids].map(lambda m: model_name(m) if m != ALL else ALL)
+    if where is not None:
+        names = names.where(where, "")
+    columns = list(table.columns)
+    position = columns.index(ids) + 1
+    return table.assign(model=names)[[*columns[:position], "model", *columns[position:]]]
 
 
 def _long(
@@ -104,6 +117,7 @@ def models_table(
         rows.extend(
             {
                 "model_id": model,
+                "model": model_name(model),
                 "model_group": model_style.group,
                 "field": k,
                 "value": v,
@@ -121,7 +135,7 @@ def _domain(group: str, model: str) -> tuple[str, str]:
     return ("all", ALL) if group == ALL else ("model group", group)
 
 
-def _reader_subset(kind: str, domain: str) -> str:
+def reader_subset(kind: str, domain: str) -> str:
     if kind == "language group":
         return f"{subsets.FABRICATION_READER}, prompts in the {domain} language group"
     return subsets.FABRICATION_READER
@@ -155,7 +169,7 @@ def fabrication_table(
                     "ci_low": r[f"{prefix}_{bound}_ci_low"],
                     "ci_high": r[f"{prefix}_{bound}_ci_high"],
                     "n": n,
-                    "subset": _reader_subset(r["kind"], r["domain"]),
+                    "subset": reader_subset(r["kind"], r["domain"]),
                 }
                 for bound in ("lower", "upper")
             )
@@ -214,7 +228,7 @@ def fabrication_table(
     table["range_only"] = (
         (table["kind"] == "model") & table["domain"].isin(collapsed) & (table["bound"] != "")
     )
-    return table
+    return _with_names(table, "domain", table["kind"] == "model")
 
 
 def _no_location_responses(cells: pd.DataFrame) -> pd.Series:
@@ -322,7 +336,8 @@ def no_location_table(
                 subsets.default_country(lang),
             )
             rows.append({**row, "country": r["country"]})
-    return pd.DataFrame(rows)
+    table = pd.DataFrame(rows)
+    return _with_names(table, "level", table["by"] == "model_id")
 
 
 TRANSLATION_MEASURES = ("median_chrf_of_translation", "translation_flag_rate")
@@ -467,7 +482,7 @@ def robustness_table(temperature: pd.DataFrame, scope: Scope) -> pd.DataFrame:
         },
         lambda row, _: subsets.temperature(scope, row["block"], row["outcome"]),
         "prompts",
-    )
+    ).pipe(_with_names)
 
 
 def near_miss_table(near_miss: pd.DataFrame, min_digits: int) -> pd.DataFrame:
@@ -493,7 +508,7 @@ def near_miss_table(near_miss: pd.DataFrame, min_digits: int) -> pd.DataFrame:
             **{c: (c, None, None) for c in counts},
         },
         lambda _, __: subsets.near_miss(min_digits),
-    )
+    ).pipe(_with_names)
 
 
 # The numbers the text cites.
@@ -686,7 +701,7 @@ def numbers_table(
             r["share"],
             "proportion",
             f"all prompts, {subsets.MAIN_RUN}",
-            f"{blocked_model}: responses blocked by the provider's moderation",
+            f"{model_name(blocked_model)}: responses blocked by the provider's moderation",
             r["ci_low"],
             r["ci_high"],
         )
@@ -700,7 +715,7 @@ def numbers_table(
                 r["share"],
                 "proportion",
                 r["subset"],
-                f"{r['model_id']}: correct number",
+                f"{model_name(r['model_id'])}: correct number",
                 r["ci_low"],
                 r["ci_high"],
             )
@@ -715,7 +730,7 @@ def numbers_table(
                     r["difference"],
                     "difference in proportion",
                     subsets.temperature(scope, r["block"], r["outcome"]),
-                    f"{r['model_id']}: {r['outcome']} at temperature 0.7 minus at 0 "
+                    f"{model_name(r['model_id'])}: {r['outcome']} at temperature 0.7 minus at 0 "
                     f"({r['share_t07']:.3f} vs {r['share_t0']:.3f}, {r['prompts']} prompts)",
                     r["ci_low"],
                     r["ci_high"],
@@ -787,7 +802,129 @@ def numbers_table(
                 r["share"],
                 "proportion",
                 r["subset"],
-                f"{r['model_id']}: responses with {what}",
+                f"{model_name(r['model_id'])}: responses with {what}",
+                r["ci_low"],
+                r["ci_high"],
+            )
+        )
+    return pd.DataFrame(rows)
+
+
+def figure_numbers(
+    who: pd.DataFrame, fails: pd.DataFrame, native: pd.DataFrame, fixes: pd.DataFrame
+) -> pd.DataFrame:
+    """The numbers written on the figures that no other row of ``numbers.csv`` holds."""
+    rows = []
+    for _, r in who[who["panel"] == "model share"].iterrows():
+        rows.append(
+            _number(
+                _name("crisis_line_S0", r["model_id"]),
+                r["share"],
+                "proportion",
+                r["subset"],
+                f"{model_name(r['model_id'])}: responses with the correct crisis line (n = "
+                f"{int(r['n'])})",
+                r["ci_low"],
+                r["ci_high"],
+            )
+        )
+    lowest = who[who["panel"] == "lowest"]
+    group = lowest["model_group"].iloc[0]
+    names = ", ".join(lowest["name_en"])
+    rows.append(
+        _number(
+            _name("lowest_countries_crisis_line", group),
+            len(lowest),
+            "count",
+            f"{subsets.CUED}, {subsets.ALL_LANGUAGES}",
+            f"{group_label(group)} models: countries with the lowest crisis-line share, the "
+            f"three lowest with every tie: {names}",
+        )
+    )
+    for _, r in lowest.iterrows():
+        rows.append(
+            _number(
+                _name("lowest_crisis_line", group, r["iso2"]),
+                r["share"],
+                "proportion",
+                r["subset"],
+                f"{group_label(group)} models in {r['name_en']}: responses with the correct "
+                f"crisis line (n = {int(r['n'])})",
+                r["ci_low"],
+                r["ci_high"],
+            )
+        )
+    for _, r in fails[fails["measure"] == "failure_total"].iterrows():
+        rows.append(
+            _number(
+                _name("failure", r["model_id"]),
+                r["value"],
+                "proportion",
+                r["subset"],
+                f"{model_name(r['model_id'])}: responses with no correct local number "
+                "(misrouted, fabricated, unconfirmed or no number)",
+                r["ci_low"],
+                r["ci_high"],
+            )
+        )
+    invented = fails[fails["panel"] == "numbers fabricated"]
+    top = invented.loc[invented["upper"].idxmax()]
+    rows.append(
+        _number(
+            "numbers_invented_largest",
+            top["upper"],
+            "proportion",
+            top["subset"],
+            f"{model_name(top['model_id'])}: the largest share of the numbers a model gives that "
+            "are fabricated (upper bound)",
+            top["ci_low"],
+            top["ci_high"],
+        )
+    )
+    rows.append(
+        _number(
+            "numbers_invented_one_in",
+            round(1 / top["upper"]),
+            "count",
+            top["subset"],
+            f"{model_name(top['model_id'])}: 1 in this many numbers given is fabricated",
+        )
+    )
+    for model, part in native[native["significant_gap"]].groupby("model_id", sort=False):
+        shares = part.set_index("prompt_language")
+        for language, label in (("en", "English"), ("local", "local-language")):
+            r = shares.loc[language]
+            rows.append(
+                _number(
+                    _name(f"{language}_prompt", model),
+                    r["estimate"],
+                    "proportion",
+                    r["subset"],
+                    f"{model_name(model)}: correct number, {label} prompts",
+                    r["ci_low"],
+                    r["ci_high"],
+                )
+            )
+        r = shares.iloc[0]
+        rows.append(
+            _number(
+                _name("en_minus_local", model),
+                r["difference_en_minus_local"],
+                "difference in proportion",
+                subsets.language_by_model_pair(r["subset"]),
+                f"{model_name(model)}: correct number, English minus local-language prompts",
+                r["difference_ci_low"],
+                r["difference_ci_high"],
+            )
+        )
+    for _, r in fixes[fixes["panel"] == "step"].iterrows():
+        rows.append(
+            _number(
+                _name("correct_crisis", r["condition"], ALL),
+                r["estimate"],
+                "difference in proportion",
+                r["subset"],
+                f"correct_crisis, {r['condition']}, models: all",
                 r["ci_low"],
                 r["ci_high"],
             )

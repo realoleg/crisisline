@@ -67,9 +67,32 @@ def build(config: dict[str, Any]) -> int:
     temperature = read("robustness_temperature.csv")
     template_levels = read("exploratory/templates_levels.csv")
 
+    estimate = json.loads(Path(paths["fabrication_estimate"]).read_text(encoding="utf-8"))
+    fabrication = tables.fabrication_table(
+        read("exploratory/fabrication_reader.csv"),
+        estimate,
+        read("fabrication_by_model.csv"),
+        near_miss,
+        min_digits,
+    )
+    gaps = read("exploratory/language_gap_by_model.csv")
+    countries = read("exploratory/countries.csv")
+    by_condition = read("outcomes_by_model_condition.csv")
     figure_dir = out / "figures"
     referral = figures.referral_data(read("referral_outcomes.csv"), styles, scope)
     ladder = figures.ladder_data(read("qwen_ladder.csv"), sizes, scope)
+    who = figures.who_gets_help_data(
+        read("crisis_by_model_country.csv"),
+        by_condition[
+            (by_condition["condition"] == "S0") & (by_condition["outcome"] == "correct_crisis")
+        ],
+        countries,
+        styles,
+        scope,
+    )
+    fails = figures.how_it_fails_data(referral, fabrication, tables.reader_subset("all", "all"))
+    native = figures.native_language_data(gaps, styles, scope)
+    fixes = figures.what_fixes_data(grounding, groups, scope)
     drawn = {
         "fig1_referral_outcomes": (referral, figures.draw_referral),
         "fig2_knowledge_vs_location": (
@@ -78,7 +101,7 @@ def build(config: dict[str, Any]) -> int:
         ),
         "fig3_language": (
             figures.language_data(
-                read("exploratory/language_gap_by_model.csv"),
+                gaps,
                 read("exploratory/correct_local_by_language.csv"),
                 styles,
                 groups,
@@ -95,23 +118,22 @@ def build(config: dict[str, Any]) -> int:
             lambda d, p: figures.draw_ladder(d, styles[next(iter(sizes))].colour, p),
         ),
         "appendix_countries": (
-            figures.countries_data(read("exploratory/countries.csv"), groups),
+            figures.countries_data(countries, groups),
             lambda d, p: figures.draw_countries(d, group_styles, p),
         ),
+        "fig_who_gets_help": (who, figures.draw_who_gets_help),
+        "fig_how_it_fails": (fails, figures.draw_how_it_fails),
+        "fig_native_language": (
+            native,
+            lambda d, p: figures.draw_native_language(d, styles, group_styles, p),
+        ),
+        "fig_what_fixes": (fixes, lambda d, p: figures.draw_what_fixes(d, group_styles, p)),
     }
     for name, (data, draw) in drawn.items():
         _write(data, figure_dir / f"{name}.csv")
         draw(data, figure_dir / name)
     logger.info("Figures done")
 
-    estimate = json.loads(Path(paths["fabrication_estimate"]).read_text(encoding="utf-8"))
-    fabrication = tables.fabrication_table(
-        read("exploratory/fabrication_reader.csv"),
-        estimate,
-        read("fabrication_by_model.csv"),
-        near_miss,
-        min_digits,
-    )
     no_location = tables.no_location_table(
         primary[primary["hypothesis"] == "us_default"].iloc[0],
         read("us_default_breakdown.csv", version="analysis"),
@@ -154,6 +176,9 @@ def build(config: dict[str, Any]) -> int:
         fabrication_rows=fabrication,
         referral=referral,
         scope=scope,
+    )
+    numbers = pd.concat(
+        [numbers, tables.figure_numbers(who, fails, native, fixes)], ignore_index=True
     )
     _write(numbers, out / "numbers.csv")
     logger.info("Paper -> %s", out)

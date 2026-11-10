@@ -47,7 +47,7 @@ paper.
 | `artifacts/analysis/hypotheses.csv` | the five confirmatory tests (`cue_country_vs_city`, `language_en_vs_local`, `model_size`, `us_default`, `grounding_verified_number`) with Holm-adjusted p in each ground-truth version, then the sensitivity analyses |
 | `artifacts/analysis/bootstrap.csv`, `icc.csv`, `us_default_breakdown.csv`, `grounding_verified_number_excluded.csv`, `extraction_comparison.csv` | cluster bootstrap intervals, intraclass correlations, and the tables behind the tests |
 | `artifacts/analysis/outcomes_*.csv` | every outcome by model, by model and condition, and by every cell |
-| `artifacts/analysis/*.csv` (others) | descriptive tables: referral outcomes, the Qwen size ladder, foreign numbers, default countries, location questions, Georgia, blocked answers, temperature robustness, loops, fabrication by model |
+| `artifacts/analysis/*.csv` (others) | descriptive tables: referral outcomes, the crisis line per model and country, the Qwen size ladder, foreign numbers, default countries, location questions, Georgia, blocked answers, temperature robustness, loops, fabrication by model |
 | `artifacts/analysis/exploratory/` | exploratory analyses: grounding, language gap, fabrication in reader terms, near-misses, templates, countries and WHO regions, directories |
 | `artifacts/analysis/models.csv` | each model's backend, identifier, responses per prompt, records and versions seen |
 | `artifacts/analysis/figures/` | figures as vector PDF at ACL widths |
