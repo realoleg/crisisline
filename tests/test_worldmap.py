@@ -103,6 +103,24 @@ def test_recentring_splits_a_country_across_the_new_antimeridian() -> None:
     assert split.area == pytest.approx(whole.area, rel=1e-9)
 
 
+def test_recentring_west_of_greenwich_splits_at_the_seam_in_the_east() -> None:
+    """Centred on 10 degrees west, the seam is at 170 degrees east: a square from 165 to 175
+    degrees east becomes two polygons inside the map's outline, with the same total area."""
+    crossing = [_feature("XXX", "XX", "Asia", [_square(165, 60, 10)])]
+    whole = worldmap.countries(crossing, {"XX"}, {}, (), 1.0)[0]
+    split = worldmap.countries(crossing, {"XX"}, {}, (), 1.0, central_lon=-10.0)[0]
+    assert len(split.polygons) == 2
+    edge = float(worldmap.robinson(180.0, 0.0)[0])
+    assert max(float(np.abs(polygon[0][:, 0]).max()) for polygon in split.polygons) <= edge
+    assert split.area == pytest.approx(whole.area, rel=1e-9)
+
+
+def test_an_override_outside_the_study_matches_no_country() -> None:
+    france = {"ADM0_A3": "FRA", "ISO_A2": "-99"}
+    assert worldmap.iso2_of(france, {"FR"}, {"FR": "FRA"}) == "FR"
+    assert worldmap.iso2_of(france, {"DE"}, {"FR": "FRA"}) == ""
+
+
 def test_countries_fail_on_a_code_they_cannot_match() -> None:
     with pytest.raises(ValueError, match=r"not matched: \['FR'\]"):
         worldmap.countries(FEATURES, {"FR", "DE"}, {}, {"Antarctica"}, 1.0)

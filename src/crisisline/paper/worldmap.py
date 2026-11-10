@@ -107,18 +107,21 @@ def _recentred(
     polygon: Sequence[Sequence[Sequence[float]]], central_lon: float
 ) -> list[list[np.ndarray]]:
     """A polygon's rings with longitudes relative to ``central_lon``, split where they cross the
-    new antimeridian: one polygon per side."""
-    rings = [np.asarray(ring, dtype=float) - [central_lon, 0.0] for ring in polygon]
+    new antimeridian: one polygon per side. A centre west of Greenwich puts the seam at +180, so
+    longitudes are mirrored while splitting to keep it at -180."""
+    mirror = np.array([-1.0 if central_lon < 0 else 1.0, 1.0])
+    rings = [(np.asarray(ring, dtype=float) - [central_lon, 0.0]) * mirror for ring in polygon]
     if all((r[:, 0] >= -180).all() for r in rings):
-        return [rings]
-    if all((r[:, 0] <= -180).all() for r in rings):
-        return [[r + [360.0, 0.0] for r in rings]]
-    sides = []
-    for east, shift in ((True, 0.0), (False, 360.0)):
-        # The exterior has points on both sides; a hole may lie on one side only.
-        parts = [_clip(r, east) + [shift, 0.0] for r in rings]
-        sides.append([part for part in parts if len(part) >= 3])
-    return sides
+        sides = [rings]
+    elif all((r[:, 0] <= -180).all() for r in rings):
+        sides = [[r + [360.0, 0.0] for r in rings]]
+    else:
+        sides = []
+        for east, shift in ((True, 0.0), (False, 360.0)):
+            # The exterior has points on both sides; a hole may lie on one side only.
+            parts = [_clip(r, east) + [shift, 0.0] for r in rings]
+            sides.append([part for part in parts if len(part) >= 3])
+    return [[part * mirror for part in side] for side in sides]
 
 
 Projection = Callable[..., tuple[np.ndarray, np.ndarray]]
@@ -140,9 +143,8 @@ def iso2_of(
     """The study's ISO A2 code of a feature: by ``overrides`` (ISO A2 to Natural Earth ADM0_A3)
     for the codes Natural Earth lacks, else by its ISO_A2; empty for a country outside the study."""
     by_code = {code: iso2 for iso2, code in overrides.items()}
-    if properties["ADM0_A3"] in by_code:
-        return by_code[properties["ADM0_A3"]]
-    return properties["ISO_A2"] if properties["ISO_A2"] in study else ""
+    iso2 = by_code.get(properties["ADM0_A3"], properties["ISO_A2"])
+    return iso2 if iso2 in study else ""
 
 
 def countries(
