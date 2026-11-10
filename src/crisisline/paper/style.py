@@ -19,7 +19,6 @@ COLUMN = 3.03  # inches
 FULL = 6.3
 PALETTE = ("#02692b", "#dd8e00", "#723f93", "#db5683", "#4e88cb")
 DARK_GREY = "#4A4A4A"
-OUTSIDE = "#F4F4F4"  # land outside the study
 GREY = "#7A7A7A"
 LIGHT_GREY = "#D9D9D9"
 MUTED_RED = "#b4534b"
@@ -40,8 +39,30 @@ GROUP_MARKERS = ("o", "s", "^")
 MODEL_MARKERS = ("o", "s", "^", "D", "v", "P")
 # The share of the crisis line: red at none, near-white at half, green at all.
 CRISIS_MAP = LinearSegmentedColormap.from_list("crisis", (MUTED_RED, "#F7F7F7", PALETTE[0]))
-# The share without the crisis line: near-white at none, deep red at all.
-MISSING_MAP = LinearSegmentedColormap.from_list("missing", ("#F7EDEC", MUTED_RED, "#6E2620"))
+# Classes of the share without the crisis line, light to near-black red.
+MISSING_CLASSES = ("#F2D7D4", "#DE9A92", MUTED_RED, "#7E2A24", "#3F1210")
+
+
+@dataclass(frozen=True, slots=True)
+class MapTheme:
+    background: str
+    outside: str  # land outside the study
+    no_line: str  # countries without a national crisis line, hatched
+    hatch: str
+    border: str  # between countries of the study
+    graticule: str
+    outline: str  # the projection's boundary
+    marker_edge: str
+    text: str
+
+
+PAPER_MAP = MapTheme(
+    "white", "#F4F4F4", "#9A9A9A", DARK_GREY, "white", "#E6E6E6", "#BBBBBB", DARK_GREY, DARK_GREY
+)
+# For talks only.
+DARK_MAP = MapTheme(
+    "#111111", "#2A2A2A", "#9A9A9A", DARK_GREY, "white", "#222222", "#555555", "#DDDDDD", "white"
+)
 
 # Display names of the models in every figure and label column; model_id stays the key.
 MODEL_NAMES = {

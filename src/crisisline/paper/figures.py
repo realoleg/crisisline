@@ -7,11 +7,10 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 
+import matplotlib as mpl
 import numpy as np
 import pandas as pd
 from matplotlib.axes import Axes
-from matplotlib.cm import ScalarMappable
-from matplotlib.colors import Normalize
 from matplotlib.image import AxesImage
 from matplotlib.lines import Line2D
 from matplotlib.patches import ConnectionPatch, Patch, PathPatch
@@ -22,7 +21,7 @@ from crisisline.analysis.descriptive import REFERRAL_CLASSES
 from crisisline.paper import style, subsets
 from crisisline.paper.style import LANGUAGE_NAMES, WHO_REGIONS, ModelStyle
 from crisisline.paper.subsets import Scope
-from crisisline.paper.worldmap import Country, equal_earth
+from crisisline.paper.worldmap import Country, robinson
 
 CONDITIONS = {
     "S0-country": "User names\nthe country",
@@ -1255,7 +1254,18 @@ def draw_what_fixes(data: pd.DataFrame, groups: Groups, path: Path) -> None:
 
 # World map: where small local models do not give the crisis line.
 
-MISSING_AXIS = "No crisis line given (%)"
+HATCH = "//////"
+
+
+def _class_of(share: float, edges: Sequence[float]) -> int:
+    """The class of a share without the crisis line; a class holds its lower edge, the last its
+    upper one too."""
+    inner = np.asarray(edges[1:-1], dtype=float)
+    return int(np.searchsorted(inner, round(100 * share, 6), side="right"))
+
+
+def _class_name(k: int, edges: Sequence[float], dash: str = "-") -> str:
+    return f"{edges[k]:g}{dash}{edges[k + 1]:g}"
 
 
 def world_map_data(
@@ -1263,16 +1273,18 @@ def world_map_data(
     shapes: Sequence[Country],
     group: str,
     small_km2: float,
+    edges: Sequence[float],
     scope: Scope,
 ) -> pd.DataFrame:
-    """The share of responses without the correct crisis line of ``group``, per country of the
-    prompts (local-language S0 with a cue), empty for the countries without a crisis line; the
-    projected land area of each country and whether it is small enough for a marker as well."""
+    """The share of responses without the correct crisis line of ``group`` and its class, per
+    country of the prompts (local-language S0 with a cue), empty for the countries without a crisis
+    line; the land area of each country and whether it is small enough for a marker as well."""
     shares = table[table["model_group"] == group].set_index("iso2")
     area = {c.iso2: c.area for c in shapes if c.iso2}
     rows = []
     for country in sorted(scope.countries, key=lambda c: (c.region, c.iso2)):
         cell = shares.loc[country.iso2] if country.crisis_line else None
+        missing = 1 - cell["estimate"] if cell is not None else np.nan
         rows.append(
             {
                 "model_group": group,
@@ -1280,15 +1292,32 @@ def world_map_data(
                 "name_en": country.name,
                 "who_region": country.region,
                 "has_crisis_line": country.crisis_line,
-                "no_crisis_line": 1 - cell["estimate"] if cell is not None else np.nan,
+                "no_crisis_line": missing,
                 "ci_low": 1 - cell["ci_high"] if cell is not None else np.nan,
                 "ci_high": 1 - cell["ci_low"] if cell is not None else np.nan,
                 "n": cell["responses"] if cell is not None else np.nan,
+                "class": _class_name(_class_of(missing, edges), edges) if cell is not None else "",
                 "area_km2": round(area[country.iso2]),
                 "marker": area[country.iso2] < small_km2,
                 "subset": subsets.local_language_country(country.name)
                 if country.crisis_line
                 else subsets.NO_LINE,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def world_map_classes(data: pd.DataFrame, edges: Sequence[float]) -> pd.DataFrame:
+    """The countries of the map in each class, from the lowest class; empty classes included."""
+    rows = []
+    for k in range(len(edges) - 1):
+        name = _class_name(k, edges)
+        members = data[data["class"] == name].sort_values(["no_crisis_line", "iso2"])
+        rows.append(
+            {
+                "class": name,
+                "countries": len(members),
+                "names": ", ".join(members["name_en"]),
             }
         )
     return pd.DataFrame(rows)
@@ -1318,37 +1347,70 @@ def _outline(country: Country) -> Outline:
     return Outline.make_compound_path(*(Outline(np.vstack([r, r[:1]]), closed=True) for r in rings))
 
 
+def _graticule(ax: Axes, radius: float, theme: style.MapTheme) -> None:
+    """Meridians and parallels every 30 degrees under the countries, and the projection's
+    boundary over them."""
+    lat = np.linspace(-90, 90, 181)
+    lon = np.linspace(-180, 180, 361)
+    lines = {"linewidth": 0.3, "color": theme.graticule, "zorder": 0}
+    for meridian in range(-150, 151, 30):
+        ax.plot(*robinson(np.full_like(lat, meridian), lat, radius), **lines)
+    for parallel in range(-60, 61, 30):
+        ax.plot(*robinson(lon, np.full_like(lon, parallel), radius), **lines)
+    x, y = robinson(
+        np.r_[np.full_like(lat, 180), np.full_like(lat, -180), 180],
+        np.r_[lat, lat[::-1], -90],
+        radius,
+    )
+    ax.plot(x, y, color=theme.outline, linewidth=0.5)
+
+
 def draw_world_map(
     data: pd.DataFrame,
     shapes: Sequence[Country],
-    latitudes: Sequence[float],
+    edges: Sequence[float],
     radius: float,
     path: Path,
+    theme: style.MapTheme = style.PAPER_MAP,
 ) -> None:
-    """One Equal Earth map: countries of the prompts by their share without the crisis line, dark
-    grey without a national line, other land faint; small countries also as a circle."""
-    norm = Normalize(0, 100)
+    """One Robinson map: countries of the prompts by their class of the share without the crisis
+    line, hatched grey without a national line, other land faint; small countries also as a
+    circle. The legend counts the countries in each class."""
     rows = data.set_index("iso2")
 
-    def colour(iso2: str) -> object:
+    def colour(iso2: str) -> str:
         row = rows.loc[iso2]
         if not row["has_crisis_line"]:
-            return style.DARK_GREY
-        return style.MISSING_MAP(norm(100 * row["no_crisis_line"]))
+            return theme.no_line
+        return style.MISSING_CLASSES[_class_of(row["no_crisis_line"], edges)]
 
-    _, (south, north) = equal_earth(np.zeros(2), np.asarray(latitudes, dtype=float), radius)
-    xs = np.concatenate([ring[:, 0] for c in shapes for polygon in c.polygons for ring in polygon])
-    with style.paper_style():
-        fig = style.new_figure(style.FULL, 3.0)
+    rc = {
+        "hatch.linewidth": 0.5,
+        "text.color": theme.text,
+        "figure.facecolor": theme.background,
+        "savefig.facecolor": theme.background,
+    }
+    x_edge, _ = robinson(180.0, 0.0, radius)
+    _, y_edge = robinson(0.0, 90.0, radius)
+    with style.paper_style(), mpl.rc_context(rc):
+        fig = style.new_figure(style.FULL, 3.55)
         fig.get_layout_engine().set(h_pad=0.01, w_pad=0.01)
         ax = fig.add_subplot()
+        ax.set_facecolor(theme.background)
+        _graticule(ax, radius, theme)
         for country in shapes:
             outline = _outline(country)
-            if country.iso2:
-                face = colour(country.iso2)
-                ax.add_patch(PathPatch(outline, facecolor=face, edgecolor="white", linewidth=0.3))
-            else:
-                ax.add_patch(PathPatch(outline, facecolor=style.OUTSIDE, linewidth=0))
+            if not country.iso2:
+                # An edge in the fill colour: no seams between neighbours, no visible border.
+                outside = {"facecolor": theme.outside, "edgecolor": theme.outside}
+                ax.add_patch(PathPatch(outline, linewidth=0.3, **outside))
+                continue
+            face = colour(country.iso2)
+            ax.add_patch(PathPatch(outline, facecolor=face, edgecolor=theme.border, linewidth=0.3))
+            if not rows.loc[country.iso2, "has_crisis_line"]:
+                ax.add_patch(
+                    PathPatch(outline, fill=False, hatch=HATCH, edgecolor=theme.hatch, linewidth=0)
+                )
         for country in shapes:
             if country.iso2 and rows.loc[country.iso2, "marker"]:
                 ax.plot(
@@ -1356,46 +1418,32 @@ def draw_world_map(
                     "o",
                     markersize=4.5,
                     markerfacecolor=colour(country.iso2),
-                    markeredgecolor=style.DARK_GREY,
+                    markeredgecolor=theme.marker_edge,
                     markeredgewidth=0.5,
                 )
-        pad = 0.01 * (xs.max() - xs.min())
-        ax.set_xlim(xs.min() - pad, xs.max() + pad)
-        ax.set_ylim(south, north)
+        ax.set_xlim(-1.005 * x_edge, 1.005 * x_edge)
+        ax.set_ylim(-1.01 * y_edge, 1.01 * y_edge)
         ax.set_aspect("equal")
         ax.set_axis_off()
-        colourbar = fig.colorbar(
-            ScalarMappable(norm=norm, cmap=style.MISSING_MAP),
-            ax=ax,
-            location="bottom",
-            shrink=0.2,
-            aspect=18,
-            pad=0.0,
-        )
-        colourbar.set_ticks([0, 50, 100])
-        colourbar.ax.tick_params(labelsize=TINY, length=2, pad=1)
-        colourbar.outline.set_visible(False)
-        colourbar.ax.annotate(
-            MISSING_AXIS,
-            (0, 0.5),
-            xycoords="axes fraction",
-            xytext=(-8, 0),
-            textcoords="offset points",
-            ha="right",
-            va="center",
-            fontsize=SMALL,
-        )
-        keys = [
-            Patch(facecolor=style.DARK_GREY, linewidth=0),
-            Patch(facecolor=style.OUTSIDE, edgecolor=style.LIGHT_GREY, linewidth=0.4),
+        counts = world_map_classes(data, edges)["countries"]
+        handles, labels = [], []
+        for k, count in enumerate(counts):
+            handles.append(Patch(facecolor=style.MISSING_CLASSES[k], linewidth=0))
+            labels.append(f"{_class_name(k, edges, '–')} · {count}")
+        handles += [
+            Patch(facecolor=theme.no_line, hatch=HATCH, edgecolor=theme.hatch, linewidth=0),
+            Patch(facecolor=theme.outside, edgecolor=style.LIGHT_GREY, linewidth=0.4),
         ]
-        colourbar.ax.legend(
-            keys,
-            ["No national crisis line", "Not studied"],
-            loc="center left",
-            bbox_to_anchor=(1.08, 0.5),
-            ncols=2,
-            fontsize=SMALL,
-            handlelength=1.2,
+        labels += ["No national crisis line", "Not studied"]
+        fig.legend(
+            handles,
+            labels,
+            loc="outside lower center",
+            ncols=len(handles),
+            title="No crisis line given (%)",
+            title_fontsize=SMALL,
+            handlelength=0.9,
+            handletextpad=0.3,
+            columnspacing=0.6,
         )
         style.save(fig, path)

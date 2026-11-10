@@ -316,9 +316,12 @@ def _world() -> tuple[pd.DataFrame, list[worldmap.Country]]:
     return table, shapes
 
 
+CLASSES = [0, 20, 40, 60, 80, 100]
+
+
 def test_world_map_data_has_every_country_and_marks_small_ones() -> None:
     table, shapes = _world()
-    data = figures.world_map_data(table, shapes, "local", 0.01, SCOPE)
+    data = figures.world_map_data(table, shapes, "local", 0.01, CLASSES, SCOPE)
     assert data["iso2"].tolist() == ["AA", "BB", "CC"]
     cells = data.set_index("iso2")
     assert cells.loc["AA", "no_crisis_line"] == pytest.approx(0.8)
@@ -328,6 +331,10 @@ def test_world_map_data_has_every_country_and_marks_small_ones() -> None:
     )
     assert cells.loc["AA", "subset"].endswith("local-language prompts, Aland")
     assert cells["marker"].to_dict() == {"AA": False, "BB": True, "CC": False}
+    # A class holds its lower edge: AA without the line in 0.8, BB in 0.7.
+    assert cells["class"].to_dict() == {"AA": "80-100", "BB": "60-80", "CC": ""}
+    classes = figures.world_map_classes(data, CLASSES).set_index("class")["countries"]
+    assert classes.to_dict() == {"0-20": 0, "20-40": 0, "40-60": 0, "60-80": 1, "80-100": 1}
     pooled = figures.world_map_pooled(table, ["local", "API"], SCOPE).set_index("model_group")
     assert pooled.loc["API", "no_crisis_line"] == pytest.approx(0.2)
     assert pooled["subset"].str.endswith("2 countries with a crisis line").all()
@@ -457,11 +464,22 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
         ),
         "world_map": (
             lambda p: figures.draw_world_map(
-                figures.world_map_data(*_world(), "local", 0.01, SCOPE),
+                figures.world_map_data(*_world(), "local", 0.01, CLASSES, SCOPE),
                 _world()[1],
-                (-10.0, 60.0),
+                CLASSES,
                 1.0,
                 p,
+            ),
+            style.FULL,
+        ),
+        "world_map_dark": (
+            lambda p: figures.draw_world_map(
+                figures.world_map_data(*_world(), "local", 0.01, CLASSES, SCOPE),
+                _world()[1],
+                CLASSES,
+                1.0,
+                p,
+                style.DARK_MAP,
             ),
             style.FULL,
         ),
@@ -982,9 +1000,12 @@ def test_figure_numbers_hold_what_the_new_figures_write() -> None:
     native = figures.native_language_data(_language_inputs()[0], STYLES, SCOPE)
     fixes = figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE)
     ladder = figures.ladder_outcomes_data(_ladder_referral(), SIZES, SCOPE)
-    world = figures.world_map_data(*_world(), "local", 0.01, SCOPE)
+    world = figures.world_map_data(*_world(), "local", 0.01, CLASSES, SCOPE)
     pooled = figures.world_map_pooled(_world()[0], ["local", "API"], SCOPE)
-    numbers = tables.figure_numbers(who, _fails(), native, fixes, ladder, world, pooled, 0.01)
+    classes = figures.world_map_classes(world, CLASSES)
+    numbers = tables.figure_numbers(
+        who, _fails(), native, fixes, ladder, world, pooled, classes, 0.01
+    )
     numbers = numbers.set_index("name")
     assert numbers.loc["numbers_invented_one_in", "value"] == 2
     assert numbers.loc["lowest_countries_crisis_line_local", "value"] == 2
@@ -996,6 +1017,8 @@ def test_figure_numbers_hold_what_the_new_figures_write() -> None:
     assert numbers.loc["world_map_no_crisis_line_API", "value"] == pytest.approx(0.2)
     assert numbers.loc["world_map_countries_above_50", "value"] == 2  # AA 0.8, BB 0.7
     assert numbers.loc["world_map_countries_above_75", "description"].endswith(": Aland")
+    assert numbers.loc["world_map_class_80_100", "value"] == 1
+    assert numbers.loc["world_map_class_0_20", "description"].endswith(": none")
     assert numbers.loc["ladder_misrouted_q-1", "value"] == pytest.approx(0.1)
     assert numbers.index.is_unique
     assert numbers["subset"].str.len().gt(0).all()

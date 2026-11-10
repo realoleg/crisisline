@@ -109,7 +109,7 @@ def build(config: dict[str, Any]) -> int:
     )
     local_crisis = read("exploratory/crisis_local_language.csv")
     world_data = figures.world_map_data(
-        local_crisis, shapes, world["group"], world["small_country_km2"], scope
+        local_crisis, shapes, world["group"], world["small_country_km2"], world["classes"], scope
     )
     world_pooled = figures.world_map_pooled(
         local_crisis, [world["group"], world["comparison_group"]], scope
@@ -147,7 +147,7 @@ def build(config: dict[str, Any]) -> int:
         "fig_world_map": (
             world_data,
             lambda d, p: figures.draw_world_map(
-                d, shapes, world["latitudes"], world["earth_radius_km"], p
+                d, shapes, world["classes"], world["earth_radius_km"], p
             ),
         ),
         "fig_how_it_fails": (fails, figures.draw_how_it_fails),
@@ -160,6 +160,15 @@ def build(config: dict[str, Any]) -> int:
     for name, (data, draw) in drawn.items():
         _write(data, figure_dir / f"{name}.csv")
         draw(data, figure_dir / name)
+    # The world map for talks, not the paper.
+    figures.draw_world_map(
+        world_data,
+        shapes,
+        world["classes"],
+        world["earth_radius_km"],
+        out / "talk" / "fig_world_map_dark",
+        style.DARK_MAP,
+    )
     logger.info("Figures done")
 
     no_location = tables.no_location_table(
@@ -216,6 +225,7 @@ def build(config: dict[str, Any]) -> int:
                 ladder_outcomes,
                 world_data,
                 world_pooled,
+                figures.world_map_classes(world_data, world["classes"]),
                 world["small_country_km2"],
             ),
         ],

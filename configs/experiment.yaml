@@ -464,6 +464,6 @@ paper:
     iso2_to_adm0: {FR: FRA}
     drop_continents: [Antarctica]
     central_longitude: 10  # degrees east
-    latitudes: [-56, 78]  # the cropped band, degrees
+    classes: [0, 20, 40, 60, 80, 100]  # % without the crisis line; each class holds its lower edge
     earth_radius_km: 6371.0088  # mean radius: projected areas in km²
     small_country_km2: 150000  # below this projected area, also a marker at the centroid

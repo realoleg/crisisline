@@ -817,6 +817,7 @@ def figure_numbers(
     ladder: pd.DataFrame,
     world: pd.DataFrame,
     world_pooled: pd.DataFrame,
+    world_classes: pd.DataFrame,
     small_km2: float,
 ) -> pd.DataFrame:
     """The numbers of the figures' captions that no other row of ``numbers.csv`` holds."""
@@ -971,6 +972,17 @@ def figure_numbers(
                 world_pooled["subset"].iloc[0],
                 f"world map, {group} models: countries where more than {round(100 * cutoff)}% of "
                 "responses lack the correct crisis line: " + ", ".join(above["name_en"]),
+            )
+        )
+    for _, r in world_classes.iterrows():
+        rows.append(
+            _number(
+                f"world_map_class_{r['class'].replace('-', '_')}",
+                r["countries"],
+                "count",
+                world_pooled["subset"].iloc[0],
+                f"world map, {group} models: countries where {r['class']}% of responses lack the "
+                f"correct crisis line (lower edge included): {r['names'] or 'none'}",
             )
         )
     small = world[world["marker"]].sort_values(["area_km2", "iso2"])

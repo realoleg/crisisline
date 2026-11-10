@@ -36,6 +36,20 @@ def test_equal_earth_keeps_areas() -> None:
         assert abs(worldmap.signed_area(np.column_stack([x, y]))) == pytest.approx(sphere, rel=1e-4)
 
 
+def test_robinson_takes_its_table_at_the_nodes() -> None:
+    x, y = worldmap.robinson(180.0, 0.0)
+    assert float(x) == pytest.approx(0.8487 * np.pi) and float(y) == 0.0
+    x, y = worldmap.robinson(0.0, 90.0)
+    assert float(x) == 0.0 and float(y) == pytest.approx(1.3523)
+    x, y = worldmap.robinson(np.array([-90.0, 90.0]), np.array([-45.0, 45.0]), radius=2.0)
+    assert x[1] == pytest.approx(2 * 0.8487 * 0.8962 * np.pi / 2)
+    assert y[1] == pytest.approx(2 * 1.3523 * 0.5571)
+    assert x[0] == -x[1] and y[0] == -y[1]
+    # Between two nodes, linear: at 47.5 degrees, halfway between 45 and 50.
+    _, y = worldmap.robinson(0.0, 47.5)
+    assert float(y) == pytest.approx(1.3523 * (0.5571 + 0.6176) / 2)
+
+
 def _square(lon: float, lat: float, side: float) -> list[list[float]]:
     # Clockwise on purpose: the projection orients rings itself.
     return [[lon, lat], [lon, lat + side], [lon + side, lat + side], [lon + side, lat]]
@@ -67,13 +81,14 @@ def test_countries_match_by_iso2_and_overrides_and_drop_continents() -> None:
     germany = shapes[0]
     exterior, hole = germany.polygons[0]
     assert worldmap.signed_area(exterior) > 0 > worldmap.signed_area(hole)
-    assert germany.area == pytest.approx(
-        worldmap.signed_area(exterior) + worldmap.signed_area(hole)
-    )
+
+    # Land area on the unit sphere: the square minus its hole.
+    def band(west: float, east: float, south: float, north: float) -> float:
+        return np.radians(east - west) * (np.sin(np.radians(north)) - np.sin(np.radians(south)))
+
+    assert germany.area == pytest.approx(band(8, 12, 50, 54) - band(9, 10, 51, 52), rel=1e-2)
     # France's centroid is that of its larger polygon, in Europe.
-    assert shapes[1].centroid[1] == pytest.approx(
-        float(worldmap.equal_earth(1.0, 46.0)[1]), rel=1e-3
-    )
+    assert shapes[1].centroid[1] == pytest.approx(float(worldmap.robinson(1.0, 46.0)[1]), rel=1e-2)
 
 
 def test_recentring_splits_a_country_across_the_new_antimeridian() -> None:

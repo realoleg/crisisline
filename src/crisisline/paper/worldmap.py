@@ -1,13 +1,14 @@
-"""Country outlines for the world map: Natural Earth admin-0 polygons in the Equal Earth projection
-(Šavrič, Patterson and Jenny 2018), matched to the countries of the prompts by ISO A2 code.
+"""Country outlines for the world map: Natural Earth admin-0 polygons in the Robinson projection,
+matched to the countries of the prompts by ISO A2 code.
 
-Equal Earth is an equal-area projection, so the area of a projected polygon on a sphere of radius R
-in kilometres is its area in square kilometres.
+Land areas come from the Equal Earth projection (Šavrič, Patterson and Jenny 2018): it is
+equal-area, so the area of a polygon projected on a sphere of radius R in kilometres is its area in
+square kilometres.
 """
 
 from __future__ import annotations
 
-from collections.abc import Collection, Iterable, Mapping, Sequence
+from collections.abc import Callable, Collection, Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
 
@@ -15,6 +16,17 @@ import numpy as np
 
 A1, A2, A3, A4 = 1.340264, -0.081106, 0.000893, 0.003796
 SQRT3 = np.sqrt(3.0)
+# Robinson's table (Snyder 1993): the length of each parallel and its distance from the equator,
+# every 5 degrees of latitude from 0 to 90.
+ROBINSON_LAT = np.arange(0.0, 91.0, 5.0)
+ROBINSON_X = np.array(
+    [1.0000, 0.9986, 0.9954, 0.9900, 0.9822, 0.9730, 0.9600, 0.9427, 0.9216, 0.8962]
+    + [0.8679, 0.8350, 0.7986, 0.7597, 0.7186, 0.6732, 0.6213, 0.5722, 0.5322]
+)
+ROBINSON_Y = np.array(
+    [0.0000, 0.0620, 0.1240, 0.1860, 0.2480, 0.3100, 0.3720, 0.4340, 0.4958, 0.5571]
+    + [0.6176, 0.6769, 0.7346, 0.7903, 0.8435, 0.8936, 0.9394, 0.9761, 1.0000]
+)
 
 
 def equal_earth(
@@ -28,6 +40,16 @@ def equal_earth(
     x = 2 * SQRT3 * lam * np.cos(theta) / (3 * (9 * A4 * t6 * t2 + 7 * A3 * t6 + 3 * A2 * t2 + A1))
     y = theta * (A4 * t6 * t2 + A3 * t6 + A2 * t2 + A1)
     return radius * x, radius * y
+
+
+def robinson(
+    lon: np.ndarray | float, lat: np.ndarray | float, radius: float = 1.0
+) -> tuple[np.ndarray, np.ndarray]:
+    """``x`` and ``y`` of longitudes and latitudes in degrees: the table interpolated linearly."""
+    lam, phi = np.radians(lon), np.asarray(lat, dtype=float)
+    length = np.interp(np.abs(phi), ROBINSON_LAT, ROBINSON_X)
+    height = np.interp(np.abs(phi), ROBINSON_LAT, ROBINSON_Y)
+    return radius * 0.8487 * length * lam, radius * 1.3523 * height * np.sign(phi)
 
 
 def signed_area(ring: np.ndarray) -> float:
@@ -52,17 +74,13 @@ def _centroid(ring: np.ndarray) -> tuple[float, float]:
 @dataclass(frozen=True, slots=True)
 class Country:
     """One admin-0 country: its Natural Earth code, its ISO A2 code if it is a country of the
-    prompts (else empty), and its projected polygons, each an anticlockwise exterior ring followed
-    by clockwise holes."""
+    prompts (else empty), its polygons in the Robinson projection, each an anticlockwise exterior
+    ring followed by clockwise holes, and its land area (exteriors minus holes, equal-area)."""
 
     code: str
     iso2: str
     polygons: tuple[tuple[np.ndarray, ...], ...]
-
-    @property
-    def area(self) -> float:
-        """Projected area: exteriors minus holes."""
-        return sum(signed_area(ring) for polygon in self.polygons for ring in polygon)
+    area: float
 
     @property
     def centroid(self) -> tuple[float, float]:
@@ -103,10 +121,15 @@ def _recentred(
     return sides
 
 
-def _project(rings: Iterable[np.ndarray], radius: float) -> tuple[np.ndarray, ...]:
+Projection = Callable[..., tuple[np.ndarray, np.ndarray]]
+
+
+def _project(
+    rings: Iterable[np.ndarray], radius: float, projection: Projection
+) -> tuple[np.ndarray, ...]:
     projected = []
     for k, ring in enumerate(rings):
-        x, y = equal_earth(ring[:, 0], ring[:, 1], radius)
+        x, y = projection(ring[:, 0], ring[:, 1], radius)
         projected.append(_oriented(np.column_stack([x, y]), anticlockwise=k == 0))
     return tuple(projected)
 
@@ -130,8 +153,8 @@ def countries(
     radius: float,
     central_lon: float = 0.0,
 ) -> list[Country]:
-    """Every country not on a dropped continent, projected about ``central_lon``, in the order of
-    its Natural Earth code; each country of the study matched once."""
+    """Every country not on a dropped continent, in the Robinson projection about ``central_lon``,
+    in the order of its Natural Earth code; each country of the study matched once."""
     shapes = []
     for feature in features:
         properties, geometry = feature["properties"], feature["geometry"]
@@ -139,15 +162,16 @@ def countries(
             continue
         parts = geometry["coordinates"]
         polygons = parts if geometry["type"] == "MultiPolygon" else [parts]
+        recentred = [part for polygon in polygons for part in _recentred(polygon, central_lon)]
+        area = sum(
+            signed_area(ring) for part in recentred for ring in _project(part, radius, equal_earth)
+        )
         shapes.append(
             Country(
                 properties["ADM0_A3"],
                 iso2_of(properties, study, overrides),
-                tuple(
-                    _project(part, radius)
-                    for polygon in polygons
-                    for part in _recentred(polygon, central_lon)
-                ),
+                tuple(_project(part, radius, robinson) for part in recentred),
+                area,
             )
         )
     matched = [c.iso2 for c in shapes if c.iso2]
