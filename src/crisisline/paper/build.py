@@ -114,48 +114,25 @@ def build(config: dict[str, Any]) -> int:
     world_pooled = figures.world_map_pooled(
         local_crisis, [world["group"], world["comparison_group"]], scope
     )
-    fails = figures.how_it_fails_data(referral, fabrication, tables.reader_subset("all", "all"))
     native = figures.native_language_data(gaps, styles, scope)
     fixes = figures.what_fixes_data(grounding, groups, scope)
+    # Named by their place in the paper.
     drawn = {
-        "fig1_referral_outcomes": (referral, figures.draw_referral),
-        "fig2_knowledge_vs_location": (
-            figures.grounding_data(grounding, groups, scope),
-            lambda d, p: figures.draw_grounding(d, group_styles, p),
-        ),
-        "fig3_language": (
-            figures.language_data(
-                gaps,
-                read("exploratory/correct_local_by_language.csv"),
-                styles,
-                groups,
-                scope,
-            ),
-            lambda d, p: figures.draw_language(d, styles, group_styles, p),
-        ),
-        "fig4_geography": (
-            figures.geography_data(who_regions, worst, groups, scope),
-            lambda d, p: figures.draw_geography(d, group_styles, p),
-        ),
-        "appendix_qwen_ladder": (ladder_outcomes, figures.draw_ladder),
-        "appendix_countries": (
-            figures.countries_data(countries, groups),
-            lambda d, p: figures.draw_countries(d, group_styles, p),
-        ),
-        "fig_who_gets_help": (who, figures.draw_who_gets_help),
-        "fig_who_gets_help_language": (who_language, figures.draw_who_gets_help_language),
-        "fig_world_map": (
+        "fig1_world_map": (
             world_data,
             lambda d, p: figures.draw_world_map(
                 d, shapes, world["classes"], world["earth_radius_km"], p
             ),
         ),
-        "fig_how_it_fails": (fails, figures.draw_how_it_fails),
-        "fig_native_language": (
+        "fig2_referral_outcomes": (referral, figures.draw_referral),
+        "fig3_language_heatmap": (who_language, figures.draw_who_gets_help_language),
+        "fig4_what_fixes": (fixes, lambda d, p: figures.draw_what_fixes(d, group_styles, p)),
+        "appendix_country_heatmap": (who, figures.draw_who_gets_help),
+        "appendix_native_language": (
             native,
             lambda d, p: figures.draw_native_language(d, styles, group_styles, p),
         ),
-        "fig_what_fixes": (fixes, lambda d, p: figures.draw_what_fixes(d, group_styles, p)),
+        "appendix_qwen_ladder": (ladder_outcomes, figures.draw_ladder),
     }
     for name, (data, draw) in drawn.items():
         _write(data, figure_dir / f"{name}.csv")
@@ -166,7 +143,7 @@ def build(config: dict[str, Any]) -> int:
         shapes,
         world["classes"],
         world["earth_radius_km"],
-        out / "talk" / "fig_world_map_dark",
+        out / "talk" / "talk_world_map_dark",
         style.DARK_MAP,
     )
     logger.info("Figures done")
@@ -219,7 +196,6 @@ def build(config: dict[str, Any]) -> int:
             numbers,
             tables.figure_numbers(
                 who,
-                fails,
                 native,
                 fixes,
                 ladder_outcomes,

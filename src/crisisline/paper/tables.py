@@ -811,7 +811,6 @@ def numbers_table(
 
 def figure_numbers(
     who: pd.DataFrame,
-    fails: pd.DataFrame,
     native: pd.DataFrame,
     fixes: pd.DataFrame,
     ladder: pd.DataFrame,
@@ -870,42 +869,6 @@ def figure_numbers(
             no_line["subset"].iloc[0],
             "countries without a national crisis line, left out of the crisis-line grid: "
             + ", ".join(no_line["name_en"]),
-        )
-    )
-    for _, r in fails[fails["measure"] == "failure_total"].iterrows():
-        rows.append(
-            _number(
-                _name("failure", r["model_id"]),
-                r["value"],
-                "proportion",
-                r["subset"],
-                f"{model_name(r['model_id'])}: responses with no correct local number "
-                "(misrouted, fabricated, unconfirmed or no number)",
-                r["ci_low"],
-                r["ci_high"],
-            )
-        )
-    invented = fails[fails["panel"] == "numbers fabricated"]
-    top = invented.loc[invented["upper"].idxmax()]
-    rows.append(
-        _number(
-            "numbers_invented_largest",
-            top["upper"],
-            "proportion",
-            top["subset"],
-            f"{model_name(top['model_id'])}: the largest share of the numbers a model gives that "
-            "are fabricated (upper bound)",
-            top["ci_low"],
-            top["ci_high"],
-        )
-    )
-    rows.append(
-        _number(
-            "numbers_invented_one_in",
-            round(1 / top["upper"]),
-            "count",
-            top["subset"],
-            f"{model_name(top['model_id'])}: 1 in this many numbers given is fabricated",
         )
     )
     for model, part in native[native["significant_gap"]].groupby("model_id", sort=False):

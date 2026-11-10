@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import math
 import re
 from collections.abc import Callable
 from pathlib import Path
@@ -173,62 +172,6 @@ def _language_inputs() -> tuple[pd.DataFrame, pd.DataFrame]:
     return by_model, by_language
 
 
-def test_language_data_orders_languages_from_the_lowest_pooled_share() -> None:
-    data = figures.language_data(*_language_inputs(), STYLES, list(GROUPS), SCOPE)
-    models = data[data["panel"] == "by model"]
-    assert list(models["model_id"].unique()) == MODELS
-    assert set(models["prompt_language"]) == {"en", "local"}
-    langs = data[data["panel"] == "by language"]
-    assert list(langs["lang"].unique()) == ["am", "si", "de"]
-    assert figures.ALL not in set(langs["model_group"])
-
-
-def _geography_inputs() -> tuple[pd.DataFrame, pd.DataFrame]:
-    pooled = {"AFR": 0.5, "EUR": 0.9, "SEAR": 0.6}
-    regions = pd.DataFrame(
-        [
-            {"model_group": group, "who_region": region, "outcome": outcome, **_ci(value)}
-            for region, value in pooled.items()
-            for group in [figures.ALL, *GROUPS]
-            for outcome in ("correct_local", "correct_crisis")
-        ]
-    )
-    worst = pd.DataFrame(
-        [
-            {
-                "iso2": iso2,
-                "name_en": name,
-                "who_region": "AFR",
-                "correct_local estimate (all)": local,
-                "correct_local ci_low (all)": local - 0.05,
-                "correct_local ci_high (all)": local + 0.05,
-                "correct_crisis estimate (all)": crisis,
-                "correct_crisis ci_low (all)": crisis - 0.05,
-                "correct_crisis ci_high (all)": crisis + 0.05,
-            }
-            for iso2, name, local, crisis in (
-                ("ET", "Ethiopia", 0.2, math.nan),
-                ("LK", "Sri Lanka", 0.4, 0.3),
-            )
-        ]
-    )
-    return regions, worst
-
-
-def test_geography_data_orders_regions_and_skips_countries_without_a_crisis_line() -> None:
-    data = figures.geography_data(*_geography_inputs(), list(GROUPS), SCOPE)
-    regions = data[data["panel"] == "region"]
-    assert list(regions["who_region"].unique()) == ["AFR", "SEAR", "EUR"]
-    assert set(regions["model_group"]) == set(GROUPS)
-    assert all(
-        subset.endswith(f" in {region}")
-        for subset, region in zip(regions["subset"], regions["who_region"], strict=True)
-    )
-    countries = data[data["panel"] == "country"]
-    assert countries[countries["outcome"] == "correct_crisis"]["iso2"].tolist() == ["LK"]
-    assert countries[countries["outcome"] == "correct_local"]["iso2"].tolist() == ["ET", "LK"]
-
-
 def _ladder() -> pd.DataFrame:
     return pd.DataFrame(
         [
@@ -258,31 +201,6 @@ def test_ladder_data_is_by_cue_then_size() -> None:
         ["city", 1.0],
         ["city", 2.0],
     ]
-
-
-def _countries() -> pd.DataFrame:
-    pooled = {("AFR", "ET"): 0.2, ("AFR", "NG"): 0.6, ("EUR", "DE"): 0.9, ("EUR", "FR"): 0.95}
-    return pd.DataFrame(
-        [
-            {
-                "model_group": group,
-                "who_region": region,
-                "iso2": iso2,
-                "name_en": iso2,
-                "outcome": outcome,
-                **_ci(value),
-            }
-            for (region, iso2), value in pooled.items()
-            for group in [figures.ALL, *GROUPS]
-            for outcome in ("correct_local", "correct_crisis")
-        ]
-    )
-
-
-def test_countries_data_sorts_within_region_from_the_highest_pooled_share() -> None:
-    data = figures.countries_data(_countries(), list(GROUPS))
-    assert list(data["iso2"].unique()) == ["NG", "ET", "FR", "DE"]
-    assert set(data["model_group"]) == set(GROUPS)
 
 
 def _world() -> tuple[pd.DataFrame, list[worldmap.Country]]:
@@ -351,7 +269,6 @@ def test_world_map_classes_hold_their_upper_edge_as_the_counts_above_a_share() -
     classes = figures.world_map_classes(data, CLASSES)
     numbers = tables.figure_numbers(
         figures.who_gets_help_data(*_who_inputs()),
-        _fails(),
         figures.native_language_data(_language_inputs()[0], STYLES, SCOPE),
         figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE),
         figures.ladder_outcomes_data(_ladder_referral(), SIZES, SCOPE),
@@ -411,33 +328,6 @@ def _who_inputs(
     return cells, margins, countries, STYLES, SCOPE, lowest
 
 
-def _fails() -> pd.DataFrame:
-    referral = figures.referral_data(_referral(), STYLES, SCOPE)
-    fabrication = pd.DataFrame(
-        [
-            {
-                "kind": "model",
-                "domain": m,
-                "measure": "numbers_fabricated",
-                "bound": bound,
-                "value": value,
-                "ci_low": value - 0.01,
-                "ci_high": value + 0.01,
-                "range_only": m == "api-a",
-            }
-            for m, (lower, upper) in {
-                "api-a": (0.01, 0.02),
-                "api-b": (0.05, 0.05),
-                "q-1": (0.5, 0.5),
-                "q-2": (0.3, 0.32),
-                "other": (0.2, 0.2),
-            }.items()
-            for bound, value in (("lower", lower), ("upper", upper))
-        ]
-    )
-    return figures.how_it_fails_data(referral, fabrication, "reader subset")
-
-
 def _grounding_with_steps() -> pd.DataFrame:
     """The grounding table with the step from S0-country to M1 (it has M2 - M1 already)."""
     steps = pd.DataFrame(
@@ -459,24 +349,10 @@ def _grounding_with_steps() -> pd.DataFrame:
 
 def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
     referral = figures.referral_data(_referral(), STYLES, SCOPE)
-    grounding = figures.grounding_data(_grounding(), list(GROUPS), SCOPE)
-    language = figures.language_data(*_language_inputs(), STYLES, list(GROUPS), SCOPE)
-    geography = figures.geography_data(*_geography_inputs(), list(GROUPS), SCOPE)
     ladder = figures.ladder_outcomes_data(_ladder_referral(), SIZES, SCOPE)
-    countries = figures.countries_data(_countries(), list(GROUPS))
     return {
         "referral": (lambda p: figures.draw_referral(referral, p), style.FULL),
-        "grounding": (lambda p: figures.draw_grounding(grounding, GROUP_STYLES, p), style.FULL),
-        "language": (
-            lambda p: figures.draw_language(language, STYLES, GROUP_STYLES, p),
-            style.FULL,
-        ),
-        "geography": (lambda p: figures.draw_geography(geography, GROUP_STYLES, p), style.FULL),
         "ladder": (lambda p: figures.draw_ladder(ladder, p), style.COLUMN),
-        "countries": (
-            lambda p: figures.draw_countries(countries, GROUP_STYLES, p),
-            style.FULL,
-        ),
         "who_gets_help": (
             lambda p: figures.draw_who_gets_help(figures.who_gets_help_data(*_who_inputs()), p),
             style.FULL,
@@ -506,10 +382,6 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
                 p,
                 style.DARK_MAP,
             ),
-            style.FULL,
-        ),
-        "how_it_fails": (
-            lambda p: figures.draw_how_it_fails(_fails(), p),
             style.FULL,
         ),
         "native_language": (
@@ -833,18 +705,23 @@ def test_every_figure_row_names_its_subset_and_crisis_rows_count_crisis_line_cou
     frames = [
         figures.referral_data(_referral(), STYLES, SCOPE),
         figures.grounding_data(_grounding(), list(GROUPS), SCOPE),
-        figures.language_data(*_language_inputs(), STYLES, list(GROUPS), SCOPE),
-        figures.geography_data(*_geography_inputs(), list(GROUPS), SCOPE),
         figures.ladder_data(_ladder(), SIZES, SCOPE),
-        figures.countries_data(_countries(), list(GROUPS)),
+        figures.ladder_outcomes_data(_ladder_referral(), SIZES, SCOPE),
+        figures.who_gets_help_data(*_who_inputs()),
+        figures.who_gets_help_language_data(*_who_language_inputs(), STYLES, SCOPE),
+        figures.native_language_data(_language_inputs()[0], STYLES, SCOPE),
+        figures.world_map_data(*_world(), "local", 0.01, CLASSES, SCOPE),
     ]
     for data in frames:
         assert data["subset"].str.len().gt(0).all()
-    grounding, geography = frames[1], frames[3]
-    for data in (grounding, geography[geography["panel"] == "region"]):
-        crisis = data["outcome"] == "correct_crisis"
-        assert data.loc[crisis, "subset"].str.contains("with a crisis line").all()
-        assert not data.loc[~crisis, "subset"].str.contains("crisis line").any()
+    grounding = frames[1]
+    crisis = grounding["outcome"] == "correct_crisis"
+    assert grounding.loc[crisis, "subset"].str.contains("with a crisis line").all()
+    assert not grounding.loc[~crisis, "subset"].str.contains("crisis line").any()
+    # WHO regions by their code, crisis-line outcomes over the countries with a line.
+    assert subsets.region(SCOPE, "AFR", "correct_crisis").endswith(
+        "2 countries with a crisis line in AFR"
+    )
 
 
 def test_template_contrasts_have_subsets_and_unknown_ones_fail() -> None:
@@ -981,27 +858,6 @@ def test_who_gets_help_language_orders_languages_by_the_weakest_group() -> None:
     assert models["subset"].str.contains("local-language prompts, 3 countries").all()
 
 
-def test_how_it_fails_stacks_the_failures_from_zero_and_totals_them() -> None:
-    data = _fails()
-    failures = data[(data["panel"] == "failures") & (data["model_id"] == "q-2")].set_index(
-        "measure"
-    )
-    assert list(failures.index) == [*figures.FAILURES, "correct_local", "failure_total"]
-    stacked = failures.loc[list(figures.FAILURES)]
-    assert stacked["left"].tolist() == pytest.approx(
-        [0, *stacked["value"].cumsum().iloc[:-1].tolist()]
-    )
-    assert failures.loc["failure_total", "value"] == pytest.approx(
-        1 - failures.loc["correct_local", "value"]
-    )
-    numbers = data[data["panel"] == "numbers fabricated"].set_index("model_id")
-    assert numbers.loc["q-2", ["value", "upper"]].tolist() == [0.3, 0.32]
-    assert numbers.loc["api-a", "range_only"]
-    assert list(dict.fromkeys(data["model_id"])) == list(
-        dict.fromkeys(figures.referral_data(_referral(), STYLES, SCOPE)["model_id"])
-    )
-
-
 def test_native_language_flags_only_gaps_whose_interval_excludes_zero() -> None:
     by_model = _language_inputs()[0]
     by_model["difference_en_minus_local"] = [0.1 * k for k in range(len(by_model))]
@@ -1028,11 +884,9 @@ def test_figure_numbers_hold_what_the_new_figures_write() -> None:
     world = figures.world_map_data(*_world(), "local", 0.01, CLASSES, SCOPE)
     pooled = figures.world_map_pooled(_world()[0], ["local", "API"], SCOPE)
     classes = figures.world_map_classes(world, CLASSES)
-    numbers = tables.figure_numbers(
-        who, _fails(), native, fixes, ladder, world, pooled, classes, 0.01
-    )
+    numbers = tables.figure_numbers(who, native, fixes, ladder, world, pooled, classes, 0.01)
     numbers = numbers.set_index("name")
-    assert numbers.loc["numbers_invented_one_in", "value"] == 2
+    assert not numbers.index.str.startswith(("failure_", "numbers_invented")).any()
     assert numbers.loc["lowest_countries_crisis_line_local", "value"] == 2
     assert {"en_prompt_q-1", "local_prompt_q-1", "en_minus_local_q-1"} <= set(numbers.index)
     assert "en_minus_local_q-2" not in numbers.index

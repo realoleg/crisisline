@@ -50,22 +50,6 @@ def _offsets(count: int, step: float) -> np.ndarray:
     return step * (np.arange(count) - (count - 1) / 2)
 
 
-def _group_handles(groups: Groups) -> list[Line2D]:
-    return [
-        Line2D(
-            [], [], color=c, marker=m, linestyle="none", label=style.group_label(g), **style.MARKER
-        )
-        for g, (c, m) in groups.items()
-    ]
-
-
-def _context_in_grey(groups: Groups, data: pd.DataFrame, value: str = "estimate") -> Groups:
-    """``groups`` with the strongest one, the context of a figure about failures, in grey."""
-    means = data[data["model_group"].isin(groups)].groupby("model_group")[value].mean()
-    strongest = means.idxmax()
-    return {g: ((style.GREY, m) if g == strongest else (c, m)) for g, (c, m) in groups.items()}
-
-
 def _bold_labels(ax: Axes, axis: str, bold: Sequence[bool]) -> None:
     labels = ax.get_yticklabels() if axis == "y" else ax.get_xticklabels()
     for label, is_bold in zip(labels, bold, strict=True):
@@ -113,7 +97,7 @@ def _value_axis_to_100(ax: Axes, room: float) -> None:
     ax.spines["bottom"].set_bounds(0, 100)
 
 
-# Figure 1: referral outcomes per model.
+# Figure 2: referral outcomes per model.
 
 
 def referral_data(
@@ -195,7 +179,7 @@ def draw_referral(data: pd.DataFrame, path: Path) -> None:
         style.save(fig, path)
 
 
-# Figure 2: knowledge against location given in the system prompt.
+# The grounding conditions, for figure 4.
 
 GROUNDING_OUTCOMES = {"correct_crisis": "Correct crisis line", "fabricated": "Fabricated number"}
 
@@ -259,20 +243,7 @@ def _condition_lines(
         ax.spines["left"].set_bounds(0, 100)
 
 
-def draw_grounding(data: pd.DataFrame, groups: Groups, path: Path) -> None:
-    with style.paper_style():
-        fig = style.new_figure(style.FULL, 2.4)
-        axes = fig.subplots(1, len(GROUNDING_OUTCOMES))
-        for ax, (outcome, title) in zip(axes, GROUNDING_OUTCOMES.items(), strict=True):
-            rows = data[data["outcome"] == outcome]
-            top = 100 if outcome == "correct_crisis" else 100 * rows["ci_high"].max() * 1.1
-            _condition_lines(ax, rows, groups, top)
-            ax.set_title(title)
-        axes[0].set_ylabel(SHARE_AXIS)
-        style.save(fig, path)
-
-
-# Figure 3: prompt language.
+# English against local-language prompts, for the appendix.
 
 LANGUAGES = {"en": "English", "local": "Local-language"}
 
@@ -306,51 +277,14 @@ def _gap_rows(
     return rows
 
 
-def language_data(
-    by_model: pd.DataFrame,
-    by_language: pd.DataFrame,
-    styles: Mapping[str, ModelStyle],
-    groups: Sequence[str],
-    scope: Scope,
-) -> pd.DataFrame:
-    """(a) each model's correct number for English and local-language prompts that name the
-    country; (b) each group's correct number per prompt language, languages from the lowest share
-    over all models."""
-    model_rows = pd.DataFrame(_gap_rows(by_model, list(styles), styles, scope)).assign(
-        panel="by model", lang=""
-    )
-    pooled = by_language[by_language["model_group"] == ALL].set_index("lang")["estimate"]
-    order = sorted(pooled.index, key=lambda lang: (pooled[lang], lang))
-    lang_rows = (
-        by_language[by_language["model_group"].isin(groups)]
-        .assign(
-            panel="by language",
-            model_id="",
-            prompt_language="",
-            subset=lambda t: [
-                subsets.language(lang, n) for lang, n in zip(t["lang"], t["countries"], strict=True)
-            ],
-            lang_rank=lambda t: t["lang"].map(order.index),
-            group_rank=lambda t: t["model_group"].map(list(groups).index),
-        )
-        .sort_values(["lang_rank", "group_rank"])
-    )
-    columns = ["panel", "model_group", "model_id", "lang", "prompt_language"]
-    columns += ["estimate", "ci_low", "ci_high", "difference_en_minus_local"]
-    columns += ["difference_ci_low", "difference_ci_high", "significant_gap", "subset"]
-    return _named(pd.concat([model_rows, lang_rows], ignore_index=True)[columns])
-
-
 def _dumbbells(
     ax: Axes,
     data: pd.DataFrame,
     styles: Mapping[str, ModelStyle],
     groups: Groups,
-    write_shares: bool = True,
 ) -> None:
     """English (filled) and local-language (hollow) shares per model, joined; the models whose gap
-    excludes zero in their group's colour, with the two shares written if ``write_shares``, the
-    others grey."""
+    excludes zero in their group's colour, the others grey."""
     order = list(dict.fromkeys(data["model_id"]))
     for y, model in enumerate(order):
         rows = data[data["model_id"] == model].set_index("prompt_language")
@@ -376,9 +310,6 @@ def _dumbbells(
                 zorder=2,
                 **{**style.ERRORBAR, "elinewidth": 0.6},
             )
-        if significant and write_shares:
-            shares = " → ".join(style.percent(rows.loc[lang, "estimate"]) for lang in LANGUAGES)
-            ax.text(103, y, shares, color=colour, fontsize=SMALL, va="center")
     ax.set_yticks(range(len(order)), [style.model_name(m) for m in order])
     ax.tick_params(axis="y", length=0)
     ax.set_ylim(len(order) - 0.5, -0.5)
@@ -398,172 +329,6 @@ def _language_keys() -> list[Line2D]:
         )
         for language, label in LANGUAGES.items()
     ]
-
-
-def draw_language(
-    data: pd.DataFrame, styles: Mapping[str, ModelStyle], groups: Groups, path: Path
-) -> None:
-    """(a) a dumbbell per model; (b) a dot per group and language, the strongest group grey."""
-    with style.paper_style():
-        fig = style.new_figure(style.FULL, 4.3)
-        left, right = fig.subplots(1, 2, width_ratios=(1.15, 1))
-        _dumbbells(left, data[data["panel"] == "by model"], styles, groups)
-        left.set_title("(a) By model, country named")
-        langs = data[data["panel"] == "by language"]
-        shown = _context_in_grey(groups, langs)
-        lang_order = list(langs["lang"].unique())
-        for offset, (group, (colour, marker)) in zip(
-            _offsets(len(shown), 0.24), shown.items(), strict=True
-        ):
-            rows = langs[langs["model_group"] == group]
-            right.errorbar(
-                100 * rows["estimate"],
-                rows["lang"].map(lang_order.index) + offset,
-                xerr=style.percent_errors(rows["estimate"], rows["ci_low"], rows["ci_high"]),
-                fmt=marker,
-                color=colour,
-                **style.ERRORBAR,
-            )
-        right.set_yticks(range(len(lang_order)), lang_order)
-        right.set_ylim(len(lang_order) - 0.5, -0.5)
-        right.set_xlim(0, 100)
-        right.set_title("(b) By prompt language")
-        for ax in (left, right):
-            ax.set_xlabel(CORRECT_AXIS)
-            ax.tick_params(axis="y", length=0)
-            style.format_axis(ax, categorical="y")
-        _value_axis_to_100(left, 32)
-        fig.legend(
-            handles=_group_handles(shown) + _language_keys(),
-            loc="outside lower center",
-            ncols=len(shown) + len(LANGUAGES),
-        )
-        style.save(fig, path)
-
-
-# Figure 4: geography.
-
-GEOGRAPHY_OUTCOMES = {
-    "correct_local": "Any correct number",
-    "correct_crisis": "Correct crisis line",
-}
-WORST_MARKERS = {"correct_local": (style.DARK_GREY, "o"), "correct_crisis": (style.PALETTE[0], "s")}
-
-
-def geography_data(
-    who_regions: pd.DataFrame, worst: pd.DataFrame, groups: Sequence[str], scope: Scope
-) -> pd.DataFrame:
-    """Each group's shares per WHO region, regions from the lowest share of a correct number over
-    all models; then the countries with the lowest share, all models."""
-    pooled = who_regions[
-        (who_regions["model_group"] == ALL) & (who_regions["outcome"] == "correct_local")
-    ].set_index("who_region")["estimate"]
-    regions = sorted(pooled.index, key=lambda r: (pooled[r], r))
-    region_rows = (
-        who_regions[
-            who_regions["model_group"].isin(groups)
-            & who_regions["outcome"].isin(GEOGRAPHY_OUTCOMES)
-        ]
-        .assign(
-            panel="region",
-            iso2="",
-            name_en="",
-            outcome_rank=lambda t: t["outcome"].map(list(GEOGRAPHY_OUTCOMES).index),
-            region_rank=lambda t: t["who_region"].map(regions.index),
-            group_rank=lambda t: t["model_group"].map(list(groups).index),
-            subset=lambda t: [
-                subsets.region(scope, r, o)
-                for r, o in zip(t["who_region"], t["outcome"], strict=True)
-            ],
-        )
-        .sort_values(["outcome_rank", "region_rank", "group_rank"])
-    )
-    country_rows = [
-        {
-            "panel": "country",
-            "outcome": outcome,
-            "who_region": row["who_region"],
-            "iso2": row["iso2"],
-            "name_en": row["name_en"],
-            "model_group": ALL,
-            "estimate": row[f"{outcome} estimate ({ALL})"],
-            "ci_low": row[f"{outcome} ci_low ({ALL})"],
-            "ci_high": row[f"{outcome} ci_high ({ALL})"],
-            "subset": subsets.country(row["name_en"]),
-        }
-        for outcome in GEOGRAPHY_OUTCOMES
-        for _, row in worst.iterrows()
-        if pd.notna(row[f"{outcome} estimate ({ALL})"])
-    ]
-    columns = list(country_rows[0])
-    return pd.concat([region_rows[columns], pd.DataFrame(country_rows)], ignore_index=True)
-
-
-def draw_geography(data: pd.DataFrame, groups: Groups, path: Path) -> None:
-    with style.paper_style():
-        fig = style.new_figure(style.FULL, 2.7)
-        axes = fig.subplots(1, 3, width_ratios=(1, 1, 1.15))
-        regions = data[data["panel"] == "region"]
-        shown = _context_in_grey(groups, regions)
-        region_order = list(regions["who_region"].unique())
-        offsets = _offsets(len(shown), 0.24)
-        for ax, (outcome, title), letter in zip(
-            axes[:2], GEOGRAPHY_OUTCOMES.items(), "ab", strict=True
-        ):
-            for offset, (group, (colour, marker)) in zip(offsets, shown.items(), strict=True):
-                rows = regions[(regions["outcome"] == outcome) & (regions["model_group"] == group)]
-                ax.errorbar(
-                    100 * rows["estimate"],
-                    rows["who_region"].map(region_order.index) + offset,
-                    xerr=style.percent_errors(rows["estimate"], rows["ci_low"], rows["ci_high"]),
-                    fmt=marker,
-                    color=colour,
-                    **style.ERRORBAR,
-                )
-            ax.set_yticks(range(len(region_order)), region_order)
-            ax.set_ylim(len(region_order) - 0.5, -0.5)
-            ax.set_title(f"({letter}) {title}")
-        axes[1].tick_params(axis="y", labelleft=False)
-        countries = data[data["panel"] == "country"]
-        country_order = list(dict.fromkeys(countries["name_en"]))
-        worst_handles = []
-        for offset, (outcome, (colour, marker)) in zip(
-            _offsets(2, 0.3), WORST_MARKERS.items(), strict=True
-        ):
-            rows = countries[countries["outcome"] == outcome]
-            axes[2].errorbar(
-                100 * rows["estimate"],
-                rows["name_en"].map(country_order.index) + offset,
-                xerr=style.percent_errors(rows["estimate"], rows["ci_low"], rows["ci_high"]),
-                fmt=marker,
-                color=colour,
-                **style.ERRORBAR,
-            )
-            worst_handles.append(
-                Line2D(
-                    [],
-                    [],
-                    color=colour,
-                    marker=marker,
-                    linestyle="none",
-                    label=f"All models, {GEOGRAPHY_OUTCOMES[outcome].lower()}",
-                    **style.MARKER,
-                )
-            )
-        axes[2].set_yticks(range(len(country_order)), country_order)
-        axes[2].set_ylim(len(country_order) - 0.5, -0.5)
-        axes[2].set_title("(c) Lowest-scoring countries")
-        for ax in axes:
-            ax.set_xlim(0, 100)
-            ax.set_xlabel(SHARE_AXIS)
-            ax.tick_params(axis="y", length=0)
-            style.format_axis(ax, categorical="y")
-        fig.legend(
-            handles=_group_handles(shown) + worst_handles,
-            loc="outside lower center",
-            ncols=len(shown) + len(worst_handles),
-        )
-        style.save(fig, path)
 
 
 # Appendix: the Qwen size ladder.
@@ -642,74 +407,8 @@ def draw_ladder(data: pd.DataFrame, path: Path) -> None:
         style.save(fig, path)
 
 
-# Appendix: every country, by WHO region.
-
-
-def countries_data(countries: pd.DataFrame, groups: Sequence[str]) -> pd.DataFrame:
-    """Each group's share of a correct number per country; countries by WHO region, then from the
-    highest share over all models."""
-    data = countries[countries["outcome"] == "correct_local"]
-    pooled = data[data["model_group"] == ALL].set_index("iso2")["estimate"]
-    rows = data[data["model_group"].isin(groups)].assign(
-        pooled=lambda t: t["iso2"].map(pooled),
-        group_rank=lambda t: t["model_group"].map(list(groups).index),
-    )
-    rows = rows.sort_values(
-        ["who_region", "pooled", "iso2", "group_rank"], ascending=[True, False, True, True]
-    )
-    rows = rows.assign(subset=rows["name_en"].map(subsets.country))
-    columns = ["who_region", "iso2", "name_en", "model_group", "estimate", "ci_low", "ci_high"]
-    return rows[[*columns, "subset"]]
-
-
-def _region_labels(ax: Axes, regions: pd.Series, order: Sequence[str], line: str) -> None:
-    """WHO region names above the columns of their countries, and a separator between regions."""
-    for region, part in regions.groupby(regions, sort=False):
-        first, last = order.index(part.index[0]), order.index(part.index[-1])
-        ax.text(
-            (first + last) / 2,
-            1.01,
-            region,
-            transform=ax.get_xaxis_transform(),
-            ha="center",
-            va="bottom",
-            fontsize=SMALL,
-        )
-        if last < len(order) - 1:
-            ax.axvline(last + 0.5, color=line, linewidth=0.8)
-
-
-def draw_countries(data: pd.DataFrame, groups: Groups, path: Path) -> None:
-    with style.paper_style():
-        fig = style.new_figure(style.FULL, 2.9)
-        ax = fig.add_subplot()
-        shown = _context_in_grey(groups, data)
-        order = list(dict.fromkeys(data["iso2"]))
-        for offset, (group, (colour, marker)) in zip(
-            _offsets(len(shown), 0.22), shown.items(), strict=True
-        ):
-            rows = data[data["model_group"] == group]
-            ax.errorbar(
-                rows["iso2"].map(order.index) + offset,
-                100 * rows["estimate"],
-                yerr=style.percent_errors(rows["estimate"], rows["ci_low"], rows["ci_high"]),
-                fmt=marker,
-                color=colour,
-                **{**style.ERRORBAR, "markersize": 3.2, "elinewidth": 0.7},
-            )
-        ax.set_xticks(range(len(order)), order, rotation=90, fontsize=SMALL)
-        ax.tick_params(axis="x", length=0)
-        ax.set_xlim(-0.7, len(order) - 0.3)
-        ax.set_ylim(0, 100)
-        ax.set_ylabel(CORRECT_AXIS)
-        style.format_axis(ax, categorical="x")
-        regions = data.drop_duplicates("iso2").set_index("iso2")["who_region"]
-        _region_labels(ax, regions, order, style.GREY)
-        fig.legend(handles=_group_handles(shown), loc="outside lower center", ncols=len(shown))
-        style.save(fig, path)
-
-
-# Who gets help: the crisis line per model and country, the correct number per model and language.
+# Heatmaps: the crisis line per model and country (appendix), the correct number per model and
+# language (figure 3).
 
 CELL, MODEL_MARGIN, COLUMN_MARGIN = "cell", "model share", "column share"
 COUNTRY_MARGIN, LOWEST, NO_CRISIS_LINE = "country share", "lowest", "no crisis line"
@@ -1084,153 +783,7 @@ def draw_who_gets_help_language(data: pd.DataFrame, path: Path) -> None:
     )
 
 
-# How it fails: the failure classes, and the share of numbers that are invented.
-
-FAILURES = ("misrouted", "fabricated", "unconfirmed_number", "nothing")
-CORRECT_REMAINDER = "#EFEFEF"
-
-
-def how_it_fails_data(
-    referral: pd.DataFrame, fabrication: pd.DataFrame, subset_reader: str
-) -> pd.DataFrame:
-    """(a) each model's failure classes stacked from zero, the correct rest and the failure total
-    (one minus ``correct_local``), models in the order of the referral figure; (b) the share of
-    all numbers a model gives that are fabricated, between its lower and upper bound."""
-    rows = []
-    for model in dict.fromkeys(referral["model_id"]):
-        part = referral[referral["model_id"] == model].set_index("referral")
-        group, subset = part["group"].iloc[0], part["subset"].iloc[0]
-        left = 0.0
-        for name in FAILURES:
-            cell = part.loc[name]
-            rows.append(
-                {
-                    "panel": "failures",
-                    "model_group": group,
-                    "model_id": model,
-                    "measure": name,
-                    "left": left,
-                    "value": cell["share"],
-                    "ci_low": cell["ci_low"],
-                    "ci_high": cell["ci_high"],
-                    "subset": subset,
-                }
-            )
-            left += cell["share"]
-        correct = part.loc["correct_local"]
-        rows.append(
-            {
-                "panel": "failures",
-                "model_group": group,
-                "model_id": model,
-                "measure": "correct_local",
-                "left": left,
-                "value": correct["share"],
-                "ci_low": correct["ci_low"],
-                "ci_high": correct["ci_high"],
-                "subset": subset,
-            }
-        )
-        rows.append(
-            {
-                "panel": "failures",
-                "model_group": group,
-                "model_id": model,
-                "measure": "failure_total",
-                "left": 0.0,
-                "value": 1 - correct["share"],
-                "ci_low": 1 - correct["ci_high"],
-                "ci_high": 1 - correct["ci_low"],
-                "subset": subset,
-            }
-        )
-    numbers = fabrication[
-        (fabrication["kind"] == "model") & (fabrication["measure"] == "numbers_fabricated")
-    ].set_index(["domain", "bound"])
-    for model in dict.fromkeys(referral["model_id"]):
-        lower, upper = numbers.loc[(model, "lower")], numbers.loc[(model, "upper")]
-        rows.append(
-            {
-                "panel": "numbers fabricated",
-                "model_group": referral.loc[referral["model_id"] == model, "group"].iloc[0],
-                "model_id": model,
-                "measure": "numbers_fabricated",
-                "value": lower["value"],
-                "upper": upper["value"],
-                "ci_low": lower["ci_low"],
-                "ci_high": upper["ci_high"],
-                "range_only": bool(lower["range_only"]),
-                "subset": subset_reader,
-            }
-        )
-    return _named(pd.DataFrame(rows))
-
-
-def draw_how_it_fails(data: pd.DataFrame, path: Path) -> None:
-    with style.paper_style():
-        fig = style.new_figure(style.FULL, 2.8)
-        left, right = fig.subplots(1, 2, sharey=True, width_ratios=(1.5, 1))
-        failures = data[data["panel"] == "failures"]
-        position = _model_rows(left, _grouped(failures, "model_group"))
-        for name in (*FAILURES, "correct_local"):
-            rows = failures[failures["measure"] == name]
-            label, colour = (
-                style.REFERRAL[name] if name in FAILURES else ("Correct", CORRECT_REMAINDER)
-            )
-            left.barh(
-                rows["model_id"].map(position),
-                100 * rows["value"],
-                left=100 * rows["left"],
-                height=0.72,
-                color=colour,
-                edgecolor="white",
-                linewidth=0.4,
-                label=label,
-            )
-        for _, row in failures[failures["measure"] == "failure_total"].iterrows():
-            left.text(
-                100 * row["value"] + 1.5,
-                position[row["model_id"]],
-                style.percent(row["value"]),
-                fontsize=TINY,
-                va="center",
-                fontweight="bold",
-            )
-        left.set_xlim(0, 100)
-        left.set_xlabel(SHARE_AXIS)
-        style.format_axis(left, categorical="y")
-        numbers = data[data["panel"] == "numbers fabricated"]
-        for _, row in numbers.iterrows():
-            y = position[row["model_id"]]
-            if row["range_only"] or row["value"] != row["upper"]:
-                right.plot(
-                    [100 * row["value"], 100 * row["upper"]],
-                    [y, y],
-                    color=style.MUTED_RED,
-                    linewidth=3.0,
-                    solid_capstyle="butt",
-                )
-            if not row["range_only"]:
-                right.errorbar(
-                    [100 * row["value"]],
-                    [y],
-                    xerr=[
-                        [100 * (row["value"] - row["ci_low"])],
-                        [100 * (row["ci_high"] - row["value"])],
-                    ],
-                    fmt="o",
-                    color=style.MUTED_RED,
-                    **style.ERRORBAR,
-                )
-        right.set_xlim(0, 100 * numbers["ci_high"].max() * 1.12)
-        right.set_xlabel("Numbers given that are invented (%)")
-        right.tick_params(axis="y", length=0)
-        style.format_axis(right, categorical="y")
-        fig.legend(*left.get_legend_handles_labels(), loc="outside lower center", ncols=5)
-        style.save(fig, path)
-
-
-# Native language: English against local-language prompts per model.
+# Appendix: English against local-language prompts per model.
 
 
 def native_language_data(
@@ -1250,7 +803,7 @@ def draw_native_language(
         fig = style.new_figure(style.COLUMN, 2.8)
         ax = fig.add_subplot()
         circles = {g: (colour, "o") for g, (colour, _) in groups.items()}
-        _dumbbells(ax, data, styles, circles, write_shares=False)
+        _dumbbells(ax, data, styles, circles)
         ax.set_xlabel(CORRECT_AXIS)
         style.format_axis(ax, categorical="y")
         _value_axis_to_100(ax, 3)
@@ -1258,8 +811,8 @@ def draw_native_language(
         style.save(fig, path)
 
 
-# What fixes it: the crisis line and invented numbers as the system prompt names the country, then
-# the number.
+# Figure 4: the crisis line and invented numbers as the system prompt names the country, then the
+# number.
 
 STEPS = ("M1 - S0-country", "M2 - M1")
 FIX_CONDITIONS = ("Country in\nmessage", "Country in\nsystem prompt", "+ Verified\nnumber")
@@ -1302,7 +855,7 @@ def draw_what_fixes(data: pd.DataFrame, groups: Groups, path: Path) -> None:
         style.save(fig, path)
 
 
-# World map: where small local models do not give the crisis line.
+# Figure 1: where small local models do not give the crisis line.
 
 HATCH = "//////"
 
