@@ -38,6 +38,9 @@ CRISIS_AXIS = "Correct crisis line (%)"
 SMALL = 8  # points: direct labels and dense tick labels, the smallest size the template allows
 TINY = 7  # points: the percentages inside bars and the codes of the dense grids
 SEPARATOR_REACH = 2  # points: how far the separators of a grid reach beyond it
+POINTS_PER_INCH = 72
+# Fraction of an axis's height: the least distance between neighbouring direct labels.
+LABEL_GAP = 0.09
 LABEL_PAD = 2  # points: between a grid and its tick labels
 
 
@@ -47,13 +50,6 @@ def _ordered_groups(styles: Mapping[str, ModelStyle]) -> list[str]:
 
 def _offsets(count: int, step: float) -> np.ndarray:
     return step * (np.arange(count) - (count - 1) / 2)
-
-
-def _bold_labels(ax: Axes, axis: str, bold: Sequence[bool]) -> None:
-    labels = ax.get_yticklabels() if axis == "y" else ax.get_xticklabels()
-    for label, is_bold in zip(labels, bold, strict=True):
-        if is_bold:
-            label.set_fontweight("bold")
 
 
 def _named(table: pd.DataFrame) -> pd.DataFrame:
@@ -76,7 +72,9 @@ def _model_rows(ax: Axes, groups: Sequence[tuple[str, list[str]]]) -> dict[str, 
             labels.append(style.model_name(model))
             bold.append(False)
     ax.set_yticks(ticks, labels)
-    _bold_labels(ax, "y", bold)
+    for label, is_bold in zip(ax.get_yticklabels(), bold, strict=True):
+        if is_bold:
+            label.set_fontweight("bold")
     ax.tick_params(axis="y", length=0)
     ax.set_ylim(len(ticks) - 0.5, -0.6)
     return position
@@ -164,7 +162,7 @@ def draw_referral(data: pd.DataFrame, path: Path) -> None:
             )
         for _, row in data[data["referral"] == "correct_crisis_line"].iterrows():
             ax.text(
-                2,
+                2,  # percentage points: just inside the start of the bar
                 position[row["model_id"]],
                 style.percent(row["share"]),
                 color="white",
@@ -224,7 +222,9 @@ def _condition_lines(ax: Axes, data: pd.DataFrame, colours: Mapping[str, str], t
             **style.ERRORBAR,
         )
         starts.append(100 * rows["estimate"].iloc[0])
-    for y, (group, colour) in zip(style.spread(starts, 0.09 * top), colours.items(), strict=True):
+    for y, (group, colour) in zip(
+        style.spread(starts, LABEL_GAP * top), colours.items(), strict=True
+    ):
         ax.text(-0.15, y, style.group_label(group), color=colour, ha="right", va="center")
     ax.set_xticks(range(len(CONDITIONS)), list(CONDITIONS.values()), fontsize=SMALL)
     ax.set_xlim(-0.9, len(CONDITIONS) - 0.7)
@@ -376,7 +376,8 @@ def draw_ladder(data: pd.DataFrame, path: Path) -> None:
             )
             ends.append(100 * rows["share"].iloc[-1])
         top = 10 * np.ceil(10 * data["ci_high"].max())
-        placed = style.spread(ends, 0.09 * top)
+        placed = style.spread(ends, LABEL_GAP * top)
+        # The lowest label at least 2% of the axis above zero.
         placed = [y + max(0.0, 0.02 * top - min(placed)) for y in placed]
         sizes = sorted(data["size"].unique())
         for y, outcome in zip(placed, LADDER_OUTCOMES, strict=True):
@@ -586,7 +587,9 @@ def _share_grid(
     with style.paper_style():
         fig = style.new_figure(style.FULL, height)
         # Room on the right for the separator that reaches past the margin column.
-        right_edge = 1 - SEPARATOR_REACH / 72 / style.FULL if sections is not None else 1
+        right_edge = (
+            1 - SEPARATOR_REACH / POINTS_PER_INCH / style.FULL if sections is not None else 1
+        )
         fig.get_layout_engine().set(
             h_pad=0.01, w_pad=0.01, hspace=0.0, wspace=0.0, rect=(0, 0, right_edge, 1)
         )
@@ -662,7 +665,7 @@ def _separators(fig: Figure, axes: tuple[Axes, Axes, Axes], breaks: Sequence[flo
     the margin column. All white edges first, so that crossings stay black."""
     ax, right, bottom = axes
     width, height = fig.get_size_inches()
-    reach, pad = SEPARATOR_REACH / 72, LABEL_PAD / 72
+    reach, pad = SEPARATOR_REACH / POINTS_PER_INCH, LABEL_PAD / POINTS_PER_INCH
     up = ax.transData + ScaledTranslation(0, reach, fig.dpi_scale_trans)
     down = bottom.transData + ScaledTranslation(0, -reach, fig.dpi_scale_trans)
 

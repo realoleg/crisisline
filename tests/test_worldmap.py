@@ -1,4 +1,5 @@
-"""Tests of the Equal Earth projection and the matching of Natural Earth countries."""
+"""Tests of the map projections, the split at the seam and the matching of Natural Earth
+countries."""
 
 from __future__ import annotations
 

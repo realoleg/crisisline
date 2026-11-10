@@ -141,7 +141,7 @@ def _domain(group: str, model: str) -> tuple[str, str]:
     return ("all", ALL) if group == ALL else ("model group", group)
 
 
-def reader_subset(kind: str, domain: str) -> str:
+def _reader_subset(kind: str, domain: str) -> str:
     if kind == "language group":
         return f"{subsets.FABRICATION_READER}, prompts in the {domain} language group"
     return subsets.FABRICATION_READER
@@ -175,7 +175,7 @@ def fabrication_table(
                     "ci_low": r[f"{prefix}_{bound}_ci_low"],
                     "ci_high": r[f"{prefix}_{bound}_ci_high"],
                     "n": n,
-                    "subset": reader_subset(r["kind"], r["domain"]),
+                    "subset": _reader_subset(r["kind"], r["domain"]),
                 }
                 for bound in ("lower", "upper")
             )
@@ -238,7 +238,8 @@ def fabrication_table(
 
 
 def _no_location_responses(cells: pd.DataFrame) -> pd.Series:
-    """Responses to prompts that name no country, per model."""
+    """Responses to prompts that name no country, per model: ``blocked`` is defined for every
+    response, so its rows hold all of them."""
     rows = cells[
         (cells["condition"] == "S0")
         & (cells["lang_mode"] == "none")

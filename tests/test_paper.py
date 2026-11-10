@@ -790,7 +790,7 @@ def test_pooled_template_contrasts_take_the_interval_of_the_grounding_step() -> 
         tables.templates_table(*_template_inputs(-0.04), SCOPE)
 
 
-# The redesigned figures.
+# Heatmaps, the language and grounding figures, the world map and their numbers.
 
 
 def test_language_names_are_the_translation_languages_and_english() -> None:
@@ -888,7 +888,7 @@ def _figure_numbers() -> pd.DataFrame:
     return tables.figure_numbers(who, native, fixes, ladder, world, pooled, classes, 0.01)
 
 
-def test_figure_numbers_hold_what_the_new_figures_write() -> None:
+def test_figure_numbers_hold_what_the_figures_write() -> None:
     numbers = _figure_numbers().set_index("name")
     assert numbers.loc["lowest_countries_crisis_line_local", "value"] == 2
     assert {"en_prompt_q-1", "local_prompt_q-1", "en_minus_local_q-1"} <= set(numbers.index)
