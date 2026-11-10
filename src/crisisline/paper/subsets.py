@@ -14,6 +14,7 @@ ABOUT_A_COUNTRY = "prompts about a country (S0 with a city or country cue, M1, M
 NO_COUNTRY = "prompts that name no country (S0 without a cue)"
 ALL_LANGUAGES = "all prompt languages"
 MAIN_RUN = "main run"
+NO_LINE = "countries of the prompts without a national crisis line"
 REGIONS = {
     "AFR": "Africa",
     "AMR": "Americas",
@@ -155,6 +156,10 @@ def region(scope: Scope, who_region: str, outcome: str) -> str:
 
 def all_regions(scope: Scope, outcome: str) -> str:
     return f"{CUED}, {ALL_LANGUAGES}, {scope.count(outcome)}"
+
+
+def local_languages(scope: Scope) -> str:
+    return f"{CUED}, local-language prompts, {scope.count()}"
 
 
 def country(name: str) -> str:

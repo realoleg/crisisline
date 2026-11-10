@@ -234,6 +234,17 @@ def _ladder() -> pd.DataFrame:
     ).rename(columns={"estimate": "share"})
 
 
+def _ladder_referral() -> pd.DataFrame:
+    return _referral()[lambda t: t["model_id"].isin(["q-2", "q-1"])].assign(responses=24)
+
+
+def test_ladder_outcomes_are_four_classes_by_size_over_crisis_line_countries() -> None:
+    data = figures.ladder_outcomes_data(_ladder_referral(), SIZES, SCOPE)
+    assert list(dict.fromkeys(data["referral"])) == list(figures.LADDER_OUTCOMES)
+    assert data["size"].tolist() == [1.0, 2.0] * len(figures.LADDER_OUTCOMES)
+    assert data["subset"].str.contains("2 countries with a crisis line").all()
+
+
 def test_ladder_data_is_by_cue_then_size() -> None:
     data = figures.ladder_data(_ladder(), SIZES, SCOPE)
     assert data[["cue", "size"]].values.tolist() == [
@@ -366,7 +377,7 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
     grounding = figures.grounding_data(_grounding(), list(GROUPS), SCOPE)
     language = figures.language_data(*_language_inputs(), STYLES, list(GROUPS), SCOPE)
     geography = figures.geography_data(*_geography_inputs(), list(GROUPS), SCOPE)
-    ladder = figures.ladder_data(_ladder(), SIZES, SCOPE)
+    ladder = figures.ladder_outcomes_data(_ladder_referral(), SIZES, SCOPE)
     countries = figures.countries_data(_countries(), list(GROUPS))
     return {
         "referral": (lambda p: figures.draw_referral(referral, p), style.FULL),
@@ -376,13 +387,19 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
             style.FULL,
         ),
         "geography": (lambda p: figures.draw_geography(geography, GROUP_STYLES, p), style.FULL),
-        "ladder": (lambda p: figures.draw_ladder(ladder, STYLES["q-1"].colour, p), style.COLUMN),
+        "ladder": (lambda p: figures.draw_ladder(ladder, p), style.COLUMN),
         "countries": (
             lambda p: figures.draw_countries(countries, GROUP_STYLES, p),
             style.FULL,
         ),
         "who_gets_help": (
             lambda p: figures.draw_who_gets_help(figures.who_gets_help_data(*_who_inputs()), p),
+            style.FULL,
+        ),
+        "who_gets_help_language": (
+            lambda p: figures.draw_who_gets_help_language(
+                figures.who_gets_help_language_data(*_who_language_inputs(), STYLES, SCOPE), p
+            ),
             style.FULL,
         ),
         "how_it_fails": (
@@ -404,7 +421,7 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
                 GROUP_STYLES,
                 p,
             ),
-            style.COLUMN,
+            style.FULL,
         ),
     }
 
@@ -807,20 +824,49 @@ def test_spread_keeps_order_and_minimum_gap() -> None:
     assert style.spread([1.0, 20.0], 4.0) == [1.0, 20.0]
 
 
-def test_who_gets_help_orders_models_by_strength_and_marks_tied_lowest_countries() -> None:
+def test_who_gets_help_orders_models_by_strength_and_lists_countries_without_a_line() -> None:
     data = figures.who_gets_help_data(*_who_inputs())
     cells = data[data["panel"] == "cell"]
     assert list(dict.fromkeys(cells["model_id"])) == ["api-a", "api-b", "q-2", "other", "q-1"]
-    # AFR before EUR; within AFR from the highest all-model share; no line last.
-    assert list(dict.fromkeys(cells["iso2"])) == ["AA", "BB", "CC"]
-    no_line = cells[cells["iso2"] == "CC"]
-    assert no_line["share"].isna().all() and not no_line["has_crisis_line"].any()
-    # One lowest country asked for, two tied at zero: both are marked.
+    # By WHO region, within a region from the highest all-model share; no line: not in the grid.
+    assert list(dict.fromkeys(cells["iso2"])) == ["AA", "BB"]
+    no_line = data[data["panel"] == "no crisis line"]
+    assert no_line["iso2"].tolist() == ["CC"] and no_line["share"].isna().all()
+    # One lowest country asked for, two tied at zero: both are listed.
     lowest = data[data["panel"] == "lowest"]
     assert set(lowest["iso2"]) == {"AA", "BB"} and set(lowest["model_group"]) == {"local"}
     margin = data[data["panel"] == "country share"].set_index("iso2")
-    assert margin.loc["AA", "share"] == 0.6 and pd.isna(margin.loc["CC", "share"])
-    assert data["n"].notna().sum() == len(cells) - len(no_line) + 5 + 2 + 2
+    assert margin["share"].to_dict() == {"AA": 0.6, "BB": 0.5}
+    assert data["n"].notna().sum() == len(cells) + 5 + 2 + 2
+
+
+def _who_language_inputs() -> tuple[pd.DataFrame, pd.DataFrame]:
+    _, by_language = _language_inputs()
+    strength = {"api-b": 0.9, "api-a": 0.95, "q-1": 0.1, "q-2": 0.3, "other": 0.2}
+    cells = pd.DataFrame(
+        [
+            {"model_id": m, "lang": lang, "responses": 24, **_ci(v)}
+            for m, v in strength.items()
+            for lang in ("am", "de", "si", figures.ALL)
+        ]
+    ).rename(columns={"estimate": "share"})
+    # The weakest group ranks si above de above am; over all models, de is first.
+    local = by_language["model_group"] == "local"
+    shares = by_language.loc[local, "lang"].map({"am": 0.1, "de": 0.3, "si": 0.5})
+    by_language.loc[local, "estimate"] = shares
+    return cells, by_language.assign(responses=48)
+
+
+def test_who_gets_help_language_orders_languages_by_the_weakest_group() -> None:
+    data = figures.who_gets_help_language_data(*_who_language_inputs(), STYLES, SCOPE)
+    cells = data[data["panel"] == "cell"]
+    assert list(dict.fromkeys(cells["model_id"])) == ["api-a", "api-b", "q-2", "other", "q-1"]
+    assert list(dict.fromkeys(cells["lang"])) == ["si", "de", "am"]
+    assert figures.ALL not in set(cells["lang"])
+    margin = data[data["panel"] == "column share"].set_index("lang")["share"]
+    assert margin.to_dict() == {"si": 0.4, "de": 0.9, "am": 0.2}
+    models = data[data["panel"] == "model share"]
+    assert models["subset"].str.contains("local-language prompts, 3 countries").all()
 
 
 def test_how_it_fails_stacks_the_failures_from_zero_and_totals_them() -> None:
@@ -845,14 +891,18 @@ def test_how_it_fails_stacks_the_failures_from_zero_and_totals_them() -> None:
 
 
 def test_native_language_flags_only_gaps_whose_interval_excludes_zero() -> None:
-    data = figures.native_language_data(_language_inputs()[0], STYLES, SCOPE)
+    by_model = _language_inputs()[0]
+    by_model["difference_en_minus_local"] = [0.1 * k for k in range(len(by_model))]
+    data = figures.native_language_data(by_model, STYLES, SCOPE)
     flagged = set(data.loc[data["significant_gap"], "model_id"])
     assert flagged == {"q-1"}
+    # From the largest gap.
+    assert list(dict.fromkeys(data["model_id"])) == MODELS[::-1]
 
 
-def test_what_fixes_has_the_lines_and_the_two_steps_over_all_models() -> None:
+def test_what_fixes_has_both_outcomes_and_the_two_steps_over_all_models() -> None:
     data = figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE)
-    assert set(data.loc[data["panel"] == "line", "outcome"]) == {"correct_crisis"}
+    assert set(data.loc[data["panel"] == "line", "outcome"]) == set(figures.FIX_AXES)
     steps = data[data["panel"] == "step"]
     assert steps["condition"].tolist() == list(figures.STEPS)
     assert steps["subset"].str.contains("with a crisis line").all()
@@ -862,12 +912,15 @@ def test_figure_numbers_hold_what_the_new_figures_write() -> None:
     who = figures.who_gets_help_data(*_who_inputs())
     native = figures.native_language_data(_language_inputs()[0], STYLES, SCOPE)
     fixes = figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE)
-    numbers = tables.figure_numbers(who, _fails(), native, fixes).set_index("name")
+    ladder = figures.ladder_outcomes_data(_ladder_referral(), SIZES, SCOPE)
+    numbers = tables.figure_numbers(who, _fails(), native, fixes, ladder).set_index("name")
     assert numbers.loc["numbers_invented_one_in", "value"] == 2
     assert numbers.loc["lowest_countries_crisis_line_local", "value"] == 2
     assert {"en_prompt_q-1", "local_prompt_q-1", "en_minus_local_q-1"} <= set(numbers.index)
     assert "en_minus_local_q-2" not in numbers.index
     assert numbers.loc["correct_crisis_M2_minus_M1_all", "value"] == 0.5
+    assert numbers.loc["countries_without_crisis_line", "value"] == 1
+    assert numbers.loc["ladder_misrouted_q-1", "value"] == pytest.approx(0.1)
     assert numbers.index.is_unique
     assert numbers["subset"].str.len().gt(0).all()
 

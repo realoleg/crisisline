@@ -1,6 +1,6 @@
 """The paper's figures. For each, one function selects exactly the data it plots from the analysis
 tables (written next to the figure as CSV, in plotted order) and one draws that data. Each figure
-states one message in saturated colour; context is grey; key numbers are written from the data."""
+states one message in saturated colour; context is grey; numbers belong in numbers.csv."""
 
 from __future__ import annotations
 
@@ -12,7 +12,6 @@ import pandas as pd
 from matplotlib.axes import Axes
 from matplotlib.image import AxesImage
 from matplotlib.lines import Line2D
-from matplotlib.patches import Patch, Rectangle
 from matplotlib.ticker import FixedLocator, NullLocator
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
@@ -30,6 +29,7 @@ SHARE_AXIS = "Responses (%)"
 CORRECT_AXIS = "Correct number (%)"
 CRISIS_AXIS = "Correct crisis line (%)"
 SMALL = 8  # points: direct labels and dense tick labels, the smallest size the template allows
+TINY = 7  # points: the percentages inside bars and the codes of the dense grids
 
 Groups = Mapping[str, tuple[str, str]]
 
@@ -176,7 +176,7 @@ def draw_referral(data: pd.DataFrame, path: Path) -> None:
                 position[row["model_id"]],
                 style.percent(row["share"]),
                 color="white",
-                fontsize=SMALL,
+                fontsize=TINY,
                 ha="left",
                 va="center",
             )
@@ -216,7 +216,13 @@ def grounding_data(grounding: pd.DataFrame, groups: Sequence[str], scope: Scope)
     return rows[columns].rename(columns={"measure": "condition"})
 
 
-def _condition_lines(ax: Axes, data: pd.DataFrame, groups: Groups, top: float) -> None:
+def _condition_lines(
+    ax: Axes,
+    data: pd.DataFrame,
+    groups: Groups,
+    top: float,
+    labels: Sequence[str] = tuple(CONDITIONS.values()),
+) -> None:
     """One line per group across the conditions, labelled at its first point."""
     offsets = _offsets(len(groups), 0.08)
     starts = []
@@ -236,7 +242,7 @@ def _condition_lines(ax: Axes, data: pd.DataFrame, groups: Groups, top: float) -
         style.spread(starts, 0.09 * top), groups.items(), strict=True
     ):
         ax.text(-0.15, y, style.group_label(group), color=colour, ha="right", va="center")
-    ax.set_xticks(range(len(CONDITIONS)), list(CONDITIONS.values()), fontsize=SMALL)
+    ax.set_xticks(range(len(CONDITIONS)), list(labels), fontsize=SMALL)
     ax.set_xlim(-0.9, len(CONDITIONS) - 0.7)
     ax.set_ylim(0, 1.04 * top)
     style.format_axis(ax, categorical="x")
@@ -328,10 +334,15 @@ def language_data(
 
 
 def _dumbbells(
-    ax: Axes, data: pd.DataFrame, styles: Mapping[str, ModelStyle], groups: Groups
+    ax: Axes,
+    data: pd.DataFrame,
+    styles: Mapping[str, ModelStyle],
+    groups: Groups,
+    write_shares: bool = True,
 ) -> None:
     """English (filled) and local-language (hollow) shares per model, joined; the models whose gap
-    excludes zero in their group's colour with the two shares written, the others grey."""
+    excludes zero in their group's colour, with the two shares written if ``write_shares``, the
+    others grey."""
     order = list(dict.fromkeys(data["model_id"]))
     for y, model in enumerate(order):
         rows = data[data["model_id"] == model].set_index("prompt_language")
@@ -357,7 +368,7 @@ def _dumbbells(
                 zorder=2,
                 **{**style.ERRORBAR, "elinewidth": 0.6},
             )
-        if significant:
+        if significant and write_shares:
             shares = " → ".join(style.percent(rows.loc[lang, "estimate"]) for lang in LANGUAGES)
             ax.text(103, y, shares, color=colour, fontsize=SMALL, va="center")
     ax.set_yticks(range(len(order)), [style.model_name(m) for m in order])
@@ -549,7 +560,8 @@ def draw_geography(data: pd.DataFrame, groups: Groups, path: Path) -> None:
 
 # Appendix: the Qwen size ladder.
 
-CUES = {"country": ("Country named", "-", "o"), "city": ("City named", "--", "s")}
+CUES = ("country", "city")
+LADDER_OUTCOMES = ("correct_crisis_line", "misrouted", "fabricated", "nothing")
 
 
 def ladder_data(ladder: pd.DataFrame, sizes: Mapping[str, float], scope: Scope) -> pd.DataFrame:
@@ -558,50 +570,67 @@ def ladder_data(ladder: pd.DataFrame, sizes: Mapping[str, float], scope: Scope) 
     rows = ladder[ladder["outcome"] == "correct_local"].assign(
         size=lambda t: t["model_id"].map(sizes)
     )
-    rows = rows.assign(cue_rank=rows["cue"].map(list(CUES).index)).sort_values(["cue_rank", "size"])
+    rows = rows.assign(cue_rank=rows["cue"].map(CUES.index)).sort_values(["cue_rank", "size"])
     rows = rows.assign(subset=[subsets.cue(scope, c) for c in rows["cue"]])
     return _named(rows[["cue", "model_id", "size", "share", "ci_low", "ci_high", "subset"]])
 
 
-def draw_ladder(data: pd.DataFrame, colour: str, path: Path) -> None:
-    """Both cues; the smallest and the largest model's share at the country cue written."""
+def ladder_outcomes_data(
+    referral: pd.DataFrame, sizes: Mapping[str, float], scope: Scope
+) -> pd.DataFrame:
+    """Each model's share of four referral classes against its size, prompts that name a city or
+    the country pooled, countries with a crisis line."""
+    rows = referral[referral["referral"].isin(LADDER_OUTCOMES)].assign(
+        size=lambda t: t["model_id"].map(sizes),
+        outcome_rank=lambda t: t["referral"].map(LADDER_OUTCOMES.index),
+        subset=subsets.all_regions(scope, "correct_crisis"),
+    )
+    rows = rows.sort_values(["outcome_rank", "size"])
+    columns = ["referral", "model_id", "size", "share", "ci_low", "ci_high", "responses", "subset"]
+    return _named(rows[columns].reset_index(drop=True))
+
+
+def draw_ladder(data: pd.DataFrame, path: Path) -> None:
+    """A line per referral class with its interval as a band, labelled at its right end."""
     with style.paper_style():
-        fig = style.new_figure(style.COLUMN, 2.3)
+        fig = style.new_figure(style.COLUMN, 2.2)
         ax = fig.add_subplot()
-        for cue, (label, line, marker) in CUES.items():
-            rows = data[data["cue"] == cue]
-            ax.errorbar(
+        ends = []
+        for outcome in LADDER_OUTCOMES:
+            rows = data[data["referral"] == outcome]
+            colour = style.REFERRAL[outcome][1]
+            ax.fill_between(
+                rows["size"],
+                100 * rows["ci_low"],
+                100 * rows["ci_high"],
+                color=colour,
+                alpha=0.18,
+                linewidth=0,
+            )
+            ax.plot(
                 rows["size"],
                 100 * rows["share"],
-                yerr=style.percent_errors(rows["share"], rows["ci_low"], rows["ci_high"]),
-                fmt=marker,
-                linestyle=line,
+                "-o",
                 color=colour,
                 linewidth=1.0,
-                label=label,
-                **style.ERRORBAR,
+                **{**style.MARKER, "markersize": 3.5},
             )
-        first = next(iter(CUES))
-        ends = data[data["cue"] == first].iloc[[0, -1]]
-        for (_, row), ha in zip(ends.iterrows(), ("left", "right"), strict=True):
-            ax.annotate(
-                style.percent(row["share"]),
-                (row["size"], 100 * row["share"]),
-                xytext=(0, -13),
-                textcoords="offset points",
-                ha=ha,
-                fontsize=SMALL,
-                color=colour,
-            )
+            ends.append(100 * rows["share"].iloc[-1])
+        top = 10 * np.ceil(10 * data["ci_high"].max())
+        placed = style.spread(ends, 0.09 * top)
+        placed = [y + max(0.0, 0.02 * top - min(placed)) for y in placed]
         sizes = sorted(data["size"].unique())
+        for y, outcome in zip(placed, LADDER_OUTCOMES, strict=True):
+            label, colour = style.REFERRAL[outcome]
+            ax.text(1.15 * sizes[-1], y, label, color=colour, fontsize=SMALL, va="center")
         ax.set_xscale("log")
         style.format_axis(ax)
         ax.set_xticks(sizes, [f"{s:g}B" for s in sizes])
         ax.xaxis.set_minor_locator(NullLocator())
-        ax.set_ylim(0, 100)
+        ax.set_xlim(sizes[0] / 1.15, sizes[-1] * 1.1)
+        ax.set_ylim(0, top)
         ax.set_xlabel("Parameters")
-        ax.set_ylabel(CORRECT_AXIS)
-        fig.legend(loc="outside lower center", ncols=len(CUES))
+        ax.set_ylabel(SHARE_AXIS)
         style.save(fig, path)
 
 
@@ -672,9 +701,28 @@ def draw_countries(data: pd.DataFrame, groups: Groups, path: Path) -> None:
         style.save(fig, path)
 
 
-# Who gets help: the crisis line per model and country.
+# Who gets help: the crisis line per model and country, the correct number per model and language.
 
-CELL, MODEL_MARGIN, COUNTRY_MARGIN, LOWEST = "cell", "model share", "country share", "lowest"
+CELL, MODEL_MARGIN, COLUMN_MARGIN = "cell", "model share", "column share"
+COUNTRY_MARGIN, LOWEST, NO_CRISIS_LINE = "country share", "lowest", "no crisis line"
+
+
+def _models_by_margin(margin: pd.Series, styles: Mapping[str, ModelStyle]) -> list[str]:
+    """Models by group, from the highest margin share within each."""
+    order = []
+    for group in _ordered_groups(styles):
+        members = [m for m, s in styles.items() if s.group == group]
+        order += sorted(members, key=lambda m: (-margin[m], m))
+    return order
+
+
+def _weakest_group(margin: pd.Series, styles: Mapping[str, ModelStyle]) -> str:
+    """The group with the lowest mean margin share over its models."""
+    means = {
+        g: np.mean([margin[m] for m, s in styles.items() if s.group == g])
+        for g in _ordered_groups(styles)
+    }
+    return min(means, key=means.get)
 
 
 def who_gets_help_data(
@@ -685,30 +733,23 @@ def who_gets_help_data(
     scope: Scope,
     lowest: int = 3,
 ) -> pd.DataFrame:
-    """The crisis-line share of every model in every country (S0 with a cue), the margins (each
-    model over all countries, each country over all models), and the countries with the lowest
-    share for the weakest group: the ``lowest`` lowest, and every country tied with the last."""
+    """The crisis-line share of every model in every country with a crisis line (S0 with a cue),
+    the margins (each model over all countries, each country over all models), the countries with
+    the lowest share for the weakest group (the ``lowest`` lowest, and every country tied with the
+    last), and the countries without a crisis line, which the figure leaves out."""
     countries = countries[countries["outcome"] == "correct_crisis"]
     margin = model_shares.set_index("model_id")
-    order = []
-    for group in _ordered_groups(styles):
-        members = [m for m, s in styles.items() if s.group == group]
-        order += sorted(members, key=lambda m: (-margin.loc[m, "share"], m))
+    order = _models_by_margin(margin["share"], styles)
     pooled = countries[countries["model_group"] == ALL].set_index("iso2")
     columns = []
     for region in REGION_LABELS:
-        listed = [c for c in scope.countries if c.region == region]
-        with_line = [c for c in listed if c.crisis_line]
-        with_line.sort(key=lambda c: (-pooled.loc[c.iso2, "estimate"], c.iso2))
-        columns += with_line + sorted(
-            (c for c in listed if not c.crisis_line), key=lambda c: c.iso2
-        )
+        with_line = [c for c in scope.countries if c.region == region and c.crisis_line]
+        columns += sorted(with_line, key=lambda c: (-pooled.loc[c.iso2, "estimate"], c.iso2))
     shares = cells.set_index(["model_id", "iso2"])
     rows = []
     for model in order:
         for country in columns:
-            found = (model, country.iso2) in shares.index
-            cell = shares.loc[(model, country.iso2)] if found else None
+            cell = shares.loc[(model, country.iso2)]
             rows.append(
                 {
                     "panel": CELL,
@@ -717,11 +758,10 @@ def who_gets_help_data(
                     "iso2": country.iso2,
                     "name_en": country.name,
                     "who_region": country.region,
-                    "has_crisis_line": country.crisis_line,
-                    "share": cell["share"] if found else np.nan,
-                    "ci_low": cell["ci_low"] if found else np.nan,
-                    "ci_high": cell["ci_high"] if found else np.nan,
-                    "n": cell["responses"] if found else np.nan,
+                    "share": cell["share"],
+                    "ci_low": cell["ci_low"],
+                    "ci_high": cell["ci_high"],
+                    "n": cell["responses"],
                     "subset": subsets.country(country.name),
                 }
             )
@@ -738,7 +778,6 @@ def who_gets_help_data(
             }
         )
     for country in columns:
-        found = country.iso2 in pooled.index and country.crisis_line
         rows.append(
             {
                 "panel": COUNTRY_MARGIN,
@@ -746,26 +785,19 @@ def who_gets_help_data(
                 "iso2": country.iso2,
                 "name_en": country.name,
                 "who_region": country.region,
-                "has_crisis_line": country.crisis_line,
-                "share": pooled.loc[country.iso2, "estimate"] if found else np.nan,
-                "ci_low": pooled.loc[country.iso2, "ci_low"] if found else np.nan,
-                "ci_high": pooled.loc[country.iso2, "ci_high"] if found else np.nan,
-                "n": pooled.loc[country.iso2, "responses"] if found else np.nan,
+                "share": pooled.loc[country.iso2, "estimate"],
+                "ci_low": pooled.loc[country.iso2, "ci_low"],
+                "ci_high": pooled.loc[country.iso2, "ci_high"],
+                "n": pooled.loc[country.iso2, "responses"],
                 "subset": subsets.country(country.name),
             }
         )
-    group_means = {
-        g: np.mean([margin.loc[m, "share"] for m in order if styles[m].group == g])
-        for g in _ordered_groups(styles)
-    }
-    weakest = min(group_means, key=group_means.get)
-    by_group = countries[countries["model_group"] == weakest].set_index("iso2")["estimate"]
-    cutoff = by_group.nsmallest(lowest).max()
+    weakest = _weakest_group(margin["share"], styles)
+    by_group = countries[countries["model_group"] == weakest].set_index("iso2")
+    cutoff = by_group["estimate"].nsmallest(lowest).max()
     for country in columns:
-        if country.iso2 in by_group.index and by_group[country.iso2] <= cutoff:
-            row = countries[
-                (countries["model_group"] == weakest) & (countries["iso2"] == country.iso2)
-            ].iloc[0]
+        if country.iso2 in by_group.index and by_group.loc[country.iso2, "estimate"] <= cutoff:
+            row = by_group.loc[country.iso2]
             rows.append(
                 {
                     "panel": LOWEST,
@@ -773,7 +805,6 @@ def who_gets_help_data(
                     "iso2": country.iso2,
                     "name_en": country.name,
                     "who_region": country.region,
-                    "has_crisis_line": True,
                     "share": row["estimate"],
                     "ci_low": row["ci_low"],
                     "ci_high": row["ci_high"],
@@ -781,11 +812,89 @@ def who_gets_help_data(
                     "subset": subsets.country(country.name),
                 }
             )
+    for region in REGION_LABELS:
+        for country in sorted(
+            (c for c in scope.countries if c.region == region and not c.crisis_line),
+            key=lambda c: c.iso2,
+        ):
+            rows.append(
+                {
+                    "panel": NO_CRISIS_LINE,
+                    "model_group": ALL,
+                    "iso2": country.iso2,
+                    "name_en": country.name,
+                    "who_region": country.region,
+                    "subset": subsets.NO_LINE,
+                }
+            )
     table = pd.DataFrame(rows)
     return _named(table.assign(model_id=table["model_id"].fillna("")))
 
 
-def _crisis_cells(ax: Axes, values: np.ndarray, no_line: Sequence[int]) -> AxesImage:
+def who_gets_help_language_data(
+    cells: pd.DataFrame,
+    by_language: pd.DataFrame,
+    styles: Mapping[str, ModelStyle],
+    scope: Scope,
+) -> pd.DataFrame:
+    """The correct-number share of every model in every prompt language (local-language S0 with a
+    cue), the margins (each model over all languages, each language over all models); languages
+    from the highest share of the weakest group."""
+    languages = cells[cells["lang"] != ALL].set_index(["model_id", "lang"])
+    margin = cells[cells["lang"] == ALL].set_index("model_id")
+    order = _models_by_margin(margin["share"], styles)
+    weakest = _weakest_group(margin["share"], styles)
+    group = by_language[by_language["model_group"] == weakest].set_index("lang")["estimate"]
+    columns = sorted(group.index, key=lambda lang: (-group[lang], lang))
+    pooled = by_language[by_language["model_group"] == ALL].set_index("lang")
+    countries = by_language.drop_duplicates("lang").set_index("lang")["countries"]
+    rows = []
+    for model in order:
+        for lang in columns:
+            cell = languages.loc[(model, lang)]
+            rows.append(
+                {
+                    "panel": CELL,
+                    "model_group": styles[model].group,
+                    "model_id": model,
+                    "lang": lang,
+                    "share": cell["share"],
+                    "ci_low": cell["ci_low"],
+                    "ci_high": cell["ci_high"],
+                    "n": cell["responses"],
+                    "subset": subsets.language(lang, int(countries[lang])),
+                }
+            )
+        rows.append(
+            {
+                "panel": MODEL_MARGIN,
+                "model_group": styles[model].group,
+                "model_id": model,
+                "share": margin.loc[model, "share"],
+                "ci_low": margin.loc[model, "ci_low"],
+                "ci_high": margin.loc[model, "ci_high"],
+                "n": margin.loc[model, "responses"],
+                "subset": subsets.local_languages(scope),
+            }
+        )
+    for lang in columns:
+        rows.append(
+            {
+                "panel": COLUMN_MARGIN,
+                "model_group": ALL,
+                "lang": lang,
+                "share": pooled.loc[lang, "estimate"],
+                "ci_low": pooled.loc[lang, "ci_low"],
+                "ci_high": pooled.loc[lang, "ci_high"],
+                "n": pooled.loc[lang, "responses"],
+                "subset": subsets.language(lang, int(countries[lang])),
+            }
+        )
+    table = pd.DataFrame(rows)
+    return _named(table.assign(model_id=table["model_id"].fillna("")))
+
+
+def _share_cells(ax: Axes, values: np.ndarray) -> AxesImage:
     image = ax.imshow(
         100 * values,
         cmap=style.CRISIS_MAP,
@@ -794,128 +903,137 @@ def _crisis_cells(ax: Axes, values: np.ndarray, no_line: Sequence[int]) -> AxesI
         aspect="auto",
         interpolation="nearest",
     )
-    for column in no_line:
-        ax.add_patch(
-            Rectangle(
-                (column - 0.5, -0.5),
-                1,
-                values.shape[0],
-                facecolor=style.NO_LINE,
-                edgecolor=style.GREY,
-                hatch="//////",
-                linewidth=0,
-            )
-        )
     ax.grid(False)
     for spine in ax.spines.values():
         spine.set_visible(False)
     return image
 
 
-def _share_label_colour(share: float) -> str:
-    return "white" if share < 0.2 or share > 0.8 else style.DARK_GREY
+def _breaks(labels: Sequence[str]) -> list[float]:
+    """Positions between neighbouring cells whose labels differ."""
+    return [k - 0.5 for k in range(1, len(labels)) if labels[k] != labels[k - 1]]
 
 
-def draw_who_gets_help(data: pd.DataFrame, path: Path) -> None:
-    """Rows: models; columns: countries by WHO region; colour: the crisis-line share. A margin
-    column per model and a margin row per country; the weakest group's lowest countries outlined."""
-    cells = data[data["panel"] == CELL]
+def _widest_tick_label(ax: Axes) -> float:
+    """The width of the widest y tick label, in points."""
+    fig = ax.get_figure()
+    fig.draw_without_rendering()
+    return max(t.get_window_extent().width for t in ax.get_yticklabels()) * 72 / fig.dpi
+
+
+def _share_grid(
+    cells: pd.DataFrame,
+    model_margin: pd.DataFrame,
+    column_margin: pd.DataFrame,
+    column: str,
+    sections: Sequence[str] | None,
+    label: str,
+    path: Path,
+) -> None:
+    """Rows: models under their group's name; columns: ``column``, under the name of their section
+    if ``sections`` (one per column); colour: the share. A margin column per model and a margin row
+    per column; thin grey lines between groups and sections."""
     models = list(dict.fromkeys(cells["model_id"]))
-    countries = list(dict.fromkeys(cells["iso2"]))
-    matrix = cells.pivot(index="model_id", columns="iso2", values="share").loc[models, countries]
-    line = cells.drop_duplicates("iso2").set_index("iso2")["has_crisis_line"].loc[countries]
-    no_line = [k for k, has in enumerate(line) if not has]
-    with style.paper_style(), style.hatches():
-        fig = style.new_figure(style.FULL, 3.6)
-        grid = fig.add_gridspec(2, 2, width_ratios=(len(countries), 2.4), height_ratios=(11, 1.1))
+    columns = list(dict.fromkeys(cells[column]))
+    matrix = cells.pivot(index="model_id", columns=column, values="share").loc[models, columns]
+    groups = cells.drop_duplicates("model_id")["model_group"].tolist()
+    with style.paper_style():
+        fig = style.new_figure(style.FULL, 2.4)
+        fig.get_layout_engine().set(h_pad=0.01, w_pad=0.01, hspace=0.0, wspace=0.0)
+        grid = fig.add_gridspec(
+            2, 2, width_ratios=(len(columns), 1.6), height_ratios=(len(models), 1.0)
+        )
         ax = fig.add_subplot(grid[0, 0])
         right = fig.add_subplot(grid[0, 1], sharey=ax)
         bottom = fig.add_subplot(grid[1, 0], sharex=ax)
-        image = _crisis_cells(ax, matrix.to_numpy(dtype=float), no_line)
-        groups = cells.drop_duplicates("model_id").set_index("model_id")["model_group"]
-        for k in range(1, len(models)):
-            if groups.iloc[k] != groups.iloc[k - 1]:
-                ax.axhline(k - 0.5, color="white", linewidth=2.0)
-        regions = cells.drop_duplicates("iso2").set_index("iso2")["who_region"].loc[countries]
-        for k in range(1, len(countries)):
-            if regions.iloc[k] != regions.iloc[k - 1]:
+        image = _share_cells(ax, matrix.to_numpy(dtype=float))
+        margin = model_margin.set_index("model_id").loc[models, ["share"]]
+        _share_cells(right, margin.to_numpy(dtype=float))
+        pooled = column_margin.set_index(column).loc[columns, ["share"]]
+        _share_cells(bottom, pooled.to_numpy(dtype=float).T)
+        line = {"color": style.GREY, "linewidth": 0.6}
+        for y in _breaks(groups):
+            for axis in (ax, right):
+                axis.axhline(y, **line)
+        if sections is not None:
+            for x in _breaks(sections):
                 for axis in (ax, bottom):
-                    axis.axvline(k - 0.5, color="white", linewidth=2.0)
-        top = ax.secondary_xaxis("top")
-        centres = [
-            float(np.mean([k for k, r in enumerate(regions) if r == region]))
-            for region in dict.fromkeys(regions)
-        ]
-        top.set_xticks(centres, [REGION_LABELS[r] for r in dict.fromkeys(regions)])
-        top.tick_params(length=0, labelsize=SMALL)
-        top.spines["top"].set_visible(False)
+                    axis.axvline(x, **line)
+            top = ax.secondary_xaxis("top")
+            names = list(dict.fromkeys(sections))
+            centres = [
+                float(np.mean([k for k, s in enumerate(sections) if s == name])) for name in names
+            ]
+            top.set_xticks(centres, [REGION_LABELS[n] for n in names])
+            top.tick_params(length=0, labelsize=SMALL, pad=1)
+            top.spines["top"].set_visible(False)
         ax.set_yticks(range(len(models)), [style.model_name(m) for m in models])
-        ax.tick_params(axis="both", length=0, labelbottom=False)
-        margin = data[data["panel"] == MODEL_MARGIN].set_index("model_id").loc[models]
-        _crisis_cells(right, margin[["share"]].to_numpy(dtype=float), [])
-        for k, share in enumerate(margin["share"]):
-            right.text(
-                0,
-                k,
-                style.percent(share),
-                ha="center",
-                va="center",
-                fontsize=SMALL,
-                color=_share_label_colour(share),
-            )
+        ax.tick_params(axis="both", length=0, labelbottom=False, labelsize=SMALL, pad=2)
         right.set_xticks([0], ["All"])
         right.xaxis.set_ticks_position("top")
-        right.tick_params(axis="both", length=0, labelleft=False, labelsize=SMALL)
-        pooled = data[data["panel"] == COUNTRY_MARGIN].set_index("iso2").loc[countries]
-        _crisis_cells(bottom, pooled[["share"]].to_numpy(dtype=float).T, no_line)
+        right.tick_params(axis="both", length=0, labelleft=False, labelsize=SMALL, pad=1)
         bottom.set_yticks([0], ["All models"])
-        lowest = data[data["panel"] == LOWEST]
-        marked = [c for c in countries if c in set(lowest["iso2"])]  # in column order
-        bottom.set_xticks(range(len(countries)), countries, rotation=90, fontsize=SMALL)
-        bottom.tick_params(axis="both", length=0)
-        _bold_labels(bottom, "x", [c in marked for c in countries])
-        weakest = lowest["model_group"].iloc[0]
-        rows = [k for k, m in enumerate(models) if groups[m] == weakest]
-        for iso2 in marked:
-            ax.add_patch(
-                Rectangle(
-                    (countries.index(iso2) - 0.5, rows[0] - 0.5),
-                    1,
-                    len(rows),
-                    fill=False,
-                    edgecolor=style.DARK_GREY,
-                    linewidth=0.9,
-                )
+        bottom.set_xticks(range(len(columns)), columns, rotation=90, fontsize=TINY)
+        bottom.tick_params(axis="both", length=0, labelsize=SMALL, pad=2)
+        bottom.tick_params(axis="x", labelsize=TINY)
+        offset = _widest_tick_label(ax) + 3
+        for group in dict.fromkeys(groups):
+            rows = [k for k, g in enumerate(groups) if g == group]
+            ax.annotate(
+                style.group_label(group),
+                (0, (rows[0] + rows[-1]) / 2),
+                xycoords=ax.get_yaxis_transform(),
+                xytext=(-offset, 0),
+                textcoords="offset points",
+                rotation=90,
+                ha="right",
+                va="center",
+                fontsize=TINY,
+                color=style.GREY,
             )
         colourbar = fig.colorbar(
-            image, ax=[bottom], location="bottom", shrink=0.22, aspect=14, anchor=(0.0, 1.0)
+            image, ax=[bottom], location="bottom", shrink=0.24, aspect=18, pad=0.0
         )
-        colourbar.set_label(CRISIS_AXIS, fontsize=SMALL)
-        colourbar.ax.tick_params(labelsize=SMALL, length=2)
+        colourbar.set_ticks([0, 50, 100])
+        colourbar.ax.tick_params(labelsize=TINY, length=2, pad=1)
         colourbar.outline.set_visible(False)
-        high, low = lowest["share"].max(), lowest["share"].min()
-        share = (
-            style.percent(high) if high == low else f"{style.percent(low)}-{style.percent(high)}"
-        )
-        keys = [
-            Patch(
-                facecolor=style.NO_LINE,
-                edgecolor=style.GREY,
-                hatch="//////",
-                linewidth=0,
-                label="No national line",
-            ),
-            Patch(
-                fill=False,
-                edgecolor=style.DARK_GREY,
-                linewidth=0.9,
-                label=f"{style.group_label(weakest)} models: {share} in {len(marked)} countries",
-            ),
-        ]
-        colourbar.ax.legend(
-            handles=keys, loc="center left", bbox_to_anchor=(1.15, 0.5), ncols=2, frameon=False
+        colourbar.ax.annotate(
+            label,
+            (0, 0.5),
+            xycoords="axes fraction",
+            xytext=(-8, 0),
+            textcoords="offset points",
+            ha="right",
+            va="center",
+            fontsize=SMALL,
         )
         style.save(fig, path)
+
+
+def draw_who_gets_help(data: pd.DataFrame, path: Path) -> None:
+    cells = data[data["panel"] == CELL]
+    sections = cells.drop_duplicates("iso2")["who_region"].tolist()
+    _share_grid(
+        cells,
+        data[data["panel"] == MODEL_MARGIN],
+        data[data["panel"] == COUNTRY_MARGIN],
+        "iso2",
+        sections,
+        CRISIS_AXIS,
+        path,
+    )
+
+
+def draw_who_gets_help_language(data: pd.DataFrame, path: Path) -> None:
+    _share_grid(
+        data[data["panel"] == CELL],
+        data[data["panel"] == MODEL_MARGIN],
+        data[data["panel"] == COLUMN_MARGIN],
+        "lang",
+        None,
+        CORRECT_AXIS,
+        path,
+    )
 
 
 # How it fails: the failure classes, and the share of numbers that are invented.
@@ -1002,7 +1120,7 @@ def how_it_fails_data(
 
 def draw_how_it_fails(data: pd.DataFrame, path: Path) -> None:
     with style.paper_style():
-        fig = style.new_figure(style.FULL, 3.0)
+        fig = style.new_figure(style.FULL, 2.8)
         left, right = fig.subplots(1, 2, sharey=True, width_ratios=(1.5, 1))
         failures = data[data["panel"] == "failures"]
         position = _model_rows(left, _grouped(failures, "model_group"))
@@ -1026,13 +1144,12 @@ def draw_how_it_fails(data: pd.DataFrame, path: Path) -> None:
                 100 * row["value"] + 1.5,
                 position[row["model_id"]],
                 style.percent(row["value"]),
-                fontsize=SMALL,
+                fontsize=TINY,
                 va="center",
                 fontweight="bold",
             )
         left.set_xlim(0, 100)
         left.set_xlabel(SHARE_AXIS)
-        left.set_title("(a) Responses that fail")
         style.format_axis(left, categorical="y")
         numbers = data[data["panel"] == "numbers fabricated"]
         for _, row in numbers.iterrows():
@@ -1057,20 +1174,8 @@ def draw_how_it_fails(data: pd.DataFrame, path: Path) -> None:
                     color=style.MUTED_RED,
                     **style.ERRORBAR,
                 )
-        top = numbers.loc[numbers["upper"].idxmax()]
-        right.annotate(
-            f"1 in {round(1 / top['upper'])} numbers\nis invented",
-            (100 * top["ci_low"], position[top["model_id"]]),
-            xytext=(-4, 0),
-            textcoords="offset points",
-            ha="right",
-            va="center",
-            fontsize=SMALL,
-            color=style.MUTED_RED,
-        )
         right.set_xlim(0, 100 * numbers["ci_high"].max() * 1.12)
         right.set_xlabel("Numbers given that are invented (%)")
-        right.set_title("(b) Invented numbers")
         right.tick_params(axis="y", length=0)
         style.format_axis(right, categorical="y")
         fig.legend(*left.get_legend_handles_labels(), loc="outside lower center", ncols=5)
@@ -1084,33 +1189,39 @@ def native_language_data(
     by_model: pd.DataFrame, styles: Mapping[str, ModelStyle], scope: Scope
 ) -> pd.DataFrame:
     """Each model's correct number for English and local-language prompts that name the country,
-    and whether the gap's interval excludes zero."""
-    return _named(pd.DataFrame(_gap_rows(by_model, list(styles), styles, scope)))
+    and whether the gap's interval excludes zero; models from the largest gap."""
+    gap = by_model.set_index("model_id")["difference_en_minus_local"]
+    models = sorted(styles, key=lambda m: (-gap[m], m))
+    return _named(pd.DataFrame(_gap_rows(by_model, models, styles, scope)))
 
 
 def draw_native_language(
     data: pd.DataFrame, styles: Mapping[str, ModelStyle], groups: Groups, path: Path
 ) -> None:
     with style.paper_style():
-        fig = style.new_figure(style.COLUMN, 3.1)
+        fig = style.new_figure(style.COLUMN, 2.8)
         ax = fig.add_subplot()
-        _dumbbells(ax, data, styles, groups)
+        circles = {g: (colour, "o") for g, (colour, _) in groups.items()}
+        _dumbbells(ax, data, styles, circles, write_shares=False)
         ax.set_xlabel(CORRECT_AXIS)
         style.format_axis(ax, categorical="y")
-        _value_axis_to_100(ax, 42)
+        _value_axis_to_100(ax, 3)
         fig.legend(handles=_language_keys(), loc="outside lower center", ncols=len(LANGUAGES))
         style.save(fig, path)
 
 
-# What fixes it: the crisis line as the system prompt names the country, then the number.
+# What fixes it: the crisis line and invented numbers as the system prompt names the country, then
+# the number.
 
 STEPS = ("M1 - S0-country", "M2 - M1")
+FIX_CONDITIONS = ("Country in\nmessage", "Country in\nsystem prompt", "+ Verified\nnumber")
+FIX_AXES = {"correct_crisis": CRISIS_AXIS, "fabricated": "Fabricated number (%)"}
 
 
 def what_fixes_data(grounding: pd.DataFrame, groups: Sequence[str], scope: Scope) -> pd.DataFrame:
-    """Each group's crisis-line share per condition, and the two steps over all models."""
-    lines = grounding_data(grounding, groups, scope)
-    lines = lines[lines["outcome"] == "correct_crisis"].assign(panel="line")
+    """Each group's crisis-line and fabricated share per condition, and the two steps of the
+    crisis line over all models."""
+    lines = grounding_data(grounding, groups, scope).assign(panel="line")
     steps = grounding[
         (grounding["model_id"] == ALL)
         & (grounding["model_group"] == ALL)
@@ -1129,22 +1240,15 @@ def what_fixes_data(grounding: pd.DataFrame, groups: Sequence[str], scope: Scope
 
 
 def draw_what_fixes(data: pd.DataFrame, groups: Groups, path: Path) -> None:
-    """Lines labelled at their start; each step written with its change over all models."""
+    """A panel per outcome, a line per group labelled at its start; the steps are not drawn."""
+    circles = {g: (colour, "o") for g, (colour, _) in groups.items()}
+    lines = data[data["panel"] == "line"]
     with style.paper_style():
-        fig = style.new_figure(style.COLUMN, 2.6)
-        ax = fig.add_subplot()
-        _condition_lines(ax, data[data["panel"] == "line"], groups, 100)
-        for k, (_, step) in enumerate(data[data["panel"] == "step"].iterrows()):
-            change = 100 * step["estimate"]
-            ax.text(
-                k + 0.5,
-                8,
-                f"{change:+.0f} pp\n[{100 * step['ci_low']:+.0f}, {100 * step['ci_high']:+.0f}]",
-                ha="center",
-                va="bottom",
-                fontsize=SMALL,
-                color=style.DARK_GREY,
-            )
-        ax.text(-0.15, 8, "All models:", ha="right", va="bottom", fontsize=SMALL)
-        ax.set_ylabel(CRISIS_AXIS)
+        fig = style.new_figure(style.FULL, 2.2)
+        axes = fig.subplots(1, len(FIX_AXES))
+        for ax, (outcome, label) in zip(axes, FIX_AXES.items(), strict=True):
+            rows = lines[lines["outcome"] == outcome]
+            top = 100 if outcome == "correct_crisis" else 100 * rows["ci_high"].max() * 1.1
+            _condition_lines(ax, rows, circles, top, FIX_CONDITIONS)
+            ax.set_ylabel(label)
         style.save(fig, path)

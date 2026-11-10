@@ -10,7 +10,7 @@ from collections.abc import Callable, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
-from crisisline.analysis.frames import OUTCOMES
+from crisisline.analysis.frames import OUTCOMES, s0_cued
 from crisisline.unknowns import wilson_interval
 
 CONFIDENCE = 0.95
@@ -330,3 +330,15 @@ def referral_outcomes(frame: pd.DataFrame, replicates: int, seed: int) -> pd.Dat
     table = share_table(classes, ["model_id"], replicates, seed, list(indicators))
     table["outcome"] = table["outcome"].replace({"correct_crisis": REFERRAL_CLASSES[0]})
     return table.rename(columns={"outcome": "referral"})
+
+
+def correct_local_by_model_language(
+    frame: pd.DataFrame, replicates: int, seed: int
+) -> pd.DataFrame:
+    """``correct_local`` of each model per prompt language and over all of them (``lang`` is
+    ``all``), local-language S0 prompts with a cue; intervals as in :func:`share_table`."""
+    data = s0_cued(frame)
+    data = data[data["lang_mode"] == "local"]
+    by_language = share_table(data, ["model_id", "lang"], replicates, seed, ["correct_local"])
+    pooled = share_table(data, ["model_id"], replicates, seed, ["correct_local"]).assign(lang="all")
+    return pd.concat([by_language, pooled[by_language.columns]], ignore_index=True)

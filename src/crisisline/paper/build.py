@@ -81,12 +81,19 @@ def build(config: dict[str, Any]) -> int:
     figure_dir = out / "figures"
     referral = figures.referral_data(read("referral_outcomes.csv"), styles, scope)
     ladder = figures.ladder_data(read("qwen_ladder.csv"), sizes, scope)
+    ladder_outcomes = figures.ladder_outcomes_data(read("qwen_ladder_referral.csv"), sizes, scope)
     who = figures.who_gets_help_data(
         read("crisis_by_model_country.csv"),
         by_condition[
             (by_condition["condition"] == "S0") & (by_condition["outcome"] == "correct_crisis")
         ],
         countries,
+        styles,
+        scope,
+    )
+    who_language = figures.who_gets_help_language_data(
+        read("correct_local_by_model_language.csv"),
+        read("exploratory/correct_local_by_language.csv"),
         styles,
         scope,
     )
@@ -113,15 +120,13 @@ def build(config: dict[str, Any]) -> int:
             figures.geography_data(who_regions, worst, groups, scope),
             lambda d, p: figures.draw_geography(d, group_styles, p),
         ),
-        "appendix_qwen_ladder": (
-            ladder,
-            lambda d, p: figures.draw_ladder(d, styles[next(iter(sizes))].colour, p),
-        ),
+        "appendix_qwen_ladder": (ladder_outcomes, figures.draw_ladder),
         "appendix_countries": (
             figures.countries_data(countries, groups),
             lambda d, p: figures.draw_countries(d, group_styles, p),
         ),
         "fig_who_gets_help": (who, figures.draw_who_gets_help),
+        "fig_who_gets_help_language": (who_language, figures.draw_who_gets_help_language),
         "fig_how_it_fails": (fails, figures.draw_how_it_fails),
         "fig_native_language": (
             native,
@@ -178,7 +183,8 @@ def build(config: dict[str, Any]) -> int:
         scope=scope,
     )
     numbers = pd.concat(
-        [numbers, tables.figure_numbers(who, fails, native, fixes)], ignore_index=True
+        [numbers, tables.figure_numbers(who, fails, native, fixes, ladder_outcomes)],
+        ignore_index=True,
     )
     _write(numbers, out / "numbers.csv")
     logger.info("Paper -> %s", out)

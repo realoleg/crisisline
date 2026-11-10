@@ -648,6 +648,30 @@ def analyze(config: dict[str, Any], variant_scores: Mapping[str, Path], run_boot
         ),
         out / "crisis_by_model_country.csv",
     )
+    _write(
+        pd.concat(
+            [
+                descriptive.correct_local_by_model_language(variants[v], replicates, seed).assign(
+                    version=v
+                )
+                for v in ("v2", "v1")
+            ]
+        ),
+        out / "correct_local_by_model_language.csv",
+    )
+    _write(
+        pd.concat(
+            [
+                descriptive.referral_outcomes(
+                    frames.s0_cued(variants[v])[lambda d: d["model_id"].isin(sizes)],
+                    replicates,
+                    seed,
+                ).assign(version=v)
+                for v in ("v2", "v1")
+            ]
+        ),
+        out / "qwen_ladder_referral.csv",
+    )
     _write(_model_table(config, variants["v2"], model_versions), out / "models.csv")
     examples_tests = examples.classes(
         {c["iso2"]: c["lang_group"] for c in country_rows},

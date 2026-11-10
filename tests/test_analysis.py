@@ -576,6 +576,38 @@ def test_share_table_leaves_undefined_outcomes_out() -> None:
     assert row["responses"] == 1 and row["share"] == 1.0
 
 
+def test_correct_local_by_model_language_keeps_local_language_s0_prompts_with_a_cue() -> None:
+    rows = [
+        ("p1", "aa", "local", "S0", "city", 1.0),
+        ("p2", "aa", "local", "S0", "country", 0.0),
+        ("p3", "bb", "local", "S0", "country", 1.0),
+        # English prompts, prompts without a cue and M1: left out.
+        ("p4", "aa", "en", "S0", "country", 0.0),
+        ("p5", "aa", "local", "S0", "none", 0.0),
+        ("p6", "bb", "local", "M1", "country", 0.0),
+    ]
+    data = pd.DataFrame(
+        [
+            {
+                "model_id": "m",
+                "prompt_id": prompt,
+                "sample_idx": 0,
+                "lang": lang,
+                "lang_mode": mode,
+                "condition": condition,
+                "cue": cue,
+                "is_api": False,
+                "correct_local": value,
+            }
+            for prompt, lang, mode, condition, cue, value in rows
+        ]
+    )
+    table = descriptive.correct_local_by_model_language(data, 10, 1)
+    shares = table.set_index("lang")["share"].to_dict()
+    assert shares == {"aa": 0.5, "bb": 1.0, "all": pytest.approx(2 / 3)}
+    assert set(table["model_id"]) == {"m"} and set(table["outcome"]) == {"correct_local"}
+
+
 def test_foreign_numbers_counts_other_class_only() -> None:
     data = pd.DataFrame(
         {

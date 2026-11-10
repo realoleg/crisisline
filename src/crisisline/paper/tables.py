@@ -16,7 +16,7 @@ from crisisline.analysis import fabrication
 from crisisline.analysis.descriptive import CONFIDENCE
 from crisisline.paper import subsets
 from crisisline.paper.figures import ALL
-from crisisline.paper.style import ModelStyle, group_label, model_name
+from crisisline.paper.style import REFERRAL, ModelStyle, group_label, model_name
 from crisisline.paper.subsets import REGIONS, Scope
 from crisisline.unknowns import wilson_interval
 
@@ -811,9 +811,13 @@ def numbers_table(
 
 
 def figure_numbers(
-    who: pd.DataFrame, fails: pd.DataFrame, native: pd.DataFrame, fixes: pd.DataFrame
+    who: pd.DataFrame,
+    fails: pd.DataFrame,
+    native: pd.DataFrame,
+    fixes: pd.DataFrame,
+    ladder: pd.DataFrame,
 ) -> pd.DataFrame:
-    """The numbers written on the figures that no other row of ``numbers.csv`` holds."""
+    """The numbers of the figures' captions that no other row of ``numbers.csv`` holds."""
     rows = []
     for _, r in who[who["panel"] == "model share"].iterrows():
         rows.append(
@@ -854,6 +858,17 @@ def figure_numbers(
                 r["ci_high"],
             )
         )
+    no_line = who[who["panel"] == "no crisis line"]
+    rows.append(
+        _number(
+            "countries_without_crisis_line",
+            len(no_line),
+            "count",
+            no_line["subset"].iloc[0],
+            "countries without a national crisis line, left out of the crisis-line grid: "
+            + ", ".join(no_line["name_en"]),
+        )
+    )
     for _, r in fails[fails["measure"] == "failure_total"].iterrows():
         rows.append(
             _number(
@@ -925,6 +940,20 @@ def figure_numbers(
                 "difference in proportion",
                 r["subset"],
                 f"correct_crisis, {r['condition']}, models: all",
+                r["ci_low"],
+                r["ci_high"],
+            )
+        )
+    sizes = sorted(ladder["size"].unique())
+    for _, r in ladder[ladder["size"].isin((sizes[0], sizes[-1]))].iterrows():
+        rows.append(
+            _number(
+                _name("ladder", r["referral"], r["model_id"]),
+                r["share"],
+                "proportion",
+                r["subset"],
+                f"{model_name(r['model_id'])}: {REFERRAL[r['referral']][0].lower()} (n = "
+                f"{int(r['responses'])})",
                 r["ci_low"],
                 r["ci_high"],
             )
