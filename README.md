@@ -48,7 +48,8 @@ score (ground truth v2, v1, and v1 without labels), audit score, unknowns --esti
 | `artifacts/analysis/outcomes_*.csv` | every outcome by model, by model and condition, and by every cell |
 | `artifacts/analysis/*.csv` (others) | descriptive tables: foreign numbers, default countries, location questions, Georgia, blocked answers, temperature robustness, loops, fabrication by model |
 | `artifacts/analysis/exploratory/` | exploratory analyses: grounding, language gap, fabrication in reader terms, near-misses, templates, countries and WHO regions, directories |
-| `artifacts/analysis/figures/`, `tables/` | figures as vector PDF at ACL widths, tables in LaTeX with `booktabs` |
+| `artifacts/analysis/models.csv` | each model's backend, identifier, responses per prompt, records and versions seen |
+| `artifacts/analysis/figures/` | figures as vector PDF at ACL widths |
 | `artifacts/analysis/examples.jsonl` | example candidates chosen by rule, pending human review |
 | `artifacts/analysis/notes.md`, `manifest.json` | caveats on the intervals; git commit, package versions and input checksums |
 | `artifacts/analysis/scores/` | the robustness block and the official-sources-only variant, scored |

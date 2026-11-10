@@ -24,7 +24,6 @@ from crisisline.analysis import (
     frames,
     hypotheses,
     pipeline,
-    tables,
 )
 
 SIZES = {"q-1": 1.0, "q-2": 2.0, "q-4": 4.0, "q-8": 8.0}
@@ -1017,56 +1016,6 @@ def test_example_classes_follow_the_plan() -> None:
     city = tests["positive_correct_from_city_cue"]
     assert city({**base, "correct_local": 1.0, "numbers": [correct]})[0]
     assert not city({**base, "cue": "country", "correct_local": 1.0, "numbers": [correct]})[0]
-
-
-def test_booktabs_has_rules_and_escapes() -> None:
-    made = tables.booktabs(pd.DataFrame({"a_b": ["50%"]}), "l", "A & B", "tab:x")
-    for part in (
-        r"\toprule",
-        r"\midrule",
-        r"\bottomrule",
-        r"a\_b",
-        r"50\%",
-        r"A \& B",
-        r"\label{tab:x}",
-    ):
-        assert part in made
-
-
-def test_hypothesis_table_formats_p_values() -> None:
-    table = hypotheses.holm(
-        [
-            _result("cue_country_vs_city", 2.0, 0.0001),
-            _result("language_en_vs_local", 1.2, 0.2, "two-sided"),
-        ]
-    )
-    made = tables.hypotheses_table(table.assign(ci_low=1.0, ci_high=3.0, n=1234), ["x"])
-    assert made["p"].tolist() == ["<0.001", "0.200"]
-    assert made["Side"].tolist() == ["one", "two"]
-    assert made["n"].tolist() == ["1,234", "1,234"]
-
-
-def test_sensitivity_table_shows_no_estimate_without_convergence() -> None:
-    nan = float("nan")
-    made = tables.sensitivity_table(
-        pd.DataFrame(
-            {
-                "analysis": ["v2", "x", "x"],
-                "hypothesis": [
-                    "cue_country_vs_city",
-                    "cue_country_vs_city",
-                    "language_en_vs_local",
-                ],
-                "estimate": [2.0, 2.0, nan],
-                "ci_low": [1.0, 1.0, nan],
-                "ci_high": [3.0, 3.0, nan],
-                "p": [0.01, 0.01, nan],
-                "n": [10, 10, 10],
-            }
-        )
-    )
-    assert made["Estimate"].tolist() == ["2.00", "--"]
-    assert made["p"].tolist() == ["0.010", "--"]
 
 
 def _pdf_size_cm(path: Path) -> tuple[float, float]:

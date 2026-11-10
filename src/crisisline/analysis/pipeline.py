@@ -26,7 +26,6 @@ from crisisline.analysis import (
     figures,
     frames,
     hypotheses,
-    tables,
 )
 from crisisline.cli import file_sha256, git_commit, load_config, read_csv, read_jsonl, repo_root
 
@@ -321,12 +320,12 @@ def _model_table(
         spec = settings[model]
         rows.append(
             {
-                "Model": model,
-                "Backend": spec["backend"],
-                "Identifier": spec.get("tag") or spec.get("model"),
-                "Responses per prompt": part["sample_idx"].nunique(),
-                "Records": len(part),
-                "Versions seen": len(model_versions[model]),
+                "model_id": model,
+                "backend": spec["backend"],
+                "identifier": spec.get("tag") or spec.get("model"),
+                "responses_per_prompt": part["sample_idx"].nunique(),
+                "records": len(part),
+                "versions_seen": len(model_versions[model]),
             }
         )
     return pd.DataFrame(rows)
@@ -627,41 +626,7 @@ def analyze(config: dict[str, Any], variant_scores: Mapping[str, Path], run_boot
     for v, frame in (("v2", variants["v2"]), ("v1", variants["v1"])):
         _draw_figures(frame, v, out, country_rows, outside, settings, seed, replicates, no_country)
         _write(descriptive.error_types(frame), out / f"error_types_{v}.csv")
-    table_dir = out / "tables"
-    table_dir.mkdir(parents=True, exist_ok=True)
-    model_table = _model_table(config, variants["v2"], model_versions)
-    (table_dir / "models.tex").write_text(
-        tables.booktabs(model_table, "lllrrr", "Models.", "tab:models"), encoding="utf-8"
-    )
-    (table_dir / "hypotheses.tex").write_text(
-        tables.booktabs(
-            tables.hypotheses_table(pd.concat([primary, versus]), ["v2", "v1"]),
-            "llrlrrrr",
-            "Hypotheses: odds ratios (us_default: share), two-sided 95% CI, "
-            "Holm p within each version.",
-            "tab:hypotheses",
-        ),
-        encoding="utf-8",
-    )
-    (table_dir / "sensitivity.tex").write_text(
-        tables.booktabs(
-            tables.sensitivity_table(table),
-            "llrlrr",
-            "Sensitivity analyses, unadjusted; no estimate where a model did not converge.",
-            "tab:sensitivity",
-        ),
-        encoding="utf-8",
-    )
-    by_model_outcomes = pd.read_csv(out / "outcomes_by_model.csv")
-    (table_dir / "outcomes_by_model.tex").write_text(
-        tables.booktabs(
-            tables.outcomes_table(by_model_outcomes, TABLE_OUTCOMES),
-            "lrrrrrr",
-            "Outcomes by model, percent of responses: ground truth v2 (v1 in parentheses).",
-            "tab:outcomes",
-        ),
-        encoding="utf-8",
-    )
+    _write(_model_table(config, variants["v2"], model_versions), out / "models.csv")
     examples_tests = examples.classes(
         {c["iso2"]: c["lang_group"] for c in country_rows},
         config["score"]["na_default_numbers"],
