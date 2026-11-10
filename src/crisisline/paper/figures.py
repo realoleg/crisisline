@@ -1257,11 +1257,16 @@ def draw_what_fixes(data: pd.DataFrame, groups: Groups, path: Path) -> None:
 HATCH = "//////"
 
 
+def percent_value(share: float) -> float:
+    """A share in percent, rounded so that a class edge is not missed by a floating-point error."""
+    return round(100 * share, 6)
+
+
 def _class_of(share: float, edges: Sequence[float]) -> int:
-    """The class of a share without the crisis line; a class holds its lower edge, the last its
-    upper one too."""
+    """The class of a share without the crisis line; a class holds its upper edge, the first its
+    lower one too: a country in a class above 50% has more than 50%."""
     inner = np.asarray(edges[1:-1], dtype=float)
-    return int(np.searchsorted(inner, round(100 * share, 6), side="right"))
+    return int(np.searchsorted(inner, percent_value(share), side="left"))
 
 
 def _class_name(k: int, edges: Sequence[float], dash: str = "-") -> str:
@@ -1429,7 +1434,7 @@ def draw_world_map(
         handles, labels = [], []
         for k, count in enumerate(counts):
             handles.append(Patch(facecolor=style.MISSING_CLASSES[k], linewidth=0))
-            labels.append(f"{_class_name(k, edges, '–')} · {count}")
+            labels.append(f"{_class_name(k, edges, '–')}% · {count}")
         handles += [
             Patch(facecolor=theme.no_line, hatch=HATCH, edgecolor=theme.hatch, linewidth=0),
             Patch(facecolor=theme.outside, edgecolor=style.LIGHT_GREY, linewidth=0.4),
@@ -1440,7 +1445,7 @@ def draw_world_map(
             labels,
             loc="outside lower center",
             ncols=len(handles),
-            title="No crisis line given (%)",
+            title="No crisis line given",
             title_fontsize=SMALL,
             handlelength=0.9,
             handletextpad=0.3,

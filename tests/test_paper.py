@@ -316,7 +316,7 @@ def _world() -> tuple[pd.DataFrame, list[worldmap.Country]]:
     return table, shapes
 
 
-CLASSES = [0, 20, 40, 60, 80, 100]
+CLASSES = [0, 25, 50, 75, 100]
 
 
 def test_world_map_data_has_every_country_and_marks_small_ones() -> None:
@@ -331,13 +331,38 @@ def test_world_map_data_has_every_country_and_marks_small_ones() -> None:
     )
     assert cells.loc["AA", "subset"].endswith("local-language prompts, Aland")
     assert cells["marker"].to_dict() == {"AA": False, "BB": True, "CC": False}
-    # A class holds its lower edge: AA without the line in 0.8, BB in 0.7.
-    assert cells["class"].to_dict() == {"AA": "80-100", "BB": "60-80", "CC": ""}
+    # AA without the line in 0.8, BB in 0.7.
+    assert cells["class"].to_dict() == {"AA": "75-100", "BB": "50-75", "CC": ""}
     classes = figures.world_map_classes(data, CLASSES).set_index("class")["countries"]
-    assert classes.to_dict() == {"0-20": 0, "20-40": 0, "40-60": 0, "60-80": 1, "80-100": 1}
+    assert classes.to_dict() == {"0-25": 0, "25-50": 0, "50-75": 1, "75-100": 1}
     pooled = figures.world_map_pooled(table, ["local", "API"], SCOPE).set_index("model_group")
     assert pooled.loc["API", "no_crisis_line"] == pytest.approx(0.2)
     assert pooled["subset"].str.endswith("2 countries with a crisis line").all()
+
+
+def test_world_map_classes_hold_their_upper_edge_as_the_counts_above_a_share() -> None:
+    """A country at exactly 75% without the line is in 50-75 and not above 75%; the class counts
+    equal the counts of countries above 50% and above 75%."""
+    table, shapes = _world()
+    table.loc[(table["model_group"] == "local") & (table["iso2"] == "AA"), "estimate"] = 0.25
+    data = figures.world_map_data(table, shapes, "local", 0.01, CLASSES, SCOPE)
+    assert data.set_index("iso2").loc["AA", "class"] == "50-75"
+    pooled = figures.world_map_pooled(table, ["local", "API"], SCOPE)
+    classes = figures.world_map_classes(data, CLASSES)
+    numbers = tables.figure_numbers(
+        figures.who_gets_help_data(*_who_inputs()),
+        _fails(),
+        figures.native_language_data(_language_inputs()[0], STYLES, SCOPE),
+        figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE),
+        figures.ladder_outcomes_data(_ladder_referral(), SIZES, SCOPE),
+        data,
+        pooled,
+        classes,
+        0.01,
+    ).set_index("name")["value"]
+    assert numbers["world_map_countries_above_75"] == numbers["world_map_class_75_100"] == 0
+    assert numbers["world_map_countries_above_50"] == 2
+    assert numbers["world_map_class_50_75"] + numbers["world_map_class_75_100"] == 2
 
 
 # Drawing.
@@ -1017,8 +1042,8 @@ def test_figure_numbers_hold_what_the_new_figures_write() -> None:
     assert numbers.loc["world_map_no_crisis_line_API", "value"] == pytest.approx(0.2)
     assert numbers.loc["world_map_countries_above_50", "value"] == 2  # AA 0.8, BB 0.7
     assert numbers.loc["world_map_countries_above_75", "description"].endswith(": Aland")
-    assert numbers.loc["world_map_class_80_100", "value"] == 1
-    assert numbers.loc["world_map_class_0_20", "description"].endswith(": none")
+    assert numbers.loc["world_map_class_75_100", "value"] == 1
+    assert numbers.loc["world_map_class_0_25", "description"].endswith(": none")
     assert numbers.loc["ladder_misrouted_q-1", "value"] == pytest.approx(0.1)
     assert numbers.index.is_unique
     assert numbers["subset"].str.len().gt(0).all()

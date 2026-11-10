@@ -40,7 +40,7 @@ MODEL_MARKERS = ("o", "s", "^", "D", "v", "P")
 # The share of the crisis line: red at none, near-white at half, green at all.
 CRISIS_MAP = LinearSegmentedColormap.from_list("crisis", (MUTED_RED, "#F7F7F7", PALETTE[0]))
 # Classes of the share without the crisis line, light to near-black red.
-MISSING_CLASSES = ("#F2D7D4", "#DE9A92", MUTED_RED, "#7E2A24", "#3F1210")
+MISSING_CLASSES = ("#F2D7D4", "#CF7F76", "#8E3129", "#3F1210")
 
 
 @dataclass(frozen=True, slots=True)

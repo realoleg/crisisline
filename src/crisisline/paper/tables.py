@@ -15,7 +15,7 @@ import pandas as pd
 from crisisline.analysis import fabrication
 from crisisline.analysis.descriptive import CONFIDENCE
 from crisisline.paper import subsets
-from crisisline.paper.figures import ALL
+from crisisline.paper.figures import ALL, percent_value
 from crisisline.paper.style import REFERRAL, ModelStyle, group_label, model_name
 from crisisline.paper.subsets import Scope
 from crisisline.unknowns import wilson_interval
@@ -963,7 +963,8 @@ def figure_numbers(
     shown = world[world["has_crisis_line"]]
     group = group_label(shown["model_group"].iloc[0])
     for cutoff in (0.5, 0.75):
-        above = shown[shown["no_crisis_line"] > cutoff].sort_values(["no_crisis_line", "iso2"])
+        percent = shown["no_crisis_line"].map(percent_value)
+        above = shown[percent > 100 * cutoff].sort_values(["no_crisis_line", "iso2"])
         rows.append(
             _number(
                 f"world_map_countries_above_{round(100 * cutoff)}",
@@ -982,7 +983,7 @@ def figure_numbers(
                 "count",
                 world_pooled["subset"].iloc[0],
                 f"world map, {group} models: countries where {r['class']}% of responses lack the "
-                f"correct crisis line (lower edge included): {r['names'] or 'none'}",
+                f"correct crisis line (upper edge included): {r['names'] or 'none'}",
             )
         )
     small = world[world["marker"]].sort_values(["area_km2", "iso2"])
