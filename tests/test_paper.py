@@ -13,6 +13,7 @@ import pytest
 from matplotlib.text import Text
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
+from crisisline.cli import load_config
 from crisisline.paper import figures, style, subsets, tables
 
 GROUPS = {"API": ["api-b", "api-a"], "local": ["q-2", "other", "q-1"]}
@@ -809,6 +810,11 @@ def test_pooled_template_contrasts_take_the_interval_of_the_grounding_step() -> 
 # The redesigned figures.
 
 
+def test_language_names_are_the_translation_languages_and_english() -> None:
+    config = load_config(Path("configs/prompts.yaml"))
+    assert {**config["translation"]["languages"], "en": "English"} == style.LANGUAGE_NAMES
+
+
 def test_display_names_cover_unknown_models_and_label_columns() -> None:
     assert style.model_name("qwen3.5-0.8b") == "Qwen3.5 0.8B"
     assert style.model_name("local-8") == "Ministral 3 8B"
@@ -865,6 +871,7 @@ def test_who_gets_help_language_orders_languages_by_the_weakest_group() -> None:
     assert figures.ALL not in set(cells["lang"])
     margin = data[data["panel"] == "column share"].set_index("lang")["share"]
     assert margin.to_dict() == {"si": 0.4, "de": 0.9, "am": 0.2}
+    assert cells.drop_duplicates("lang")["language"].tolist() == ["Sinhala", "German", "Amharic"]
     models = data[data["panel"] == "model share"]
     assert models["subset"].str.contains("local-language prompts, 3 countries").all()
 

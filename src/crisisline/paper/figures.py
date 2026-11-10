@@ -12,11 +12,12 @@ import pandas as pd
 from matplotlib.axes import Axes
 from matplotlib.image import AxesImage
 from matplotlib.lines import Line2D
+from matplotlib.patches import ConnectionPatch
 from matplotlib.ticker import FixedLocator, NullLocator
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
 from crisisline.paper import style, subsets
-from crisisline.paper.style import REGION_LABELS, ModelStyle
+from crisisline.paper.style import LANGUAGE_NAMES, REGION_LABELS, ModelStyle
 from crisisline.paper.subsets import Scope
 
 CONDITIONS = {
@@ -858,6 +859,7 @@ def who_gets_help_language_data(
                     "model_group": styles[model].group,
                     "model_id": model,
                     "lang": lang,
+                    "language": LANGUAGE_NAMES[lang],
                     "share": cell["share"],
                     "ci_low": cell["ci_low"],
                     "ci_high": cell["ci_high"],
@@ -883,6 +885,7 @@ def who_gets_help_language_data(
                 "panel": COLUMN_MARGIN,
                 "model_group": ALL,
                 "lang": lang,
+                "language": LANGUAGE_NAMES[lang],
                 "share": pooled.loc[lang, "estimate"],
                 "ci_low": pooled.loc[lang, "ci_low"],
                 "ci_high": pooled.loc[lang, "ci_high"],
@@ -895,6 +898,7 @@ def who_gets_help_language_data(
 
 
 def _share_cells(ax: Axes, values: np.ndarray) -> AxesImage:
+    """The shares as tiles, a very thin white line between neighbours."""
     image = ax.imshow(
         100 * values,
         cmap=style.CRISIS_MAP,
@@ -903,6 +907,11 @@ def _share_cells(ax: Axes, values: np.ndarray) -> AxesImage:
         aspect="auto",
         interpolation="nearest",
     )
+    rows, columns = values.shape
+    for y in np.arange(0.5, rows - 1):
+        ax.axhline(y, color="white", linewidth=0.3)
+    for x in np.arange(0.5, columns - 1):
+        ax.axvline(x, color="white", linewidth=0.3)
     ax.grid(False)
     for spine in ax.spines.values():
         spine.set_visible(False)
@@ -929,16 +938,18 @@ def _share_grid(
     sections: Sequence[str] | None,
     label: str,
     path: Path,
+    names: Mapping[str, str] | None = None,
+    height: float = 2.4,
 ) -> None:
-    """Rows: models under their group's name; columns: ``column``, under the name of their section
-    if ``sections`` (one per column); colour: the share. A margin column per model and a margin row
-    per column; thin grey lines between groups and sections."""
+    """Rows: models next to their group's name; columns: ``column``, by their ``names`` if given,
+    under the name of their section if ``sections`` (one per column); colour: the share. A margin
+    column per model and a margin row per column; a dark line between sections, through both."""
     models = list(dict.fromkeys(cells["model_id"]))
     columns = list(dict.fromkeys(cells[column]))
     matrix = cells.pivot(index="model_id", columns=column, values="share").loc[models, columns]
     groups = cells.drop_duplicates("model_id")["model_group"].tolist()
     with style.paper_style():
-        fig = style.new_figure(style.FULL, 2.4)
+        fig = style.new_figure(style.FULL, height)
         fig.get_layout_engine().set(h_pad=0.01, w_pad=0.01, hspace=0.0, wspace=0.0)
         grid = fig.add_gridspec(
             2, 2, width_ratios=(len(columns), 1.6), height_ratios=(len(models), 1.0)
@@ -951,20 +962,24 @@ def _share_grid(
         _share_cells(right, margin.to_numpy(dtype=float))
         pooled = column_margin.set_index(column).loc[columns, ["share"]]
         _share_cells(bottom, pooled.to_numpy(dtype=float).T)
-        line = {"color": style.GREY, "linewidth": 0.6}
-        for y in _breaks(groups):
-            for axis in (ax, right):
-                axis.axhline(y, **line)
         if sections is not None:
             for x in _breaks(sections):
-                for axis in (ax, bottom):
-                    axis.axvline(x, **line)
+                separator = ConnectionPatch(
+                    (x, -0.5),
+                    (x, 0.5),
+                    coordsA=ax.transData,
+                    coordsB=bottom.transData,
+                    color=style.DARK_GREY,
+                    linewidth=0.6,
+                )
+                separator.set_in_layout(False)
+                fig.add_artist(separator)
             top = ax.secondary_xaxis("top")
-            names = list(dict.fromkeys(sections))
+            blocks = list(dict.fromkeys(sections))
             centres = [
-                float(np.mean([k for k, s in enumerate(sections) if s == name])) for name in names
+                float(np.mean([k for k, s in enumerate(sections) if s == name])) for name in blocks
             ]
-            top.set_xticks(centres, [REGION_LABELS[n] for n in names])
+            top.set_xticks(centres, [REGION_LABELS[n] for n in blocks])
             top.tick_params(length=0, labelsize=SMALL, pad=1)
             top.spines["top"].set_visible(False)
         ax.set_yticks(range(len(models)), [style.model_name(m) for m in models])
@@ -973,7 +988,8 @@ def _share_grid(
         right.xaxis.set_ticks_position("top")
         right.tick_params(axis="both", length=0, labelleft=False, labelsize=SMALL, pad=1)
         bottom.set_yticks([0], ["All models"])
-        bottom.set_xticks(range(len(columns)), columns, rotation=90, fontsize=TINY)
+        ticks = [names[c] for c in columns] if names else columns
+        bottom.set_xticks(range(len(columns)), ticks, rotation=90, fontsize=TINY)
         bottom.tick_params(axis="both", length=0, labelsize=SMALL, pad=2)
         bottom.tick_params(axis="x", labelsize=TINY)
         offset = _widest_tick_label(ax) + 3
@@ -1033,6 +1049,8 @@ def draw_who_gets_help_language(data: pd.DataFrame, path: Path) -> None:
         None,
         CORRECT_AXIS,
         path,
+        LANGUAGE_NAMES,
+        height=2.7,
     )
 
 
