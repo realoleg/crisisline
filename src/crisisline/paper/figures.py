@@ -25,10 +25,11 @@ from crisisline.paper.style import LANGUAGE_NAMES, WHO_REGIONS, ModelStyle
 from crisisline.paper.subsets import Scope
 from crisisline.paper.worldmap import Country, robinson
 
+# The grounding conditions and their labels in figure 4.
 CONDITIONS = {
-    "S0-country": "User names\nthe country",
-    "M1": "Country in\nthe system\nprompt",
-    "M2": "Verified\nnumber in the\nsystem prompt",
+    "S0-country": "Country in\nmessage",
+    "M1": "Country in\nsystem prompt",
+    "M2": "+ Verified\nnumber",
 }
 ALL = "all"  # the pooled rows of the exploratory tables
 SHARE_AXIS = "Responses (%)"
@@ -38,8 +39,6 @@ SMALL = 8  # points: direct labels and dense tick labels, the smallest size the 
 TINY = 7  # points: the percentages inside bars and the codes of the dense grids
 SEPARATOR_REACH = 2  # points: how far the separators of a grid reach beyond it
 LABEL_PAD = 2  # points: between a grid and its tick labels
-
-Groups = Mapping[str, tuple[str, str]]
 
 
 def _ordered_groups(styles: Mapping[str, ModelStyle]) -> list[str]:
@@ -181,7 +180,7 @@ def draw_referral(data: pd.DataFrame, path: Path) -> None:
 
 # The grounding conditions, for figure 4.
 
-GROUNDING_OUTCOMES = {"correct_crisis": "Correct crisis line", "fabricated": "Fabricated number"}
+FIX_AXES = {"correct_crisis": CRISIS_AXIS, "fabricated": "Fabricated number (%)"}
 
 
 def grounding_data(grounding: pd.DataFrame, groups: Sequence[str], scope: Scope) -> pd.DataFrame:
@@ -190,10 +189,10 @@ def grounding_data(grounding: pd.DataFrame, groups: Sequence[str], scope: Scope)
         (grounding["model_id"] == ALL)
         & grounding["model_group"].isin(groups)
         & grounding["measure"].isin(CONDITIONS)
-        & grounding["outcome"].isin(GROUNDING_OUTCOMES)
+        & grounding["outcome"].isin(FIX_AXES)
     ]
     order = {
-        "outcome": list(GROUNDING_OUTCOMES),
+        "outcome": list(FIX_AXES),
         "model_group": list(groups),
         "measure": list(CONDITIONS),
     }
@@ -208,33 +207,25 @@ def grounding_data(grounding: pd.DataFrame, groups: Sequence[str], scope: Scope)
     return rows[columns].rename(columns={"measure": "condition"})
 
 
-def _condition_lines(
-    ax: Axes,
-    data: pd.DataFrame,
-    groups: Groups,
-    top: float,
-    labels: Sequence[str] = tuple(CONDITIONS.values()),
-) -> None:
+def _condition_lines(ax: Axes, data: pd.DataFrame, colours: Mapping[str, str], top: float) -> None:
     """One line per group across the conditions, labelled at its first point."""
-    offsets = _offsets(len(groups), 0.08)
+    offsets = _offsets(len(colours), 0.08)
     starts = []
-    for offset, (group, (colour, marker)) in zip(offsets, groups.items(), strict=True):
+    for offset, (group, colour) in zip(offsets, colours.items(), strict=True):
         rows = data[data["model_group"] == group]
         ax.errorbar(
             rows["condition"].map(list(CONDITIONS).index) + offset,
             100 * rows["estimate"],
             yerr=style.percent_errors(rows["estimate"], rows["ci_low"], rows["ci_high"]),
-            fmt=f"-{marker}",
+            fmt="-o",
             color=colour,
             linewidth=1.0,
             **style.ERRORBAR,
         )
         starts.append(100 * rows["estimate"].iloc[0])
-    for y, (group, (colour, _)) in zip(
-        style.spread(starts, 0.09 * top), groups.items(), strict=True
-    ):
+    for y, (group, colour) in zip(style.spread(starts, 0.09 * top), colours.items(), strict=True):
         ax.text(-0.15, y, style.group_label(group), color=colour, ha="right", va="center")
-    ax.set_xticks(range(len(CONDITIONS)), list(labels), fontsize=SMALL)
+    ax.set_xticks(range(len(CONDITIONS)), list(CONDITIONS.values()), fontsize=SMALL)
     ax.set_xlim(-0.9, len(CONDITIONS) - 0.7)
     ax.set_ylim(0, 1.04 * top)
     style.format_axis(ax, categorical="x")
@@ -277,12 +268,7 @@ def _gap_rows(
     return rows
 
 
-def _dumbbells(
-    ax: Axes,
-    data: pd.DataFrame,
-    styles: Mapping[str, ModelStyle],
-    groups: Groups,
-) -> None:
+def _dumbbells(ax: Axes, data: pd.DataFrame, styles: Mapping[str, ModelStyle]) -> None:
     """English (filled) and local-language (hollow) shares per model, joined; the models whose gap
     excludes zero in their group's colour, the others grey."""
     order = list(dict.fromkeys(data["model_id"]))
@@ -290,7 +276,6 @@ def _dumbbells(
         rows = data[data["model_id"] == model].set_index("prompt_language")
         significant = bool(rows["significant_gap"].iloc[0])
         colour = styles[model].colour if significant else style.GREY
-        marker = groups[styles[model].group][1]
         ax.plot(
             100 * rows.loc[list(LANGUAGES), "estimate"],
             [y, y],
@@ -304,7 +289,7 @@ def _dumbbells(
                 [100 * row["estimate"]],
                 [y],
                 xerr=style.percent_errors([row["estimate"]], [row["ci_low"]], [row["ci_high"]]),
-                fmt=marker,
+                fmt="o",
                 color=colour,
                 markerfacecolor=colour if language == "en" else "white",
                 zorder=2,
@@ -796,14 +781,11 @@ def native_language_data(
     return _named(pd.DataFrame(_gap_rows(by_model, models, styles, scope)))
 
 
-def draw_native_language(
-    data: pd.DataFrame, styles: Mapping[str, ModelStyle], groups: Groups, path: Path
-) -> None:
+def draw_native_language(data: pd.DataFrame, styles: Mapping[str, ModelStyle], path: Path) -> None:
     with style.paper_style():
         fig = style.new_figure(style.COLUMN, 2.8)
         ax = fig.add_subplot()
-        circles = {g: (colour, "o") for g, (colour, _) in groups.items()}
-        _dumbbells(ax, data, styles, circles)
+        _dumbbells(ax, data, styles)
         ax.set_xlabel(CORRECT_AXIS)
         style.format_axis(ax, categorical="y")
         _value_axis_to_100(ax, 3)
@@ -815,8 +797,6 @@ def draw_native_language(
 # number.
 
 STEPS = ("M1 - S0-country", "M2 - M1")
-FIX_CONDITIONS = ("Country in\nmessage", "Country in\nsystem prompt", "+ Verified\nnumber")
-FIX_AXES = {"correct_crisis": CRISIS_AXIS, "fabricated": "Fabricated number (%)"}
 
 
 def what_fixes_data(grounding: pd.DataFrame, groups: Sequence[str], scope: Scope) -> pd.DataFrame:
@@ -840,9 +820,8 @@ def what_fixes_data(grounding: pd.DataFrame, groups: Sequence[str], scope: Scope
     return pd.concat([lines, steps[lines.columns]], ignore_index=True)
 
 
-def draw_what_fixes(data: pd.DataFrame, groups: Groups, path: Path) -> None:
+def draw_what_fixes(data: pd.DataFrame, colours: Mapping[str, str], path: Path) -> None:
     """A panel per outcome, a line per group labelled at its start; the steps are not drawn."""
-    circles = {g: (colour, "o") for g, (colour, _) in groups.items()}
     lines = data[data["panel"] == "line"]
     with style.paper_style():
         fig = style.new_figure(style.FULL, 2.2)
@@ -850,7 +829,7 @@ def draw_what_fixes(data: pd.DataFrame, groups: Groups, path: Path) -> None:
         for ax, (outcome, label) in zip(axes, FIX_AXES.items(), strict=True):
             rows = lines[lines["outcome"] == outcome]
             top = 100 if outcome == "correct_crisis" else 100 * rows["ci_high"].max() * 1.1
-            _condition_lines(ax, rows, circles, top, FIX_CONDITIONS)
+            _condition_lines(ax, rows, colours, top)
             ax.set_ylabel(label)
         style.save(fig, path)
 

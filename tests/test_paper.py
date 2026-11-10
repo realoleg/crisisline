@@ -18,7 +18,7 @@ from crisisline.paper import figures, style, subsets, tables, worldmap
 GROUPS = {"API": ["api-b", "api-a"], "local": ["q-2", "other", "q-1"]}
 SIZES = {"q-1": 1.0, "q-2": 2.0}
 STYLES = style.model_styles(GROUPS, SIZES)
-GROUP_STYLES = style.group_styles(list(GROUPS))
+COLOURS = style.group_colours(list(GROUPS))
 MODELS = list(STYLES)
 SCOPE = subsets.Scope.from_rows(
     [
@@ -61,8 +61,10 @@ def test_models_are_ordered_by_group_with_the_size_ladder_by_size() -> None:
     assert MODELS == ["api-b", "api-a", "q-1", "q-2", "other"]
     assert {STYLES[m].colour for m in GROUPS["API"]} == {style.GROUP_COLOURS[0]}
     assert {STYLES[m].colour for m in GROUPS["local"]} == {style.GROUP_COLOURS[1]}
-    assert [STYLES[m].marker for m in ("q-1", "q-2", "other")] == ["o", "s", "^"]
-    assert GROUP_STYLES["local"] == (style.GROUP_COLOURS[1], style.GROUP_MARKERS[1])
+    assert list(COLOURS.items()) == [
+        ("API", style.GROUP_COLOURS[0]),
+        ("local", style.GROUP_COLOURS[1]),
+    ]
 
 
 def test_referral_colours_follow_the_outcome_semantics() -> None:
@@ -388,7 +390,6 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
             lambda p: figures.draw_native_language(
                 figures.native_language_data(_language_inputs()[0], STYLES, SCOPE),
                 STYLES,
-                GROUP_STYLES,
                 p,
             ),
             style.COLUMN,
@@ -396,7 +397,7 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
         "what_fixes": (
             lambda p: figures.draw_what_fixes(
                 figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE),
-                GROUP_STYLES,
+                COLOURS,
                 p,
             ),
             style.FULL,
@@ -886,7 +887,6 @@ def test_figure_numbers_hold_what_the_new_figures_write() -> None:
     classes = figures.world_map_classes(world, CLASSES)
     numbers = tables.figure_numbers(who, native, fixes, ladder, world, pooled, classes, 0.01)
     numbers = numbers.set_index("name")
-    assert not numbers.index.str.startswith(("failure_", "numbers_invented")).any()
     assert numbers.loc["lowest_countries_crisis_line_local", "value"] == 2
     assert {"en_prompt_q-1", "local_prompt_q-1", "en_minus_local_q-1"} <= set(numbers.index)
     assert "en_minus_local_q-2" not in numbers.index

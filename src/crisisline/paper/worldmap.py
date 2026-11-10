@@ -115,9 +115,9 @@ def _recentred(
         return [[r + [360.0, 0.0] for r in rings]]
     sides = []
     for east, shift in ((True, 0.0), (False, 360.0)):
+        # The exterior has points on both sides; a hole may lie on one side only.
         parts = [_clip(r, east) + [shift, 0.0] for r in rings]
-        if len(parts[0]) >= 3:
-            sides.append([part for part in parts if len(part) >= 3])
+        sides.append([part for part in parts if len(part) >= 3])
     return sides
 
 

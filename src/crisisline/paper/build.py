@@ -35,7 +35,7 @@ def build(config: dict[str, Any]) -> int:
     groups = list(model_groups)
     sizes = settings["model_sizes"]
     styles = style.model_styles(model_groups, sizes)
-    group_styles = style.group_styles(groups)
+    group_colours = style.group_colours(groups)
     models_config = load_config(Path(paths["models_config"]))
     temperature_block = {
         iso2
@@ -126,11 +126,11 @@ def build(config: dict[str, Any]) -> int:
         ),
         "fig2_referral_outcomes": (referral, figures.draw_referral),
         "fig3_language_heatmap": (who_language, figures.draw_who_gets_help_language),
-        "fig4_what_fixes": (fixes, lambda d, p: figures.draw_what_fixes(d, group_styles, p)),
+        "fig4_what_fixes": (fixes, lambda d, p: figures.draw_what_fixes(d, group_colours, p)),
         "appendix_country_heatmap": (who, figures.draw_who_gets_help),
         "appendix_native_language": (
             native,
-            lambda d, p: figures.draw_native_language(d, styles, group_styles, p),
+            lambda d, p: figures.draw_native_language(d, styles, p),
         ),
         "appendix_qwen_ladder": (ladder_outcomes, figures.draw_ladder),
     }

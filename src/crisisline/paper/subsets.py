@@ -20,16 +20,11 @@ CONDITIONS = {
     "M1": "M1 (location in the system prompt)",
     "M2": "M2 (location and numbers in the system prompt)",
 }
-CRISIS_OUTCOMES = ("correct_crisis", "correct_crisis_line")
 _WITHOUT_COUNTRY = re.compile(r"^without ([A-Z]{2})$")
 
 
 def countries(n: int) -> str:
     return f"{n} country" if n == 1 else f"{n} countries"
-
-
-def about_crisis_line(outcome: str) -> bool:
-    return outcome in CRISIS_OUTCOMES
 
 
 @dataclass(frozen=True, slots=True)
@@ -81,7 +76,7 @@ class Scope:
         without: Collection[str] = (),
     ) -> str:
         """``N countries``, ``N countries with a crisis line`` for an outcome about it."""
-        crisis = about_crisis_line(outcome)
+        crisis = outcome == "correct_crisis"
         n = sum(
             (c.crisis_line or not crisis)
             and not (non_english and c.english)
@@ -91,9 +86,6 @@ class Scope:
             for c in self.countries
         )
         return countries(n) + (" with a crisis line" if crisis else "")
-
-    def name(self, iso2: str) -> str:
-        return next(c.name for c in self.countries if c.iso2 == iso2)
 
 
 # Figures and the tables built from the same data.

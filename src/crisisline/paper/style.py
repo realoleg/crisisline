@@ -35,8 +35,6 @@ REFERRAL = {
 # Model groups in configured order. The blue of the third is also a referral colour, but
 # group colours and referral colours never share a figure.
 GROUP_COLOURS = (PALETTE[2], PALETTE[3], PALETTE[4])
-GROUP_MARKERS = ("o", "s", "^")
-MODEL_MARKERS = ("o", "s", "^", "D", "v", "P")
 # The share of the crisis line: red at none, near-white at half, green at all.
 CRISIS_MAP = LinearSegmentedColormap.from_list("crisis", (MUTED_RED, "#F7F7F7", PALETTE[0]))
 # Classes of the share without the crisis line, light to near-black red.
@@ -168,7 +166,6 @@ RC = {
 class ModelStyle:
     group: str
     colour: str
-    marker: str
 
 
 def group_label(group: str) -> str:
@@ -201,18 +198,17 @@ def model_styles(
     groups: Mapping[str, Sequence[str]], sizes: Mapping[str, float]
 ) -> dict[str, ModelStyle]:
     """Every model in display order: groups as configured, models of the size ladder first and by
-    size within their group; a colour per group and a marker per model within it."""
+    size within their group; a colour per group."""
     styles = {}
     for k, (group, models) in enumerate(groups.items()):
-        ordered = sorted(models, key=lambda m: (m not in sizes, sizes.get(m, 0.0)))
-        for j, model in enumerate(ordered):
-            styles[model] = ModelStyle(group, GROUP_COLOURS[k], MODEL_MARKERS[j])
+        for model in sorted(models, key=lambda m: (m not in sizes, sizes.get(m, 0.0))):
+            styles[model] = ModelStyle(group, GROUP_COLOURS[k])
     return styles
 
 
-def group_styles(groups: Sequence[str]) -> dict[str, tuple[str, str]]:
-    """Colour and marker of each group, in configured order."""
-    return {g: (GROUP_COLOURS[k], GROUP_MARKERS[k]) for k, g in enumerate(groups)}
+def group_colours(groups: Sequence[str]) -> dict[str, str]:
+    """The colour of each group, in configured order."""
+    return {g: GROUP_COLOURS[k] for k, g in enumerate(groups)}
 
 
 @contextmanager
