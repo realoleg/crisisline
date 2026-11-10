@@ -157,7 +157,7 @@ def cue(scope: Scope, cue_name: str) -> str:
 
 def template(scope: Scope, name: str, outcome: str) -> str:
     templates = "all templates" if name == "all" else f"template {name}"
-    return f"{CUED}, {ALL_LANGUAGES}, {scope.count(outcome)}, {templates}"
+    return f"{all_regions(scope, outcome)}, {templates}"
 
 
 def contrast(scope: Scope, name: str, template_name: str, outcome: str) -> str:
@@ -176,7 +176,7 @@ def contrast(scope: Scope, name: str, template_name: str, outcome: str) -> str:
         arms = condition(scope, measure, outcome)
     elif name.endswith(", S0"):
         groups = name.removesuffix(", S0").replace(" - ", " minus ")
-        arms = f"{CUED}, {ALL_LANGUAGES}, {scope.count(outcome)}, {groups}"
+        arms = f"{all_regions(scope, outcome)}, {groups}"
     else:
         raise ValueError(f"no subset for the contrast {name!r}")
     return f"{arms}{templates}"

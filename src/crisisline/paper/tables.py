@@ -14,8 +14,9 @@ import pandas as pd
 
 from crisisline.analysis import fabrication
 from crisisline.analysis.descriptive import CONFIDENCE
+from crisisline.analysis.intervals import ALL
 from crisisline.paper import subsets
-from crisisline.paper.figures import ALL, percent_value
+from crisisline.paper.figures import percent_value
 from crisisline.paper.style import REFERRAL, ModelStyle, group_label, model_name
 from crisisline.paper.subsets import Scope
 from crisisline.unknowns import wilson_interval
@@ -127,6 +128,11 @@ def models_table(
             if v != ""
         )
     return pd.DataFrame(rows)
+
+
+def _ladder_ends(ladder: pd.DataFrame) -> pd.DataFrame:
+    """The rows of the smallest and the largest model of the size ladder."""
+    return ladder[ladder["size"].isin((ladder["size"].min(), ladder["size"].max()))]
 
 
 def _domain(group: str, model: str) -> tuple[str, str]:
@@ -706,8 +712,7 @@ def numbers_table(
         )
     )
 
-    sizes = sorted(ladder["size"].unique())
-    for _, r in ladder[ladder["size"].isin((sizes[0], sizes[-1]))].iterrows():
+    for _, r in _ladder_ends(ladder).iterrows():
         rows.append(
             _number(
                 _name("ladder", r["model_id"], r["cue"]),
@@ -960,8 +965,7 @@ def figure_numbers(
             "as a circle at their centroid: " + ", ".join(small["name_en"]),
         )
     )
-    sizes = sorted(ladder["size"].unique())
-    for _, r in ladder[ladder["size"].isin((sizes[0], sizes[-1]))].iterrows():
+    for _, r in _ladder_ends(ladder).iterrows():
         rows.append(
             _number(
                 _name("ladder", r["referral"], r["model_id"]),

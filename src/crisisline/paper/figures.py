@@ -20,6 +20,7 @@ from matplotlib.ticker import FixedLocator, NullLocator
 from matplotlib.transforms import ScaledTranslation
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
+from crisisline.analysis.intervals import ALL
 from crisisline.paper import style, subsets
 from crisisline.paper.style import LANGUAGE_NAMES, WHO_REGIONS, ModelStyle
 from crisisline.paper.subsets import Scope
@@ -31,7 +32,6 @@ CONDITIONS = {
     "M1": "Country in\nsystem prompt",
     "M2": "+ Verified\nnumber",
 }
-ALL = "all"  # the pooled rows of the exploratory tables
 SHARE_AXIS = "Responses (%)"
 CORRECT_AXIS = "Correct number (%)"
 CRISIS_AXIS = "Correct crisis line (%)"
@@ -57,9 +57,10 @@ def _bold_labels(ax: Axes, axis: str, bold: Sequence[bool]) -> None:
 
 
 def _named(table: pd.DataFrame) -> pd.DataFrame:
-    """``table`` with the display name of each model next to its model_id."""
-    names = table["model_id"].map(lambda m: style.model_name(m) if m else "")
-    return table.assign(model=names)
+    """``table`` with the display name of each model next to its model_id; rows of no model have
+    both empty."""
+    ids = table["model_id"].fillna("")
+    return table.assign(model_id=ids, model=ids.map(lambda m: style.model_name(m) if m else ""))
 
 
 def _model_rows(ax: Axes, groups: Sequence[tuple[str, list[str]]]) -> dict[str, int]:
@@ -417,6 +418,32 @@ def _weakest_group(margin: pd.Series, styles: Mapping[str, ModelStyle]) -> str:
     return min(means, key=means.get)
 
 
+def _country_keys(country: subsets.Country) -> dict[str, str]:
+    return {"iso2": country.iso2, "name_en": country.name, "who_region": country.region}
+
+
+def _panel_row(
+    panel: str,
+    group: str,
+    keys: Mapping[str, str],
+    cell: pd.Series,
+    subset: str,
+    share: str = "share",
+) -> dict[str, object]:
+    """A row of a heatmap's data under ``keys``: the share of ``cell`` (its column ``share``), its
+    interval and its responses."""
+    return {
+        "panel": panel,
+        "model_group": group,
+        **keys,
+        "share": cell[share],
+        "ci_low": cell["ci_low"],
+        "ci_high": cell["ci_high"],
+        "n": cell["responses"],
+        "subset": subset,
+    }
+
+
 def who_gets_help_data(
     cells: pd.DataFrame,
     model_shares: pd.DataFrame,
@@ -438,89 +465,38 @@ def who_gets_help_data(
         with_line = [c for c in scope.countries if c.region == region and c.crisis_line]
         columns += sorted(with_line, key=lambda c: (-pooled.loc[c.iso2, "estimate"], c.iso2))
     shares = cells.set_index(["model_id", "iso2"])
+    keys = {c.iso2: _country_keys(c) for c in scope.countries}
+    subset = {c.iso2: subsets.country(c.name) for c in scope.countries}
+    all_countries = subsets.all_regions(scope, "correct_crisis")
     rows = []
     for model in order:
-        for country in columns:
-            cell = shares.loc[(model, country.iso2)]
+        group = styles[model].group
+        for c in columns:
+            cell = shares.loc[(model, c.iso2)]
             rows.append(
-                {
-                    "panel": CELL,
-                    "model_group": styles[model].group,
-                    "model_id": model,
-                    "iso2": country.iso2,
-                    "name_en": country.name,
-                    "who_region": country.region,
-                    "share": cell["share"],
-                    "ci_low": cell["ci_low"],
-                    "ci_high": cell["ci_high"],
-                    "n": cell["responses"],
-                    "subset": subsets.country(country.name),
-                }
+                _panel_row(CELL, group, {"model_id": model, **keys[c.iso2]}, cell, subset[c.iso2])
             )
         rows.append(
-            {
-                "panel": MODEL_MARGIN,
-                "model_group": styles[model].group,
-                "model_id": model,
-                "share": margin.loc[model, "share"],
-                "ci_low": margin.loc[model, "ci_low"],
-                "ci_high": margin.loc[model, "ci_high"],
-                "n": margin.loc[model, "responses"],
-                "subset": subsets.all_regions(scope, "correct_crisis"),
-            }
+            _panel_row(MODEL_MARGIN, group, {"model_id": model}, margin.loc[model], all_countries)
         )
-    for country in columns:
-        rows.append(
-            {
-                "panel": COUNTRY_MARGIN,
-                "model_group": ALL,
-                "iso2": country.iso2,
-                "name_en": country.name,
-                "who_region": country.region,
-                "share": pooled.loc[country.iso2, "estimate"],
-                "ci_low": pooled.loc[country.iso2, "ci_low"],
-                "ci_high": pooled.loc[country.iso2, "ci_high"],
-                "n": pooled.loc[country.iso2, "responses"],
-                "subset": subsets.country(country.name),
-            }
-        )
+    for c in columns:
+        cell = pooled.loc[c.iso2]
+        rows.append(_panel_row(COUNTRY_MARGIN, ALL, keys[c.iso2], cell, subset[c.iso2], "estimate"))
     weakest = _weakest_group(margin["share"], styles)
     by_group = countries[countries["model_group"] == weakest].set_index("iso2")
     cutoff = by_group["estimate"].nsmallest(lowest).max()
-    for country in columns:
-        if country.iso2 in by_group.index and by_group.loc[country.iso2, "estimate"] <= cutoff:
-            row = by_group.loc[country.iso2]
-            rows.append(
-                {
-                    "panel": LOWEST,
-                    "model_group": weakest,
-                    "iso2": country.iso2,
-                    "name_en": country.name,
-                    "who_region": country.region,
-                    "share": row["estimate"],
-                    "ci_low": row["ci_low"],
-                    "ci_high": row["ci_high"],
-                    "n": row["responses"],
-                    "subset": subsets.country(country.name),
-                }
-            )
+    for c in columns:
+        if c.iso2 in by_group.index and by_group.loc[c.iso2, "estimate"] <= cutoff:
+            cell = by_group.loc[c.iso2]
+            rows.append(_panel_row(LOWEST, weakest, keys[c.iso2], cell, subset[c.iso2], "estimate"))
     for region in WHO_REGIONS:
-        for country in sorted(
+        for c in sorted(
             (c for c in scope.countries if c.region == region and not c.crisis_line),
             key=lambda c: c.iso2,
         ):
-            rows.append(
-                {
-                    "panel": NO_CRISIS_LINE,
-                    "model_group": ALL,
-                    "iso2": country.iso2,
-                    "name_en": country.name,
-                    "who_region": country.region,
-                    "subset": subsets.NO_LINE,
-                }
-            )
-    table = pd.DataFrame(rows)
-    return _named(table.assign(model_id=table["model_id"].fillna("")))
+            no_line = {"panel": NO_CRISIS_LINE, "model_group": ALL, **keys[c.iso2]}
+            rows.append({**no_line, "subset": subsets.NO_LINE})
+    return _named(pd.DataFrame(rows))
 
 
 def who_gets_help_language_data(
@@ -540,52 +516,28 @@ def who_gets_help_language_data(
     columns = sorted(group.index, key=lambda lang: (-group[lang], lang))
     pooled = by_language[by_language["model_group"] == ALL].set_index("lang")
     countries = by_language.drop_duplicates("lang").set_index("lang")["countries"]
+    names = {lang: {"lang": lang, "language": LANGUAGE_NAMES[lang]} for lang in columns}
+    subset = {lang: subsets.language(lang, int(countries[lang])) for lang in columns}
     rows = []
     for model in order:
+        model_group = styles[model].group
         for lang in columns:
+            keys = {"model_id": model, **names[lang]}
             cell = languages.loc[(model, lang)]
-            rows.append(
-                {
-                    "panel": CELL,
-                    "model_group": styles[model].group,
-                    "model_id": model,
-                    "lang": lang,
-                    "language": LANGUAGE_NAMES[lang],
-                    "share": cell["share"],
-                    "ci_low": cell["ci_low"],
-                    "ci_high": cell["ci_high"],
-                    "n": cell["responses"],
-                    "subset": subsets.language(lang, int(countries[lang])),
-                }
-            )
+            rows.append(_panel_row(CELL, model_group, keys, cell, subset[lang]))
         rows.append(
-            {
-                "panel": MODEL_MARGIN,
-                "model_group": styles[model].group,
-                "model_id": model,
-                "share": margin.loc[model, "share"],
-                "ci_low": margin.loc[model, "ci_low"],
-                "ci_high": margin.loc[model, "ci_high"],
-                "n": margin.loc[model, "responses"],
-                "subset": subsets.local_languages(scope),
-            }
+            _panel_row(
+                MODEL_MARGIN,
+                model_group,
+                {"model_id": model},
+                margin.loc[model],
+                subsets.local_languages(scope),
+            )
         )
     for lang in columns:
-        rows.append(
-            {
-                "panel": COLUMN_MARGIN,
-                "model_group": ALL,
-                "lang": lang,
-                "language": LANGUAGE_NAMES[lang],
-                "share": pooled.loc[lang, "estimate"],
-                "ci_low": pooled.loc[lang, "ci_low"],
-                "ci_high": pooled.loc[lang, "ci_high"],
-                "n": pooled.loc[lang, "responses"],
-                "subset": subsets.language(lang, int(countries[lang])),
-            }
-        )
-    table = pd.DataFrame(rows)
-    return _named(table.assign(model_id=table["model_id"].fillna("")))
+        cell = pooled.loc[lang]
+        rows.append(_panel_row(COLUMN_MARGIN, ALL, names[lang], cell, subset[lang], "estimate"))
+    return _named(pd.DataFrame(rows))
 
 
 def _share_cells(ax: Axes, values: np.ndarray) -> AxesImage:
@@ -855,6 +807,15 @@ def _class_name(k: int, edges: Sequence[float], dash: str = "-") -> str:
     return f"{edges[k]:g}{dash}{edges[k + 1]:g}"
 
 
+def _without_line(cell: pd.Series) -> dict[str, float]:
+    """The share without the correct crisis line and its interval, from those of the line."""
+    return {
+        "no_crisis_line": 1 - cell["estimate"],
+        "ci_low": 1 - cell["ci_high"],
+        "ci_high": 1 - cell["ci_low"],
+    }
+
+
 def world_map_data(
     table: pd.DataFrame,
     shapes: Sequence[Country],
@@ -867,23 +828,22 @@ def world_map_data(
     country of the prompts (local-language S0 with a cue), empty for the countries without a crisis
     line; the land area of each country and whether it is small enough for a marker as well."""
     shares = table[table["model_group"] == group].set_index("iso2")
+    no_share = pd.Series(np.nan, index=shares.columns)
     area = {c.iso2: c.area for c in shapes if c.iso2}
     rows = []
     for country in sorted(scope.countries, key=lambda c: (c.region, c.iso2)):
-        cell = shares.loc[country.iso2] if country.crisis_line else None
-        missing = 1 - cell["estimate"] if cell is not None else np.nan
+        cell = shares.loc[country.iso2] if country.crisis_line else no_share
+        missing = _without_line(cell)
         rows.append(
             {
                 "model_group": group,
-                "iso2": country.iso2,
-                "name_en": country.name,
-                "who_region": country.region,
+                **_country_keys(country),
                 "has_crisis_line": country.crisis_line,
-                "no_crisis_line": missing,
-                "ci_low": 1 - cell["ci_high"] if cell is not None else np.nan,
-                "ci_high": 1 - cell["ci_low"] if cell is not None else np.nan,
-                "n": cell["responses"] if cell is not None else np.nan,
-                "class": _class_name(_class_of(missing, edges), edges) if cell is not None else "",
+                **missing,
+                "n": cell["responses"],
+                "class": _class_name(_class_of(missing["no_crisis_line"], edges), edges)
+                if country.crisis_line
+                else "",
                 "area_km2": round(area[country.iso2]),
                 "marker": area[country.iso2] < small_km2,
                 "subset": subsets.local_language_country(country.name)
@@ -918,9 +878,7 @@ def world_map_pooled(table: pd.DataFrame, groups: Sequence[str], scope: Scope) -
         [
             {
                 "model_group": group,
-                "no_crisis_line": 1 - pooled.loc[group, "estimate"],
-                "ci_low": 1 - pooled.loc[group, "ci_high"],
-                "ci_high": 1 - pooled.loc[group, "ci_low"],
+                **_without_line(pooled.loc[group]),
                 "n": pooled.loc[group, "responses"],
                 "subset": subsets.local_languages(scope, "correct_crisis"),
             }
