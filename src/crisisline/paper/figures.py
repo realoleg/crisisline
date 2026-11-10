@@ -36,8 +36,7 @@ CORRECT_AXIS = "Correct number (%)"
 CRISIS_AXIS = "Correct crisis line (%)"
 SMALL = 8  # points: direct labels and dense tick labels, the smallest size the template allows
 TINY = 7  # points: the percentages inside bars and the codes of the dense grids
-SEPARATOR_RISE = 4  # points: how far the separators of a grid reach above and to the right
-SEPARATOR_DROP = 2  # points: how far they reach below it, between the column labels
+SEPARATOR_REACH = 2  # points: how far the separators of a grid reach beyond it
 LABEL_PAD = 2  # points: between a grid and its tick labels
 
 Groups = Mapping[str, tuple[str, str]]
@@ -951,7 +950,7 @@ def _share_grid(
     with style.paper_style():
         fig = style.new_figure(style.FULL, height)
         # Room on the right for the separator that reaches past the margin column.
-        right_edge = 1 - SEPARATOR_RISE / 72 / style.FULL if sections is not None else 1
+        right_edge = 1 - SEPARATOR_REACH / 72 / style.FULL if sections is not None else 1
         fig.get_layout_engine().set(
             h_pad=0.01, w_pad=0.01, hspace=0.0, wspace=0.0, rect=(0, 0, right_edge, 1)
         )
@@ -1027,20 +1026,20 @@ def _separators(fig: Figure, axes: tuple[Axes, Axes, Axes], breaks: Sequence[flo
     the margin column. All white edges first, so that crossings stay black."""
     ax, right, bottom = axes
     width, height = fig.get_size_inches()
-    rise, drop, pad = (points / 72 for points in (SEPARATOR_RISE, SEPARATOR_DROP, LABEL_PAD))
-    up = ax.transData + ScaledTranslation(0, rise, fig.dpi_scale_trans)
-    down = bottom.transData + ScaledTranslation(0, -drop, fig.dpi_scale_trans)
+    reach, pad = SEPARATOR_REACH / 72, LABEL_PAD / 72
+    up = ax.transData + ScaledTranslation(0, reach, fig.dpi_scale_trans)
+    down = bottom.transData + ScaledTranslation(0, -reach, fig.dpi_scale_trans)
 
     def before_margin_column() -> tuple[list[float], list[float]]:
         x = (ax.get_position().x1 + right.get_position().x0) / 2
         return [x, x], [
-            ax.get_position().y1 + rise / height,
-            bottom.get_position().y0 - drop / height,
+            ax.get_position().y1 + reach / height,
+            bottom.get_position().y0 - reach / height,
         ]
 
     def before_margin_row() -> tuple[list[float], list[float]]:
         y = (ax.get_position().y0 + bottom.get_position().y1) / 2
-        return [ax.get_position().x0 - pad / width, right.get_position().x1 + rise / width], [y, y]
+        return [ax.get_position().x0 - pad / width, right.get_position().x1 + reach / width], [y, y]
 
     for colour, linewidth, zorder in (("white", 2.0, 3), ("black", 1.0, 4)):
         line = {"color": colour, "linewidth": linewidth, "zorder": zorder}
