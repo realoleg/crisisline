@@ -13,7 +13,7 @@ from matplotlib.text import Text
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
 from crisisline.cli import load_config
-from crisisline.paper import figures, style, subsets, tables, worldmap
+from crisisline.paper import build, figures, style, subsets, tables, worldmap
 
 GROUPS = {"API": ["api-b", "api-a"], "local": ["q-2", "other", "q-1"]}
 SIZES = {"q-1": 1.0, "q-2": 2.0}
@@ -877,7 +877,7 @@ def test_what_fixes_has_both_outcomes_and_the_two_steps_over_all_models() -> Non
     assert steps["subset"].str.contains("with a crisis line").all()
 
 
-def test_figure_numbers_hold_what_the_new_figures_write() -> None:
+def _figure_numbers() -> pd.DataFrame:
     who = figures.who_gets_help_data(*_who_inputs())
     native = figures.native_language_data(_language_inputs()[0], STYLES, SCOPE)
     fixes = figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE)
@@ -885,8 +885,11 @@ def test_figure_numbers_hold_what_the_new_figures_write() -> None:
     world = figures.world_map_data(*_world(), "local", 0.01, CLASSES, SCOPE)
     pooled = figures.world_map_pooled(_world()[0], ["local", "API"], SCOPE)
     classes = figures.world_map_classes(world, CLASSES)
-    numbers = tables.figure_numbers(who, native, fixes, ladder, world, pooled, classes, 0.01)
-    numbers = numbers.set_index("name")
+    return tables.figure_numbers(who, native, fixes, ladder, world, pooled, classes, 0.01)
+
+
+def test_figure_numbers_hold_what_the_new_figures_write() -> None:
+    numbers = _figure_numbers().set_index("name")
     assert numbers.loc["lowest_countries_crisis_line_local", "value"] == 2
     assert {"en_prompt_q-1", "local_prompt_q-1", "en_minus_local_q-1"} <= set(numbers.index)
     assert "en_minus_local_q-2" not in numbers.index
@@ -901,6 +904,17 @@ def test_figure_numbers_hold_what_the_new_figures_write() -> None:
     assert numbers.loc["ladder_misrouted_q-1", "value"] == pytest.approx(0.1)
     assert numbers.index.is_unique
     assert numbers["subset"].str.len().gt(0).all()
+
+
+def test_counts_in_the_numbers_are_written_as_integers(tmp_path: Path) -> None:
+    """numbers.csv holds text values too, such as the worst region, ahead of the figure numbers."""
+    text = pd.DataFrame([tables._number("worst_region", "AFR", "WHO region", "s", "")])
+    build._write(pd.concat([text, _figure_numbers()], ignore_index=True), tmp_path / "numbers.csv")
+    written = pd.read_csv(tmp_path / "numbers.csv", dtype=str).set_index("name")["value"]
+    assert written["countries_without_crisis_line"] == "1"
+    assert written["world_map_class_75_100"] == "1"
+    assert written["world_map_small_country_km2"] == "0.01"
+    assert written["world_map_no_crisis_line_API"] == "0.2"
 
 
 def test_saved_text_is_single_spaced(tmp_path: Path) -> None:

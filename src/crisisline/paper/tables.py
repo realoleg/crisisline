@@ -542,6 +542,12 @@ def _number(
     }
 
 
+def _numbers(rows: Sequence[Mapping[str, Any]]) -> pd.DataFrame:
+    """Rows of ``numbers.csv``. ``value`` holds text as well as numbers, so it keeps each value's
+    own type: a count stays an integer instead of becoming a float."""
+    return pd.DataFrame(rows, dtype=object).astype({"ci_low": float, "ci_high": float})
+
+
 def _comparison_numbers(hypotheses: pd.DataFrame, scope: Scope) -> Iterable[dict[str, Any]]:
     for _, r in hypotheses[hypotheses["hypothesis"].isin(COMPARISONS)].iterrows():
         unit = "proportion" if r["hypothesis"] == "us_default" else "odds ratio"
@@ -811,7 +817,7 @@ def numbers_table(
                 r["ci_high"],
             )
         )
-    return pd.DataFrame(rows)
+    return _numbers(rows)
 
 
 def figure_numbers(
@@ -978,4 +984,4 @@ def figure_numbers(
                 r["ci_high"],
             )
         )
-    return pd.DataFrame(rows)
+    return _numbers(rows)
