@@ -7,8 +7,10 @@ from collections.abc import Callable
 from pathlib import Path
 
 import matplotlib.image as mpimg
+import numpy as np
 import pandas as pd
 import pytest
+from matplotlib.figure import Figure
 from matplotlib.text import Text
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
@@ -371,6 +373,7 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
                 _world()[1],
                 CLASSES,
                 1.0,
+                0.0,
                 p,
             ),
             style.FULL,
@@ -381,6 +384,7 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
                 _world()[1],
                 CLASSES,
                 1.0,
+                0.0,
                 p,
                 style.DARK_MAP,
             ),
@@ -915,6 +919,19 @@ def test_counts_in_the_numbers_are_written_as_integers(tmp_path: Path) -> None:
     assert written["world_map_class_75_100"] == "1"
     assert written["world_map_small_country_km2"] == "0.01"
     assert written["world_map_no_crisis_line_API"] == "0.2"
+
+
+def test_the_graticule_draws_greenwich_whatever_the_centre() -> None:
+    """Centred on 10 degrees east, Greenwich lies 10 degrees west of the centre; the meridians are
+    the multiples of 30 degrees from Greenwich, 180 degrees included."""
+    ax = Figure().add_subplot()
+    figures._graticule(ax, 1.0, 10.0, style.PAPER_MAP)
+    lat = np.linspace(-90, 90, 181)
+    greenwich = np.column_stack(worldmap.robinson(np.full_like(lat, -10.0), lat))
+    assert any(np.allclose(line.get_xydata(), greenwich) for line in ax.get_lines())
+    assert {(m + 10) % 360 for m in figures._meridians(10.0)} == set(range(0, 360, 30))
+    # Centred on Greenwich, 180 degrees is the map's edge: the outline, not a meridian.
+    assert figures._meridians(0.0) == list(range(-150, 151, 30))
 
 
 def test_saved_text_is_single_spaced(tmp_path: Path) -> None:

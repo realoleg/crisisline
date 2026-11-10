@@ -895,13 +895,20 @@ def _outline(country: Country) -> Outline:
     return Outline.make_compound_path(*(Outline(np.vstack([r, r[:1]]), closed=True) for r in rings))
 
 
-def _graticule(ax: Axes, radius: float, theme: style.MapTheme) -> None:
-    """Meridians and parallels every 30 degrees under the countries, and the projection's
-    boundary over them."""
+def _meridians(central_lon: float) -> list[float]:
+    """The meridians at multiples of 30 degrees from Greenwich, in longitudes relative to the
+    map's centre; the one on the map's edge is left to the outline."""
+    relative = ((lon - central_lon + 180) % 360 - 180 for lon in range(-180, 180, 30))
+    return sorted(x for x in relative if x != -180)
+
+
+def _graticule(ax: Axes, radius: float, central_lon: float, theme: style.MapTheme) -> None:
+    """Meridians and parallels every 30 degrees from Greenwich and the equator under the
+    countries, and the projection's boundary over them."""
     lat = np.linspace(-90, 90, 181)
     lon = np.linspace(-180, 180, 361)
     lines = {"linewidth": 0.3, "color": theme.graticule, "zorder": 0}
-    for meridian in range(-150, 151, 30):
+    for meridian in _meridians(central_lon):
         ax.plot(*robinson(np.full_like(lat, meridian), lat, radius), **lines)
     for parallel in range(-60, 61, 30):
         ax.plot(*robinson(lon, np.full_like(lon, parallel), radius), **lines)
@@ -918,12 +925,13 @@ def draw_world_map(
     shapes: Sequence[Country],
     edges: Sequence[float],
     radius: float,
+    central_lon: float,
     path: Path,
     theme: style.MapTheme = style.PAPER_MAP,
 ) -> None:
-    """One Robinson map: countries of the prompts by their class of the share without the crisis
-    line, hatched grey without a national line, other land faint; small countries also as a
-    circle. The legend counts the countries in each class."""
+    """One Robinson map centred on ``central_lon``, as ``shapes`` are: countries of the prompts by
+    their class of the share without the crisis line, hatched grey without a national line, other
+    land faint; small countries also as a circle. The legend counts the countries in each class."""
     rows = data.set_index("iso2")
 
     def colour(iso2: str) -> str:
@@ -945,7 +953,7 @@ def draw_world_map(
         fig.get_layout_engine().set(h_pad=0.01, w_pad=0.01)
         ax = fig.add_subplot()
         ax.set_facecolor(theme.background)
-        _graticule(ax, radius, theme)
+        _graticule(ax, radius, central_lon, theme)
         for country in shapes:
             outline = _outline(country)
             if not country.iso2:

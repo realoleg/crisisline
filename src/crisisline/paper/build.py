@@ -121,7 +121,7 @@ def build(config: dict[str, Any]) -> int:
         "fig1_world_map": (
             world_data,
             lambda d, p: figures.draw_world_map(
-                d, shapes, world["classes"], world["earth_radius_km"], p
+                d, shapes, world["classes"], world["earth_radius_km"], world["central_longitude"], p
             ),
         ),
         "fig2_referral_outcomes": (referral, figures.draw_referral),
@@ -143,6 +143,7 @@ def build(config: dict[str, Any]) -> int:
         shapes,
         world["classes"],
         world["earth_radius_km"],
+        world["central_longitude"],
         out / "talk" / "talk_world_map_dark",
         style.DARK_MAP,
     )
