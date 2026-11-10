@@ -4,7 +4,7 @@ states one message in saturated colour; context is grey; numbers belong in numbe
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from pathlib import Path
 
 import matplotlib as mpl
@@ -36,7 +36,9 @@ CORRECT_AXIS = "Correct number (%)"
 CRISIS_AXIS = "Correct crisis line (%)"
 SMALL = 8  # points: direct labels and dense tick labels, the smallest size the template allows
 TINY = 7  # points: the percentages inside bars and the codes of the dense grids
-SEPARATOR_RISE = 4  # points: how far the separators of a grid reach beyond it
+SEPARATOR_RISE = 4  # points: how far the separators of a grid reach above and to the right
+SEPARATOR_DROP = 2  # points: how far they reach below it, between the column labels
+LABEL_PAD = 2  # points: between a grid and its tick labels
 
 Groups = Mapping[str, tuple[str, str]]
 
@@ -974,14 +976,14 @@ def _share_grid(
             top.tick_params(length=0, labelsize=SMALL, pad=1)
             top.spines["top"].set_visible(False)
         ax.set_yticks(range(len(models)), [style.model_name(m) for m in models])
-        ax.tick_params(axis="both", length=0, labelbottom=False, labelsize=SMALL, pad=2)
+        ax.tick_params(axis="both", length=0, labelbottom=False, labelsize=SMALL, pad=LABEL_PAD)
         right.set_xticks([0], ["All"])
         right.xaxis.set_ticks_position("top")
         right.tick_params(axis="both", length=0, labelleft=False, labelsize=SMALL, pad=1)
         bottom.set_yticks([0], ["All models"])
         ticks = [names[c] for c in columns] if names else columns
         bottom.set_xticks(range(len(columns)), ticks, rotation=90, fontsize=TINY)
-        bottom.tick_params(axis="both", length=0, labelsize=SMALL, pad=2)
+        bottom.tick_params(axis="both", length=0, labelsize=SMALL, pad=LABEL_PAD)
         bottom.tick_params(axis="x", labelsize=TINY)
         colourbar = fig.colorbar(
             image, ax=[bottom], location="bottom", shrink=0.24, aspect=18, pad=0.0
@@ -1004,32 +1006,55 @@ def _share_grid(
         style.save(fig, path)
 
 
+class _LaidOutLine(Line2D):
+    """A line in figure coordinates that ``place`` puts from the laid-out axes at each draw."""
+
+    def __init__(
+        self, place: Callable[[], tuple[list[float], list[float]]], **kwargs: object
+    ) -> None:
+        super().__init__([], [], **kwargs)
+        self._place = place
+
+    def draw(self, renderer: object) -> None:
+        self.set_data(*self._place())
+        super().draw(renderer)
+
+
 def _separators(fig: Figure, axes: tuple[Axes, Axes, Axes], breaks: Sequence[float]) -> None:
-    """Black lines with a thin white edge: one between sections, from a little above the grid to
-    a little below the margin row, and one between the grid and the margin row, a little wider
-    than both. All white edges first, so that crossings stay black. Call once the figure is laid
-    out: the lines take no part in the layout."""
+    """Black lines with a thin white edge, none in the layout: one between sections and one
+    between the grid and the margin column, from a little above the grid to a little below the
+    margin row; one between the grid and the margin row, from the model names to a little past
+    the margin column. All white edges first, so that crossings stay black."""
     ax, right, bottom = axes
-    rise = SEPARATOR_RISE / 72
+    width, height = fig.get_size_inches()
+    rise, drop, pad = (points / 72 for points in (SEPARATOR_RISE, SEPARATOR_DROP, LABEL_PAD))
     up = ax.transData + ScaledTranslation(0, rise, fig.dpi_scale_trans)
-    down = bottom.transData + ScaledTranslation(0, -rise, fig.dpi_scale_trans)
-    fig.draw_without_rendering()
-    gap = (ax.get_position().y0 + bottom.get_position().y1) / 2
-    wide = rise / fig.get_figwidth()
-    span = [ax.get_position().x0 - wide, right.get_position().x1 + wide]
-    for colour, width, zorder in (("white", 2.0, 3), ("black", 1.0, 4)):
-        line = {"color": colour, "linewidth": width, "zorder": zorder}
-        for x in breaks:
-            vertical = ConnectionPatch(
-                (x, -0.5), (x, 0.5), coordsA=up, coordsB=down, capstyle="butt", **line
-            )
-            vertical.set_in_layout(False)
-            fig.add_artist(vertical)
-        horizontal = Line2D(
-            span, [gap, gap], transform=fig.transFigure, solid_capstyle="butt", **line
-        )
-        horizontal.set_in_layout(False)
-        fig.add_artist(horizontal)
+    down = bottom.transData + ScaledTranslation(0, -drop, fig.dpi_scale_trans)
+
+    def before_margin_column() -> tuple[list[float], list[float]]:
+        x = (ax.get_position().x1 + right.get_position().x0) / 2
+        return [x, x], [
+            ax.get_position().y1 + rise / height,
+            bottom.get_position().y0 - drop / height,
+        ]
+
+    def before_margin_row() -> tuple[list[float], list[float]]:
+        y = (ax.get_position().y0 + bottom.get_position().y1) / 2
+        return [ax.get_position().x0 - pad / width, right.get_position().x1 + rise / width], [y, y]
+
+    for colour, linewidth, zorder in (("white", 2.0, 3), ("black", 1.0, 4)):
+        line = {"color": colour, "linewidth": linewidth, "zorder": zorder}
+        lines = [
+            ConnectionPatch((x, -0.5), (x, 0.5), coordsA=up, coordsB=down, capstyle="butt", **line)
+            for x in breaks
+        ]
+        lines += [
+            _LaidOutLine(place, transform=fig.transFigure, solid_capstyle="butt", **line)
+            for place in (before_margin_column, before_margin_row)
+        ]
+        for artist in lines:
+            artist.set_in_layout(False)
+            fig.add_artist(artist)
 
 
 def draw_who_gets_help(data: pd.DataFrame, path: Path) -> None:
