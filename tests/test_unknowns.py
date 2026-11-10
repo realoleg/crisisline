@@ -335,3 +335,10 @@ def test_wilson_interval_matches_a_known_value() -> None:
     assert high == pytest.approx(0.7634, abs=1e-4)
     assert unknowns.wilson_interval(0, 10, 0.95)[0] == 0.0
     assert unknowns.wilson_interval(10, 10, 0.95)[1] == 1.0
+
+
+@pytest.mark.parametrize("total", range(1, 201))
+def test_wilson_interval_is_exact_at_the_endpoints(total: int) -> None:
+    # The bounds are 0 and 1 analytically; float cancellation must not leave a residue.
+    assert unknowns.wilson_interval(0, total, 0.95)[0] == 0.0
+    assert unknowns.wilson_interval(total, total, 0.95)[1] == 1.0

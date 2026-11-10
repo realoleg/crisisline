@@ -334,7 +334,11 @@ def wilson_interval(successes: int, total: int, confidence: float) -> tuple[floa
     denominator = 1 + z**2 / total
     centre = (share + z**2 / (2 * total)) / denominator
     margin = z * (share * (1 - share) / total + z**2 / (4 * total**2)) ** 0.5 / denominator
-    return max(0.0, centre - margin), min(1.0, centre + margin)
+    # The bounds at 0 and at total successes are exactly 0 and 1; centre - margin cancels
+    # to a 1-ulp residue whose sign depends on the platform's libm.
+    low = 0.0 if successes == 0 else max(0.0, centre - margin)
+    high = 1.0 if successes == total else min(1.0, centre + margin)
+    return low, high
 
 
 def _stratum_summary(s: Stratum, total_mentions: int, confidence: float) -> dict[str, Any]:
