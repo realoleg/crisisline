@@ -939,7 +939,7 @@ def _share_grid(
 ) -> None:
     """Rows: models; columns: ``column``, by their ``names`` if given, under their section if
     ``sections`` (one per column); colour: the share. A margin column per model and a margin row
-    per column; a dark line between sections, through both."""
+    per column; a white line between sections, through both."""
     models = list(dict.fromkeys(cells["model_id"]))
     columns = list(dict.fromkeys(cells[column]))
     matrix = cells.pivot(index="model_id", columns=column, values="share").loc[models, columns]
@@ -964,7 +964,7 @@ def _share_grid(
                     (x, 0.5),
                     coordsA=ax.transData,
                     coordsB=bottom.transData,
-                    color=style.DARK_GREY,
+                    color="white",
                     linewidth=1.2,
                 )
                 separator.set_in_layout(False)
