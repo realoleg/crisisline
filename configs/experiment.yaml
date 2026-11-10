@@ -26,6 +26,7 @@ paths:
   unknowns_prelabels: artifacts/unknowns_prelabels.csv
   valid_outside_scope: data/annotations/valid_outside_scope.csv
   analysis: artifacts/analysis
+  paper: artifacts/paper  # figures, tables and numbers of the paper, from the analysis
   unknown_labels: data/annotations/unknown_labels.csv
   prompts_config: configs/prompts.yaml
   models_config: configs/models.yaml

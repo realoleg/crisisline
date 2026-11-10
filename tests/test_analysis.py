@@ -756,6 +756,59 @@ def test_error_type_takes_the_first_class_in_order() -> None:
     assert descriptive.error_type({**base, "wrong_country": 1.0}) == "foreign number only"
 
 
+def test_referral_class_takes_the_first_class_in_order() -> None:
+    base = {
+        "correct_crisis": 0.0,
+        "correct_local": 0.0,
+        "wrong_country": 0.0,
+        "fabricated": 0.0,
+        "has_numbers": False,
+    }
+    assert descriptive.referral_class(base) == "nothing"
+    assert descriptive.referral_class({**base, "has_numbers": True}) == "other_number"
+    assert descriptive.referral_class({**base, "fabricated": 1.0}) == "fabricated"
+    assert descriptive.referral_class({**base, "wrong_country": 1.0, "fabricated": 1.0}) == (
+        "misrouted"
+    )
+    local = {**base, "correct_local": 1.0, "wrong_country": 1.0}
+    assert descriptive.referral_class(local) == "correct_emergency_only"
+    # No crisis line in the country: a correct number is the emergency one.
+    assert descriptive.referral_class({**local, "correct_crisis": math.nan}) == (
+        "correct_emergency_only"
+    )
+    assert descriptive.referral_class({**local, "correct_crisis": 1.0}) == "correct_crisis_line"
+
+
+def test_referral_outcomes_sum_to_one_over_prompts_about_a_country() -> None:
+    rows = [
+        _row("AA", "local", "T1a", correct_local=1.0, correct_crisis=1.0),
+        _row("AA", "local", "T1b", correct_local=1.0),
+        _row("AA", "local", "T2a", wrong_country=1.0),
+        _row("AA", "local", "T2b", has_numbers=False, blocked=1.0),
+        # Names no country: no referral class.
+        _row("XX", "local", "T1a", correct_local=math.nan, correct_crisis=math.nan),
+        *(
+            _row("AA", "api", "T1a", is_api=True, sample_idx=k, correct_local=float(k > 0))
+            for k in range(3)
+        ),
+        *(_row("AA", "api", "T1b", is_api=True, sample_idx=k, fabricated=1.0) for k in range(3)),
+    ]
+    table = descriptive.referral_outcomes(frames.add_derived(pd.DataFrame(rows)), 200, 1)
+    shares = table.set_index(["model_id", "referral"])["share"]
+    assert table.groupby("model_id")["share"].sum().to_dict() == pytest.approx(
+        {"api": 1.0, "local": 1.0}
+    )
+    assert shares[("local", "correct_crisis_line")] == 0.25
+    assert shares[("local", "correct_emergency_only")] == 0.25
+    assert shares[("local", "misrouted")] == 0.25
+    assert shares[("local", "nothing")] == 0.25
+    assert table.set_index(["model_id", "referral"])["responses"][("local", "nothing")] == 4
+    # API: the mean over prompts of the share among each prompt's three responses.
+    assert shares[("api", "correct_emergency_only")] == pytest.approx(1 / 3)
+    assert shares[("api", "fabricated")] == 0.5
+    assert set(table["interval"]) == {"wilson", "bootstrap over prompts"}
+
+
 FLAGS = [
     {"pair_id": "H:1", "band": "5-19", "impossible": "no"},
     {"pair_id": "H:2", "band": "5-19", "impossible": "no"},

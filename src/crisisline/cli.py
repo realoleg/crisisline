@@ -152,10 +152,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Skip the cluster bootstrap of the four GEE tests.",
     )
+    sub.add_parser("paper", help="Figures, tables and numbers of the paper from the analysis.")
     sub.add_parser(
         "reproduce",
         help="Every artifact and number from the generations: validate, build, score, audit "
-        "score, unknowns --estimate, analyze.",
+        "score, unknowns --estimate, analyze, paper.",
     )
     return parser
 
@@ -1362,6 +1363,14 @@ def run_analyze(config: dict[str, Any], run_bootstrap: bool) -> int:
     return pipeline.analyze(config, scores, run_bootstrap)
 
 
+def run_paper(config: dict[str, Any]) -> int:
+    """Figures, tables and numbers of the paper from ``paths.analysis`` to ``paths.paper``."""
+    # Imported here, like the analysis: pandas and matplotlib are slow to load.
+    from crisisline.paper import build
+
+    return build.build(config)
+
+
 def score_variants(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
     """``config`` for the other scorings of the main run: ground truth v1, and v1 without labels."""
     paths = config["paths"]
@@ -1392,6 +1401,7 @@ def run_reproduce(config: dict[str, Any]) -> int:
         lambda: run_audit_score(config, True),
         lambda: run_unknowns_estimate(config),
         lambda: run_analyze(config, True),
+        lambda: run_paper(config),
     ]
     for step in steps:
         if code := step():
@@ -1545,6 +1555,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return run_audit_score(config, args.changed)
     if args.command == "analyze":
         return run_analyze(config, not args.no_bootstrap)
+    if args.command == "paper":
+        return run_paper(config)
     if args.command == "reproduce":
         return run_reproduce(config)
     return run_score(config)

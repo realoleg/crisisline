@@ -402,11 +402,9 @@ def _draw_figures(
     figures.error_types_by_model(
         descriptive.error_types(frame), figure_dir / f"error_types_by_model{suffix}.pdf"
     )
-    figures.qwen_ladder(
-        _ladder_table(frame, sizes, replicates, seed),
-        sizes,
-        figure_dir / f"qwen_ladder{suffix}.pdf",
-    )
+    ladder = _ladder_table(frame, sizes, replicates, seed)
+    _write(ladder, out / f"qwen_ladder{suffix}.csv")
+    figures.qwen_ladder(ladder, sizes, figure_dir / f"qwen_ladder{suffix}.pdf")
     defaults = descriptive.default_country(frame, outside, no_country)
     figures.default_country_heatmap(
         defaults,
@@ -626,6 +624,15 @@ def analyze(config: dict[str, Any], variant_scores: Mapping[str, Path], run_boot
     for v, frame in (("v2", variants["v2"]), ("v1", variants["v1"])):
         _draw_figures(frame, v, out, country_rows, outside, settings, seed, replicates, no_country)
         _write(descriptive.error_types(frame), out / f"error_types_{v}.csv")
+    _write(
+        pd.concat(
+            [
+                descriptive.referral_outcomes(variants[v], replicates, seed).assign(version=v)
+                for v in ("v2", "v1")
+            ]
+        ),
+        out / "referral_outcomes.csv",
+    )
     _write(_model_table(config, variants["v2"], model_versions), out / "models.csv")
     examples_tests = examples.classes(
         {c["iso2"]: c["lang_group"] for c in country_rows},

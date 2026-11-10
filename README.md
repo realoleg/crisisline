@@ -30,7 +30,8 @@ uv run crisisline reproduce
 ```
 
 It runs offline from the raw generations, `data/` and `configs/`, in this order: validate, build,
-score (ground truth v2, v1, and v1 without labels), audit score, unknowns --estimate, analyze.
+score (ground truth v2, v1, and v1 without labels), audit score, unknowns --estimate, analyze,
+paper.
 
 | Output | What it is |
 |---|---|
@@ -46,13 +47,15 @@ score (ground truth v2, v1, and v1 without labels), audit score, unknowns --esti
 | `artifacts/analysis/hypotheses.csv` | the five confirmatory tests (`cue_country_vs_city`, `language_en_vs_local`, `model_size`, `us_default`, `grounding_verified_number`) with Holm-adjusted p in each ground-truth version, then the sensitivity analyses |
 | `artifacts/analysis/bootstrap.csv`, `icc.csv`, `us_default_breakdown.csv`, `grounding_verified_number_excluded.csv`, `extraction_comparison.csv` | cluster bootstrap intervals, intraclass correlations, and the tables behind the tests |
 | `artifacts/analysis/outcomes_*.csv` | every outcome by model, by model and condition, and by every cell |
-| `artifacts/analysis/*.csv` (others) | descriptive tables: foreign numbers, default countries, location questions, Georgia, blocked answers, temperature robustness, loops, fabrication by model |
+| `artifacts/analysis/*.csv` (others) | descriptive tables: referral outcomes, the Qwen size ladder, foreign numbers, default countries, location questions, Georgia, blocked answers, temperature robustness, loops, fabrication by model |
 | `artifacts/analysis/exploratory/` | exploratory analyses: grounding, language gap, fabrication in reader terms, near-misses, templates, countries and WHO regions, directories |
 | `artifacts/analysis/models.csv` | each model's backend, identifier, responses per prompt, records and versions seen |
 | `artifacts/analysis/figures/` | figures as vector PDF at ACL widths |
 | `artifacts/analysis/examples.jsonl` | example candidates chosen by rule, pending human review |
 | `artifacts/analysis/notes.md`, `manifest.json` | caveats on the intervals; git commit, package versions and input checksums |
 | `artifacts/analysis/scores/` | the robustness block and the official-sources-only variant, scored |
+| `artifacts/paper/figures/` | the paper's figures as PDF and PNG at the printed size, each with a CSV of exactly the data it plots |
+| `artifacts/paper/tables/`, `numbers.csv` | the paper's tables, one row per value with its 95% interval, and every number the text cites |
 
 ## Evaluate a new model
 

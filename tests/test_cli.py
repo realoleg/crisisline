@@ -29,6 +29,7 @@ COMMANDS = (
     "score",
     "audit",
     "analyze",
+    "paper",
     "reproduce",
 )
 
@@ -70,6 +71,7 @@ CLIENT = object()
         ),
         (["unknowns", "--estimate"], "run_unknowns_estimate", ()),
         (["analyze", "--no-bootstrap"], "run_analyze", (False,)),
+        (["paper"], "run_paper", ()),
     ],
 )
 def test_commands_pass_their_options_on(
@@ -121,8 +123,26 @@ def test_reproduce_stops_at_the_first_stage_that_fails(monkeypatch: pytest.Monke
     monkeypatch.setattr(cli, "run_audit_score", stage("audit score", 1))
     monkeypatch.setattr(cli, "run_unknowns_estimate", stage("estimate", 0))
     monkeypatch.setattr(cli, "run_analyze", stage("analyze", 0))
+    monkeypatch.setattr(cli, "run_paper", stage("paper", 0))
     assert main(["reproduce"]) == 1
     assert calls == ["validate", "build", "score", "score", "score", "audit score"]
+
+
+def test_reproduce_ends_with_the_paper_after_the_analysis(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls: list[str] = []
+
+    def stage(name: str) -> object:
+        def run(*args: object) -> int:
+            calls.append(name)
+            return 0
+
+        return run
+
+    for name in ("validate", "build", "score", "audit_score", "unknowns_estimate", "analyze"):
+        monkeypatch.setattr(cli, f"run_{name}", stage(name))
+    monkeypatch.setattr(cli, "run_paper", stage("paper"))
+    assert main(["reproduce"]) == 0
+    assert calls[-2:] == ["analyze", "paper"]
 
 
 def test_console_script_installed() -> None:
