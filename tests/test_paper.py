@@ -14,7 +14,7 @@ from matplotlib.text import Text
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
 from crisisline.cli import load_config
-from crisisline.paper import figures, style, subsets, tables
+from crisisline.paper import figures, style, subsets, tables, worldmap
 
 GROUPS = {"API": ["api-b", "api-a"], "local": ["q-2", "other", "q-1"]}
 SIZES = {"q-1": 1.0, "q-2": 2.0}
@@ -285,6 +285,60 @@ def test_countries_data_sorts_within_region_from_the_highest_pooled_share() -> N
     assert set(data["model_group"]) == set(GROUPS)
 
 
+def _world() -> tuple[pd.DataFrame, list[worldmap.Country]]:
+    """Countries of the prompts AA (large), BB (small) and CC (no line), and one outside."""
+    squares = {
+        "AAA": ("AA", 0, 40),
+        "BBB": ("BB", 30, 1),
+        "CCC": ("CC", -30, 20),
+        "DDD": ("-99", 60, 10),
+    }
+    features = [
+        {
+            "properties": {"ADM0_A3": code, "ISO_A2": iso2, "CONTINENT": "Europe"},
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[[lon, 0], [lon + side, 0], [lon + side, side], [lon, side]]],
+            },
+        }
+        for code, (iso2, lon, side) in squares.items()
+    ]
+    shapes = worldmap.countries(features, {"AA", "BB", "CC"}, {}, (), 1.0)
+    countries = pd.DataFrame(
+        [
+            {
+                "model_group": group,
+                "iso2": iso2,
+                "outcome": "correct_crisis",
+                "responses": 48,
+                **_ci(value),
+            }
+            for group, value in (("API", 0.9), ("local", 0.2))
+            for iso2 in ("AA", "BB")
+        ]
+    )
+    return countries, shapes
+
+
+WORLD_PANELS = {"API": "API models", "local": "Local models"}
+
+
+def test_world_map_data_has_every_country_per_panel_and_marks_small_ones() -> None:
+    countries, shapes = _world()
+    data = figures.world_map_data(countries, shapes, WORLD_PANELS, 0.01, SCOPE)
+    assert data["panel"].unique().tolist() == list(WORLD_PANELS.values())
+    assert data.groupby("panel")["iso2"].apply(list).tolist() == [["AA", "BB", "CC"]] * 2
+    cells = data.set_index(["model_group", "iso2"])
+    assert cells.loc[("local", "AA"), "share"] == 0.2
+    assert pd.isna(cells.loc[("API", "CC"), "share"])
+    assert cells.loc[("API", "CC"), "subset"] == subsets.NO_LINE
+    assert data.drop_duplicates("iso2").set_index("iso2")["marker"].to_dict() == {
+        "AA": False,
+        "BB": True,
+        "CC": False,
+    }
+
+
 # Drawing.
 
 
@@ -404,6 +458,16 @@ def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
         "who_gets_help_language": (
             lambda p: figures.draw_who_gets_help_language(
                 figures.who_gets_help_language_data(*_who_language_inputs(), STYLES, SCOPE), p
+            ),
+            style.FULL,
+        ),
+        "world_map": (
+            lambda p: figures.draw_world_map(
+                figures.world_map_data(*_world(), WORLD_PANELS, 0.01, SCOPE),
+                _world()[1],
+                (-10.0, 60.0),
+                1.0,
+                p,
             ),
             style.FULL,
         ),
@@ -924,13 +988,16 @@ def test_figure_numbers_hold_what_the_new_figures_write() -> None:
     native = figures.native_language_data(_language_inputs()[0], STYLES, SCOPE)
     fixes = figures.what_fixes_data(_grounding_with_steps(), list(GROUPS), SCOPE)
     ladder = figures.ladder_outcomes_data(_ladder_referral(), SIZES, SCOPE)
-    numbers = tables.figure_numbers(who, _fails(), native, fixes, ladder).set_index("name")
+    world = figures.world_map_data(*_world(), WORLD_PANELS, 0.01, SCOPE)
+    numbers = tables.figure_numbers(who, _fails(), native, fixes, ladder, world, 0.01)
+    numbers = numbers.set_index("name")
     assert numbers.loc["numbers_invented_one_in", "value"] == 2
     assert numbers.loc["lowest_countries_crisis_line_local", "value"] == 2
     assert {"en_prompt_q-1", "local_prompt_q-1", "en_minus_local_q-1"} <= set(numbers.index)
     assert "en_minus_local_q-2" not in numbers.index
     assert numbers.loc["correct_crisis_M2_minus_M1_all", "value"] == 0.5
     assert numbers.loc["countries_without_crisis_line", "value"] == 1
+    assert numbers.loc["world_map_small_country_km2", "description"].endswith(": Bland")
     assert numbers.loc["ladder_misrouted_q-1", "value"] == pytest.approx(0.1)
     assert numbers.index.is_unique
     assert numbers["subset"].str.len().gt(0).all()

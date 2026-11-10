@@ -815,6 +815,8 @@ def figure_numbers(
     native: pd.DataFrame,
     fixes: pd.DataFrame,
     ladder: pd.DataFrame,
+    world: pd.DataFrame,
+    small_km2: float,
 ) -> pd.DataFrame:
     """The numbers of the figures' captions that no other row of ``numbers.csv`` holds."""
     rows = []
@@ -943,6 +945,18 @@ def figure_numbers(
                 r["ci_high"],
             )
         )
+    small = world.drop_duplicates("iso2")
+    small = small[small["marker"]].sort_values(["area_km2", "iso2"])
+    rows.append(
+        _number(
+            "world_map_small_country_km2",
+            small_km2,
+            "area (km²)",
+            "Natural Earth 1:110m admin-0 polygons, Equal Earth projection (equal-area)",
+            "world map: countries of the prompts with a smaller projected land area are also drawn "
+            "as a circle at their centroid: " + ", ".join(small["name_en"]),
+        )
+    )
     sizes = sorted(ladder["size"].unique())
     for _, r in ladder[ladder["size"].isin((sizes[0], sizes[-1]))].iterrows():
         rows.append(

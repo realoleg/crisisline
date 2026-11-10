@@ -93,3 +93,12 @@ Generation cannot be reproduced byte for byte: provider models change behind the
 API sampling is not deterministic. This is why the raw generations are published. The manual
 labels in `data/annotations/` (extraction audit, unknown numbers) are published as data and are
 not regenerated; numbers that a new run produces and no label covers count as unknown.
+
+## Data
+
+`data/ne_110m_admin_0_countries.geojson` is Natural Earth's 1:110m Admin 0 – Countries, v5.1.2,
+in the public domain, unchanged from
+<https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_110m_admin_0_countries.geojson>
+(sha256 `6866c877d39cba9c357620878839b336d569f8c662d3cfab4cb1dbe2d39c977f`). Only the world map
+reads it; countries are matched by ISO A2 code, France by `configs/experiment.yaml`
+(`paper.world_map.iso2_to_adm0`), where Natural Earth gives `-99`.

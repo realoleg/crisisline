@@ -14,7 +14,7 @@ from typing import Any
 import pandas as pd
 
 from crisisline.cli import load_config, read_csv
-from crisisline.paper import figures, style, tables
+from crisisline.paper import figures, style, tables, worldmap
 from crisisline.paper.subsets import Scope
 
 logger = logging.getLogger(__name__)
@@ -97,6 +97,18 @@ def build(config: dict[str, Any]) -> int:
         styles,
         scope,
     )
+    world = config["paper"]["world_map"]
+    geojson = json.loads(Path(paths["world_map"]).read_text(encoding="utf-8"))
+    shapes = worldmap.countries(
+        geojson["features"],
+        {c.iso2 for c in scope.countries},
+        world["iso2_to_adm0"],
+        world["drop_continents"],
+        world["earth_radius_km"],
+    )
+    world_data = figures.world_map_data(
+        countries, shapes, world["panels"], world["small_country_km2"], scope
+    )
     fails = figures.how_it_fails_data(referral, fabrication, tables.reader_subset("all", "all"))
     native = figures.native_language_data(gaps, styles, scope)
     fixes = figures.what_fixes_data(grounding, groups, scope)
@@ -127,6 +139,12 @@ def build(config: dict[str, Any]) -> int:
         ),
         "fig_who_gets_help": (who, figures.draw_who_gets_help),
         "fig_who_gets_help_language": (who_language, figures.draw_who_gets_help_language),
+        "fig_world_map": (
+            world_data,
+            lambda d, p: figures.draw_world_map(
+                d, shapes, world["latitudes"], world["earth_radius_km"], p
+            ),
+        ),
         "fig_how_it_fails": (fails, figures.draw_how_it_fails),
         "fig_native_language": (
             native,
@@ -183,7 +201,12 @@ def build(config: dict[str, Any]) -> int:
         scope=scope,
     )
     numbers = pd.concat(
-        [numbers, tables.figure_numbers(who, fails, native, fixes, ladder_outcomes)],
+        [
+            numbers,
+            tables.figure_numbers(
+                who, fails, native, fixes, ladder_outcomes, world_data, world["small_country_km2"]
+            ),
+        ],
         ignore_index=True,
     )
     _write(numbers, out / "numbers.csv")

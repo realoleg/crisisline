@@ -10,15 +10,19 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from matplotlib.axes import Axes
+from matplotlib.cm import ScalarMappable
+from matplotlib.colors import Normalize
 from matplotlib.image import AxesImage
 from matplotlib.lines import Line2D
-from matplotlib.patches import ConnectionPatch
+from matplotlib.patches import ConnectionPatch, Patch, PathPatch
+from matplotlib.path import Path as Outline
 from matplotlib.ticker import FixedLocator, NullLocator
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
 from crisisline.paper import style, subsets
 from crisisline.paper.style import LANGUAGE_NAMES, WHO_REGIONS, ModelStyle
 from crisisline.paper.subsets import Scope
+from crisisline.paper.worldmap import Country, equal_earth
 
 CONDITIONS = {
     "S0-country": "User names\nthe country",
@@ -1246,4 +1250,138 @@ def draw_what_fixes(data: pd.DataFrame, groups: Groups, path: Path) -> None:
             top = 100 if outcome == "correct_crisis" else 100 * rows["ci_high"].max() * 1.1
             _condition_lines(ax, rows, circles, top, FIX_CONDITIONS)
             ax.set_ylabel(label)
+        style.save(fig, path)
+
+
+# World map: the crisis line per country, for two model groups.
+
+HATCH = "//////"
+
+
+def world_map_data(
+    countries: pd.DataFrame,
+    shapes: Sequence[Country],
+    panels: Mapping[str, str],
+    small_km2: float,
+    scope: Scope,
+) -> pd.DataFrame:
+    """Each panel's crisis-line share per country of the prompts (S0 with a cue), empty for the
+    countries without a crisis line; the projected land area of each country and whether it is
+    small enough to be drawn with a marker as well."""
+    shares = countries[countries["outcome"] == "correct_crisis"].set_index(["model_group", "iso2"])
+    area = {c.iso2: c.area for c in shapes if c.iso2}
+    rows = []
+    for group, header in panels.items():
+        for country in sorted(scope.countries, key=lambda c: (c.region, c.iso2)):
+            found = country.crisis_line and (group, country.iso2) in shares.index
+            cell = shares.loc[(group, country.iso2)] if found else None
+            rows.append(
+                {
+                    "panel": header,
+                    "model_group": group,
+                    "iso2": country.iso2,
+                    "name_en": country.name,
+                    "who_region": country.region,
+                    "has_crisis_line": country.crisis_line,
+                    "share": cell["estimate"] if found else np.nan,
+                    "ci_low": cell["ci_low"] if found else np.nan,
+                    "ci_high": cell["ci_high"] if found else np.nan,
+                    "n": cell["responses"] if found else np.nan,
+                    "area_km2": round(area[country.iso2]),
+                    "marker": area[country.iso2] < small_km2,
+                    "subset": subsets.country(country.name)
+                    if country.crisis_line
+                    else subsets.NO_LINE,
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def _outline(country: Country) -> Outline:
+    rings = [ring for polygon in country.polygons for ring in polygon]
+    return Outline.make_compound_path(*(Outline(np.vstack([r, r[:1]]), closed=True) for r in rings))
+
+
+def draw_world_map(
+    data: pd.DataFrame,
+    shapes: Sequence[Country],
+    latitudes: Sequence[float],
+    radius: float,
+    path: Path,
+) -> None:
+    """A map per panel in the Equal Earth projection: countries of the prompts by their share,
+    hatched grey without a crisis line, other land light grey; small countries also as a circle."""
+    norm = Normalize(0, 100)
+    edge = {"edgecolor": "white", "linewidth": 0.25}
+    _, (south, north) = equal_earth(np.zeros(2), np.asarray(latitudes, dtype=float), radius)
+    east, _ = equal_earth(180.0, 0.0, radius)
+    with style.paper_style(), style.hatches():
+        fig = style.new_figure(style.FULL, 1.75)
+        fig.get_layout_engine().set(h_pad=0.01, w_pad=0.01, hspace=0.0, wspace=0.02)
+        axes = fig.subplots(1, data["panel"].nunique())
+        for ax, (header, rows) in zip(axes, data.groupby("panel", sort=False), strict=True):
+            by_iso2 = rows.set_index("iso2")
+            for country in shapes:
+                outline = _outline(country)
+                if not country.iso2:
+                    ax.add_patch(PathPatch(outline, facecolor=style.OUTSIDE, **edge))
+                    continue
+                row = by_iso2.loc[country.iso2]
+                if row["has_crisis_line"]:
+                    colour = style.CRISIS_MAP(norm(100 * row["share"]))
+                    ax.add_patch(PathPatch(outline, facecolor=colour, **edge))
+                else:
+                    ax.add_patch(PathPatch(outline, facecolor=style.LIGHT_GREY, **edge))
+                    ax.add_patch(PathPatch(outline, fill=False, hatch=HATCH, linewidth=0))
+            for country in shapes:
+                if country.iso2 and by_iso2.loc[country.iso2, "marker"]:
+                    row = by_iso2.loc[country.iso2]
+                    colour = (
+                        style.CRISIS_MAP(norm(100 * row["share"]))
+                        if row["has_crisis_line"]
+                        else style.LIGHT_GREY
+                    )
+                    ax.plot(
+                        *country.centroid,
+                        "o",
+                        markersize=3.2,
+                        markerfacecolor=colour,
+                        markeredgecolor=style.DARK_GREY,
+                        markeredgewidth=0.4,
+                    )
+            ax.set_xlim(-east, east)
+            ax.set_ylim(south, north)
+            ax.set_aspect("equal")
+            ax.set_axis_off()
+            ax.set_title(header, fontsize=SMALL, pad=2)
+        mappable = ScalarMappable(norm=norm, cmap=style.CRISIS_MAP)
+        colourbar = fig.colorbar(
+            mappable, ax=list(axes), location="bottom", shrink=0.18, aspect=18, pad=0.02
+        )
+        colourbar.set_ticks([0, 50, 100])
+        colourbar.ax.tick_params(labelsize=TINY, length=2, pad=1)
+        colourbar.outline.set_visible(False)
+        colourbar.ax.annotate(
+            CRISIS_AXIS,
+            (0, 0.5),
+            xycoords="axes fraction",
+            xytext=(-8, 0),
+            textcoords="offset points",
+            ha="right",
+            va="center",
+            fontsize=SMALL,
+        )
+        keys = [
+            Patch(facecolor=style.LIGHT_GREY, hatch=HATCH, edgecolor=style.GREY, linewidth=0),
+            Patch(facecolor=style.OUTSIDE, linewidth=0),
+        ]
+        colourbar.ax.legend(
+            keys,
+            ["No national line", "Not in the study"],
+            loc="center left",
+            bbox_to_anchor=(1.08, 0.5),
+            ncols=2,
+            fontsize=SMALL,
+            handlelength=1.2,
+        )
         style.save(fig, path)
