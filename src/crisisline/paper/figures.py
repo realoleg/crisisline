@@ -10,12 +10,14 @@ from pathlib import Path
 import matplotlib as mpl
 import numpy as np
 import pandas as pd
+from matplotlib import patheffects
 from matplotlib.axes import Axes
 from matplotlib.image import AxesImage
 from matplotlib.lines import Line2D
 from matplotlib.patches import ConnectionPatch, Patch, PathPatch
 from matplotlib.path import Path as Outline
 from matplotlib.ticker import FixedLocator, NullLocator
+from matplotlib.transforms import ScaledTranslation
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
 from crisisline.paper import style, subsets
@@ -34,6 +36,7 @@ CORRECT_AXIS = "Correct number (%)"
 CRISIS_AXIS = "Correct crisis line (%)"
 SMALL = 8  # points: direct labels and dense tick labels, the smallest size the template allows
 TINY = 7  # points: the percentages inside bars and the codes of the dense grids
+SEPARATOR_RISE = 6  # points: how far the lines between sections rise above a grid
 
 Groups = Mapping[str, tuple[str, str]]
 
@@ -939,7 +942,7 @@ def _share_grid(
 ) -> None:
     """Rows: models; columns: ``column``, by their ``names`` if given, under their section if
     ``sections`` (one per column); colour: the share. A margin column per model and a margin row
-    per column; a white line between sections, through both."""
+    per column; a black line between sections, through both and rising above the grid."""
     models = list(dict.fromkeys(cells["model_id"]))
     columns = list(dict.fromkeys(cells[column]))
     matrix = cells.pivot(index="model_id", columns=column, values="share").loc[models, columns]
@@ -958,14 +961,19 @@ def _share_grid(
         pooled = column_margin.set_index(column).loc[columns, ["share"]]
         _share_cells(bottom, pooled.to_numpy(dtype=float).T)
         if sections is not None:
+            # From a little above the grid, between the section names, to the foot of the margin
+            # row: black with a thin white edge.
+            above = ax.transData + ScaledTranslation(0, SEPARATOR_RISE / 72, fig.dpi_scale_trans)
             for x in _breaks(sections):
                 separator = ConnectionPatch(
                     (x, -0.5),
                     (x, 0.5),
-                    coordsA=ax.transData,
+                    coordsA=above,
                     coordsB=bottom.transData,
-                    color="white",
-                    linewidth=1.2,
+                    color="black",
+                    linewidth=1.0,
+                    capstyle="butt",
+                    path_effects=[patheffects.withStroke(linewidth=2.0, foreground="white")],
                 )
                 separator.set_in_layout(False)
                 fig.add_artist(separator)
