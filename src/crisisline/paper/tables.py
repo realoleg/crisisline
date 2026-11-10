@@ -816,6 +816,7 @@ def figure_numbers(
     fixes: pd.DataFrame,
     ladder: pd.DataFrame,
     world: pd.DataFrame,
+    world_pooled: pd.DataFrame,
     small_km2: float,
 ) -> pd.DataFrame:
     """The numbers of the figures' captions that no other row of ``numbers.csv`` holds."""
@@ -945,8 +946,34 @@ def figure_numbers(
                 r["ci_high"],
             )
         )
-    small = world.drop_duplicates("iso2")
-    small = small[small["marker"]].sort_values(["area_km2", "iso2"])
+    for _, r in world_pooled.iterrows():
+        rows.append(
+            _number(
+                _name("world_map_no_crisis_line", r["model_group"]),
+                r["no_crisis_line"],
+                "proportion",
+                r["subset"],
+                f"{group_label(r['model_group'])} models: responses without the correct crisis "
+                f"line (n = {int(r['n'])})",
+                r["ci_low"],
+                r["ci_high"],
+            )
+        )
+    shown = world[world["has_crisis_line"]]
+    group = group_label(shown["model_group"].iloc[0])
+    for cutoff in (0.5, 0.75):
+        above = shown[shown["no_crisis_line"] > cutoff].sort_values(["no_crisis_line", "iso2"])
+        rows.append(
+            _number(
+                f"world_map_countries_above_{round(100 * cutoff)}",
+                len(above),
+                "count",
+                world_pooled["subset"].iloc[0],
+                f"world map, {group} models: countries where more than {round(100 * cutoff)}% of "
+                "responses lack the correct crisis line: " + ", ".join(above["name_en"]),
+            )
+        )
+    small = world[world["marker"]].sort_values(["area_km2", "iso2"])
     rows.append(
         _number(
             "world_map_small_country_km2",

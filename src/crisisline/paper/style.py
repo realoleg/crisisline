@@ -19,7 +19,7 @@ COLUMN = 3.03  # inches
 FULL = 6.3
 PALETTE = ("#02692b", "#dd8e00", "#723f93", "#db5683", "#4e88cb")
 DARK_GREY = "#4A4A4A"
-OUTSIDE = "#EFEFEF"  # land outside the study
+OUTSIDE = "#F4F4F4"  # land outside the study
 GREY = "#7A7A7A"
 LIGHT_GREY = "#D9D9D9"
 MUTED_RED = "#b4534b"
@@ -40,6 +40,8 @@ GROUP_MARKERS = ("o", "s", "^")
 MODEL_MARKERS = ("o", "s", "^", "D", "v", "P")
 # The share of the crisis line: red at none, near-white at half, green at all.
 CRISIS_MAP = LinearSegmentedColormap.from_list("crisis", (MUTED_RED, "#F7F7F7", PALETTE[0]))
+# The share without the crisis line: near-white at none, deep red at all.
+MISSING_MAP = LinearSegmentedColormap.from_list("missing", ("#F7EDEC", MUTED_RED, "#6E2620"))
 
 # Display names of the models in every figure and label column; model_id stays the key.
 MODEL_NAMES = {
@@ -195,13 +197,6 @@ def group_styles(groups: Sequence[str]) -> dict[str, tuple[str, str]]:
 @contextmanager
 def paper_style() -> Iterator[None]:
     with mpl.rc_context(RC):
-        yield
-
-
-@contextmanager
-def hatches() -> Iterator[None]:
-    """Thin grey hatching, for countries without a crisis line."""
-    with mpl.rc_context({"hatch.linewidth": 0.4, "hatch.color": GREY}):
         yield
 
 

@@ -76,6 +76,18 @@ def test_countries_match_by_iso2_and_overrides_and_drop_continents() -> None:
     )
 
 
+def test_recentring_splits_a_country_across_the_new_antimeridian() -> None:
+    """Centred on 10 degrees east, the seam is at 170 degrees west: a square from 175 to 165
+    degrees west becomes two polygons at the two edges of the map, with the same total area."""
+    crossing = [_feature("XXX", "XX", "Asia", [_square(-175, 60, 10)])]
+    whole = worldmap.countries(crossing, {"XX"}, {}, (), 1.0)[0]
+    split = worldmap.countries(crossing, {"XX"}, {}, (), 1.0, central_lon=10.0)[0]
+    assert len(split.polygons) == 2
+    edges = sorted(float(polygon[0][:, 0].mean()) for polygon in split.polygons)
+    assert edges[0] < -1.5 and edges[1] > 1.5
+    assert split.area == pytest.approx(whole.area, rel=1e-9)
+
+
 def test_countries_fail_on_a_code_they_cannot_match() -> None:
     with pytest.raises(ValueError, match=r"not matched: \['FR'\]"):
         worldmap.countries(FEATURES, {"FR", "DE"}, {}, {"Antarctica"}, 1.0)
@@ -92,6 +104,7 @@ def test_the_committed_map_matches_every_country_of_the_prompts() -> None:
         world["iso2_to_adm0"],
         world["drop_continents"],
         world["earth_radius_km"],
+        world["central_longitude"],
     )
     assert {c.iso2 for c in shapes if c.iso2} == study
     lebanon = next(c for c in shapes if c.iso2 == "LB")

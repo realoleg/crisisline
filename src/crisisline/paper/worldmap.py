@@ -71,11 +71,42 @@ class Country:
         return _centroid(largest[0])
 
 
-def _project(rings: Iterable[Sequence[Sequence[float]]], radius: float) -> tuple[np.ndarray, ...]:
+def _clip(ring: np.ndarray, east: bool) -> np.ndarray:
+    """The part of a ring east (or west) of longitude -180 (Sutherland-Hodgman, one half-plane)."""
+    inside = ring[:, 0] >= -180 if east else ring[:, 0] <= -180
+    points = []
+    for k in range(len(ring)):
+        p, q = ring[k], ring[(k + 1) % len(ring)]
+        if inside[k]:
+            points.append(p)
+        if inside[k] != inside[(k + 1) % len(ring)]:
+            t = (-180 - p[0]) / (q[0] - p[0])
+            points.append(np.array([-180.0, p[1] + t * (q[1] - p[1])]))
+    return np.asarray(points).reshape(-1, 2)
+
+
+def _recentred(
+    polygon: Sequence[Sequence[Sequence[float]]], central_lon: float
+) -> list[list[np.ndarray]]:
+    """A polygon's rings with longitudes relative to ``central_lon``, split where they cross the
+    new antimeridian: one polygon per side."""
+    rings = [np.asarray(ring, dtype=float) - [central_lon, 0.0] for ring in polygon]
+    if all((r[:, 0] >= -180).all() for r in rings):
+        return [rings]
+    if all((r[:, 0] <= -180).all() for r in rings):
+        return [[r + [360.0, 0.0] for r in rings]]
+    sides = []
+    for east, shift in ((True, 0.0), (False, 360.0)):
+        parts = [_clip(r, east) + [shift, 0.0] for r in rings]
+        if len(parts[0]) >= 3:
+            sides.append([part for part in parts if len(part) >= 3])
+    return sides
+
+
+def _project(rings: Iterable[np.ndarray], radius: float) -> tuple[np.ndarray, ...]:
     projected = []
     for k, ring in enumerate(rings):
-        points = np.asarray(ring, dtype=float)
-        x, y = equal_earth(points[:, 0], points[:, 1], radius)
+        x, y = equal_earth(ring[:, 0], ring[:, 1], radius)
         projected.append(_oriented(np.column_stack([x, y]), anticlockwise=k == 0))
     return tuple(projected)
 
@@ -97,9 +128,10 @@ def countries(
     overrides: Mapping[str, str],
     drop_continents: Collection[str],
     radius: float,
+    central_lon: float = 0.0,
 ) -> list[Country]:
-    """Every country not on a dropped continent, projected, in the order of its Natural Earth code;
-    each country of the study matched once."""
+    """Every country not on a dropped continent, projected about ``central_lon``, in the order of
+    its Natural Earth code; each country of the study matched once."""
     shapes = []
     for feature in features:
         properties, geometry = feature["properties"], feature["geometry"]
@@ -111,7 +143,11 @@ def countries(
             Country(
                 properties["ADM0_A3"],
                 iso2_of(properties, study, overrides),
-                tuple(_project(polygon, radius) for polygon in polygons),
+                tuple(
+                    _project(part, radius)
+                    for polygon in polygons
+                    for part in _recentred(polygon, central_lon)
+                ),
             )
         )
     matched = [c.iso2 for c in shapes if c.iso2]

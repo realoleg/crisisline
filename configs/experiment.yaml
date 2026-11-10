@@ -458,13 +458,12 @@ analysis:
 
 paper:
   world_map:
-    # Model group: the header of its map.
-    panels:
-      API: API models
-      other local: Small local models
+    group: other local  # the map
+    comparison_group: API  # its pooled value, for the caption
     # ISO A2 codes Natural Earth gives as -99, to its ADM0_A3 code.
     iso2_to_adm0: {FR: FRA}
     drop_continents: [Antarctica]
-    latitudes: [-56, 75]  # the cropped band, degrees
+    central_longitude: 10  # degrees east
+    latitudes: [-56, 78]  # the cropped band, degrees
     earth_radius_km: 6371.0088  # mean radius: projected areas in km²
     small_country_km2: 150000  # below this projected area, also a marker at the centroid

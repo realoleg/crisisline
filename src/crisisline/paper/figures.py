@@ -1253,48 +1253,64 @@ def draw_what_fixes(data: pd.DataFrame, groups: Groups, path: Path) -> None:
         style.save(fig, path)
 
 
-# World map: the crisis line per country, for two model groups.
+# World map: where small local models do not give the crisis line.
 
-HATCH = "//////"
+MISSING_AXIS = "No crisis line given (%)"
 
 
 def world_map_data(
-    countries: pd.DataFrame,
+    table: pd.DataFrame,
     shapes: Sequence[Country],
-    panels: Mapping[str, str],
+    group: str,
     small_km2: float,
     scope: Scope,
 ) -> pd.DataFrame:
-    """Each panel's crisis-line share per country of the prompts (S0 with a cue), empty for the
-    countries without a crisis line; the projected land area of each country and whether it is
-    small enough to be drawn with a marker as well."""
-    shares = countries[countries["outcome"] == "correct_crisis"].set_index(["model_group", "iso2"])
+    """The share of responses without the correct crisis line of ``group``, per country of the
+    prompts (local-language S0 with a cue), empty for the countries without a crisis line; the
+    projected land area of each country and whether it is small enough for a marker as well."""
+    shares = table[table["model_group"] == group].set_index("iso2")
     area = {c.iso2: c.area for c in shapes if c.iso2}
     rows = []
-    for group, header in panels.items():
-        for country in sorted(scope.countries, key=lambda c: (c.region, c.iso2)):
-            found = country.crisis_line and (group, country.iso2) in shares.index
-            cell = shares.loc[(group, country.iso2)] if found else None
-            rows.append(
-                {
-                    "panel": header,
-                    "model_group": group,
-                    "iso2": country.iso2,
-                    "name_en": country.name,
-                    "who_region": country.region,
-                    "has_crisis_line": country.crisis_line,
-                    "share": cell["estimate"] if found else np.nan,
-                    "ci_low": cell["ci_low"] if found else np.nan,
-                    "ci_high": cell["ci_high"] if found else np.nan,
-                    "n": cell["responses"] if found else np.nan,
-                    "area_km2": round(area[country.iso2]),
-                    "marker": area[country.iso2] < small_km2,
-                    "subset": subsets.country(country.name)
-                    if country.crisis_line
-                    else subsets.NO_LINE,
-                }
-            )
+    for country in sorted(scope.countries, key=lambda c: (c.region, c.iso2)):
+        cell = shares.loc[country.iso2] if country.crisis_line else None
+        rows.append(
+            {
+                "model_group": group,
+                "iso2": country.iso2,
+                "name_en": country.name,
+                "who_region": country.region,
+                "has_crisis_line": country.crisis_line,
+                "no_crisis_line": 1 - cell["estimate"] if cell is not None else np.nan,
+                "ci_low": 1 - cell["ci_high"] if cell is not None else np.nan,
+                "ci_high": 1 - cell["ci_low"] if cell is not None else np.nan,
+                "n": cell["responses"] if cell is not None else np.nan,
+                "area_km2": round(area[country.iso2]),
+                "marker": area[country.iso2] < small_km2,
+                "subset": subsets.local_language_country(country.name)
+                if country.crisis_line
+                else subsets.NO_LINE,
+            }
+        )
     return pd.DataFrame(rows)
+
+
+def world_map_pooled(table: pd.DataFrame, groups: Sequence[str], scope: Scope) -> pd.DataFrame:
+    """The share without the correct crisis line of each of ``groups`` over all countries with a
+    crisis line, on the subset of the map."""
+    pooled = table[table["iso2"] == ALL].set_index("model_group")
+    return pd.DataFrame(
+        [
+            {
+                "model_group": group,
+                "no_crisis_line": 1 - pooled.loc[group, "estimate"],
+                "ci_low": 1 - pooled.loc[group, "ci_high"],
+                "ci_high": 1 - pooled.loc[group, "ci_low"],
+                "n": pooled.loc[group, "responses"],
+                "subset": subsets.local_languages(scope, "correct_crisis"),
+            }
+            for group in groups
+        ]
+    )
 
 
 def _outline(country: Country) -> Outline:
@@ -1309,60 +1325,58 @@ def draw_world_map(
     radius: float,
     path: Path,
 ) -> None:
-    """A map per panel in the Equal Earth projection: countries of the prompts by their share,
-    hatched grey without a crisis line, other land light grey; small countries also as a circle."""
+    """One Equal Earth map: countries of the prompts by their share without the crisis line, dark
+    grey without a national line, other land faint; small countries also as a circle."""
     norm = Normalize(0, 100)
-    edge = {"edgecolor": "white", "linewidth": 0.25}
+    rows = data.set_index("iso2")
+
+    def colour(iso2: str) -> object:
+        row = rows.loc[iso2]
+        if not row["has_crisis_line"]:
+            return style.DARK_GREY
+        return style.MISSING_MAP(norm(100 * row["no_crisis_line"]))
+
     _, (south, north) = equal_earth(np.zeros(2), np.asarray(latitudes, dtype=float), radius)
-    east, _ = equal_earth(180.0, 0.0, radius)
-    with style.paper_style(), style.hatches():
-        fig = style.new_figure(style.FULL, 1.75)
-        fig.get_layout_engine().set(h_pad=0.01, w_pad=0.01, hspace=0.0, wspace=0.02)
-        axes = fig.subplots(1, data["panel"].nunique())
-        for ax, (header, rows) in zip(axes, data.groupby("panel", sort=False), strict=True):
-            by_iso2 = rows.set_index("iso2")
-            for country in shapes:
-                outline = _outline(country)
-                if not country.iso2:
-                    ax.add_patch(PathPatch(outline, facecolor=style.OUTSIDE, **edge))
-                    continue
-                row = by_iso2.loc[country.iso2]
-                if row["has_crisis_line"]:
-                    colour = style.CRISIS_MAP(norm(100 * row["share"]))
-                    ax.add_patch(PathPatch(outline, facecolor=colour, **edge))
-                else:
-                    ax.add_patch(PathPatch(outline, facecolor=style.LIGHT_GREY, **edge))
-                    ax.add_patch(PathPatch(outline, fill=False, hatch=HATCH, linewidth=0))
-            for country in shapes:
-                if country.iso2 and by_iso2.loc[country.iso2, "marker"]:
-                    row = by_iso2.loc[country.iso2]
-                    colour = (
-                        style.CRISIS_MAP(norm(100 * row["share"]))
-                        if row["has_crisis_line"]
-                        else style.LIGHT_GREY
-                    )
-                    ax.plot(
-                        *country.centroid,
-                        "o",
-                        markersize=3.2,
-                        markerfacecolor=colour,
-                        markeredgecolor=style.DARK_GREY,
-                        markeredgewidth=0.4,
-                    )
-            ax.set_xlim(-east, east)
-            ax.set_ylim(south, north)
-            ax.set_aspect("equal")
-            ax.set_axis_off()
-            ax.set_title(header, fontsize=SMALL, pad=2)
-        mappable = ScalarMappable(norm=norm, cmap=style.CRISIS_MAP)
+    xs = np.concatenate([ring[:, 0] for c in shapes for polygon in c.polygons for ring in polygon])
+    with style.paper_style():
+        fig = style.new_figure(style.FULL, 3.0)
+        fig.get_layout_engine().set(h_pad=0.01, w_pad=0.01)
+        ax = fig.add_subplot()
+        for country in shapes:
+            outline = _outline(country)
+            if country.iso2:
+                face = colour(country.iso2)
+                ax.add_patch(PathPatch(outline, facecolor=face, edgecolor="white", linewidth=0.3))
+            else:
+                ax.add_patch(PathPatch(outline, facecolor=style.OUTSIDE, linewidth=0))
+        for country in shapes:
+            if country.iso2 and rows.loc[country.iso2, "marker"]:
+                ax.plot(
+                    *country.centroid,
+                    "o",
+                    markersize=4.5,
+                    markerfacecolor=colour(country.iso2),
+                    markeredgecolor=style.DARK_GREY,
+                    markeredgewidth=0.5,
+                )
+        pad = 0.01 * (xs.max() - xs.min())
+        ax.set_xlim(xs.min() - pad, xs.max() + pad)
+        ax.set_ylim(south, north)
+        ax.set_aspect("equal")
+        ax.set_axis_off()
         colourbar = fig.colorbar(
-            mappable, ax=list(axes), location="bottom", shrink=0.18, aspect=18, pad=0.02
+            ScalarMappable(norm=norm, cmap=style.MISSING_MAP),
+            ax=ax,
+            location="bottom",
+            shrink=0.2,
+            aspect=18,
+            pad=0.0,
         )
         colourbar.set_ticks([0, 50, 100])
         colourbar.ax.tick_params(labelsize=TINY, length=2, pad=1)
         colourbar.outline.set_visible(False)
         colourbar.ax.annotate(
-            CRISIS_AXIS,
+            MISSING_AXIS,
             (0, 0.5),
             xycoords="axes fraction",
             xytext=(-8, 0),
@@ -1372,12 +1386,12 @@ def draw_world_map(
             fontsize=SMALL,
         )
         keys = [
-            Patch(facecolor=style.LIGHT_GREY, hatch=HATCH, edgecolor=style.GREY, linewidth=0),
-            Patch(facecolor=style.OUTSIDE, linewidth=0),
+            Patch(facecolor=style.DARK_GREY, linewidth=0),
+            Patch(facecolor=style.OUTSIDE, edgecolor=style.LIGHT_GREY, linewidth=0.4),
         ]
         colourbar.ax.legend(
             keys,
-            ["No national line", "Not in the study"],
+            ["No national crisis line", "Not studied"],
             loc="center left",
             bbox_to_anchor=(1.08, 0.5),
             ncols=2,

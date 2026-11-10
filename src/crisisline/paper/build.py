@@ -105,9 +105,14 @@ def build(config: dict[str, Any]) -> int:
         world["iso2_to_adm0"],
         world["drop_continents"],
         world["earth_radius_km"],
+        world["central_longitude"],
     )
+    local_crisis = read("exploratory/crisis_local_language.csv")
     world_data = figures.world_map_data(
-        countries, shapes, world["panels"], world["small_country_km2"], scope
+        local_crisis, shapes, world["group"], world["small_country_km2"], scope
+    )
+    world_pooled = figures.world_map_pooled(
+        local_crisis, [world["group"], world["comparison_group"]], scope
     )
     fails = figures.how_it_fails_data(referral, fabrication, tables.reader_subset("all", "all"))
     native = figures.native_language_data(gaps, styles, scope)
@@ -204,7 +209,14 @@ def build(config: dict[str, Any]) -> int:
         [
             numbers,
             tables.figure_numbers(
-                who, fails, native, fixes, ladder_outcomes, world_data, world["small_country_km2"]
+                who,
+                fails,
+                native,
+                fixes,
+                ladder_outcomes,
+                world_data,
+                world_pooled,
+                world["small_country_km2"],
             ),
         ],
         ignore_index=True,

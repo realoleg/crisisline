@@ -147,8 +147,12 @@ def all_regions(scope: Scope, outcome: str) -> str:
     return f"{CUED}, {ALL_LANGUAGES}, {scope.count(outcome)}"
 
 
-def local_languages(scope: Scope) -> str:
-    return f"{CUED}, local-language prompts, {scope.count()}"
+def local_languages(scope: Scope, outcome: str = "") -> str:
+    return f"{CUED}, local-language prompts, {scope.count(outcome)}"
+
+
+def local_language_country(name: str) -> str:
+    return f"{CUED}, local-language prompts, {name}"
 
 
 def country(name: str) -> str:

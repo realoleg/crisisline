@@ -219,6 +219,25 @@ def countries(
     return pd.DataFrame(by_country), pd.DataFrame(by_region)
 
 
+def crisis_local_language(
+    frame: pd.DataFrame, groups: Mapping[str, Sequence[str]], replicates: int, seed: int
+) -> pd.DataFrame:
+    """``correct_crisis`` of local-language S0 prompts with a cue, per model group and country
+    (resampled by prompt) and over all countries (``iso2`` is ``all``, resampled by country)."""
+    data = s0_cued(frame)
+    data = data[data["lang_mode"] == "local"]
+    rows = []
+    for group, _, part in intervals.scopes(data, groups, per_model=False):
+        cells = [*part.groupby("iso2", sort=True), (ALL, part)]
+        for iso2, cell in cells:
+            keys = {"model_group": group, "iso2": iso2}
+            result = intervals.share(
+                cell, "correct_crisis", replicates, seed, (group, iso2, "local")
+            )
+            rows += _row(keys, "correct_crisis", result)
+    return pd.DataFrame(rows)
+
+
 def worst_countries(by_country: pd.DataFrame, count: int) -> pd.DataFrame:
     """The ``count`` countries with the lowest ``correct_local`` over all models; ties by iso2.
     One column per outcome, model group and statistic, all models first."""

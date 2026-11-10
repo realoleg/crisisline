@@ -426,6 +426,9 @@ def tables(
     out["worst_countries"] = breakdowns.worst_countries(
         by_country["v2"], exploratory["worst_countries"]
     ).assign(version="v2")
+    out["crisis_local_language"] = _by_version(
+        lambda f: breakdowns.crisis_local_language(f, groups, replicates, seed), variants
+    )
     logger.info("Countries done")
     out["directories"] = _by_version(
         lambda f: breakdowns.directories(f, groups, replicates, seed), variants
