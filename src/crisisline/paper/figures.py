@@ -13,21 +13,14 @@ from matplotlib.lines import Line2D
 from matplotlib.ticker import NullLocator
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
-from crisisline.paper import style
+from crisisline.paper import style, subsets
 from crisisline.paper.style import ModelStyle
+from crisisline.paper.subsets import REGIONS, Scope
 
 CONDITIONS = {
     "S0-country": "Country named\nby the user",
     "M1": "Location in\nsystem prompt",
     "M2": "Location and\nnumbers in\nsystem prompt",
-}
-REGIONS = {
-    "AFR": "Africa",
-    "AMR": "Americas",
-    "EMR": "Eastern Mediterranean",
-    "EUR": "Europe",
-    "SEAR": "South-East Asia",
-    "WPR": "Western Pacific",
 }
 ALL = "all"  # the pooled rows of the exploratory tables
 SHARE_AXIS = "Responses (%)"
@@ -62,50 +55,40 @@ def _bold_labels(ax: Axes, axis: str, bold: Sequence[bool]) -> None:
 
 
 def referral_data(
-    referral: pd.DataFrame, correct_local: pd.DataFrame, styles: Mapping[str, ModelStyle]
+    referral: pd.DataFrame, styles: Mapping[str, ModelStyle], scope: Scope
 ) -> pd.DataFrame:
     """Each model's referral classes, models sorted within their group by the share with a correct
-    number; ``left`` is where a class's bar starts. The rows ``correct_any`` hold that share and its
-    interval (``correct_local``), the second whisker."""
-    correct = correct_local.set_index("model_id")
+    number; ``left`` is where a class's bar starts. The rows ``correct_local`` hold that share
+    (the first two classes) and its interval, the second whisker. Countries with a crisis line."""
     shares = referral.set_index(["model_id", "referral"])
+    subset = subsets.referral(scope)
     rows = []
     for group in _ordered_groups(styles):
         models = [m for m, s in styles.items() if s.group == group]
-        for model in sorted(models, key=lambda m: -correct.loc[m, "share"]):
+        for model in sorted(models, key=lambda m: -shares.loc[(m, "correct_local"), "share"]):
             left = 0.0
-            for name in REFERRAL_CLASSES:
+            for name in (*REFERRAL_CLASSES, "correct_local"):
                 cell = shares.loc[(model, name)]
                 rows.append(
                     {
                         "group": group,
                         "model_id": model,
                         "referral": name,
-                        "left": left,
+                        "left": 0.0 if name == "correct_local" else left,
                         "share": cell["share"],
                         "ci_low": cell["ci_low"],
                         "ci_high": cell["ci_high"],
+                        "subset": subset,
                     }
                 )
                 left += cell["share"]
-            rows.append(
-                {
-                    "group": group,
-                    "model_id": model,
-                    "referral": "correct_any",
-                    "left": 0.0,
-                    "share": correct.loc[model, "share"],
-                    "ci_low": correct.loc[model, "ci_low"],
-                    "ci_high": correct.loc[model, "ci_high"],
-                }
-            )
     return pd.DataFrame(rows)
 
 
 def draw_referral(data: pd.DataFrame, path: Path) -> None:
     """Stacked bars per model under group headings; whiskers: correct crisis line, any correct."""
     with style.paper_style():
-        fig = style.new_figure(style.COLUMN, 3.5)
+        fig = style.new_figure(style.COLUMN, 4.3)
         ax = fig.add_subplot()
         ticks, labels, bold, position = [], [], [], {}
         for group, part in data.groupby("group", sort=False):
@@ -130,7 +113,7 @@ def draw_referral(data: pd.DataFrame, path: Path) -> None:
                 linewidth=0.4,
                 label=label,
             )
-        for name in ("correct_crisis_line", "correct_any"):
+        for name in ("correct_crisis_line", "correct_local"):
             rows = data[data["referral"] == name]
             ax.errorbar(
                 100 * rows["share"],
@@ -148,7 +131,7 @@ def draw_referral(data: pd.DataFrame, path: Path) -> None:
         ax.set_xlim(0, 100)
         ax.set_xlabel(SHARE_AXIS)
         style.format_axis(ax, categorical="y")
-        fig.legend(loc="outside lower center", ncols=2)
+        fig.legend(loc="outside lower center", ncols=1)
         style.save(fig, path)
 
 
@@ -157,7 +140,7 @@ def draw_referral(data: pd.DataFrame, path: Path) -> None:
 GROUNDING_OUTCOMES = {"correct_crisis": "Correct crisis line", "fabricated": "Fabricated number"}
 
 
-def grounding_data(grounding: pd.DataFrame, groups: Sequence[str]) -> pd.DataFrame:
+def grounding_data(grounding: pd.DataFrame, groups: Sequence[str], scope: Scope) -> pd.DataFrame:
     """Each group's pooled share per condition, local-language prompts."""
     rows = grounding[
         (grounding["model_id"] == ALL)
@@ -171,9 +154,14 @@ def grounding_data(grounding: pd.DataFrame, groups: Sequence[str]) -> pd.DataFra
         "measure": list(CONDITIONS),
     }
     rows = rows.sort_values(list(order), key=lambda c: c.map(order[c.name].index))
-    return rows[["outcome", "model_group", "measure", "estimate", "ci_low", "ci_high"]].rename(
-        columns={"measure": "condition"}
+    rows = rows.assign(
+        subset=[
+            subsets.condition(scope, m, o)
+            for m, o in zip(rows["measure"], rows["outcome"], strict=True)
+        ]
     )
+    columns = ["outcome", "model_group", "measure", "estimate", "ci_low", "ci_high", "subset"]
+    return rows[columns].rename(columns={"measure": "condition"})
 
 
 def draw_grounding(data: pd.DataFrame, groups: Mapping[str, tuple[str, str]], path: Path) -> None:
@@ -213,6 +201,7 @@ def language_data(
     by_language: pd.DataFrame,
     styles: Mapping[str, ModelStyle],
     groups: Sequence[str],
+    scope: Scope,
 ) -> pd.DataFrame:
     """(a) each model's correct number for English and local-language prompts that name the
     country; (b) each group's correct number per prompt language, languages from the lowest share
@@ -227,6 +216,7 @@ def language_data(
             "estimate": row[f"share_{language}"],
             "ci_low": row[f"share_{language}_ci_low"],
             "ci_high": row[f"share_{language}_ci_high"],
+            "subset": subsets.language_by_model(scope, language),
         }
         for model in styles
         for row in [by_model.set_index("model_id").loc[model]]
@@ -240,6 +230,9 @@ def language_data(
             panel="by language",
             model_id="",
             prompt_language="",
+            subset=lambda t: [
+                subsets.language(lang, n) for lang, n in zip(t["lang"], t["countries"], strict=True)
+            ],
             lang_rank=lambda t: t["lang"].map(order.index),
             group_rank=lambda t: t["model_group"].map(list(groups).index),
         )
@@ -341,7 +334,7 @@ WORST_MARKERS = {"correct_local": (style.DARK_GREY, "o"), "correct_crisis": (sty
 
 
 def geography_data(
-    who_regions: pd.DataFrame, worst: pd.DataFrame, groups: Sequence[str]
+    who_regions: pd.DataFrame, worst: pd.DataFrame, groups: Sequence[str], scope: Scope
 ) -> pd.DataFrame:
     """Each group's shares per WHO region, regions from the lowest share of a correct number over
     all models; then the countries with the lowest share, all models."""
@@ -361,6 +354,10 @@ def geography_data(
             outcome_rank=lambda t: t["outcome"].map(list(GEOGRAPHY_OUTCOMES).index),
             region_rank=lambda t: t["who_region"].map(regions.index),
             group_rank=lambda t: t["model_group"].map(list(groups).index),
+            subset=lambda t: [
+                subsets.region(scope, r, o)
+                for r, o in zip(t["who_region"], t["outcome"], strict=True)
+            ],
         )
         .sort_values(["outcome_rank", "region_rank", "group_rank"])
     )
@@ -375,6 +372,7 @@ def geography_data(
             "estimate": row[f"{outcome} estimate ({ALL})"],
             "ci_low": row[f"{outcome} ci_low ({ALL})"],
             "ci_high": row[f"{outcome} ci_high ({ALL})"],
+            "subset": subsets.country(row["name_en"]),
         }
         for outcome in GEOGRAPHY_OUTCOMES
         for _, row in worst.iterrows()
@@ -456,14 +454,15 @@ def draw_geography(data: pd.DataFrame, groups: Mapping[str, tuple[str, str]], pa
 CUES = {"country": ("Country named", "-", "o"), "city": ("City named", "--", "s")}
 
 
-def ladder_data(ladder: pd.DataFrame, sizes: Mapping[str, float]) -> pd.DataFrame:
+def ladder_data(ladder: pd.DataFrame, sizes: Mapping[str, float], scope: Scope) -> pd.DataFrame:
     """Each model's share of a correct number against its size, prompts that name a city or the
     country."""
     rows = ladder[ladder["outcome"] == "correct_local"].assign(
         size=lambda t: t["model_id"].map(sizes)
     )
     rows = rows.assign(cue_rank=rows["cue"].map(list(CUES).index)).sort_values(["cue_rank", "size"])
-    return rows[["cue", "model_id", "size", "share", "ci_low", "ci_high"]]
+    rows = rows.assign(subset=[subsets.cue(scope, c) for c in rows["cue"]])
+    return rows[["cue", "model_id", "size", "share", "ci_low", "ci_high", "subset"]]
 
 
 def draw_ladder(data: pd.DataFrame, colour: str, path: Path) -> None:
@@ -510,7 +509,9 @@ def countries_data(countries: pd.DataFrame, groups: Sequence[str]) -> pd.DataFra
     rows = rows.sort_values(
         ["who_region", "pooled", "iso2", "group_rank"], ascending=[True, False, True, True]
     )
-    return rows[["who_region", "iso2", "name_en", "model_group", "estimate", "ci_low", "ci_high"]]
+    rows = rows.assign(subset=rows["name_en"].map(subsets.country))
+    columns = ["who_region", "iso2", "name_en", "model_group", "estimate", "ci_low", "ci_high"]
+    return rows[[*columns, "subset"]]
 
 
 def draw_countries(data: pd.DataFrame, groups: Mapping[str, tuple[str, str]], path: Path) -> None:

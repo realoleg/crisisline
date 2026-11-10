@@ -1,20 +1,23 @@
 """The paper's tables and the numbers its text cites, as tidy frames: one row per value, with its
-95% interval where it has one. Everything is taken from the analysis tables; the only new
-intervals are Wilson intervals of counts the analysis reports without one."""
+95% interval where it has one and the prompt subset it covers. Everything is taken from the
+analysis outputs; the only new intervals are Wilson intervals of counts the analysis reports
+without one."""
 
 from __future__ import annotations
 
 import math
 import re
-from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from typing import Any
 
 import pandas as pd
 
 from crisisline.analysis import fabrication
 from crisisline.analysis.descriptive import CONFIDENCE
-from crisisline.paper.figures import ALL, REGIONS
+from crisisline.paper import subsets
+from crisisline.paper.figures import ALL
 from crisisline.paper.style import ModelStyle
+from crisisline.paper.subsets import REGIONS, Scope
 from crisisline.unknowns import wilson_interval
 
 COMPARISONS = {
@@ -25,6 +28,7 @@ COMPARISONS = {
     "grounding_verified_number": "Location and numbers in the system prompt vs country named",
 }
 NAN = math.nan
+UNKNOWN_MENTIONS = "unknown_number_mentions_fabricated"
 _SIZE = re.compile(r":(e?\d+(?:\.\d+)?b)")
 _QUANTIZATION = re.compile(r"(q\d+_\w+)$")
 
@@ -41,10 +45,11 @@ def _long(
     table: pd.DataFrame,
     ids: Sequence[str],
     measures: Mapping[str, tuple[str, str | None, str | None]],
+    subset: Callable[[pd.Series, str], str],
     n: str | None = None,
 ) -> pd.DataFrame:
     """One row per row of ``table`` and measure: ``value`` and its interval from the columns
-    named in ``measures``."""
+    named in ``measures``, and the subset of that row and measure."""
     rows = []
     for _, row in table.iterrows():
         for measure, (value, low, high) in measures.items():
@@ -56,6 +61,7 @@ def _long(
                     "ci_low": row[low] if low else NAN,
                     "ci_high": row[high] if high else NAN,
                     **({"n": row[n]} if n else {}),
+                    "subset": subset(row, measure),
                 }
             )
     return pd.DataFrame(rows)
@@ -96,7 +102,13 @@ def models_table(
             "versions_seen": row["versions_seen"],
         }
         rows.extend(
-            {"model_id": model, "model_group": model_style.group, "field": k, "value": v}
+            {
+                "model_id": model,
+                "model_group": model_style.group,
+                "field": k,
+                "value": v,
+                "subset": subsets.MODELS,
+            }
             for k, v in fields.items()
             if v != ""
         )
@@ -109,13 +121,24 @@ def _domain(group: str, model: str) -> tuple[str, str]:
     return ("all", ALL) if group == ALL else ("model group", group)
 
 
+def _reader_subset(kind: str, domain: str) -> str:
+    if kind == "language group":
+        return f"{subsets.FABRICATION_READER}, prompts in the {domain} language group"
+    return subsets.FABRICATION_READER
+
+
 def fabrication_table(
-    reader: pd.DataFrame, by_model: pd.DataFrame, near_miss: pd.DataFrame
+    reader: pd.DataFrame,
+    estimate: Mapping[str, Any],
+    by_model: pd.DataFrame,
+    near_miss: pd.DataFrame,
+    min_digits: int,
 ) -> pd.DataFrame:
     """Fabricated numbers in reader terms (share of all numbers; share of responses with one),
-    the share of unknown-number mentions, each between its lower and upper bound; then the rate
-    of near-misses of a real number against chance. ``range_only``: the interval collapses, so
-    only the range of the two bounds is reported."""
+    the share of unknown-number mentions (per model; over all models the stratified estimate),
+    each between its lower and upper bound; then the rate of near-misses of a real number against
+    chance. ``range_only``: the interval collapses, so only the range of the two bounds is
+    reported."""
     rows = []
     for _, r in reader.iterrows():
         for measure, prefix, n in (
@@ -132,21 +155,38 @@ def fabrication_table(
                     "ci_low": r[f"{prefix}_{bound}_ci_low"],
                     "ci_high": r[f"{prefix}_{bound}_ci_high"],
                     "n": n,
+                    "subset": _reader_subset(r["kind"], r["domain"]),
                 }
                 for bound in ("lower", "upper")
             )
-    for _, r in by_model.iterrows():
-        kind, domain = ("all", ALL) if r["model_id"] == "all models" else ("model", r["model_id"])
+    # Over all models, the estimate itself rather than this table's check of it.
+    rows.extend(
+        {
+            "kind": "all",
+            "domain": ALL,
+            "measure": UNKNOWN_MENTIONS,
+            "bound": bound,
+            "value": estimate["share"],
+            "ci_low": estimate["interval"][0],
+            "ci_high": estimate["interval"][1],
+            "n": estimate["mentions"],
+            "subset": subsets.UNKNOWN_MENTIONS,
+        }
+        for bound in ("lower", "upper")
+    )
+    models = by_model[by_model["model_id"] != "all models"]
+    for _, r in models.iterrows():
         rows.extend(
             {
-                "kind": kind,
-                "domain": domain,
-                "measure": "unknown_number_mentions_fabricated",
+                "kind": "model",
+                "domain": r["model_id"],
+                "measure": UNKNOWN_MENTIONS,
                 "bound": bound,
                 "value": r[f"share_{bound}"],
                 "ci_low": r[f"ci_{bound}_low"],
                 "ci_high": r[f"ci_{bound}_high"],
                 "n": r["mentions"],
+                "subset": subsets.UNKNOWN_MENTIONS,
             }
             for bound in ("lower", "upper")
         )
@@ -162,6 +202,7 @@ def fabrication_table(
                 "ci_low": r[f"{column}_ci_low"],
                 "ci_high": r[f"{column}_ci_high"],
                 "n": r["mentions"],
+                "subset": subsets.near_miss(min_digits),
             }
             for measure, column in (
                 ("near_miss_rate", "near_miss"),
@@ -169,7 +210,7 @@ def fabrication_table(
             )
         )
     table = pd.DataFrame(rows)
-    collapsed = set(fabrication.collapsed_intervals(by_model)["model_id"])
+    collapsed = set(fabrication.collapsed_intervals(models)["model_id"])
     table["range_only"] = (
         (table["kind"] == "model") & table["domain"].isin(collapsed) & (table["bound"] != "")
     )
@@ -186,7 +227,9 @@ def _no_location_responses(cells: pd.DataFrame) -> pd.Series:
     return rows.groupby("model_id")["responses"].sum()
 
 
-def _share_row(part: str, by: str, level: str, measure: str, hits: int, n: int) -> dict[str, Any]:
+def _share_row(
+    part: str, by: str, level: str, measure: str, hits: int, n: int, subset: str
+) -> dict[str, Any]:
     low, high = _wilson(hits, n)
     return {
         "part": part,
@@ -199,6 +242,7 @@ def _share_row(part: str, by: str, level: str, measure: str, hits: int, n: int) 
         "ci_high": high,
         "hits": hits,
         "n": n,
+        "subset": subset,
     }
 
 
@@ -209,6 +253,7 @@ def no_location_table(
     cells: pd.DataFrame,
     defaults: pd.DataFrame,
     models: Sequence[str],
+    scope: Scope,
 ) -> pd.DataFrame:
     """Prompts that name no country: the share of North American numbers in English (overall,
     by template, model and block); how often a model asks where the user is, or gives nothing
@@ -227,6 +272,7 @@ def no_location_table(
             "ci_high": us_default["ci_high"],
             "hits": NAN,
             "n": us_default["n"],
+            "subset": subsets.NORTH_AMERICAN,
         }
     ]
     rows.extend(
@@ -241,11 +287,15 @@ def no_location_table(
             "ci_high": r["ci_high"],
             "hits": r["hits"],
             "n": r["n"],
+            "subset": subsets.NORTH_AMERICAN_BLOCKS[r["level"]]
+            if r["by"] == "block"
+            else subsets.NORTH_AMERICAN,
         }
         for _, r in breakdown.iterrows()
     )
     responses = _no_location_responses(cells)
     counts = asks.set_index("model_id")
+    asked_subset = subsets.asks_location(scope)
     for model in [*models, ALL]:
         asked = int(
             counts["asks_location"].sum() if model == ALL else counts.loc[model, "asks_location"]
@@ -253,8 +303,11 @@ def no_location_table(
         nothing = int(counts["nothing"].sum() if model == ALL else counts.loc[model, "nothing"])
         n = int(responses.sum() if model == ALL else responses[model])
         by = "all" if model == ALL else "model_id"
-        rows.append(_share_row("asks_location", by, model, "asks_where_the_user_is", asked, n))
-        rows.append(_share_row("asks_location", by, model, "no_number_and_no_question", nothing, n))
+        for measure, hits in (
+            ("asks_where_the_user_is", asked),
+            ("no_number_and_no_question", nothing),
+        ):
+            rows.append(_share_row("asks_location", by, model, measure, hits, n, asked_subset))
     for lang, part_rows in defaults.groupby("lang", sort=True):
         # Every country tied for the most responses.
         top = part_rows[part_rows["responses"] == part_rows["responses"].max()]
@@ -266,9 +319,13 @@ def no_location_table(
                 "names_a_number_of_this_country",
                 int(r["responses"]),
                 int(r["language_responses"]),
+                subsets.default_country(lang),
             )
             rows.append({**row, "country": r["country"]})
     return pd.DataFrame(rows)
+
+
+TRANSLATION_MEASURES = ("median_chrf_of_translation", "translation_flag_rate")
 
 
 def languages_table(by_language: pd.DataFrame, gap: pd.DataFrame) -> pd.DataFrame:
@@ -278,6 +335,7 @@ def languages_table(by_language: pd.DataFrame, gap: pd.DataFrame) -> pd.DataFram
         by_language,
         ["lang", "model_group"],
         {"correct_local": ("estimate", "ci_low", "ci_high")},
+        lambda row, _: subsets.language(row["lang"], row["countries"]),
         "responses",
     )
     gaps = _long(
@@ -291,35 +349,85 @@ def languages_table(by_language: pd.DataFrame, gap: pd.DataFrame) -> pd.DataFram
             "translation_flag_rate": ("flag_rate", None, None),
             "countries": ("countries", None, None),
         },
+        lambda row, measure: (
+            subsets.translations(row["lang"])
+            if measure in TRANSLATION_MEASURES
+            else subsets.language_gap(row["lang"], row["countries"])
+        ),
     )
     return pd.concat([shares, gaps], ignore_index=True).sort_values("lang", kind="stable")
 
 
-def templates_table(levels: pd.DataFrame, contrasts: pd.DataFrame) -> pd.DataFrame:
+# Pooled over templates, these contrasts are steps of the grounding analysis, which reports them
+# with its own bootstrap.
+GROUNDING_STEPS = {
+    "M1 - S0-country, local": "M1 - S0-country",
+    "M2 - S0-country, local": "M2 - S0-country",
+}
+
+
+def templates_table(
+    levels: pd.DataFrame, contrasts: pd.DataFrame, grounding: pd.DataFrame, scope: Scope
+) -> pd.DataFrame:
     """Shares per prompt template and model group, then each contrast within each template;
-    ``flag`` marks contrasts whose templates disagree."""
+    ``flag`` marks contrasts whose templates disagree. A contrast pooled over templates that the
+    grounding analysis also reports takes its interval from there, so that each number has one."""
     columns = ["template", "model_group", "contrast", "outcome", "value", "ci_low", "ci_high"]
-    level_rows = levels.assign(contrast="", flag="").rename(columns={"estimate": "value"})
-    contrast_rows = contrasts.rename(columns={"estimate": "value"}).fillna({"flag": ""})
+    level_rows = levels.assign(
+        contrast="",
+        flag="",
+        subset=[
+            subsets.template(scope, t, o)
+            for t, o in zip(levels["template"], levels["outcome"], strict=True)
+        ],
+    ).rename(columns={"estimate": "value"})
+    contrast_rows = (
+        contrasts.assign(
+            subset=[
+                subsets.contrast(scope, c, t, o)
+                for c, t, o in zip(
+                    contrasts["contrast"], contrasts["template"], contrasts["outcome"], strict=True
+                )
+            ]
+        )
+        .rename(columns={"estimate": "value"})
+        .fillna({"flag": ""})
+    )
+    steps = grounding[grounding["model_id"] == ALL].set_index(["model_group", "measure", "outcome"])
+    pooled = (contrast_rows["template"] == "all") & contrast_rows["contrast"].isin(GROUNDING_STEPS)
+    for index in contrast_rows.index[pooled]:
+        row = contrast_rows.loc[index]
+        step = steps.loc[(row["model_group"], GROUNDING_STEPS[row["contrast"]], row["outcome"])]
+        if not math.isclose(step["estimate"], row["value"], rel_tol=1e-5, abs_tol=1e-9):
+            raise ValueError(f"the grounding step and the pooled template contrast differ: {row}")
+        contrast_rows.loc[index, ["value", "ci_low", "ci_high"]] = [
+            step["estimate"],
+            step["ci_low"],
+            step["ci_high"],
+        ]
     return pd.concat(
         [
-            level_rows[[*columns, "responses", "flag"]],
-            contrast_rows[[*columns, "responses", "flag"]],
+            level_rows[[*columns, "responses", "flag", "subset"]],
+            contrast_rows[[*columns, "responses", "flag", "subset"]],
         ],
         ignore_index=True,
     ).rename(columns={"responses": "n"})
 
 
-def sensitivity_table(hypotheses: pd.DataFrame) -> pd.DataFrame:
+def sensitivity_table(hypotheses: pd.DataFrame, scope: Scope) -> pd.DataFrame:
     """Every model-based comparison under both ground-truth versions, both working correlations,
     and each sensitivity analysis; no estimate where the model did not converge."""
     rows = hypotheses[
         hypotheses["hypothesis"].isin(COMPARISONS)
         & ~hypotheses["analysis"].str.startswith("main block")
     ]
-    rows = rows.assign(comparison=rows["hypothesis"].map(COMPARISONS)).rename(
-        columns={"hypothesis": "comparison_id", "working_structure": "working_correlation"}
-    )
+    rows = rows.assign(
+        comparison=rows["hypothesis"].map(COMPARISONS),
+        subset=[
+            subsets.comparison(scope, h, a)
+            for h, a in zip(rows["hypothesis"], rows["analysis"], strict=True)
+        ],
+    ).rename(columns={"hypothesis": "comparison_id", "working_structure": "working_correlation"})
     return rows[
         [
             "analysis",
@@ -337,11 +445,12 @@ def sensitivity_table(hypotheses: pd.DataFrame) -> pd.DataFrame:
             "working_correlation",
             "converged",
             "note",
+            "subset",
         ]
     ].fillna({"note": ""})
 
 
-def robustness_table(temperature: pd.DataFrame) -> pd.DataFrame:
+def robustness_table(temperature: pd.DataFrame, scope: Scope) -> pd.DataFrame:
     """Temperature 0.7 (three responses) against 0 on the same prompts, local models."""
     return _long(
         temperature,
@@ -356,11 +465,12 @@ def robustness_table(temperature: pd.DataFrame) -> pd.DataFrame:
                 None,
             ),
         },
+        lambda row, _: subsets.temperature(scope, row["block"], row["outcome"]),
         "prompts",
     )
 
 
-def near_miss_table(near_miss: pd.DataFrame) -> pd.DataFrame:
+def near_miss_table(near_miss: pd.DataFrame, min_digits: int) -> pd.DataFrame:
     """Numbers within two digit edits of a real number of the country, per model and group."""
     counts = (
         "mentions",
@@ -382,6 +492,7 @@ def near_miss_table(near_miss: pd.DataFrame) -> pd.DataFrame:
             "near_miss_by_chance": ("chance", "chance_ci_low", "chance_ci_high"),
             **{c: (c, None, None) for c in counts},
         },
+        lambda _, __: subsets.near_miss(min_digits),
     )
 
 
@@ -392,6 +503,7 @@ def _number(
     name: str,
     value: float | str,
     unit: str,
+    subset: str,
     description: str,
     low: float = NAN,
     high: float = NAN,
@@ -404,17 +516,19 @@ def _number(
         "ci_low": low,
         "ci_high": high,
         "unit": unit,
+        "subset": subset,
         "description": description,
     }
 
 
-def _comparison_numbers(hypotheses: pd.DataFrame) -> Iterable[dict[str, Any]]:
+def _comparison_numbers(hypotheses: pd.DataFrame, scope: Scope) -> Iterable[dict[str, Any]]:
     for _, r in hypotheses[hypotheses["hypothesis"].isin(COMPARISONS)].iterrows():
         unit = "proportion" if r["hypothesis"] == "us_default" else "odds ratio"
         yield _number(
             r["hypothesis"],
             r["estimate"],
             unit,
+            subsets.comparison(scope, r["hypothesis"], r["analysis"]),
             f"{COMPARISONS[r['hypothesis']]}: {r['effect']} (n = {r['n']})",
             r["ci_low"],
             r["ci_high"],
@@ -439,8 +553,8 @@ def _georgia_numbers(georgia: pd.DataFrame) -> Iterable[dict[str, Any]]:
                 _name("georgia", setting, outcome),
                 hits / n,
                 "proportion",
-                f"Georgia, {setting} (condition/cue/language), all models: responses with {what} "
-                f"({hits} of {n})",
+                f"{subsets.georgia(setting)}, all models",
+                f"Responses with {what} ({hits} of {n})",
                 *_wilson(hits, n),
             )
     hits, n = int(data["names_georgia_hits"].sum()), int(data["responses"].sum())
@@ -448,8 +562,9 @@ def _georgia_numbers(georgia: pd.DataFrame) -> Iterable[dict[str, Any]]:
         "georgia_names_the_country",
         hits / n,
         "proportion",
-        f"Georgia, all prompts and models: responses that name the country (Tbilisi, country of "
-        f"Georgia; unvalidated pattern) ({hits} of {n})",
+        "Georgia, all prompts, all models",
+        "Responses that name the country (Tbilisi, country of Georgia): an unvalidated "
+        f"automatic pattern match ({hits} of {n})",
         *_wilson(hits, n),
     )
 
@@ -470,9 +585,10 @@ def numbers_table(
     groups: Sequence[str],
     fabrication_rows: pd.DataFrame,
     referral: pd.DataFrame,
+    scope: Scope,
 ) -> pd.DataFrame:
     """Every number the text cites, one row each, ground truth v2."""
-    rows = list(_comparison_numbers(hypotheses))
+    rows = list(_comparison_numbers(hypotheses, scope))
 
     asked = no_location[(no_location["part"] == "asks_location") & (no_location["level"] == ALL)]
     for _, r in asked.iterrows():
@@ -481,8 +597,11 @@ def numbers_table(
                 _name("no_country", r["measure"]),
                 r["value"],
                 "proportion",
-                f"Prompts that name no country, all models: {r['measure'].replace('_', ' ')} "
-                f"(unvalidated rule; {r['hits']} of {r['n']})",
+                r["subset"],
+                f"All models: {r['measure'].replace('_', ' ')} "
+                f"({int(r['hits'])} of {int(r['n'])}). "
+                "Unvalidated automatic measure: a rule (a question with a location word, per "
+                "language) that was not checked by hand; precision and recall are unknown",
                 r["ci_low"],
                 r["ci_high"],
             )
@@ -497,6 +616,7 @@ def numbers_table(
             "worst_region",
             region,
             "WHO region",
+            subsets.all_regions(scope, "correct_local"),
             f"WHO region with the lowest share of a correct number over all models: {name}",
         )
     )
@@ -507,13 +627,23 @@ def numbers_table(
                 _name("worst_region", outcome),
                 r["estimate"],
                 "proportion",
-                f"{name}, all models, prompts that name a city or the country: {outcome}",
+                subsets.region(scope, region, outcome),
+                f"{name}, all models: {outcome}",
                 r["ci_low"],
                 r["ci_high"],
             )
         )
     for rank, (_, r) in enumerate(worst.iterrows(), start=1):
-        rows.append(_number(f"worst_country_{rank}", r["iso2"], "country", r["name_en"]))
+        rows.append(
+            _number(
+                f"worst_country_{rank}",
+                r["iso2"],
+                "country",
+                subsets.all_regions(scope, "correct_local"),
+                f"Country with the {rank}. lowest share of a correct number over all models: "
+                f"{r['name_en']}",
+            )
+        )
         for outcome in ("correct_local", "correct_crisis"):
             if pd.notna(r[f"{outcome} estimate ({ALL})"]):
                 rows.append(
@@ -521,8 +651,8 @@ def numbers_table(
                         f"worst_country_{rank}_{outcome}",
                         r[f"{outcome} estimate ({ALL})"],
                         "proportion",
-                        f"{r['name_en']}, all models, prompts that name a city or the country: "
-                        f"{outcome}",
+                        subsets.country(r["name_en"]),
+                        f"{r['name_en']}, all models: {outcome}",
                         r[f"{outcome} ci_low ({ALL})"],
                         r[f"{outcome} ci_high ({ALL})"],
                     )
@@ -540,8 +670,9 @@ def numbers_table(
                 _name("no_usable_resource", r["template"]),
                 r["estimate"],
                 "proportion",
-                f"Template {r['template']}, all models, prompts that name a city or the country: "
-                "responses with no usable resource (no number, a loop, blocked or empty)",
+                subsets.template(scope, r["template"], r["outcome"]),
+                f"Template {r['template']}, all models: responses with no usable resource (no "
+                "number, a loop, blocked or empty)",
                 r["ci_low"],
                 r["ci_high"],
             )
@@ -554,7 +685,8 @@ def numbers_table(
             _name("blocked", blocked_model),
             r["share"],
             "proportion",
-            f"{blocked_model}: responses blocked by the provider's moderation, all prompts",
+            f"all prompts, {subsets.MAIN_RUN}",
+            f"{blocked_model}: responses blocked by the provider's moderation",
             r["ci_low"],
             r["ci_high"],
         )
@@ -567,7 +699,8 @@ def numbers_table(
                 _name("ladder", r["model_id"], r["cue"]),
                 r["share"],
                 "proportion",
-                f"{r['model_id']}, prompts that name the {r['cue']}: correct number",
+                r["subset"],
+                f"{r['model_id']}: correct number",
                 r["ci_low"],
                 r["ci_high"],
             )
@@ -581,8 +714,9 @@ def numbers_table(
                     _name("temperature", r["block"], r["model_id"], r["outcome"]),
                     r["difference"],
                     "difference in proportion",
-                    f"{r['model_id']}, block {r['block']}: {r['outcome']} at temperature 0.7 minus "
-                    f"at 0 ({r['share_t07']:.3f} vs {r['share_t0']:.3f}, {r['prompts']} prompts)",
+                    subsets.temperature(scope, r["block"], r["outcome"]),
+                    f"{r['model_id']}: {r['outcome']} at temperature 0.7 minus at 0 "
+                    f"({r['share_t07']:.3f} vs {r['share_t0']:.3f}, {r['prompts']} prompts)",
                     r["ci_low"],
                     r["ci_high"],
                 )
@@ -601,8 +735,8 @@ def numbers_table(
                 _name(r["outcome"], r["measure"], r["model_group"]),
                 r["estimate"],
                 "difference in proportion" if difference else "proportion",
-                f"{r['outcome']}, {r['measure']}, local-language prompts, models: "
-                f"{r['model_group']}",
+                subsets.condition(scope, r["measure"], r["outcome"]),
+                f"{r['outcome']}, {r['measure']}, models: {r['model_group']}",
                 r["ci_low"],
                 r["ci_high"],
             )
@@ -611,32 +745,49 @@ def numbers_table(
     overall = fabrication_rows[
         (fabrication_rows["kind"] == "all") & (fabrication_rows["bound"] == "lower")
     ]
-    for _, r in overall.iterrows():
+    for _, r in overall[overall["measure"] != UNKNOWN_MENTIONS].iterrows():
         rows.append(
             _number(
                 _name("all_models", r["measure"]),
                 r["value"],
                 "proportion",
+                r["subset"],
                 f"All models: {r['measure'].replace('_', ' ')} (lower bound; n = {r['n']})",
                 r["ci_low"],
                 r["ci_high"],
             )
         )
+    r = overall[overall["measure"] == UNKNOWN_MENTIONS].iloc[0]
+    rows.append(
+        _number(
+            "unconfirmed_numbers_estimated_fabricated",
+            r["value"],
+            "proportion",
+            r["subset"],
+            f"Estimated share fabricated among the {r['n']:,} mentions of unknown numbers "
+            "(stratified estimate from the blind labelling, stratified bootstrap interval). "
+            "The 'Unconfirmed number' class of the referral figure holds the unknown numbers "
+            "left unlabelled and those labelled unverified or another service; this estimate "
+            "covers all unknown numbers before labelling, not that class alone",
+            r["ci_low"],
+            r["ci_high"],
+        )
+    )
 
-    for _, r in referral[
-        referral["referral"].isin(("correct_crisis_line", "correct_any"))
-    ].iterrows():
+    shown = referral[referral["referral"].isin(("correct_crisis_line", "correct_local"))]
+    for _, r in shown.iterrows():
+        what = (
+            "the correct crisis line"
+            if r["referral"] == "correct_crisis_line"
+            else "a correct local number (the crisis line or another)"
+        )
         rows.append(
             _number(
                 _name(r["referral"], r["model_id"]),
                 r["share"],
                 "proportion",
-                f"{r['model_id']}: responses to prompts about a country with "
-                + (
-                    "the correct crisis line"
-                    if r["referral"] == "correct_crisis_line"
-                    else "any correct number"
-                ),
+                r["subset"],
+                f"{r['model_id']}: responses with {what}",
                 r["ci_low"],
                 r["ci_high"],
             )

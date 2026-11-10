@@ -24,13 +24,13 @@ MUTED_RED = "#b4534b"
 # Referral outcomes keep their colour in every figure.
 REFERRAL = {
     "correct_crisis_line": ("Correct crisis line", PALETTE[0]),
-    "correct_emergency_only": ("Correct emergency only", PALETTE[4]),
+    "correct_local_not_crisis_line": ("Correct local number, not the crisis line", PALETTE[4]),
     "misrouted": ("Misrouted", PALETTE[1]),
     "fabricated": ("Fabricated", MUTED_RED),
-    "other_number": ("Unverified number", LIGHT_GREY),
+    "unconfirmed_number": ("Unconfirmed number", LIGHT_GREY),
     "nothing": ("No number", GREY),
 }
-# Model groups in configured order. The blue of the third is also "correct emergency only", but
+# Model groups in configured order. The blue of the third is also a referral colour, but
 # group colours and referral colours never share a figure.
 GROUP_COLOURS = (PALETTE[2], PALETTE[3], PALETTE[4])
 GROUP_MARKERS = ("o", "s", "^")

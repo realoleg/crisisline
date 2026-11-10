@@ -1516,6 +1516,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
         handlers=[handler],
     )
+    # Font subsetting while matplotlib writes a PDF logs every table it prunes.
+    logging.getLogger("fontTools").setLevel(logging.WARNING)
     config = resolve_paths(load_config(args.config or root / DEFAULT_CONFIG), root)
     if args.command == "validate":
         return run_validate(config, args.check_urls)

@@ -12,13 +12,40 @@ import pandas as pd
 import pytest
 
 from crisisline.analysis.descriptive import REFERRAL_CLASSES
-from crisisline.paper import figures, style, tables
+from crisisline.paper import figures, style, subsets, tables
 
 GROUPS = {"API": ["api-b", "api-a"], "local": ["q-2", "other", "q-1"]}
 SIZES = {"q-1": 1.0, "q-2": 2.0}
 STYLES = style.model_styles(GROUPS, SIZES)
 GROUP_STYLES = style.group_styles(list(GROUPS))
 MODELS = list(STYLES)
+SCOPE = subsets.Scope.from_rows(
+    [
+        {
+            "iso2": "AA",
+            "name_en": "Aland",
+            "who_region": "AFR",
+            "lang": "aa",
+            "has_crisis_line": "true",
+        },
+        {
+            "iso2": "BB",
+            "name_en": "Bland",
+            "who_region": "AFR",
+            "lang": "en",
+            "has_crisis_line": "true",
+        },
+        {
+            "iso2": "CC",
+            "name_en": "Cland",
+            "who_region": "EUR",
+            "lang": "cc",
+            "has_crisis_line": "false",
+        },
+    ],
+    temperature_block=["AA", "CC"],
+    grounding_excluded=["api-a"],
+)
 
 
 def _ci(estimate: float) -> dict[str, float]:
@@ -42,10 +69,10 @@ def test_referral_colours_follow_the_outcome_semantics() -> None:
     assert list(colours) == list(REFERRAL_CLASSES)
     assert colours == {
         "correct_crisis_line": "#02692b",
-        "correct_emergency_only": "#4e88cb",
+        "correct_local_not_crisis_line": "#4e88cb",
         "misrouted": "#dd8e00",
         "fabricated": "#b4534b",
-        "other_number": "#D9D9D9",
+        "unconfirmed_number": "#D9D9D9",
         "nothing": "#7A7A7A",
     }
 
@@ -53,31 +80,32 @@ def test_referral_colours_follow_the_outcome_semantics() -> None:
 # Figure data.
 
 
-def _referral_inputs() -> tuple[pd.DataFrame, pd.DataFrame]:
+def _referral() -> pd.DataFrame:
     correct = {"api-b": 0.9, "api-a": 0.95, "q-1": 0.3, "q-2": 0.6, "other": 0.5}
     rows = []
     for model, share in correct.items():
-        parts = [share * 0.6, share * 0.4, 0.1, 0.05, 0.05, 0.8 - share]
+        parts = [share * 0.6, share * 0.4, 0.1, 0.05, 0.05, 0.8 - share, share]
         rows += [
             {"model_id": model, "referral": name, "share": p, "ci_low": p, "ci_high": p}
-            for name, p in zip(REFERRAL_CLASSES, parts, strict=True)
+            for name, p in zip([*REFERRAL_CLASSES, "correct_local"], parts, strict=True)
         ]
-    correct_local = pd.DataFrame(
-        [{"model_id": m, "outcome": "correct_local", **_ci(s)} for m, s in correct.items()]
-    ).rename(columns={"estimate": "share"})
-    return pd.DataFrame(rows), correct_local
+    return pd.DataFrame(rows)
 
 
 def test_referral_data_sorts_models_by_correct_share_within_their_group() -> None:
-    data = figures.referral_data(*_referral_inputs(), STYLES)
+    data = figures.referral_data(_referral(), STYLES, SCOPE)
     assert list(data["model_id"].unique()) == ["api-a", "api-b", "q-2", "other", "q-1"]
     model = data[data["model_id"] == "q-2"].set_index("referral")
-    assert list(model.index) == [*REFERRAL_CLASSES, "correct_any"]
+    assert list(model.index) == [*REFERRAL_CLASSES, "correct_local"]
     bars = model.loc[list(REFERRAL_CLASSES)]
     assert bars["left"].tolist() == pytest.approx([0, *bars["share"].cumsum().iloc[:-1].tolist()])
-    assert model.loc["correct_any", "share"] == pytest.approx(
-        bars.loc[["correct_crisis_line", "correct_emergency_only"], "share"].sum()
+    assert model.loc["correct_local", "share"] == pytest.approx(
+        bars.loc[["correct_crisis_line", "correct_local_not_crisis_line"], "share"].sum()
     )
+    assert set(data["subset"]) == {
+        "prompts about a country (S0 with a city or country cue, M1, M2), 2 countries with a "
+        "crisis line, all prompt languages"
+    }
 
 
 def _grounding() -> pd.DataFrame:
@@ -107,7 +135,7 @@ def _grounding() -> pd.DataFrame:
 
 
 def test_grounding_data_keeps_the_groups_conditions_and_two_outcomes() -> None:
-    data = figures.grounding_data(_grounding(), list(GROUPS))
+    data = figures.grounding_data(_grounding(), list(GROUPS), SCOPE)
     assert len(data) == 2 * len(GROUPS) * len(figures.CONDITIONS)
     assert set(data["model_group"]) == set(GROUPS)
     assert data["condition"].tolist()[:3] == list(figures.CONDITIONS)
@@ -131,7 +159,7 @@ def _language_inputs() -> tuple[pd.DataFrame, pd.DataFrame]:
     pooled = {"am": 0.2, "de": 0.9, "si": 0.4}
     by_language = pd.DataFrame(
         [
-            {"model_group": group, "lang": lang, **_ci(value)}
+            {"model_group": group, "lang": lang, "countries": 1, **_ci(value)}
             for lang, value in pooled.items()
             for group in [figures.ALL, *GROUPS]
         ]
@@ -140,7 +168,7 @@ def _language_inputs() -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def test_language_data_orders_languages_from_the_lowest_pooled_share() -> None:
-    data = figures.language_data(*_language_inputs(), STYLES, list(GROUPS))
+    data = figures.language_data(*_language_inputs(), STYLES, list(GROUPS), SCOPE)
     models = data[data["panel"] == "by model"]
     assert list(models["model_id"].unique()) == MODELS
     assert set(models["prompt_language"]) == {"en", "local"}
@@ -182,7 +210,7 @@ def _geography_inputs() -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def test_geography_data_orders_regions_and_skips_countries_without_a_crisis_line() -> None:
-    data = figures.geography_data(*_geography_inputs(), list(GROUPS))
+    data = figures.geography_data(*_geography_inputs(), list(GROUPS), SCOPE)
     regions = data[data["panel"] == "region"]
     assert list(regions["who_region"].unique()) == ["AFR", "SEAR", "EUR"]
     assert set(regions["model_group"]) == set(GROUPS)
@@ -202,7 +230,7 @@ def _ladder() -> pd.DataFrame:
 
 
 def test_ladder_data_is_by_cue_then_size() -> None:
-    data = figures.ladder_data(_ladder(), SIZES)
+    data = figures.ladder_data(_ladder(), SIZES, SCOPE)
     assert data[["cue", "size"]].values.tolist() == [
         ["country", 1.0],
         ["country", 2.0],
@@ -240,11 +268,11 @@ def test_countries_data_sorts_within_region_from_the_highest_pooled_share() -> N
 
 
 def _drawings() -> dict[str, tuple[Callable[[Path], None], float]]:
-    referral = figures.referral_data(*_referral_inputs(), STYLES)
-    grounding = figures.grounding_data(_grounding(), list(GROUPS))
-    language = figures.language_data(*_language_inputs(), STYLES, list(GROUPS))
-    geography = figures.geography_data(*_geography_inputs(), list(GROUPS))
-    ladder = figures.ladder_data(_ladder(), SIZES)
+    referral = figures.referral_data(_referral(), STYLES, SCOPE)
+    grounding = figures.grounding_data(_grounding(), list(GROUPS), SCOPE)
+    language = figures.language_data(*_language_inputs(), STYLES, list(GROUPS), SCOPE)
+    geography = figures.geography_data(*_geography_inputs(), list(GROUPS), SCOPE)
+    ladder = figures.ladder_data(_ladder(), SIZES, SCOPE)
     countries = figures.countries_data(_countries(), list(GROUPS))
     return {
         "referral": (lambda p: figures.draw_referral(referral, p), style.COLUMN),
@@ -400,7 +428,9 @@ def test_fabrication_table_flags_collapsed_intervals_as_range_only() -> None:
             }
         ]
     )
-    table = tables.fabrication_table(reader, by_model, near_miss)
+    table = tables.fabrication_table(
+        reader, {"share": 0.5, "interval": [0.4, 0.6], "mentions": 44}, by_model, near_miss, 7
+    )
     flagged = table[table["range_only"]]
     assert set(flagged["domain"]) == {"tight"}
     assert set(flagged["measure"]) == {
@@ -408,6 +438,11 @@ def test_fabrication_table_flags_collapsed_intervals_as_range_only() -> None:
         "responses_with_a_fabricated_number",
         "unknown_number_mentions_fabricated",
     }
+    pooled = table[(table["kind"] == "all") & (table["measure"] == tables.UNKNOWN_MENTIONS)]
+    assert pooled[["value", "ci_low", "ci_high", "n"]].drop_duplicates().values.tolist() == [
+        [0.5, 0.4, 0.6, 44]
+    ]
+    assert table["subset"].ne("").all()
     rates = table[table["measure"].str.startswith("near_miss")].set_index("measure")
     assert rates.loc["near_miss_by_chance", "value"] == 1e-6
     assert not rates["range_only"].any()
@@ -457,7 +492,9 @@ def test_no_location_table_counts_questions_and_the_commonest_country() -> None:
             {"lang": "en", "country": "CA", "responses": 4, "language_responses": 10},
         ]
     )
-    table = tables.no_location_table(us_default, breakdown, asks, cells, defaults, ["a", "b"])
+    table = tables.no_location_table(
+        us_default, breakdown, asks, cells, defaults, ["a", "b"], SCOPE
+    )
     asked = table[table["measure"] == "asks_where_the_user_is"].set_index("level")
     assert asked.loc["a", "value"] == pytest.approx(3 / 10)
     assert asked.loc[figures.ALL, ["hits", "n"]].tolist() == [3, 20]
@@ -499,15 +536,15 @@ def test_sensitivity_table_keeps_the_comparisons_without_the_extraction_rows() -
         "note",
     ):
         hypotheses[column] = None
-    table = tables.sensitivity_table(hypotheses)
+    table = tables.sensitivity_table(hypotheses, SCOPE)
     assert table["analysis"].tolist() == ["v2", "v1, Exchangeable", "without GE"]
     assert table["comparison"].iloc[0] == tables.COMPARISONS["cue_country_vs_city"]
     assert not table.columns.str.contains("hypothes").any()
 
 
 def test_numbers_are_written_to_six_significant_digits() -> None:
-    assert tables._number("x", 1 / 3, "proportion", "")["value"] == 0.333333
-    assert tables._number("x", "ET", "country", "")["value"] == "ET"
+    assert tables._number("x", 1 / 3, "proportion", "s", "")["value"] == 0.333333
+    assert tables._number("x", "ET", "country", "s", "")["value"] == "ET"
 
 
 def test_names_of_numbers_have_no_spaces_or_slashes() -> None:
@@ -517,3 +554,117 @@ def test_names_of_numbers_have_no_spaces_or_slashes() -> None:
     assert tables._name("fabricated", "M2 - S0-country", "other local") == (
         "fabricated_M2_minus_S0-country_other_local"
     )
+
+
+# Subsets.
+
+
+def test_counts_leave_out_countries_without_a_crisis_line_for_crisis_outcomes() -> None:
+    assert SCOPE.count() == "3 countries"
+    assert SCOPE.count("correct_local") == "3 countries"
+    assert SCOPE.count("correct_crisis") == "2 countries with a crisis line"
+    assert SCOPE.count(non_english=True) == "2 countries"
+    assert SCOPE.count("correct_crisis", within=SCOPE.temperature_block) == (
+        "1 country with a crisis line"
+    )
+    assert SCOPE.count(region="AFR", without=["AA"]) == "1 country"
+    assert SCOPE.languages == 3
+
+
+def test_comparison_subsets_follow_the_sensitivity_analysis() -> None:
+    assert subsets.comparison(SCOPE, "cue_country_vs_city", "v2").endswith("3 countries")
+    assert subsets.comparison(SCOPE, "cue_country_vs_city", "without CC").endswith("2 countries")
+    crisis = subsets.comparison(SCOPE, "model_size", "only countries with a crisis line")
+    assert crisis.endswith("2 countries with a crisis line")
+    assert subsets.comparison(SCOPE, "grounding_verified_number", "v2").endswith("without api-a")
+    assert "api-a" not in subsets.comparison(
+        SCOPE, "grounding_verified_number", "v2, Exchangeable, all models"
+    )
+    assert subsets.comparison(SCOPE, "us_default", "without truncated").endswith(
+        "without truncated responses"
+    )
+    with pytest.raises(ValueError, match="no subset"):
+        subsets.comparison(SCOPE, "unknown", "v2")
+
+
+def test_every_figure_row_names_its_subset_and_crisis_rows_count_crisis_line_countries() -> None:
+    frames = [
+        figures.referral_data(_referral(), STYLES, SCOPE),
+        figures.grounding_data(_grounding(), list(GROUPS), SCOPE),
+        figures.language_data(*_language_inputs(), STYLES, list(GROUPS), SCOPE),
+        figures.geography_data(*_geography_inputs(), list(GROUPS), SCOPE),
+        figures.ladder_data(_ladder(), SIZES, SCOPE),
+        figures.countries_data(_countries(), list(GROUPS)),
+    ]
+    for data in frames:
+        assert data["subset"].str.len().gt(0).all()
+    grounding, geography = frames[1], frames[3]
+    for data in (grounding, geography[geography["panel"] == "region"]):
+        crisis = data["outcome"] == "correct_crisis"
+        assert data.loc[crisis, "subset"].str.contains("with a crisis line").all()
+        assert not data.loc[~crisis, "subset"].str.contains("crisis line").any()
+
+
+def test_template_contrasts_have_subsets_and_unknown_ones_fail() -> None:
+    assert "minus" in subsets.contrast(SCOPE, "M2 - S0-country, local", "T1a", "correct_crisis")
+    assert "2 countries with a crisis line" in subsets.contrast(
+        SCOPE, "API - Gemma, S0", "all", "correct_crisis"
+    )
+    with pytest.raises(ValueError, match="no subset"):
+        subsets.contrast(SCOPE, "something else", "T1a", "correct_local")
+
+
+def _template_inputs(step: float) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    levels = pd.DataFrame(
+        [
+            {
+                "template": "all",
+                "model_group": "API",
+                "outcome": "fabricated",
+                "responses": 9,
+                **_ci(0.1),
+            }
+        ]
+    )
+    contrasts = pd.DataFrame(
+        [
+            {
+                "template": template,
+                "model_group": "API",
+                "contrast": "M2 - S0-country, local",
+                "outcome": "fabricated",
+                "responses": 9,
+                "flag": None,
+                "estimate": -0.05,
+                "ci_low": -0.09,
+                "ci_high": -0.01,
+            }
+            for template in ("T1a", "all")
+        ]
+    )
+    grounding = pd.DataFrame(
+        [
+            {
+                "model_group": "API",
+                "model_id": figures.ALL,
+                "measure": "M2 - S0-country",
+                "outcome": "fabricated",
+                "estimate": step,
+                "ci_low": -0.08,
+                "ci_high": -0.02,
+            }
+        ]
+    )
+    return levels, contrasts, grounding
+
+
+def test_pooled_template_contrasts_take_the_interval_of_the_grounding_step() -> None:
+    table = tables.templates_table(*_template_inputs(-0.05), SCOPE)
+    pooled = table[(table["template"] == "all") & (table["contrast"] != "")]
+    assert pooled[["value", "ci_low", "ci_high"]].values.tolist() == [[-0.05, -0.08, -0.02]]
+    within = table[table["template"] == "T1a"]
+    assert within[["ci_low", "ci_high"]].values.tolist() == [[-0.09, -0.01]]
+    assert pooled["subset"].iloc[0] == subsets.condition(SCOPE, "M2 - S0-country", "fabricated")
+    assert within["subset"].iloc[0].endswith(", template T1a")
+    with pytest.raises(ValueError, match="differ"):
+        tables.templates_table(*_template_inputs(-0.04), SCOPE)

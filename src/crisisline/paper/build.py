@@ -6,14 +6,16 @@ Ground truth v2 throughout, v1 only in the sensitivity table.
 
 from __future__ import annotations
 
+import json
 import logging
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 
-from crisisline.cli import load_config
+from crisisline.cli import load_config, read_csv
 from crisisline.paper import figures, style, tables
+from crisisline.paper.subsets import Scope
 
 logger = logging.getLogger(__name__)
 
@@ -27,8 +29,6 @@ def _write(table: pd.DataFrame, path: Path) -> None:
 
 def build(config: dict[str, Any]) -> int:
     """Every output of the paper stage in ``paths.paper``."""
-    # Font subsetting in the PDF backend logs every table it prunes.
-    logging.getLogger("fontTools").setLevel(logging.WARNING)
     paths, settings = config["paths"], config["analysis"]
     analysis, out = Path(paths["analysis"]), Path(paths["paper"])
     model_groups = settings["exploratory"]["model_groups"]
@@ -37,6 +37,18 @@ def build(config: dict[str, Any]) -> int:
     styles = style.model_styles(model_groups, sizes)
     group_styles = style.group_styles(groups)
     models_config = load_config(Path(paths["models_config"]))
+    temperature_block = {
+        iso2
+        for block in config["robustness"]["blocks"]
+        for iso2 in block["prompts"].get("iso2", [])
+        if iso2 != config["no_country_iso2"]
+    }
+    scope = Scope.from_rows(
+        read_csv(Path(paths["countries"])),
+        temperature_block,
+        settings["grounding_excluded_models"],
+    )
+    min_digits = settings["exploratory"]["near_miss"]["min_digits"]
 
     def read(name: str, version: str = "version") -> pd.DataFrame:
         """An analysis table, ground truth v2 only where it holds both; "NA" is Namibia."""
@@ -56,16 +68,12 @@ def build(config: dict[str, Any]) -> int:
     template_levels = read("exploratory/templates_levels.csv")
 
     figure_dir = out / "figures"
-    referral = figures.referral_data(
-        read("referral_outcomes.csv"),
-        by_model[by_model["outcome"] == "correct_local"],
-        styles,
-    )
-    ladder = figures.ladder_data(read("qwen_ladder.csv"), sizes)
+    referral = figures.referral_data(read("referral_outcomes.csv"), styles, scope)
+    ladder = figures.ladder_data(read("qwen_ladder.csv"), sizes, scope)
     drawn = {
         "fig1_referral_outcomes": (referral, figures.draw_referral),
         "fig2_knowledge_vs_location": (
-            figures.grounding_data(grounding, groups),
+            figures.grounding_data(grounding, groups, scope),
             lambda d, p: figures.draw_grounding(d, group_styles, p),
         ),
         "fig3_language": (
@@ -74,11 +82,12 @@ def build(config: dict[str, Any]) -> int:
                 read("exploratory/correct_local_by_language.csv"),
                 styles,
                 groups,
+                scope,
             ),
             lambda d, p: figures.draw_language(d, styles, group_styles, p),
         ),
         "fig4_geography": (
-            figures.geography_data(who_regions, worst, groups),
+            figures.geography_data(who_regions, worst, groups, scope),
             lambda d, p: figures.draw_geography(d, group_styles, p),
         ),
         "appendix_qwen_ladder": (
@@ -95,8 +104,13 @@ def build(config: dict[str, Any]) -> int:
         draw(data, figure_dir / name)
     logger.info("Figures done")
 
+    estimate = json.loads(Path(paths["fabrication_estimate"]).read_text(encoding="utf-8"))
     fabrication = tables.fabrication_table(
-        read("exploratory/fabrication_reader.csv"), read("fabrication_by_model.csv"), near_miss
+        read("exploratory/fabrication_reader.csv"),
+        estimate,
+        read("fabrication_by_model.csv"),
+        near_miss,
+        min_digits,
     )
     no_location = tables.no_location_table(
         primary[primary["hypothesis"] == "us_default"].iloc[0],
@@ -105,6 +119,7 @@ def build(config: dict[str, Any]) -> int:
         read("outcomes_cells.csv"),
         read("default_country.csv"),
         list(styles),
+        scope,
     )
     built = {
         "models": tables.models_table(read("models.csv"), models_config, styles),
@@ -115,11 +130,11 @@ def build(config: dict[str, Any]) -> int:
             read("exploratory/language_gap_by_language.csv"),
         ),
         "templates": tables.templates_table(
-            template_levels, read("exploratory/templates_contrasts.csv")
+            template_levels, read("exploratory/templates_contrasts.csv"), grounding, scope
         ),
-        "sensitivity": tables.sensitivity_table(hypotheses),
-        "robustness_temperature": tables.robustness_table(temperature),
-        "near_miss": tables.near_miss_table(near_miss),
+        "sensitivity": tables.sensitivity_table(hypotheses, scope),
+        "robustness_temperature": tables.robustness_table(temperature, scope),
+        "near_miss": tables.near_miss_table(near_miss, min_digits),
     }
     for name, table in built.items():
         _write(table, out / "tables" / f"{name}.csv")
@@ -138,6 +153,7 @@ def build(config: dict[str, Any]) -> int:
         groups=groups,
         fabrication_rows=fabrication,
         referral=referral,
+        scope=scope,
     )
     _write(numbers, out / "numbers.csv")
     logger.info("Paper -> %s", out)
