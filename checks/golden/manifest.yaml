@@ -1,0 +1,116 @@
+# Every file `crisisline reproduce` writes, and how its last step checks it:
+#   hash     sha256 of the bytes: outputs without floating-point values, the same bytes on
+#            every platform.
+#   numeric  against the copy at the same path in this directory (crisisline.golden):
+#            non-integer numbers within a tolerance, everything else exactly.
+#   exists   only that the file is there.
+
+- {path: artifacts/analysis/aborted_loops.csv, check: hash, sha256: 502ca808ac18b870d02961c794f9df7ad5d3d22f5be12eb4ec28910718f0deda}
+- {path: artifacts/analysis/asks_location.csv, check: hash, sha256: f0305991fb6c72f3fd8fdb5481f0d91f531b88664866df6f707669bf6757b457}
+- {path: artifacts/analysis/examples.jsonl, check: hash, sha256: fdf29793d337a617007f2994a60314c7083d8968e1b8ecd42d556359c7fa8b24}
+- {path: artifacts/analysis/exploratory/near_miss_pairs.csv, check: hash, sha256: 694489f891c73a2133a95a31ceb828a020b6df77aa296c3971dba72e9a6f0545}
+- {path: artifacts/analysis/exploratory/near_miss_validation.csv, check: hash, sha256: e32edd33eb23009c8aca52b4c0c99be6e9ac0f0b1390bb305d76b67b2a1e9a09}
+- {path: artifacts/analysis/foreign_numbers.csv, check: hash, sha256: 773e5903b36837beba9a52925f0e0915527070e97d07c458741b80e325bccf04}
+- {path: artifacts/analysis/georgia_numbers.csv, check: hash, sha256: 3a0898f51bddcb0ca8693c0a398ee66d5fede46cdd3ba8d15f7281a5766db9a4}
+- {path: artifacts/analysis/grounding_verified_number_excluded.csv, check: hash, sha256: 2a86bcade49720e36e58e073fbda738916ca2306fe4c78d770cdedb073e5de40}
+- {path: artifacts/analysis/models.csv, check: hash, sha256: 2367ab608d773b1a6491d6356307e5a93c65e579d90ad07685804e17599fd801}
+- {path: artifacts/analysis/scores/official.parquet, check: hash, sha256: b8edd1ad6585f46d3f7de7c06b6896121f52028d7c3ab2120276df6141b947b6}
+- {path: artifacts/analysis/scores/resources_official.csv, check: hash, sha256: 5169087302aad22e3e6820734348dff37b630c1cd3171331b533f87dd152bb17}
+- {path: artifacts/analysis/scores/robustness_v1.parquet, check: hash, sha256: ba7372fb524a2311ea4e37b3df41626f729dcd83159e4573316146b6e34e7ad8}
+- {path: artifacts/analysis/scores/robustness_v2.parquet, check: hash, sha256: a72a187f8e96618a5fdf23f326761b6b43d6b5286ac532884f1d961130dfa37c}
+- {path: artifacts/analysis/scores/unknowns_official.csv, check: hash, sha256: 0709df4341aa663c6d84c3d5ae0843ffaece1a5a1490e6c82de8e103b1e98611}
+- {path: artifacts/analysis/scores/unknowns_robustness_v1.csv, check: hash, sha256: ae19f5ce5eb28877b5c9c7be38621ad9d665fc19e8493793acb3e2fa10a14593}
+- {path: artifacts/analysis/scores/unknowns_robustness_v2.csv, check: hash, sha256: d00c8c46e14e76befca27df1d1810657f95173f5ae09e286f19bb9e0b0e29842}
+- {path: artifacts/m2_resources.csv, check: hash, sha256: 0b29d91f4be0a4e8580bd6137f212e8f82c5648ccca4010170eb8d024f691b50}
+- {path: artifacts/paper/tables/models.csv, check: hash, sha256: 8bbf51a7cb565713cfaf650d5f74b4b4c16148cd816e2d113f980adfd2e0c698}
+- {path: artifacts/paper/who_regions.csv, check: hash, sha256: c239151c2775555301ef8389ee8d376a2542f72a5509b251614a928cb1a982ac}
+- {path: artifacts/prompts.jsonl, check: hash, sha256: 262467b7934c88eddf5507c9c0bb2e845ab72be32fd328d938073afb314fda68}
+- {path: artifacts/scores.parquet, check: hash, sha256: 69d28239f96af34853e58f5e5d2273660807470f71550b6bfbaca8ec4aa8fdc6}
+- {path: artifacts/scores_prelabels.parquet, check: hash, sha256: 128b4df849c0d03cbaa22397a7ad8630d8a3231baf399931e89737251ab0fa50}
+- {path: artifacts/scores_v1.parquet, check: hash, sha256: 24e4b03016608ae68d91aa8225a60606cd74434becd3c05dbcf8d95b53402769}
+- {path: artifacts/unknowns.csv, check: hash, sha256: df39e82e091797d039f4b2d84fe95a83729dbeb43bc72a4c8f5d4408772d6e6a}
+- {path: artifacts/unknowns_prelabels.csv, check: hash, sha256: affc884829b6cd3c9de6c599f68e134fd9489bd452424b776344d49b8c6c427a}
+- {path: artifacts/unknowns_v1.csv, check: hash, sha256: 82d7c061b9208d9976e377d7eafcf71e5175571ce17f35c4d81e52ca51e017fe}
+
+- {path: artifacts/analysis/claude_blocked_share.csv, check: numeric}
+- {path: artifacts/analysis/claude_with_without_blocked.csv, check: numeric}
+- {path: artifacts/analysis/comparisons.csv, check: numeric}
+- {path: artifacts/analysis/correct_by_country.csv, check: numeric}
+- {path: artifacts/analysis/correct_by_country_v1.csv, check: numeric}
+- {path: artifacts/analysis/correct_local_by_model_language.csv, check: numeric}
+- {path: artifacts/analysis/crisis_by_model_country.csv, check: numeric}
+- {path: artifacts/analysis/default_country.csv, check: numeric}
+- {path: artifacts/analysis/error_types_v1.csv, check: numeric}
+- {path: artifacts/analysis/error_types_v2.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/correct_local_by_language.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/countries.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/crisis_local_language.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/directories.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/fabrication_reader.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/grounding.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/language_gap_by_language.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/language_gap_by_model.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/language_gap_strength.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/language_gap_translation_correlation.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/model_strength.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/near_miss_by_model.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/templates_contrasts.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/templates_levels.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/who_regions.csv, check: numeric}
+- {path: artifacts/analysis/exploratory/worst_countries.csv, check: numeric}
+- {path: artifacts/analysis/extraction_comparison.csv, check: numeric}
+- {path: artifacts/analysis/fabrication_by_model.csv, check: numeric}
+- {path: artifacts/analysis/fabrication_cells.csv, check: numeric}
+- {path: artifacts/analysis/georgia_case.csv, check: numeric}
+- {path: artifacts/analysis/icc.csv, check: numeric}
+- {path: artifacts/analysis/outcomes_by_model.csv, check: numeric}
+- {path: artifacts/analysis/outcomes_by_model_condition.csv, check: numeric}
+- {path: artifacts/analysis/outcomes_cells.csv, check: numeric}
+- {path: artifacts/analysis/qwen_ladder.csv, check: numeric}
+- {path: artifacts/analysis/qwen_ladder_referral.csv, check: numeric}
+- {path: artifacts/analysis/qwen_ladder_v1.csv, check: numeric}
+- {path: artifacts/analysis/referral_outcomes.csv, check: numeric}
+- {path: artifacts/analysis/robustness_temperature.csv, check: numeric}
+- {path: artifacts/analysis/us_default_breakdown.csv, check: numeric}
+- {path: artifacts/fabrication_estimate.json, check: numeric}
+- {path: artifacts/paper/figures/appendix_country_heatmap.csv, check: numeric}
+- {path: artifacts/paper/figures/appendix_native_language.csv, check: numeric}
+- {path: artifacts/paper/figures/appendix_qwen_ladder.csv, check: numeric}
+- {path: artifacts/paper/figures/fig1_world_map.csv, check: numeric}
+- {path: artifacts/paper/figures/fig2_referral_outcomes.csv, check: numeric}
+- {path: artifacts/paper/figures/fig3_language_heatmap.csv, check: numeric}
+- {path: artifacts/paper/figures/fig4_what_fixes.csv, check: numeric}
+- {path: artifacts/paper/numbers.csv, check: numeric}
+- {path: artifacts/paper/tables/fabrication.csv, check: numeric}
+- {path: artifacts/paper/tables/languages.csv, check: numeric}
+- {path: artifacts/paper/tables/near_miss.csv, check: numeric}
+- {path: artifacts/paper/tables/no_location.csv, check: numeric}
+- {path: artifacts/paper/tables/robustness_temperature.csv, check: numeric}
+- {path: artifacts/paper/tables/sensitivity.csv, check: numeric}
+- {path: artifacts/paper/tables/templates.csv, check: numeric}
+
+# Figures: images differ across platforms; the numbers they plot are in the tables next to them.
+- {path: artifacts/paper/figures/appendix_country_heatmap.pdf, check: exists}
+- {path: artifacts/paper/figures/appendix_country_heatmap.png, check: exists}
+- {path: artifacts/paper/figures/appendix_native_language.pdf, check: exists}
+- {path: artifacts/paper/figures/appendix_native_language.png, check: exists}
+- {path: artifacts/paper/figures/appendix_qwen_ladder.pdf, check: exists}
+- {path: artifacts/paper/figures/appendix_qwen_ladder.png, check: exists}
+- {path: artifacts/paper/figures/fig1_world_map.pdf, check: exists}
+- {path: artifacts/paper/figures/fig1_world_map.png, check: exists}
+- {path: artifacts/paper/figures/fig2_referral_outcomes.pdf, check: exists}
+- {path: artifacts/paper/figures/fig2_referral_outcomes.png, check: exists}
+- {path: artifacts/paper/figures/fig3_language_heatmap.pdf, check: exists}
+- {path: artifacts/paper/figures/fig3_language_heatmap.png, check: exists}
+- {path: artifacts/paper/figures/fig4_what_fixes.pdf, check: exists}
+- {path: artifacts/paper/figures/fig4_what_fixes.png, check: exists}
+- {path: artifacts/paper/talk/talk_world_map_dark.pdf, check: exists}
+- {path: artifacts/paper/talk/talk_world_map_dark.png, check: exists}
+
+# The commit and the time of the run.
+- {path: artifacts/analysis/manifest.json, check: exists}
+
+# GEE convergence of single replicates depends on floating-point rounding, so the interval
+# differs by platform; it is not used in the paper.
+- {path: artifacts/analysis/bootstrap.csv, check: exists}
+- {path: artifacts/analysis/notes.md, check: numeric, unchecked_lines: '^- Cluster bootstrap of '}

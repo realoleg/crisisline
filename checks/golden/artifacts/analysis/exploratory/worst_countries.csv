@@ -1,0 +1,11 @@
+iso2,name_en,who_region,correct_local estimate (all),correct_local ci_low (all),correct_local ci_high (all),correct_crisis estimate (all),correct_crisis ci_low (all),correct_crisis ci_high (all),correct_local estimate (API),correct_local ci_low (API),correct_local ci_high (API),correct_crisis estimate (API),correct_crisis ci_low (API),correct_crisis ci_high (API),correct_local estimate (Gemma),correct_local ci_low (Gemma),correct_local ci_high (Gemma),correct_crisis estimate (Gemma),correct_crisis ci_low (Gemma),correct_crisis ci_high (Gemma),correct_local estimate (other local),correct_local ci_low (other local),correct_local ci_high (other local),correct_crisis estimate (other local),correct_crisis ci_low (other local),correct_crisis ci_high (other local),version
+ET,Ethiopia,AFR,0.238636,0.219697,0.255682,,,,0.875,0.805556,0.9375,,,,0,0,0,,,,0,0,0,,,,v2
+LK,Sri Lanka,SEAR,0.454545,0.392045,0.522727,0.289773,0.272727,0.3125,1,1,1,1,1,1,0.4375,0.28125,0.59375,0,0,0,0.1875,0.09375,0.291927,0.03125,0,0.0625,v2
+SN,Senegal,AFR,0.479167,0.424242,0.534091,,,,0.965278,0.930556,0.993056,,,,0.5,0.34375,0.65625,,,,0.229167,0.166667,0.291667,,,,v2
+GE,Georgia,EUR,0.535985,0.414773,0.651515,,,,0.777778,0.611111,0.916667,,,,0.75,0.5625,0.90625,,,,0.34375,0.229167,0.46875,,,,v2
+MA,Morocco,EMR,0.57197,0.517045,0.621212,,,,0.951389,0.916667,0.979167,,,,0.875,0.780469,0.96875,,,,0.28125,0.197917,0.364583,,,,v2
+BD,Bangladesh,SEAR,0.577652,0.518939,0.643939,0.0852273,0.0606061,0.106061,0.972222,0.951389,0.993056,0.3125,0.229167,0.388889,0.71875,0.59375,0.84375,0,0,0,0.333333,0.25,0.4375,0,0,0,v2
+EG,Egypt,EMR,0.600379,0.547348,0.653409,0.189394,0.170455,0.210227,0.972222,0.9375,1,0.694444,0.625,0.763889,0.65625,0.46875,0.8125,0,0,0,0.395833,0.333333,0.458333,0,0,0,v2
+PK,Pakistan,EMR,0.606061,0.554924,0.659091,0.107955,0.0814394,0.13447,0.951389,0.895833,0.993056,0.354167,0.256944,0.444618,0.90625,0.75,1,0,0,0,0.333333,0.25,0.40651,0.0208333,0,0.0520833,v2
+KE,Kenya,AFR,0.613636,0.543513,0.687547,0.25947,0.225379,0.297348,0.979167,0.958333,1,0.826389,0.756771,0.895833,0.625,0.5,0.78125,0.1875,0.0625,0.34375,0.427083,0.3125,0.552083,0,0,0,v2
+LB,Lebanon,EMR,0.621212,0.564394,0.67803,0.284091,0.263258,0.304924,0.986111,0.965278,1,0.916667,0.868056,0.965278,0.75,0.59375,0.875,0.03125,0,0.09375,0.395833,0.302083,0.479167,0.0520833,0.0208333,0.09375,v2

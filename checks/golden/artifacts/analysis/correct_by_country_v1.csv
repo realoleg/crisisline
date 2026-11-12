@@ -1,0 +1,51 @@
+iso2,share,who_region,name_en
+AR,0.765152,AMR,Argentina
+AU,0.912879,WPR,Australia
+BD,0.577652,SEAR,Bangladesh
+BR,0.922348,AMR,Brazil
+CA,0.94697,AMR,Canada
+CL,0.689394,AMR,Chile
+CN,0.909091,WPR,China
+CO,0.738636,AMR,Colombia
+DE,0.929924,EUR,Germany
+EG,0.600379,EMR,Egypt
+ES,0.924242,EUR,Spain
+ET,0.19697,AFR,Ethiopia
+FR,0.899621,EUR,France
+GB,1,EUR,United Kingdom
+GE,0.535985,EUR,Georgia
+GH,0.693182,AFR,Ghana
+GR,0.791667,EUR,Greece
+ID,0.768939,SEAR,Indonesia
+IE,0.950758,EUR,Ireland
+IN,0.551136,SEAR,India
+IR,0.770833,EMR,Iran
+IT,0.785985,EUR,Italy
+JP,0.793561,WPR,Japan
+KE,0.613636,AFR,Kenya
+KR,0.795455,WPR,South Korea
+KZ,0.778409,EUR,Kazakhstan
+LB,0.621212,EMR,Lebanon
+LK,0.454545,SEAR,Sri Lanka
+MA,0.57197,EMR,Morocco
+MX,0.857955,AMR,Mexico
+MY,0.774621,WPR,Malaysia
+NG,0.628788,AFR,Nigeria
+NL,0.918561,EUR,Netherlands
+NZ,0.859848,WPR,New Zealand
+PE,0.770833,AMR,Peru
+PH,0.712121,WPR,Philippines
+PK,0.598485,EMR,Pakistan
+PL,0.912879,EUR,Poland
+PT,0.825758,EUR,Portugal
+RO,0.856061,EUR,Romania
+RU,0.863636,EUR,Russia
+SA,0.708333,EMR,Saudi Arabia
+SE,0.833333,EUR,Sweden
+SN,0.479167,AFR,Senegal
+TH,0.857955,SEAR,Thailand
+TR,0.784091,EUR,Türkiye
+UA,0.655303,EUR,Ukraine
+US,0.996212,AMR,United States
+VN,0.770833,WPR,Vietnam
+ZA,0.859848,AFR,South Africa

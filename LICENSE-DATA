@@ -1,0 +1,16 @@
+The crisisline ground truth, prompts and annotations are licensed under the Creative Commons
+Attribution 4.0 International licence (CC BY 4.0):
+
+    https://creativecommons.org/licenses/by/4.0/legalcode
+
+Copyright (c) 2026 The crisisline authors
+
+This covers:
+
+- data/countries.csv, data/resources.csv, data/resources_v1.csv, data/shared_numbers.csv
+- data/annotations/
+- data/translations/
+- configs/prompts.yaml
+
+data/ne_110m_admin_0_countries.geojson is Natural Earth data, in the public domain, and is not
+covered by this licence. The code is licensed under the MIT licence (LICENSE).

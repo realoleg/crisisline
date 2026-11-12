@@ -1,0 +1,166 @@
+model_id,outcome,responses,prompts,share,ci_low,ci_high,interval,version
+claude-haiku-5.5,correct_local,3384,1128,0.951241,0.942967,0.959515,bootstrap over prompts,prefix
+claude-haiku-5.5,correct_crisis,3024,1008,0.819444,0.800265,0.839947,bootstrap over prompts,prefix
+claude-haiku-5.5,wrong_country,3384,1128,0.0656028,0.0543661,0.0771277,bootstrap over prompts,prefix
+claude-haiku-5.5,na_default,3756,1252,0.0239617,0.0165069,0.0314164,bootstrap over prompts,prefix
+claude-haiku-5.5,no_resource,3756,1252,0.000798722,0,0.00186368,bootstrap over prompts,prefix
+gemini-3.5-flash-lite,correct_local,3384,1128,0.976655,0.969267,0.983156,bootstrap over prompts,prefix
+gemini-3.5-flash-lite,correct_crisis,3024,1008,0.843915,0.824074,0.863426,bootstrap over prompts,prefix
+gemini-3.5-flash-lite,wrong_country,3384,1128,0.0664894,0.054669,0.0777187,bootstrap over prompts,prefix
+gemini-3.5-flash-lite,na_default,3756,1252,0.0311502,0.0231629,0.0396699,bootstrap over prompts,prefix
+gemini-3.5-flash-lite,no_resource,3756,1252,0.00425985,0.00186368,0.00745474,bootstrap over prompts,prefix
+gemma4-e2b,correct_local,1128,1128,0.891844,0.872372,0.908656,wilson,prefix
+gemma4-e2b,correct_crisis,1008,1008,0.636905,0.60675,0.66602,wilson,prefix
+gemma4-e2b,wrong_country,1128,1128,0.10461,0.0880716,0.123832,wilson,prefix
+gemma4-e2b,na_default,1252,1252,0.0646965,0.0523581,0.079698,wilson,prefix
+gemma4-e2b,no_resource,1252,1252,0.0375399,0.028347,0.0495621,wilson,prefix
+gemma4-e4b,correct_local,1128,1128,0.89805,0.879019,0.914378,wilson,prefix
+gemma4-e4b,correct_crisis,1008,1008,0.638889,0.608761,0.667962,wilson,prefix
+gemma4-e4b,wrong_country,1128,1128,0.0833333,0.0685839,0.100911,wilson,prefix
+gemma4-e4b,na_default,1252,1252,0.0415335,0.0318123,0.0540596,wilson,prefix
+gemma4-e4b,no_resource,1252,1252,0.0319489,0.0235493,0.0432119,wilson,prefix
+gpt-6-luna,correct_local,3384,1128,0.99409,0.990544,0.997045,bootstrap over prompts,prefix
+gpt-6-luna,correct_crisis,3024,1008,0.822421,0.799603,0.843915,bootstrap over prompts,prefix
+gpt-6-luna,wrong_country,3384,1128,0.036052,0.0274823,0.0446217,bootstrap over prompts,prefix
+gpt-6-luna,na_default,3756,1252,0.0218317,0.0146432,0.0292865,bootstrap over prompts,prefix
+gpt-6-luna,no_resource,3756,1252,0.00452609,0.00186368,0.00772098,bootstrap over prompts,prefix
+llama3.1-8b,correct_local,1128,1128,0.557624,0.528493,0.586364,wilson,prefix
+llama3.1-8b,correct_crisis,1008,1008,0.342262,0.31362,0.372102,wilson,prefix
+llama3.1-8b,wrong_country,1128,1128,0.0975177,0.081547,0.116221,wilson,prefix
+llama3.1-8b,na_default,1252,1252,0.0183706,0.0122721,0.0274156,wilson,prefix
+llama3.1-8b,no_resource,1252,1252,0.146166,0.12768,0.166817,wilson,prefix
+local-8,correct_local,1128,1128,0.699468,0.672072,0.72551,wilson,prefix
+local-8,correct_crisis,1008,1008,0.446429,0.416001,0.477263,wilson,prefix
+local-8,wrong_country,1128,1128,0.187057,0.165376,0.210862,wilson,prefix
+local-8,na_default,1252,1252,0.0311502,0.0228697,0.0422989,wilson,prefix
+local-8,no_resource,1252,1252,0.0527157,0.0416491,0.0665185,wilson,prefix
+qwen3.5-0.8b,correct_local,1128,1128,0.35195,0.324626,0.38028,wilson,prefix
+qwen3.5-0.8b,correct_crisis,1008,1008,0.202381,0.178729,0.228292,wilson,prefix
+qwen3.5-0.8b,wrong_country,1128,1128,0.307624,0.281382,0.335172,wilson,prefix
+qwen3.5-0.8b,na_default,1252,1252,0.130192,0.112677,0.149969,wilson,prefix
+qwen3.5-0.8b,no_resource,1252,1252,0.308307,0.283346,0.33444,wilson,prefix
+qwen3.5-2b,correct_local,1128,1128,0.597518,0.568615,0.625758,wilson,prefix
+qwen3.5-2b,correct_crisis,1008,1008,0.304563,0.276939,0.333672,wilson,prefix
+qwen3.5-2b,wrong_country,1128,1128,0.428191,0.399607,0.457263,wilson,prefix
+qwen3.5-2b,na_default,1252,1252,0.175719,0.155639,0.197783,wilson,prefix
+qwen3.5-2b,no_resource,1252,1252,0.10623,0.0903501,0.124519,wilson,prefix
+qwen3.5-4b,correct_local,1128,1128,0.822695,0.799323,0.843877,wilson,prefix
+qwen3.5-4b,correct_crisis,1008,1008,0.486111,0.455368,0.51696,wilson,prefix
+qwen3.5-4b,wrong_country,1128,1128,0.26773,0.242712,0.294326,wilson,prefix
+qwen3.5-4b,na_default,1252,1252,0.0607029,0.048772,0.0753213,wilson,prefix
+qwen3.5-4b,no_resource,1252,1252,0.0231629,0.0161753,0.0330678,wilson,prefix
+qwen3.5-9b,correct_local,1128,1128,0.883865,0.863852,0.901273,wilson,prefix
+qwen3.5-9b,correct_crisis,1008,1008,0.548611,0.517764,0.579089,wilson,prefix
+qwen3.5-9b,wrong_country,1128,1128,0.178191,0.156963,0.201604,wilson,prefix
+qwen3.5-9b,na_default,1252,1252,0.0519169,0.0409409,0.0656343,wilson,prefix
+qwen3.5-9b,no_resource,1252,1252,0.00559105,0.00271091,0.0114959,wilson,prefix
+claude-haiku-5.5,correct_local,3384,1128,0.951241,0.942967,0.959515,bootstrap over prompts,prelabels
+claude-haiku-5.5,correct_crisis,3024,1008,0.819444,0.800265,0.839947,bootstrap over prompts,prelabels
+claude-haiku-5.5,wrong_country,3384,1128,0.0656028,0.0543661,0.0771277,bootstrap over prompts,prelabels
+claude-haiku-5.5,na_default,3756,1252,0.0239617,0.0165069,0.0314164,bootstrap over prompts,prelabels
+claude-haiku-5.5,no_resource,3756,1252,0.000798722,0,0.00186368,bootstrap over prompts,prelabels
+gemini-3.5-flash-lite,correct_local,3384,1128,0.976655,0.969267,0.983156,bootstrap over prompts,prelabels
+gemini-3.5-flash-lite,correct_crisis,3024,1008,0.843915,0.824074,0.863426,bootstrap over prompts,prelabels
+gemini-3.5-flash-lite,wrong_country,3384,1128,0.0664894,0.054669,0.0777187,bootstrap over prompts,prelabels
+gemini-3.5-flash-lite,na_default,3756,1252,0.0311502,0.0231629,0.0396699,bootstrap over prompts,prelabels
+gemini-3.5-flash-lite,no_resource,3756,1252,0.00425985,0.00186368,0.00745474,bootstrap over prompts,prelabels
+gemma4-e2b,correct_local,1128,1128,0.891844,0.872372,0.908656,wilson,prelabels
+gemma4-e2b,correct_crisis,1008,1008,0.636905,0.60675,0.66602,wilson,prelabels
+gemma4-e2b,wrong_country,1128,1128,0.10461,0.0880716,0.123832,wilson,prelabels
+gemma4-e2b,na_default,1252,1252,0.0646965,0.0523581,0.079698,wilson,prelabels
+gemma4-e2b,no_resource,1252,1252,0.0375399,0.028347,0.0495621,wilson,prelabels
+gemma4-e4b,correct_local,1128,1128,0.900709,0.881874,0.916824,wilson,prelabels
+gemma4-e4b,correct_crisis,1008,1008,0.642857,0.612786,0.671843,wilson,prelabels
+gemma4-e4b,wrong_country,1128,1128,0.0833333,0.0685839,0.100911,wilson,prelabels
+gemma4-e4b,na_default,1252,1252,0.0415335,0.0318123,0.0540596,wilson,prelabels
+gemma4-e4b,no_resource,1252,1252,0.0319489,0.0235493,0.0432119,wilson,prelabels
+gpt-6-luna,correct_local,3384,1128,0.994385,0.990839,0.99734,bootstrap over prompts,prelabels
+gpt-6-luna,correct_crisis,3024,1008,0.822421,0.799603,0.843915,bootstrap over prompts,prelabels
+gpt-6-luna,wrong_country,3384,1128,0.036052,0.0274823,0.0446217,bootstrap over prompts,prelabels
+gpt-6-luna,na_default,3756,1252,0.0218317,0.0146432,0.0292865,bootstrap over prompts,prelabels
+gpt-6-luna,no_resource,3756,1252,0.00452609,0.00186368,0.00772098,bootstrap over prompts,prelabels
+llama3.1-8b,correct_local,1128,1128,0.559397,0.530272,0.588119,wilson,prelabels
+llama3.1-8b,correct_crisis,1008,1008,0.347222,0.318462,0.377142,wilson,prelabels
+llama3.1-8b,wrong_country,1128,1128,0.100177,0.0839906,0.119078,wilson,prelabels
+llama3.1-8b,na_default,1252,1252,0.0439297,0.0339047,0.0567449,wilson,prelabels
+llama3.1-8b,no_resource,1252,1252,0.14377,0.125424,0.164295,wilson,prelabels
+local-8,correct_local,1128,1128,0.700355,0.672978,0.726371,wilson,prelabels
+local-8,correct_crisis,1008,1008,0.447421,0.416983,0.478258,wilson,prelabels
+local-8,wrong_country,1128,1128,0.190603,0.168746,0.214559,wilson,prelabels
+local-8,na_default,1252,1252,0.0359425,0.0269694,0.0477546,wilson,prelabels
+local-8,no_resource,1252,1252,0.0519169,0.0409409,0.0656343,wilson,prelabels
+qwen3.5-0.8b,correct_local,1128,1128,0.35195,0.324626,0.38028,wilson,prelabels
+qwen3.5-0.8b,correct_crisis,1008,1008,0.202381,0.178729,0.228292,wilson,prelabels
+qwen3.5-0.8b,wrong_country,1128,1128,0.308511,0.282245,0.336077,wilson,prelabels
+qwen3.5-0.8b,na_default,1252,1252,0.13099,0.113425,0.150813,wilson,prelabels
+qwen3.5-0.8b,no_resource,1252,1252,0.305112,0.280235,0.331181,wilson,prelabels
+qwen3.5-2b,correct_local,1128,1128,0.597518,0.568615,0.625758,wilson,prelabels
+qwen3.5-2b,correct_crisis,1008,1008,0.304563,0.276939,0.333672,wilson,prelabels
+qwen3.5-2b,wrong_country,1128,1128,0.428191,0.399607,0.457263,wilson,prelabels
+qwen3.5-2b,na_default,1252,1252,0.178115,0.157916,0.200284,wilson,prelabels
+qwen3.5-2b,no_resource,1252,1252,0.103035,0.087392,0.121107,wilson,prelabels
+qwen3.5-4b,correct_local,1128,1128,0.822695,0.799323,0.843877,wilson,prelabels
+qwen3.5-4b,correct_crisis,1008,1008,0.486111,0.455368,0.51696,wilson,prelabels
+qwen3.5-4b,wrong_country,1128,1128,0.26773,0.242712,0.294326,wilson,prelabels
+qwen3.5-4b,na_default,1252,1252,0.0607029,0.048772,0.0753213,wilson,prelabels
+qwen3.5-4b,no_resource,1252,1252,0.0183706,0.0122721,0.0274156,wilson,prelabels
+qwen3.5-9b,correct_local,1128,1128,0.883865,0.863852,0.901273,wilson,prelabels
+qwen3.5-9b,correct_crisis,1008,1008,0.548611,0.517764,0.579089,wilson,prelabels
+qwen3.5-9b,wrong_country,1128,1128,0.179965,0.158644,0.203457,wilson,prelabels
+qwen3.5-9b,na_default,1252,1252,0.0535144,0.0423582,0.0674021,wilson,prelabels
+qwen3.5-9b,no_resource,1252,1252,0.000798722,0.000141008,0.00451042,wilson,prelabels
+claude-haiku-5.5,correct_local,3384,1128,0.956265,0.948286,0.963948,bootstrap over prompts,v2
+claude-haiku-5.5,correct_crisis,3024,1008,0.827381,0.809193,0.847222,bootstrap over prompts,v2
+claude-haiku-5.5,wrong_country,3384,1128,0.0673759,0.0558511,0.0791962,bootstrap over prompts,v2
+claude-haiku-5.5,na_default,3756,1252,0.0239617,0.0165069,0.0314164,bootstrap over prompts,v2
+claude-haiku-5.5,no_resource,3756,1252,0.000798722,0,0.00186368,bootstrap over prompts,v2
+gemini-3.5-flash-lite,correct_local,3384,1128,0.97961,0.972518,0.986111,bootstrap over prompts,v2
+gemini-3.5-flash-lite,correct_crisis,3024,1008,0.873347,0.853505,0.891212,bootstrap over prompts,v2
+gemini-3.5-flash-lite,wrong_country,3384,1128,0.0667849,0.0552527,0.0783097,bootstrap over prompts,v2
+gemini-3.5-flash-lite,na_default,3756,1252,0.0311502,0.0231629,0.0396699,bootstrap over prompts,v2
+gemini-3.5-flash-lite,no_resource,3756,1252,0.00425985,0.00186368,0.00745474,bootstrap over prompts,v2
+gemma4-e2b,correct_local,1128,1128,0.89805,0.879019,0.914378,wilson,v2
+gemma4-e2b,correct_crisis,1008,1008,0.664683,0.634962,0.693153,wilson,v2
+gemma4-e2b,wrong_country,1128,1128,0.109929,0.0929818,0.129524,wilson,v2
+gemma4-e2b,na_default,1252,1252,0.0646965,0.0523581,0.079698,wilson,v2
+gemma4-e2b,no_resource,1252,1252,0.0375399,0.028347,0.0495621,wilson,v2
+gemma4-e4b,correct_local,1128,1128,0.913121,0.89525,0.928187,wilson,v2
+gemma4-e4b,correct_crisis,1008,1008,0.680556,0.651133,0.708607,wilson,v2
+gemma4-e4b,wrong_country,1128,1128,0.0842199,0.0693903,0.101872,wilson,v2
+gemma4-e4b,na_default,1252,1252,0.0415335,0.0318123,0.0540596,wilson,v2
+gemma4-e4b,no_resource,1252,1252,0.0319489,0.0235493,0.0432119,wilson,v2
+gpt-6-luna,correct_local,3384,1128,0.99734,0.994681,0.999409,bootstrap over prompts,v2
+gpt-6-luna,correct_crisis,3024,1008,0.844907,0.823082,0.86541,bootstrap over prompts,v2
+gpt-6-luna,wrong_country,3384,1128,0.036052,0.0274823,0.0446217,bootstrap over prompts,v2
+gpt-6-luna,na_default,3756,1252,0.0218317,0.0146432,0.0292865,bootstrap over prompts,v2
+gpt-6-luna,no_resource,3756,1252,0.00452609,0.00186368,0.00772098,bootstrap over prompts,v2
+llama3.1-8b,correct_local,1128,1128,0.592199,0.563254,0.620517,wilson,v2
+llama3.1-8b,correct_crisis,1008,1008,0.37996,0.350506,0.410326,wilson,v2
+llama3.1-8b,wrong_country,1128,1128,0.111702,0.0946215,0.131419,wilson,v2
+llama3.1-8b,na_default,1252,1252,0.0439297,0.0339047,0.0567449,wilson,v2
+llama3.1-8b,no_resource,1252,1252,0.145367,0.126928,0.165976,wilson,v2
+local-8,correct_local,1128,1128,0.710106,0.682951,0.735835,wilson,v2
+local-8,correct_crisis,1008,1008,0.484127,0.453395,0.51498,wilson,v2
+local-8,wrong_country,1128,1128,0.198582,0.176341,0.222868,wilson,v2
+local-8,na_default,1252,1252,0.0359425,0.0269694,0.0477546,wilson,v2
+local-8,no_resource,1252,1252,0.0519169,0.0409409,0.0656343,wilson,v2
+qwen3.5-0.8b,correct_local,1128,1128,0.359043,0.331569,0.387473,wilson,v2
+qwen3.5-0.8b,correct_crisis,1008,1008,0.202381,0.178729,0.228292,wilson,v2
+qwen3.5-0.8b,wrong_country,1128,1128,0.322695,0.296054,0.350539,wilson,v2
+qwen3.5-0.8b,na_default,1252,1252,0.13099,0.113425,0.150813,wilson,v2
+qwen3.5-0.8b,no_resource,1252,1252,0.304313,0.279457,0.330366,wilson,v2
+qwen3.5-2b,correct_local,1128,1128,0.611702,0.582928,0.639718,wilson,v2
+qwen3.5-2b,correct_crisis,1008,1008,0.30754,0.279827,0.336714,wilson,v2
+qwen3.5-2b,wrong_country,1128,1128,0.45922,0.430326,0.488391,wilson,v2
+qwen3.5-2b,na_default,1252,1252,0.178115,0.157916,0.200284,wilson,v2
+qwen3.5-2b,no_resource,1252,1252,0.101438,0.0859148,0.119399,wilson,v2
+qwen3.5-4b,correct_local,1128,1128,0.828014,0.804888,0.848914,wilson,v2
+qwen3.5-4b,correct_crisis,1008,1008,0.514881,0.48403,0.545619,wilson,v2
+qwen3.5-4b,wrong_country,1128,1128,0.278369,0.252999,0.305243,wilson,v2
+qwen3.5-4b,na_default,1252,1252,0.0615016,0.049488,0.0761979,wilson,v2
+qwen3.5-4b,no_resource,1252,1252,0.0183706,0.0122721,0.0274156,wilson,v2
+qwen3.5-9b,correct_local,1128,1128,0.893617,0.874269,0.910293,wilson,v2
+qwen3.5-9b,correct_crisis,1008,1008,0.583333,0.552638,0.613396,wilson,v2
+qwen3.5-9b,wrong_country,1128,1128,0.192376,0.170433,0.216407,wilson,v2
+qwen3.5-9b,na_default,1252,1252,0.0535144,0.0423582,0.0674021,wilson,v2
+qwen3.5-9b,no_resource,1252,1252,0.000798722,0.000141008,0.00451042,wilson,v2

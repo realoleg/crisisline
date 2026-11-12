@@ -1,0 +1,78 @@
+group,model_id,referral,left,share,ci_low,ci_high,subset,model
+API,gpt-6-luna,correct_crisis_line,0,0.819959,0.792683,0.846721,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",GPT-6 Luna
+API,gpt-6-luna,correct_local_not_crisis_line,0.819959,0.180041,0.153807,0.208848,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",GPT-6 Luna
+API,gpt-6-luna,misrouted,1,0,0,0,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",GPT-6 Luna
+API,gpt-6-luna,fabricated,1,0,0,0,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",GPT-6 Luna
+API,gpt-6-luna,unconfirmed_number,1,0,0,0,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",GPT-6 Luna
+API,gpt-6-luna,nothing,1,0,0,0,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",GPT-6 Luna
+API,gpt-6-luna,correct_local,0,1,1,1,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",GPT-6 Luna
+API,gemini-3.5-flash-lite,correct_crisis_line,0,0.847222,0.820988,0.873457,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemini 3.5 Flash-Lite
+API,gemini-3.5-flash-lite,correct_local_not_crisis_line,0.847222,0.139403,0.115226,0.164095,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemini 3.5 Flash-Lite
+API,gemini-3.5-flash-lite,misrouted,0.986625,0.00102881,0,0.00257202,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemini 3.5 Flash-Lite
+API,gemini-3.5-flash-lite,fabricated,0.987654,0.00154321,0,0.00360082,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemini 3.5 Flash-Lite
+API,gemini-3.5-flash-lite,unconfirmed_number,0.989197,0.0108025,0.00565844,0.0174897,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemini 3.5 Flash-Lite
+API,gemini-3.5-flash-lite,nothing,1,0,0,0,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemini 3.5 Flash-Lite
+API,gemini-3.5-flash-lite,correct_local,0,0.986626,0.979424,0.992798,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemini 3.5 Flash-Lite
+API,claude-haiku-5.5,correct_crisis_line,0,0.797325,0.771078,0.823573,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Claude Haiku 5.5
+API,claude-haiku-5.5,correct_local_not_crisis_line,0.797325,0.163066,0.137346,0.189313,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Claude Haiku 5.5
+API,claude-haiku-5.5,misrouted,0.960391,0,0,0,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Claude Haiku 5.5
+API,claude-haiku-5.5,fabricated,0.960391,0,0,0,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Claude Haiku 5.5
+API,claude-haiku-5.5,unconfirmed_number,0.960391,0,0,0,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Claude Haiku 5.5
+API,claude-haiku-5.5,nothing,0.960391,0.0396091,0.0308642,0.0483539,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Claude Haiku 5.5
+API,claude-haiku-5.5,correct_local,0,0.960391,0.951646,0.969136,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Claude Haiku 5.5
+Gemma,gemma4-e4b,correct_crisis_line,0,0.606481,0.568345,0.643362,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E4B
+Gemma,gemma4-e4b,correct_local_not_crisis_line,0.606481,0.314815,0.280235,0.351577,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E4B
+Gemma,gemma4-e4b,misrouted,0.921296,0.00925926,0.00425031,0.0200523,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E4B
+Gemma,gemma4-e4b,fabricated,0.930555,0.00154321,0.000272466,0.00868901,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E4B
+Gemma,gemma4-e4b,unconfirmed_number,0.932098,0.0169753,0.0095047,0.0301391,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E4B
+Gemma,gemma4-e4b,nothing,0.949074,0.0509259,0.0364891,0.0706557,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E4B
+Gemma,gemma4-e4b,correct_local,0,0.921296,0.897993,0.939634,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E4B
+Gemma,gemma4-e2b,correct_crisis_line,0,0.58179,0.543438,0.619178,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E2B
+Gemma,gemma4-e2b,correct_local_not_crisis_line,0.58179,0.320988,0.286188,0.357897,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E2B
+Gemma,gemma4-e2b,misrouted,0.902778,0.0462963,0.0326191,0.065321,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E2B
+Gemma,gemma4-e2b,fabricated,0.949074,0.00154321,0.000272466,0.00868901,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E2B
+Gemma,gemma4-e2b,unconfirmed_number,0.950618,0.00771605,0.00330021,0.0179342,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E2B
+Gemma,gemma4-e2b,nothing,0.958334,0.0416667,0.0287916,0.0599439,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E2B
+Gemma,gemma4-e2b,correct_local,0,0.902778,0.877537,0.923271,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Gemma 4 E2B
+other local,qwen3.5-9b,correct_crisis_line,0,0.478395,0.440174,0.51687,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B
+other local,qwen3.5-9b,correct_local_not_crisis_line,0.478395,0.435185,0.397505,0.473629,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B
+other local,qwen3.5-9b,misrouted,0.91358,0.0432099,0.0300624,0.0617413,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B
+other local,qwen3.5-9b,fabricated,0.95679,0.00617284,0.00240304,0.0157631,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B
+other local,qwen3.5-9b,unconfirmed_number,0.962963,0.037037,0.0250132,0.0545176,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B
+other local,qwen3.5-9b,nothing,1,0,0,0.00589324,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B
+other local,qwen3.5-9b,correct_local,0,0.91358,0.889435,0.932851,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B
+other local,qwen3.5-4b,correct_crisis_line,0,0.402778,0.365695,0.441006,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+other local,qwen3.5-4b,correct_local_not_crisis_line,0.402778,0.458333,0.420328,0.49683,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+other local,qwen3.5-4b,misrouted,0.861111,0.0632716,0.0469799,0.0847108,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+other local,qwen3.5-4b,fabricated,0.924383,0.0262346,0.016443,0.0416101,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+other local,qwen3.5-4b,unconfirmed_number,0.950617,0.0416667,0.0287916,0.0599439,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+other local,qwen3.5-4b,nothing,0.992284,0.00771605,0.00330021,0.0179342,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+other local,qwen3.5-4b,correct_local,0,0.861111,0.832349,0.885617,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+other local,local-8,correct_crisis_line,0,0.367284,0.331051,0.405081,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Ministral 3 8B
+other local,local-8,correct_local_not_crisis_line,0.367284,0.308642,0.27429,0.345249,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Ministral 3 8B
+other local,local-8,misrouted,0.675926,0.0709877,0.0536403,0.0933916,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Ministral 3 8B
+other local,local-8,fabricated,0.746914,0.0848765,0.0657886,0.108857,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Ministral 3 8B
+other local,local-8,unconfirmed_number,0.83179,0.135802,0.111562,0.164335,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Ministral 3 8B
+other local,local-8,nothing,0.967592,0.0324074,0.0212926,0.0490335,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Ministral 3 8B
+other local,local-8,correct_local,0,0.675926,0.638945,0.710833,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Ministral 3 8B
+other local,llama3.1-8b,correct_crisis_line,0,0.270062,0.237306,0.305528,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Llama 3.1 8B
+other local,llama3.1-8b,correct_local_not_crisis_line,0.270062,0.348765,0.31306,0.386253,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Llama 3.1 8B
+other local,llama3.1-8b,misrouted,0.618827,0.0617284,0.0456566,0.0829659,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Llama 3.1 8B
+other local,llama3.1-8b,fabricated,0.680555,0.0833333,0.0644298,0.107148,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Llama 3.1 8B
+other local,llama3.1-8b,unconfirmed_number,0.763889,0.149691,0.12429,0.179222,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Llama 3.1 8B
+other local,llama3.1-8b,nothing,0.91358,0.0864198,0.0671495,0.110565,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Llama 3.1 8B
+other local,llama3.1-8b,correct_local,0,0.618827,0.580836,0.655417,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Llama 3.1 8B
+other local,qwen3.5-2b,correct_crisis_line,0,0.165123,0.138526,0.195668,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+other local,qwen3.5-2b,correct_local_not_crisis_line,0.165123,0.433642,0.395987,0.472079,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+other local,qwen3.5-2b,misrouted,0.598765,0.24537,0.213803,0.279939,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+other local,qwen3.5-2b,fabricated,0.844135,0.0138889,0.00732388,0.0261834,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+other local,qwen3.5-2b,unconfirmed_number,0.858024,0.0756173,0.0576686,0.0985679,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+other local,qwen3.5-2b,nothing,0.933641,0.066358,0.0496355,0.0881917,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+other local,qwen3.5-2b,correct_local,0,0.598765,0.560551,0.635815,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+other local,qwen3.5-0.8b,correct_crisis_line,0,0.0601852,0.0443365,0.0812178,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B
+other local,qwen3.5-0.8b,correct_local_not_crisis_line,0.0601852,0.209877,0.180278,0.242894,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B
+other local,qwen3.5-0.8b,misrouted,0.270062,0.273148,0.240253,0.308717,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B
+other local,qwen3.5-0.8b,fabricated,0.54321,0.0277778,0.0176418,0.0434796,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B
+other local,qwen3.5-0.8b,unconfirmed_number,0.570988,0.182099,0.154287,0.213658,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B
+other local,qwen3.5-0.8b,nothing,0.753087,0.246914,0.215268,0.281542,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B
+other local,qwen3.5-0.8b,correct_local,0,0.270062,0.237306,0.305528,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B

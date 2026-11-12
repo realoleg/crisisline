@@ -1,0 +1,249 @@
+model_group,lang,countries,outcome,estimate,ci_low,ci_high,clusters,units,responses,cluster,version
+API,am,1,correct_local,0.791667,0.708333,0.888889,8,24,72,prompt_id,v2
+API,ar,4,correct_local,0.951389,0.9375,0.965278,4,96,288,iso2,v2
+API,bn,1,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,de,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,el,1,correct_local,1,1,1,8,24,72,prompt_id,v2
+API,en,9,correct_local,0.970679,0.95216,0.986111,9,216,648,iso2,v2
+API,es,6,correct_local,0.981481,0.976852,0.986111,6,144,432,iso2,v2
+API,fa,1,correct_local,1,1,1,8,24,72,prompt_id,v2
+API,fil,1,correct_local,0.972222,0.944444,1,8,24,72,prompt_id,v2
+API,fr,2,correct_local,0.972222,0.958333,0.986111,2,48,144,iso2,v2
+API,hi,1,correct_local,1,1,1,8,24,72,prompt_id,v2
+API,id,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,it,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,ja,1,correct_local,1,1,1,8,24,72,prompt_id,v2
+API,ka,1,correct_local,0.930556,0.875,0.986111,8,24,72,prompt_id,v2
+API,ko,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,ms,1,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,nl,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,pl,1,correct_local,1,1,1,8,24,72,prompt_id,v2
+API,pt,2,correct_local,0.986111,0.972222,1,2,48,144,iso2,v2
+API,ro,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,ru,2,correct_local,0.986111,0.972222,1,2,48,144,iso2,v2
+API,si,1,correct_local,1,1,1,8,24,72,prompt_id,v2
+API,sv,1,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,sw,1,correct_local,0.972222,0.944444,1,8,24,72,prompt_id,v2
+API,th,1,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,tr,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,uk,1,correct_local,1,1,1,8,24,72,prompt_id,v2
+API,ur,1,correct_local,0.972222,0.944444,1,8,24,72,prompt_id,v2
+API,vi,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,zh,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+Gemma,am,1,correct_local,0,0,0,8,16,16,prompt_id,v2
+Gemma,ar,4,correct_local,0.734375,0.546875,0.90625,4,64,64,iso2,v2
+Gemma,bn,1,correct_local,0.625,0.5,0.8125,8,16,16,prompt_id,v2
+Gemma,de,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,el,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,en,9,correct_local,0.923611,0.8125,1,9,144,144,iso2,v2
+Gemma,es,6,correct_local,1,1,1,6,96,96,iso2,v2
+Gemma,fa,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,fil,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,fr,2,correct_local,0.75,0.5,1,2,32,32,iso2,v2
+Gemma,hi,1,correct_local,0.8125,0.625,0.9375,8,16,16,prompt_id,v2
+Gemma,id,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,it,1,correct_local,0.875,0.6875,1,8,16,16,prompt_id,v2
+Gemma,ja,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,ka,1,correct_local,0.9375,0.8125,1,8,16,16,prompt_id,v2
+Gemma,ko,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,ms,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,nl,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,pl,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,pt,2,correct_local,0.96875,0.9375,1,2,32,32,iso2,v2
+Gemma,ro,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,ru,2,correct_local,1,1,1,2,32,32,iso2,v2
+Gemma,si,1,correct_local,0.375,0.125,0.625,8,16,16,prompt_id,v2
+Gemma,sv,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,sw,1,correct_local,0.5625,0.375,0.75,8,16,16,prompt_id,v2
+Gemma,th,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,tr,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,uk,1,correct_local,0.8125,0.5625,1,8,16,16,prompt_id,v2
+Gemma,ur,1,correct_local,0.9375,0.8125,1,8,16,16,prompt_id,v2
+Gemma,vi,1,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,zh,1,correct_local,0.9375,0.8125,1,8,16,16,prompt_id,v2
+other local,am,1,correct_local,0,0,0,8,48,48,prompt_id,v2
+other local,ar,4,correct_local,0.3125,0.223958,0.401042,4,192,192,iso2,v2
+other local,bn,1,correct_local,0.208333,0.125,0.291667,8,48,48,prompt_id,v2
+other local,de,1,correct_local,0.854167,0.791667,0.916667,8,48,48,prompt_id,v2
+other local,el,1,correct_local,0.541667,0.458333,0.625,8,48,48,prompt_id,v2
+other local,en,9,correct_local,0.80787,0.69213,0.914352,9,432,432,iso2,v2
+other local,es,6,correct_local,0.597222,0.513889,0.708333,6,288,288,iso2,v2
+other local,fa,1,correct_local,0.583333,0.520833,0.666667,8,48,48,prompt_id,v2
+other local,fil,1,correct_local,0.354167,0.25,0.458333,8,48,48,prompt_id,v2
+other local,fr,2,correct_local,0.5,0.229167,0.770833,2,96,96,iso2,v2
+other local,hi,1,correct_local,0.333333,0.25,0.416667,8,48,48,prompt_id,v2
+other local,id,1,correct_local,0.604167,0.541667,0.645833,8,48,48,prompt_id,v2
+other local,it,1,correct_local,0.604167,0.5,0.6875,8,48,48,prompt_id,v2
+other local,ja,1,correct_local,0.625,0.5,0.770833,8,48,48,prompt_id,v2
+other local,ka,1,correct_local,0.354167,0.25,0.5,8,48,48,prompt_id,v2
+other local,ko,1,correct_local,0.666667,0.5,0.833333,8,48,48,prompt_id,v2
+other local,ms,1,correct_local,0.4375,0.354167,0.541667,8,48,48,prompt_id,v2
+other local,nl,1,correct_local,0.791667,0.6875,0.875,8,48,48,prompt_id,v2
+other local,pl,1,correct_local,0.770833,0.666667,0.854167,8,48,48,prompt_id,v2
+other local,pt,2,correct_local,0.760417,0.666667,0.854167,2,96,96,iso2,v2
+other local,ro,1,correct_local,0.666667,0.541667,0.791667,8,48,48,prompt_id,v2
+other local,ru,2,correct_local,0.71875,0.645833,0.791667,2,96,96,iso2,v2
+other local,si,1,correct_local,0.0416667,0,0.104167,8,48,48,prompt_id,v2
+other local,sv,1,correct_local,0.645833,0.5625,0.729167,8,48,48,prompt_id,v2
+other local,sw,1,correct_local,0.229167,0.145833,0.333333,8,48,48,prompt_id,v2
+other local,th,1,correct_local,0.75,0.6875,0.8125,8,48,48,prompt_id,v2
+other local,tr,1,correct_local,0.541667,0.416667,0.645833,8,48,48,prompt_id,v2
+other local,uk,1,correct_local,0.458333,0.229167,0.666667,8,48,48,prompt_id,v2
+other local,ur,1,correct_local,0.25,0.125,0.354167,8,48,48,prompt_id,v2
+other local,vi,1,correct_local,0.541667,0.4375,0.645833,8,48,48,prompt_id,v2
+other local,zh,1,correct_local,0.854167,0.833333,0.895833,8,48,48,prompt_id,v2
+all,am,1,correct_local,0.215909,0.189394,0.242424,8,88,136,prompt_id,v2
+all,ar,4,correct_local,0.563447,0.524621,0.623106,4,352,544,iso2,v2
+all,bn,1,correct_local,0.492424,0.42803,0.55303,8,88,136,prompt_id,v2
+all,de,1,correct_local,0.916667,0.875,0.954545,8,88,136,prompt_id,v2
+all,el,1,correct_local,0.75,0.704545,0.795455,8,88,136,prompt_id,v2
+all,en,9,correct_local,0.873316,0.784933,0.947811,9,792,1224,iso2,v2
+all,es,6,correct_local,0.775253,0.727904,0.840956,6,528,816,iso2,v2
+all,fa,1,correct_local,0.772727,0.727273,0.818182,8,88,136,prompt_id,v2
+all,fil,1,correct_local,0.640152,0.583333,0.700852,8,88,136,prompt_id,v2
+all,fr,2,correct_local,0.674242,0.477273,0.871212,2,176,272,iso2,v2
+all,hi,1,correct_local,0.602273,0.556818,0.647727,8,88,136,prompt_id,v2
+all,id,1,correct_local,0.780303,0.75,0.806818,8,88,136,prompt_id,v2
+all,it,1,correct_local,0.757576,0.67803,0.829545,8,88,136,prompt_id,v2
+all,ja,1,correct_local,0.795455,0.727273,0.875,8,88,136,prompt_id,v2
+all,ka,1,correct_local,0.617424,0.530303,0.712121,8,88,136,prompt_id,v2
+all,ko,1,correct_local,0.814394,0.719697,0.897727,8,88,136,prompt_id,v2
+all,ms,1,correct_local,0.685606,0.628788,0.746212,8,88,136,prompt_id,v2
+all,nl,1,correct_local,0.882576,0.825758,0.924242,8,88,136,prompt_id,v2
+all,pl,1,correct_local,0.875,0.818182,0.920455,8,88,136,prompt_id,v2
+all,pt,2,correct_local,0.859848,0.806818,0.912879,2,176,272,iso2,v2
+all,ro,1,correct_local,0.814394,0.742424,0.882576,8,88,136,prompt_id,v2
+all,ru,2,correct_local,0.842803,0.806818,0.878788,2,176,272,iso2,v2
+all,si,1,correct_local,0.363636,0.318182,0.409091,8,88,136,prompt_id,v2
+all,sv,1,correct_local,0.799242,0.746212,0.859848,8,88,136,prompt_id,v2
+all,sw,1,correct_local,0.492424,0.443182,0.537879,8,88,136,prompt_id,v2
+all,th,1,correct_local,0.856061,0.829545,0.882576,8,88,136,prompt_id,v2
+all,tr,1,correct_local,0.746212,0.67803,0.80303,8,88,136,prompt_id,v2
+all,uk,1,correct_local,0.670455,0.511364,0.806818,8,88,136,prompt_id,v2
+all,ur,1,correct_local,0.57197,0.503788,0.636364,8,88,136,prompt_id,v2
+all,vi,1,correct_local,0.746212,0.681818,0.814394,8,88,136,prompt_id,v2
+all,zh,1,correct_local,0.905303,0.875,0.931818,8,88,136,prompt_id,v2
+API,am,1,correct_local,0.652778,0.555556,0.763889,8,24,72,prompt_id,v1
+API,ar,4,correct_local,0.951389,0.9375,0.965278,4,96,288,iso2,v1
+API,bn,1,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,de,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,el,1,correct_local,1,1,1,8,24,72,prompt_id,v1
+API,en,9,correct_local,0.970679,0.95216,0.986111,9,216,648,iso2,v1
+API,es,6,correct_local,0.981481,0.976852,0.986111,6,144,432,iso2,v1
+API,fa,1,correct_local,1,1,1,8,24,72,prompt_id,v1
+API,fil,1,correct_local,0.972222,0.944444,1,8,24,72,prompt_id,v1
+API,fr,2,correct_local,0.972222,0.958333,0.986111,2,48,144,iso2,v1
+API,hi,1,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,id,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,it,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,ja,1,correct_local,1,1,1,8,24,72,prompt_id,v1
+API,ka,1,correct_local,0.930556,0.875,0.986111,8,24,72,prompt_id,v1
+API,ko,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,ms,1,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,nl,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,pl,1,correct_local,1,1,1,8,24,72,prompt_id,v1
+API,pt,2,correct_local,0.986111,0.972222,1,2,48,144,iso2,v1
+API,ro,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,ru,2,correct_local,0.986111,0.972222,1,2,48,144,iso2,v1
+API,si,1,correct_local,1,1,1,8,24,72,prompt_id,v1
+API,sv,1,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,sw,1,correct_local,0.972222,0.944444,1,8,24,72,prompt_id,v1
+API,th,1,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,tr,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,uk,1,correct_local,0.930556,0.847222,1,8,24,72,prompt_id,v1
+API,ur,1,correct_local,0.958333,0.916667,0.986111,8,24,72,prompt_id,v1
+API,vi,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,zh,1,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+Gemma,am,1,correct_local,0,0,0,8,16,16,prompt_id,v1
+Gemma,ar,4,correct_local,0.734375,0.546875,0.90625,4,64,64,iso2,v1
+Gemma,bn,1,correct_local,0.625,0.5,0.8125,8,16,16,prompt_id,v1
+Gemma,de,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,el,1,correct_local,0.875,0.6875,1,8,16,16,prompt_id,v1
+Gemma,en,9,correct_local,0.923611,0.8125,1,9,144,144,iso2,v1
+Gemma,es,6,correct_local,1,1,1,6,96,96,iso2,v1
+Gemma,fa,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,fil,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,fr,2,correct_local,0.75,0.5,1,2,32,32,iso2,v1
+Gemma,hi,1,correct_local,0.375,0.25,0.5,8,16,16,prompt_id,v1
+Gemma,id,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,it,1,correct_local,0.875,0.6875,1,8,16,16,prompt_id,v1
+Gemma,ja,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,ka,1,correct_local,0.9375,0.8125,1,8,16,16,prompt_id,v1
+Gemma,ko,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,ms,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,nl,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,pl,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,pt,2,correct_local,0.96875,0.9375,1,2,32,32,iso2,v1
+Gemma,ro,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,ru,2,correct_local,1,1,1,2,32,32,iso2,v1
+Gemma,si,1,correct_local,0.375,0.125,0.625,8,16,16,prompt_id,v1
+Gemma,sv,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,sw,1,correct_local,0.5625,0.375,0.75,8,16,16,prompt_id,v1
+Gemma,th,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,tr,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,uk,1,correct_local,0.8125,0.5625,1,8,16,16,prompt_id,v1
+Gemma,ur,1,correct_local,0.9375,0.8125,1,8,16,16,prompt_id,v1
+Gemma,vi,1,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,zh,1,correct_local,0.9375,0.8125,1,8,16,16,prompt_id,v1
+other local,am,1,correct_local,0,0,0,8,48,48,prompt_id,v1
+other local,ar,4,correct_local,0.302083,0.223958,0.369792,4,192,192,iso2,v1
+other local,bn,1,correct_local,0.208333,0.125,0.291667,8,48,48,prompt_id,v1
+other local,de,1,correct_local,0.854167,0.791667,0.916667,8,48,48,prompt_id,v1
+other local,el,1,correct_local,0.541667,0.458333,0.625,8,48,48,prompt_id,v1
+other local,en,9,correct_local,0.805556,0.692072,0.912037,9,432,432,iso2,v1
+other local,es,6,correct_local,0.576389,0.486111,0.694444,6,288,288,iso2,v1
+other local,fa,1,correct_local,0.583333,0.520833,0.666667,8,48,48,prompt_id,v1
+other local,fil,1,correct_local,0.3125,0.208333,0.416667,8,48,48,prompt_id,v1
+other local,fr,2,correct_local,0.5,0.229167,0.770833,2,96,96,iso2,v1
+other local,hi,1,correct_local,0.291667,0.166667,0.395833,8,48,48,prompt_id,v1
+other local,id,1,correct_local,0.583333,0.520833,0.645833,8,48,48,prompt_id,v1
+other local,it,1,correct_local,0.583333,0.479167,0.6875,8,48,48,prompt_id,v1
+other local,ja,1,correct_local,0.583333,0.458333,0.729167,8,48,48,prompt_id,v1
+other local,ka,1,correct_local,0.354167,0.25,0.5,8,48,48,prompt_id,v1
+other local,ko,1,correct_local,0.583333,0.4375,0.729167,8,48,48,prompt_id,v1
+other local,ms,1,correct_local,0.4375,0.354167,0.541667,8,48,48,prompt_id,v1
+other local,nl,1,correct_local,0.791667,0.6875,0.875,8,48,48,prompt_id,v1
+other local,pl,1,correct_local,0.770833,0.666667,0.854167,8,48,48,prompt_id,v1
+other local,pt,2,correct_local,0.760417,0.666667,0.854167,2,96,96,iso2,v1
+other local,ro,1,correct_local,0.666667,0.541667,0.791667,8,48,48,prompt_id,v1
+other local,ru,2,correct_local,0.6875,0.583333,0.791667,2,96,96,iso2,v1
+other local,si,1,correct_local,0.0416667,0,0.104167,8,48,48,prompt_id,v1
+other local,sv,1,correct_local,0.645833,0.5625,0.729167,8,48,48,prompt_id,v1
+other local,sw,1,correct_local,0.229167,0.145833,0.333333,8,48,48,prompt_id,v1
+other local,th,1,correct_local,0.75,0.6875,0.8125,8,48,48,prompt_id,v1
+other local,tr,1,correct_local,0.541667,0.416667,0.645833,8,48,48,prompt_id,v1
+other local,uk,1,correct_local,0.4375,0.229167,0.625,8,48,48,prompt_id,v1
+other local,ur,1,correct_local,0.229167,0.125,0.3125,8,48,48,prompt_id,v1
+other local,vi,1,correct_local,0.541667,0.4375,0.645833,8,48,48,prompt_id,v1
+other local,zh,1,correct_local,0.833333,0.770833,0.895833,8,48,48,prompt_id,v1
+all,am,1,correct_local,0.17803,0.151515,0.208333,8,88,136,prompt_id,v1
+all,ar,4,correct_local,0.557765,0.524621,0.606061,4,352,544,iso2,v1
+all,bn,1,correct_local,0.492424,0.42803,0.55303,8,88,136,prompt_id,v1
+all,de,1,correct_local,0.916667,0.875,0.954545,8,88,136,prompt_id,v1
+all,el,1,correct_local,0.727273,0.670455,0.784091,8,88,136,prompt_id,v1
+all,en,9,correct_local,0.872054,0.78408,0.945707,9,792,1224,iso2,v1
+all,es,6,correct_local,0.763889,0.71149,0.831439,6,528,816,iso2,v1
+all,fa,1,correct_local,0.772727,0.727273,0.818182,8,88,136,prompt_id,v1
+all,fil,1,correct_local,0.617424,0.564394,0.681818,8,88,136,prompt_id,v1
+all,fr,2,correct_local,0.674242,0.477273,0.871212,2,176,272,iso2,v1
+all,hi,1,correct_local,0.492424,0.405303,0.568182,8,88,136,prompt_id,v1
+all,id,1,correct_local,0.768939,0.738636,0.799242,8,88,136,prompt_id,v1
+all,it,1,correct_local,0.746212,0.674242,0.818182,8,88,136,prompt_id,v1
+all,ja,1,correct_local,0.772727,0.693182,0.852273,8,88,136,prompt_id,v1
+all,ka,1,correct_local,0.617424,0.530303,0.712121,8,88,136,prompt_id,v1
+all,ko,1,correct_local,0.768939,0.681818,0.852273,8,88,136,prompt_id,v1
+all,ms,1,correct_local,0.685606,0.628788,0.746212,8,88,136,prompt_id,v1
+all,nl,1,correct_local,0.882576,0.825758,0.924242,8,88,136,prompt_id,v1
+all,pl,1,correct_local,0.875,0.818182,0.920455,8,88,136,prompt_id,v1
+all,pt,2,correct_local,0.859848,0.806818,0.912879,2,176,272,iso2,v1
+all,ro,1,correct_local,0.814394,0.742424,0.882576,8,88,136,prompt_id,v1
+all,ru,2,correct_local,0.825758,0.772727,0.878788,2,176,272,iso2,v1
+all,si,1,correct_local,0.363636,0.318182,0.409091,8,88,136,prompt_id,v1
+all,sv,1,correct_local,0.799242,0.746212,0.859848,8,88,136,prompt_id,v1
+all,sw,1,correct_local,0.492424,0.443182,0.537879,8,88,136,prompt_id,v1
+all,th,1,correct_local,0.856061,0.829545,0.882576,8,88,136,prompt_id,v1
+all,tr,1,correct_local,0.746212,0.67803,0.80303,8,88,136,prompt_id,v1
+all,uk,1,correct_local,0.640152,0.5,0.768939,8,88,136,prompt_id,v1
+all,ur,1,correct_local,0.556818,0.496212,0.609848,8,88,136,prompt_id,v1
+all,vi,1,correct_local,0.746212,0.681818,0.814394,8,88,136,prompt_id,v1
+all,zh,1,correct_local,0.893939,0.863636,0.924242,8,88,136,prompt_id,v1

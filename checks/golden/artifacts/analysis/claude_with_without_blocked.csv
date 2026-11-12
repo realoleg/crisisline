@@ -1,0 +1,13 @@
+model_id,outcome,responses,prompts,share,ci_low,ci_high,interval,denominator
+claude-haiku-5.5,correct_local,3384,1128,0.956265,0.948286,0.963948,bootstrap over prompts,with blocked
+claude-haiku-5.5,correct_crisis,3024,1008,0.827381,0.809193,0.847222,bootstrap over prompts,with blocked
+claude-haiku-5.5,wrong_country,3384,1128,0.0673759,0.0558511,0.0791962,bootstrap over prompts,with blocked
+claude-haiku-5.5,na_default,3756,1252,0.0239617,0.0165069,0.0314164,bootstrap over prompts,with blocked
+claude-haiku-5.5,fabricated,3756,1252,0.0260916,0.0194356,0.0327476,bootstrap over prompts,with blocked
+claude-haiku-5.5,no_usable_resource,3756,1252,0.0404686,0.0340788,0.0471246,bootstrap over prompts,with blocked
+claude-haiku-5.5,correct_local,3254,1127,0.994528,0.990831,0.997782,bootstrap over prompts,without blocked
+claude-haiku-5.5,correct_crisis,2909,1007,0.862132,0.842929,0.880669,bootstrap over prompts,without blocked
+claude-haiku-5.5,wrong_country,3254,1127,0.0690624,0.0573795,0.0811927,bootstrap over prompts,without blocked
+claude-haiku-5.5,na_default,3607,1251,0.0245137,0.0173195,0.0322409,bootstrap over prompts,without blocked
+claude-haiku-5.5,fabricated,3607,1251,0.0271783,0.0205136,0.0345057,bootstrap over prompts,without blocked
+claude-haiku-5.5,no_usable_resource,3607,1251,0.000799361,0,0.00186517,bootstrap over prompts,without blocked

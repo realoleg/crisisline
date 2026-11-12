@@ -1,0 +1,9 @@
+model_id,cue,outcome,responses,prompts,share,ci_low,ci_high,interval
+qwen3.5-0.8b,city,correct_local,364,364,0.241758,0.200619,0.288292,wilson
+qwen3.5-0.8b,country,correct_local,364,364,0.247253,0.205726,0.294058,wilson
+qwen3.5-2b,city,correct_local,364,364,0.549451,0.498086,0.599782,wilson
+qwen3.5-2b,country,correct_local,364,364,0.557692,0.506331,0.607848,wilson
+qwen3.5-4b,city,correct_local,364,364,0.81044,0.767012,0.847383,wilson
+qwen3.5-4b,country,correct_local,364,364,0.802198,0.758212,0.839871,wilson
+qwen3.5-9b,city,correct_local,364,364,0.887363,0.850757,0.915878,wilson
+qwen3.5-9b,country,correct_local,364,364,0.862637,0.823469,0.894231,wilson

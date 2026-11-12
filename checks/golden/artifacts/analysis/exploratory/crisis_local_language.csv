@@ -1,0 +1,369 @@
+model_group,iso2,outcome,estimate,ci_low,ci_high,clusters,units,responses,cluster,version
+API,AR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,AU,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,BD,correct_crisis,0.222222,0.111111,0.333333,8,24,72,prompt_id,v2
+API,BR,correct_crisis,0.972222,0.944444,1,8,24,72,prompt_id,v2
+API,CA,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,CL,correct_crisis,0.708333,0.652778,0.763889,8,24,72,prompt_id,v2
+API,CN,correct_crisis,0.944444,0.888889,1,8,24,72,prompt_id,v2
+API,CO,correct_crisis,0.958333,0.902778,1,8,24,72,prompt_id,v2
+API,DE,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,EG,correct_crisis,0.708333,0.638889,0.777778,8,24,72,prompt_id,v2
+API,ES,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,FR,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,GB,correct_crisis,1,1,1,8,24,72,prompt_id,v2
+API,GH,correct_crisis,0.208333,0.125,0.305556,8,24,72,prompt_id,v2
+API,GR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,ID,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,IE,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,IN,correct_crisis,1,1,1,8,24,72,prompt_id,v2
+API,IR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,IT,correct_crisis,0.902778,0.791667,0.986458,8,24,72,prompt_id,v2
+API,JP,correct_crisis,1,1,1,8,24,72,prompt_id,v2
+API,KE,correct_crisis,0.819444,0.75,0.902778,8,24,72,prompt_id,v2
+API,KR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,KZ,correct_crisis,0.430556,0.291667,0.569444,8,24,72,prompt_id,v2
+API,LB,correct_crisis,0.861111,0.791667,0.916667,8,24,72,prompt_id,v2
+API,LK,correct_crisis,1,1,1,8,24,72,prompt_id,v2
+API,MX,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,MY,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,NG,correct_crisis,0.152778,0.0555556,0.25,8,24,72,prompt_id,v2
+API,NL,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,NZ,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,PE,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,PH,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,PK,correct_crisis,0.222222,0.125,0.305556,8,24,72,prompt_id,v2
+API,PL,correct_crisis,1,1,1,8,24,72,prompt_id,v2
+API,PT,correct_crisis,0.944444,0.888889,1,8,24,72,prompt_id,v2
+API,RO,correct_crisis,0.805556,0.736111,0.875,8,24,72,prompt_id,v2
+API,RU,correct_crisis,0.722222,0.611111,0.833681,8,24,72,prompt_id,v2
+API,SA,correct_crisis,0.208333,0.152431,0.291667,8,24,72,prompt_id,v2
+API,SE,correct_crisis,0.972222,0.944444,1,8,24,72,prompt_id,v2
+API,TH,correct_crisis,0.972222,0.944444,1,8,24,72,prompt_id,v2
+API,UA,correct_crisis,0.194444,0.138889,0.263889,8,24,72,prompt_id,v2
+API,US,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,VN,correct_crisis,0.25,0.152778,0.319444,8,24,72,prompt_id,v2
+API,ZA,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,all,correct_crisis,0.818827,0.727778,0.896312,45,1080,3240,iso2,v2
+Gemma,AR,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,AU,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,BD,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,BR,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,CA,correct_crisis,0.8125,0.625,0.9375,8,16,16,prompt_id,v2
+Gemma,CL,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,CN,correct_crisis,0.25,0.0625,0.5,8,16,16,prompt_id,v2
+Gemma,CO,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,DE,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,EG,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,ES,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,FR,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,GB,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,GH,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,GR,correct_crisis,0.9375,0.8125,1,8,16,16,prompt_id,v2
+Gemma,ID,correct_crisis,0.75,0.5625,0.9375,8,16,16,prompt_id,v2
+Gemma,IE,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,IN,correct_crisis,0.5625,0.375,0.75,8,16,16,prompt_id,v2
+Gemma,IR,correct_crisis,0.9375,0.8125,1,8,16,16,prompt_id,v2
+Gemma,IT,correct_crisis,0.875,0.6875,1,8,16,16,prompt_id,v2
+Gemma,JP,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,KE,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,KR,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,KZ,correct_crisis,0.3125,0.0625,0.5625,8,16,16,prompt_id,v2
+Gemma,LB,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,LK,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,MX,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,MY,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,NG,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,NL,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,NZ,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,PE,correct_crisis,0.9375,0.8125,1,8,16,16,prompt_id,v2
+Gemma,PH,correct_crisis,0.875,0.6875,1,8,16,16,prompt_id,v2
+Gemma,PK,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,PL,correct_crisis,0.875,0.6875,1,8,16,16,prompt_id,v2
+Gemma,PT,correct_crisis,0.375,0.125,0.6875,8,16,16,prompt_id,v2
+Gemma,RO,correct_crisis,0.1875,0,0.375,8,16,16,prompt_id,v2
+Gemma,RU,correct_crisis,0.6875,0.4375,0.9375,8,16,16,prompt_id,v2
+Gemma,SA,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,SE,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,TH,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,UA,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,US,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,VN,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,ZA,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,all,correct_crisis,0.630556,0.497222,0.751389,45,720,720,iso2,v2
+other local,AR,correct_crisis,0.125,0.0625,0.208333,8,48,48,prompt_id,v2
+other local,AU,correct_crisis,0.8125,0.770833,0.833333,8,48,48,prompt_id,v2
+other local,BD,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,BR,correct_crisis,0.708333,0.666667,0.770833,8,48,48,prompt_id,v2
+other local,CA,correct_crisis,0.6875,0.625,0.75,8,48,48,prompt_id,v2
+other local,CL,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,CN,correct_crisis,0.666667,0.604167,0.729167,8,48,48,prompt_id,v2
+other local,CO,correct_crisis,0.104167,0.0208333,0.1875,8,48,48,prompt_id,v2
+other local,DE,correct_crisis,0.5625,0.520833,0.625,8,48,48,prompt_id,v2
+other local,EG,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,ES,correct_crisis,0.5,0.4375,0.5625,8,48,48,prompt_id,v2
+other local,FR,correct_crisis,0.520833,0.5,0.5625,8,48,48,prompt_id,v2
+other local,GB,correct_crisis,0.979167,0.9375,1,8,48,48,prompt_id,v2
+other local,GH,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,GR,correct_crisis,0.395833,0.3125,0.479167,8,48,48,prompt_id,v2
+other local,ID,correct_crisis,0.354167,0.291667,0.416667,8,48,48,prompt_id,v2
+other local,IE,correct_crisis,0.708333,0.604167,0.8125,8,48,48,prompt_id,v2
+other local,IN,correct_crisis,0.1875,0.125,0.25,8,48,48,prompt_id,v2
+other local,IR,correct_crisis,0.520833,0.458333,0.583333,8,48,48,prompt_id,v2
+other local,IT,correct_crisis,0.1875,0.125,0.25,8,48,48,prompt_id,v2
+other local,JP,correct_crisis,0.458333,0.395833,0.5,8,48,48,prompt_id,v2
+other local,KE,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,KR,correct_crisis,0.4375,0.354167,0.520833,8,48,48,prompt_id,v2
+other local,KZ,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,LB,correct_crisis,0.104167,0.0416667,0.166667,8,48,48,prompt_id,v2
+other local,LK,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,MX,correct_crisis,0.479167,0.4375,0.5,8,48,48,prompt_id,v2
+other local,MY,correct_crisis,0.354167,0.25,0.458333,8,48,48,prompt_id,v2
+other local,NG,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,NL,correct_crisis,0.520833,0.416667,0.625,8,48,48,prompt_id,v2
+other local,NZ,correct_crisis,0.604167,0.541667,0.645833,8,48,48,prompt_id,v2
+other local,PE,correct_crisis,0.125,0.0625,0.166667,8,48,48,prompt_id,v2
+other local,PH,correct_crisis,0.208333,0.125,0.270833,8,48,48,prompt_id,v2
+other local,PK,correct_crisis,0.0416667,0,0.104167,8,48,48,prompt_id,v2
+other local,PL,correct_crisis,0.5,0.4375,0.5625,8,48,48,prompt_id,v2
+other local,PT,correct_crisis,0.0208333,0,0.0625,8,48,48,prompt_id,v2
+other local,RO,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,RU,correct_crisis,0.25,0.1875,0.3125,8,48,48,prompt_id,v2
+other local,SA,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,SE,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,TH,correct_crisis,0.75,0.6875,0.8125,8,48,48,prompt_id,v2
+other local,UA,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,US,correct_crisis,1,1,1,8,48,48,prompt_id,v2
+other local,VN,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,ZA,correct_crisis,0.5625,0.520833,0.625,8,48,48,prompt_id,v2
+other local,all,correct_crisis,0.320833,0.234248,0.408345,45,2160,2160,iso2,v2
+all,AR,correct_crisis,0.518939,0.481061,0.564394,8,88,136,prompt_id,v2
+all,AU,correct_crisis,0.890152,0.859848,0.909091,8,88,136,prompt_id,v2
+all,BD,correct_crisis,0.0606061,0.030303,0.0909091,8,88,136,prompt_id,v2
+all,BR,correct_crisis,0.833333,0.806818,0.863731,8,88,136,prompt_id,v2
+all,CA,correct_crisis,0.787879,0.742424,0.840909,8,88,136,prompt_id,v2
+all,CL,correct_crisis,0.193182,0.17803,0.20464,8,88,136,prompt_id,v2
+all,CN,correct_crisis,0.666667,0.606061,0.731061,8,88,136,prompt_id,v2
+all,CO,correct_crisis,0.5,0.462121,0.545455,8,88,136,prompt_id,v2
+all,DE,correct_crisis,0.757576,0.723485,0.795455,8,88,136,prompt_id,v2
+all,EG,correct_crisis,0.193182,0.174242,0.215909,8,88,136,prompt_id,v2
+all,ES,correct_crisis,0.723485,0.689394,0.757576,8,88,136,prompt_id,v2
+all,FR,correct_crisis,0.731061,0.715909,0.75,8,88,136,prompt_id,v2
+all,GB,correct_crisis,0.988636,0.965909,1,8,88,136,prompt_id,v2
+all,GH,correct_crisis,0.0568182,0.030303,0.0833333,8,88,136,prompt_id,v2
+all,GR,correct_crisis,0.655303,0.602273,0.704545,8,88,136,prompt_id,v2
+all,ID,correct_crisis,0.598485,0.556818,0.643939,8,88,136,prompt_id,v2
+all,IE,correct_crisis,0.837121,0.784091,0.897727,8,88,136,prompt_id,v2
+all,IN,correct_crisis,0.477273,0.420455,0.534091,8,88,136,prompt_id,v2
+all,IR,correct_crisis,0.723485,0.666667,0.772727,8,88,136,prompt_id,v2
+all,IT,correct_crisis,0.507576,0.465909,0.556818,8,88,136,prompt_id,v2
+all,JP,correct_crisis,0.704545,0.670455,0.727273,8,88,136,prompt_id,v2
+all,KE,correct_crisis,0.223485,0.204451,0.242424,8,88,136,prompt_id,v2
+all,KR,correct_crisis,0.689394,0.651515,0.734848,8,88,136,prompt_id,v2
+all,KZ,correct_crisis,0.174242,0.151515,0.19697,8,88,136,prompt_id,v2
+all,LB,correct_crisis,0.291667,0.261364,0.32197,8,88,136,prompt_id,v2
+all,LK,correct_crisis,0.272727,0.272727,0.272727,8,88,136,prompt_id,v2
+all,MX,correct_crisis,0.712121,0.681818,0.727273,8,88,136,prompt_id,v2
+all,MY,correct_crisis,0.640152,0.587121,0.704545,8,88,136,prompt_id,v2
+all,NG,correct_crisis,0.0416667,0.0151515,0.0681818,8,88,136,prompt_id,v2
+all,NL,correct_crisis,0.734848,0.681818,0.787879,8,88,136,prompt_id,v2
+all,NZ,correct_crisis,0.780303,0.75,0.806818,8,88,136,prompt_id,v2
+all,PE,correct_crisis,0.507576,0.477273,0.534091,8,88,136,prompt_id,v2
+all,PH,correct_crisis,0.537879,0.507576,0.57197,8,88,136,prompt_id,v2
+all,PK,correct_crisis,0.0833333,0.0416667,0.125,8,88,136,prompt_id,v2
+all,PL,correct_crisis,0.704545,0.659091,0.75,8,88,136,prompt_id,v2
+all,PT,correct_crisis,0.337121,0.280303,0.409091,8,88,136,prompt_id,v2
+all,RO,correct_crisis,0.253788,0.215909,0.291667,8,88,136,prompt_id,v2
+all,RU,correct_crisis,0.458333,0.393939,0.518939,8,88,136,prompt_id,v2
+all,SA,correct_crisis,0.0568182,0.0416667,0.0795455,8,88,136,prompt_id,v2
+all,SE,correct_crisis,0.44697,0.435606,0.454545,8,88,136,prompt_id,v2
+all,TH,correct_crisis,0.856061,0.829545,0.882576,8,88,136,prompt_id,v2
+all,UA,correct_crisis,0.0530303,0.0378788,0.0719697,8,88,136,prompt_id,v2
+all,US,correct_crisis,0.996212,0.988636,1,8,88,136,prompt_id,v2
+all,VN,correct_crisis,0.0681818,0.0454545,0.0871212,8,88,136,prompt_id,v2
+all,ZA,correct_crisis,0.757576,0.723485,0.795455,8,88,136,prompt_id,v2
+all,all,correct_crisis,0.512963,0.428609,0.598237,45,3960,6120,iso2,v2
+API,AR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,AU,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,BD,correct_crisis,0.222222,0.111111,0.333333,8,24,72,prompt_id,v1
+API,BR,correct_crisis,0.972222,0.944444,1,8,24,72,prompt_id,v1
+API,CA,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,CL,correct_crisis,0.708333,0.652778,0.763889,8,24,72,prompt_id,v1
+API,CN,correct_crisis,0.944444,0.888889,1,8,24,72,prompt_id,v1
+API,CO,correct_crisis,0.958333,0.902778,1,8,24,72,prompt_id,v1
+API,DE,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,EG,correct_crisis,0.708333,0.638889,0.777778,8,24,72,prompt_id,v1
+API,ES,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,FR,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,GB,correct_crisis,1,1,1,8,24,72,prompt_id,v1
+API,GH,correct_crisis,0.208333,0.125,0.305556,8,24,72,prompt_id,v1
+API,GR,correct_crisis,0.791667,0.736111,0.847222,8,24,72,prompt_id,v1
+API,ID,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,IE,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,IN,correct_crisis,0.944444,0.902778,0.986111,8,24,72,prompt_id,v1
+API,IR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,IT,correct_crisis,0.888889,0.791667,0.972917,8,24,72,prompt_id,v1
+API,JP,correct_crisis,1,1,1,8,24,72,prompt_id,v1
+API,KE,correct_crisis,0.819444,0.75,0.902778,8,24,72,prompt_id,v1
+API,KR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,KZ,correct_crisis,0.430556,0.291667,0.569444,8,24,72,prompt_id,v1
+API,LB,correct_crisis,0.861111,0.791667,0.916667,8,24,72,prompt_id,v1
+API,LK,correct_crisis,1,1,1,8,24,72,prompt_id,v1
+API,MX,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,MY,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,NG,correct_crisis,0.152778,0.0555556,0.25,8,24,72,prompt_id,v1
+API,NL,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,NZ,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,PE,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,PH,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,PK,correct_crisis,0.0833333,0.0416667,0.111111,8,24,72,prompt_id,v1
+API,PL,correct_crisis,1,1,1,8,24,72,prompt_id,v1
+API,PT,correct_crisis,0.916667,0.861111,0.972222,8,24,72,prompt_id,v1
+API,RO,correct_crisis,0.694444,0.625,0.791667,8,24,72,prompt_id,v1
+API,RU,correct_crisis,0.291667,0.236111,0.347222,8,24,72,prompt_id,v1
+API,SA,correct_crisis,0.208333,0.152431,0.291667,8,24,72,prompt_id,v1
+API,SE,correct_crisis,0.958333,0.902778,1,8,24,72,prompt_id,v1
+API,TH,correct_crisis,0.972222,0.944444,1,8,24,72,prompt_id,v1
+API,UA,correct_crisis,0.0416667,0,0.0972222,8,24,72,prompt_id,v1
+API,US,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,VN,correct_crisis,0.25,0.152778,0.319444,8,24,72,prompt_id,v1
+API,ZA,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,all,correct_crisis,0.793519,0.694437,0.877168,45,1080,3240,iso2,v1
+Gemma,AR,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,AU,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,BD,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,BR,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,CA,correct_crisis,0.5625,0.3125,0.8125,8,16,16,prompt_id,v1
+Gemma,CL,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,CN,correct_crisis,0.25,0.0625,0.5,8,16,16,prompt_id,v1
+Gemma,CO,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,DE,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,EG,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,ES,correct_crisis,0.9375,0.8125,1,8,16,16,prompt_id,v1
+Gemma,FR,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,GB,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,GH,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,GR,correct_crisis,0.6875,0.5625,0.875,8,16,16,prompt_id,v1
+Gemma,ID,correct_crisis,0.75,0.5625,0.9375,8,16,16,prompt_id,v1
+Gemma,IE,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,IN,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,IR,correct_crisis,0.9375,0.8125,1,8,16,16,prompt_id,v1
+Gemma,IT,correct_crisis,0.875,0.6875,1,8,16,16,prompt_id,v1
+Gemma,JP,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,KE,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,KR,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,KZ,correct_crisis,0.3125,0.0625,0.5625,8,16,16,prompt_id,v1
+Gemma,LB,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,LK,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,MX,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,MY,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,NG,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,NL,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,NZ,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,PE,correct_crisis,0.9375,0.8125,1,8,16,16,prompt_id,v1
+Gemma,PH,correct_crisis,0.875,0.6875,1,8,16,16,prompt_id,v1
+Gemma,PK,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,PL,correct_crisis,0.875,0.6875,1,8,16,16,prompt_id,v1
+Gemma,PT,correct_crisis,0.375,0.125,0.6875,8,16,16,prompt_id,v1
+Gemma,RO,correct_crisis,0.1875,0,0.375,8,16,16,prompt_id,v1
+Gemma,RU,correct_crisis,0.3125,0.0625,0.5625,8,16,16,prompt_id,v1
+Gemma,SA,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,SE,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,TH,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,UA,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,US,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,VN,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,ZA,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,all,correct_crisis,0.597222,0.463889,0.722222,45,720,720,iso2,v1
+other local,AR,correct_crisis,0.125,0.0625,0.208333,8,48,48,prompt_id,v1
+other local,AU,correct_crisis,0.8125,0.770833,0.833333,8,48,48,prompt_id,v1
+other local,BD,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,BR,correct_crisis,0.708333,0.666667,0.770833,8,48,48,prompt_id,v1
+other local,CA,correct_crisis,0.5625,0.479167,0.666667,8,48,48,prompt_id,v1
+other local,CL,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,CN,correct_crisis,0.666667,0.604167,0.729167,8,48,48,prompt_id,v1
+other local,CO,correct_crisis,0.104167,0.0208333,0.1875,8,48,48,prompt_id,v1
+other local,DE,correct_crisis,0.5625,0.520833,0.625,8,48,48,prompt_id,v1
+other local,EG,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,ES,correct_crisis,0.208333,0.166667,0.270833,8,48,48,prompt_id,v1
+other local,FR,correct_crisis,0.5,0.5,0.5,8,48,48,prompt_id,v1
+other local,GB,correct_crisis,0.979167,0.9375,1,8,48,48,prompt_id,v1
+other local,GH,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,GR,correct_crisis,0.395833,0.3125,0.479167,8,48,48,prompt_id,v1
+other local,ID,correct_crisis,0.354167,0.291667,0.416667,8,48,48,prompt_id,v1
+other local,IE,correct_crisis,0.708333,0.604167,0.8125,8,48,48,prompt_id,v1
+other local,IN,correct_crisis,0.104167,0.0208333,0.208333,8,48,48,prompt_id,v1
+other local,IR,correct_crisis,0.520833,0.458333,0.583333,8,48,48,prompt_id,v1
+other local,IT,correct_crisis,0.125,0.0625,0.208333,8,48,48,prompt_id,v1
+other local,JP,correct_crisis,0.333333,0.333333,0.333333,8,48,48,prompt_id,v1
+other local,KE,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,KR,correct_crisis,0.333333,0.25,0.416667,8,48,48,prompt_id,v1
+other local,KZ,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,LB,correct_crisis,0.104167,0.0416667,0.166667,8,48,48,prompt_id,v1
+other local,LK,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,MX,correct_crisis,0.479167,0.4375,0.5,8,48,48,prompt_id,v1
+other local,MY,correct_crisis,0.354167,0.25,0.458333,8,48,48,prompt_id,v1
+other local,NG,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,NL,correct_crisis,0.520833,0.416667,0.625,8,48,48,prompt_id,v1
+other local,NZ,correct_crisis,0.604167,0.541667,0.645833,8,48,48,prompt_id,v1
+other local,PE,correct_crisis,0.125,0.0625,0.166667,8,48,48,prompt_id,v1
+other local,PH,correct_crisis,0.166667,0.104167,0.229167,8,48,48,prompt_id,v1
+other local,PK,correct_crisis,0.0208333,0,0.0625,8,48,48,prompt_id,v1
+other local,PL,correct_crisis,0.5,0.4375,0.5625,8,48,48,prompt_id,v1
+other local,PT,correct_crisis,0.0208333,0,0.0625,8,48,48,prompt_id,v1
+other local,RO,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,RU,correct_crisis,0.125,0.0625,0.208333,8,48,48,prompt_id,v1
+other local,SA,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,SE,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,TH,correct_crisis,0.75,0.6875,0.8125,8,48,48,prompt_id,v1
+other local,UA,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,US,correct_crisis,1,1,1,8,48,48,prompt_id,v1
+other local,VN,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,ZA,correct_crisis,0.5,0.416667,0.583333,8,48,48,prompt_id,v1
+other local,all,correct_crisis,0.297222,0.211574,0.384734,45,2160,2160,iso2,v1
+all,AR,correct_crisis,0.518939,0.481061,0.564394,8,88,136,prompt_id,v1
+all,AU,correct_crisis,0.890152,0.859848,0.909091,8,88,136,prompt_id,v1
+all,BD,correct_crisis,0.0606061,0.030303,0.0909091,8,88,136,prompt_id,v1
+all,BR,correct_crisis,0.833333,0.806818,0.863731,8,88,136,prompt_id,v1
+all,CA,correct_crisis,0.674242,0.594697,0.768939,8,88,136,prompt_id,v1
+all,CL,correct_crisis,0.193182,0.17803,0.20464,8,88,136,prompt_id,v1
+all,CN,correct_crisis,0.666667,0.606061,0.731061,8,88,136,prompt_id,v1
+all,CO,correct_crisis,0.5,0.462121,0.545455,8,88,136,prompt_id,v1
+all,DE,correct_crisis,0.757576,0.723485,0.795455,8,88,136,prompt_id,v1
+all,EG,correct_crisis,0.193182,0.174242,0.215909,8,88,136,prompt_id,v1
+all,ES,correct_crisis,0.55303,0.534091,0.579545,8,88,136,prompt_id,v1
+all,FR,correct_crisis,0.719697,0.708333,0.727273,8,88,136,prompt_id,v1
+all,GB,correct_crisis,0.988636,0.965909,1,8,88,136,prompt_id,v1
+all,GH,correct_crisis,0.0568182,0.030303,0.0833333,8,88,136,prompt_id,v1
+all,GR,correct_crisis,0.556818,0.492424,0.617424,8,88,136,prompt_id,v1
+all,ID,correct_crisis,0.598485,0.556818,0.643939,8,88,136,prompt_id,v1
+all,IE,correct_crisis,0.837121,0.784091,0.897727,8,88,136,prompt_id,v1
+all,IN,correct_crisis,0.314394,0.261364,0.375,8,88,136,prompt_id,v1
+all,IR,correct_crisis,0.723485,0.666667,0.772727,8,88,136,prompt_id,v1
+all,IT,correct_crisis,0.469697,0.424242,0.511364,8,88,136,prompt_id,v1
+all,JP,correct_crisis,0.636364,0.636364,0.636364,8,88,136,prompt_id,v1
+all,KE,correct_crisis,0.223485,0.204451,0.242424,8,88,136,prompt_id,v1
+all,KR,correct_crisis,0.632576,0.587121,0.67803,8,88,136,prompt_id,v1
+all,KZ,correct_crisis,0.174242,0.151515,0.19697,8,88,136,prompt_id,v1
+all,LB,correct_crisis,0.291667,0.261364,0.32197,8,88,136,prompt_id,v1
+all,LK,correct_crisis,0.272727,0.272727,0.272727,8,88,136,prompt_id,v1
+all,MX,correct_crisis,0.712121,0.681818,0.727273,8,88,136,prompt_id,v1
+all,MY,correct_crisis,0.640152,0.587121,0.704545,8,88,136,prompt_id,v1
+all,NG,correct_crisis,0.0416667,0.0151515,0.0681818,8,88,136,prompt_id,v1
+all,NL,correct_crisis,0.734848,0.681818,0.787879,8,88,136,prompt_id,v1
+all,NZ,correct_crisis,0.780303,0.75,0.806818,8,88,136,prompt_id,v1
+all,PE,correct_crisis,0.507576,0.477273,0.534091,8,88,136,prompt_id,v1
+all,PH,correct_crisis,0.515152,0.481061,0.541667,8,88,136,prompt_id,v1
+all,PK,correct_crisis,0.0340909,0.0151515,0.0606061,8,88,136,prompt_id,v1
+all,PL,correct_crisis,0.704545,0.659091,0.75,8,88,136,prompt_id,v1
+all,PT,correct_crisis,0.329545,0.268939,0.401515,8,88,136,prompt_id,v1
+all,RO,correct_crisis,0.223485,0.193182,0.253788,8,88,136,prompt_id,v1
+all,RU,correct_crisis,0.204545,0.155303,0.253883,8,88,136,prompt_id,v1
+all,SA,correct_crisis,0.0568182,0.0416667,0.0795455,8,88,136,prompt_id,v1
+all,SE,correct_crisis,0.443182,0.424242,0.454545,8,88,136,prompt_id,v1
+all,TH,correct_crisis,0.856061,0.829545,0.882576,8,88,136,prompt_id,v1
+all,UA,correct_crisis,0.0113636,0,0.0265152,8,88,136,prompt_id,v1
+all,US,correct_crisis,0.996212,0.988636,1,8,88,136,prompt_id,v1
+all,VN,correct_crisis,0.0681818,0.0454545,0.0871212,8,88,136,prompt_id,v1
+all,ZA,correct_crisis,0.723485,0.67803,0.768939,8,88,136,prompt_id,v1
+all,all,correct_crisis,0.487121,0.404958,0.572226,45,3960,6120,iso2,v1

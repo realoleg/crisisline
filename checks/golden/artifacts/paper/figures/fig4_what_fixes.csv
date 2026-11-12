@@ -1,0 +1,21 @@
+outcome,model_group,condition,estimate,ci_low,ci_high,subset,panel
+correct_crisis,API,S0-country,0.81358,0.72037,0.892608,"S0 with a country cue, local-language prompts, 45 countries with a crisis line",line
+correct_crisis,API,M1,0.803704,0.70554,0.887654,"M1 (location in the system prompt), local-language prompts, 45 countries with a crisis line",line
+correct_crisis,API,M2,0.990741,0.98642,0.995062,"M2 (location and numbers in the system prompt), local-language prompts, 45 countries with a crisis line",line
+correct_crisis,Gemma,S0-country,0.625,0.5,0.744514,"S0 with a country cue, local-language prompts, 45 countries with a crisis line",line
+correct_crisis,Gemma,M1,0.627778,0.5,0.744444,"M1 (location in the system prompt), local-language prompts, 45 countries with a crisis line",line
+correct_crisis,Gemma,M2,1,1,1,"M2 (location and numbers in the system prompt), local-language prompts, 45 countries with a crisis line",line
+correct_crisis,other local,S0-country,0.325926,0.238889,0.414838,"S0 with a country cue, local-language prompts, 45 countries with a crisis line",line
+correct_crisis,other local,M1,0.330556,0.241667,0.419444,"M1 (location in the system prompt), local-language prompts, 45 countries with a crisis line",line
+correct_crisis,other local,M2,0.930556,0.896273,0.960185,"M2 (location and numbers in the system prompt), local-language prompts, 45 countries with a crisis line",line
+fabricated,API,S0-country,0.0405556,0.0211111,0.0633333,"S0 with a country cue, local-language prompts, 50 countries",line
+fabricated,API,M1,0.0333333,0.0166667,0.0533333,"M1 (location in the system prompt), local-language prompts, 50 countries",line
+fabricated,API,M2,0.00222222,0,0.005,"M2 (location and numbers in the system prompt), local-language prompts, 50 countries",line
+fabricated,Gemma,S0-country,0.015,0.0025,0.03,"S0 with a country cue, local-language prompts, 50 countries",line
+fabricated,Gemma,M1,0.0175,0,0.0425,"M1 (location in the system prompt), local-language prompts, 50 countries",line
+fabricated,Gemma,M2,0.0025,0,0.0075,"M2 (location and numbers in the system prompt), local-language prompts, 50 countries",line
+fabricated,other local,S0-country,0.134167,0.105833,0.163333,"S0 with a country cue, local-language prompts, 50 countries",line
+fabricated,other local,M1,0.149167,0.118333,0.1825,"M1 (location in the system prompt), local-language prompts, 50 countries",line
+fabricated,other local,M2,0.0175,0.01,0.0266667,"M2 (location and numbers in the system prompt), local-language prompts, 50 countries",line
+correct_crisis,all,M1 - S0-country,0.0003367,-0.00942761,0.010101,"M1 (location in the system prompt) minus S0 with a country cue, local-language prompts, 45 countries with a crisis line",step
+correct_crisis,all,M2 - M1,0.44596,0.365636,0.52391,"M2 (location and numbers in the system prompt) minus M1 (location in the system prompt), local-language prompts, 45 countries with a crisis line",step

@@ -1,0 +1,58 @@
+model_id,error_type,responses,share
+claude-haiku-5.5,correct number,3219,0.951241
+claude-haiku-5.5,directory only,2,0.000591017
+claude-haiku-5.5,foreign number only,32,0.00945626
+claude-haiku-5.5,no resource,131,0.0387116
+gemini-3.5-flash-lite,correct number,3305,0.976655
+gemini-3.5-flash-lite,fabricated number,5,0.00147754
+gemini-3.5-flash-lite,foreign number only,21,0.00620567
+gemini-3.5-flash-lite,no resource,9,0.00265957
+gemini-3.5-flash-lite,other number,44,0.0130024
+gemma4-e2b,correct number,1006,0.891844
+gemma4-e2b,directory only,14,0.0124113
+gemma4-e2b,fabricated number,2,0.00177305
+gemma4-e2b,foreign number only,54,0.0478723
+gemma4-e2b,no resource,40,0.035461
+gemma4-e2b,other number,12,0.0106383
+gemma4-e4b,correct number,1016,0.900709
+gemma4-e4b,directory only,28,0.0248227
+gemma4-e4b,fabricated number,1,0.000886525
+gemma4-e4b,foreign number only,23,0.0203901
+gemma4-e4b,no resource,37,0.0328014
+gemma4-e4b,other number,23,0.0203901
+gpt-6-luna,correct number,3365,0.994385
+gpt-6-luna,foreign number only,10,0.00295508
+gpt-6-luna,no resource,2,0.000591017
+gpt-6-luna,other number,7,0.00206856
+llama3.1-8b,correct number,631,0.559397
+llama3.1-8b,fabricated number,108,0.0957447
+llama3.1-8b,foreign number only,65,0.0576241
+llama3.1-8b,no resource,136,0.120567
+llama3.1-8b,other number,188,0.166667
+local-8,correct number,790,0.700355
+local-8,directory only,4,0.0035461
+local-8,fabricated number,92,0.0815603
+local-8,foreign number only,74,0.0656028
+local-8,no resource,49,0.0434397
+local-8,other number,119,0.105496
+qwen3.5-0.8b,correct number,397,0.35195
+qwen3.5-0.8b,fabricated number,31,0.0274823
+qwen3.5-0.8b,foreign number only,226,0.200355
+qwen3.5-0.8b,no resource,301,0.266844
+qwen3.5-0.8b,other number,173,0.153369
+qwen3.5-2b,correct number,674,0.597518
+qwen3.5-2b,directory only,1,0.000886525
+qwen3.5-2b,fabricated number,26,0.0230496
+qwen3.5-2b,foreign number only,249,0.220745
+qwen3.5-2b,no resource,90,0.0797872
+qwen3.5-2b,other number,88,0.0780142
+qwen3.5-4b,correct number,928,0.822695
+qwen3.5-4b,fabricated number,26,0.0230496
+qwen3.5-4b,foreign number only,100,0.0886525
+qwen3.5-4b,no resource,16,0.0141844
+qwen3.5-4b,other number,58,0.0514184
+qwen3.5-9b,correct number,997,0.883865
+qwen3.5-9b,directory only,1,0.000886525
+qwen3.5-9b,fabricated number,13,0.0115248
+qwen3.5-9b,foreign number only,62,0.0549645
+qwen3.5-9b,other number,55,0.0487589

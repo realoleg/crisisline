@@ -1,0 +1,158 @@
+{
+  "share": 0.5200813461223714,
+  "interval": [
+    0.5014321713212987,
+    0.5369560451545609
+  ],
+  "confidence": 0.95,
+  "replicates": 10000,
+  "seed": 2026,
+  "pairs": 8478,
+  "mentions": 18809,
+  "strata": [
+    {
+      "name": "5+, census",
+      "pairs": 430,
+      "mentions": 9209,
+      "weight": 0.489606039661864,
+      "labelled_pairs": 430,
+      "pair_share": 0.3325581395348837,
+      "pair_share_wilson": null,
+      "mention_share": 0.11553914648713215,
+      "labels": {
+        "fabricated": {
+          "pairs": 143,
+          "mentions": 1064
+        },
+        "not_a_number": {
+          "pairs": 3,
+          "mentions": 50
+        },
+        "other_service": {
+          "pairs": 92,
+          "mentions": 2183
+        },
+        "unverified": {
+          "pairs": 78,
+          "mentions": 2222
+        },
+        "valid": {
+          "pairs": 114,
+          "mentions": 3690
+        }
+      }
+    },
+    {
+      "name": "2-4, not flagged",
+      "pairs": 785,
+      "mentions": 1964,
+      "weight": 0.10441809771917698,
+      "labelled_pairs": 50,
+      "pair_share": 0.78,
+      "pair_share_wilson": [
+        0.6475845041874634,
+        0.8724608402978559
+      ],
+      "mention_share": 0.768,
+      "labels": {
+        "fabricated": {
+          "pairs": 39,
+          "mentions": 96
+        },
+        "other_service": {
+          "pairs": 5,
+          "mentions": 16
+        },
+        "unverified": {
+          "pairs": 1,
+          "mentions": 2
+        },
+        "valid": {
+          "pairs": 5,
+          "mentions": 11
+        }
+      }
+    },
+    {
+      "name": "1, not flagged",
+      "pairs": 5668,
+      "mentions": 5668,
+      "weight": 0.3013451007496411,
+      "labelled_pairs": 100,
+      "pair_share": 0.97,
+      "pair_share_wilson": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "mention_share": 0.97,
+      "labels": {
+        "fabricated": {
+          "pairs": 97,
+          "mentions": 97
+        },
+        "not_a_number": {
+          "pairs": 1,
+          "mentions": 1
+        },
+        "unverified": {
+          "pairs": 2,
+          "mentions": 2
+        }
+      }
+    },
+    {
+      "name": "1, flagged",
+      "pairs": 1348,
+      "mentions": 1348,
+      "weight": 0.07166781859747993,
+      "labelled_pairs": 68,
+      "pair_share": 0.8529411764705882,
+      "pair_share_wilson": [
+        0.7500260574669123,
+        0.9181118226365673
+      ],
+      "mention_share": 0.8529411764705882,
+      "labels": {
+        "fabricated": {
+          "pairs": 58,
+          "mentions": 58
+        },
+        "not_a_number": {
+          "pairs": 7,
+          "mentions": 7
+        },
+        "other_service": {
+          "pairs": 1,
+          "mentions": 1
+        },
+        "valid": {
+          "pairs": 2,
+          "mentions": 2
+        }
+      }
+    },
+    {
+      "name": "2-4, flagged",
+      "pairs": 247,
+      "mentions": 620,
+      "weight": 0.03296294327183795,
+      "labelled_pairs": 32,
+      "pair_share": 0.90625,
+      "pair_share_wilson": [
+        0.7578184527161214,
+        0.9675984487016338
+      ],
+      "mention_share": 0.9066666666666666,
+      "labels": {
+        "fabricated": {
+          "pairs": 29,
+          "mentions": 68
+        },
+        "not_a_number": {
+          "pairs": 3,
+          "mentions": 7
+        }
+      }
+    }
+  ]
+}

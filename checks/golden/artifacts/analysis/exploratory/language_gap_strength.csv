@@ -1,0 +1,49 @@
+variant,term,estimate,ci_low,ci_high,p_two_sided,n,clusters,converged,note,models,version
+all English prompts,interaction: OR of en vs local per +0.1 strength,0.807736,0.661803,0.985849,0.0357161,5576,41,True,,11,v2
+all English prompts,OR en vs local at strength 0.388 (weakest),3.59381,1.99556,6.47211,2.02723e-05,5576,41,True,,11,v2
+all English prompts,OR en vs local at strength 0.824 (mean of models),1.41683,0.943974,2.12656,0.092631,5576,41,True,,11,v2
+all English prompts,OR en vs local at strength 0.996 (strongest),0.979608,0.479346,2.00196,0.954945,5576,41,True,,11,v2
+English prompts outside the gap data,interaction: OR of en vs local per +0.1 strength,0.812317,0.666843,0.989525,0.0389657,5576,41,True,,11,v2
+English prompts outside the gap data,OR en vs local at strength 0.429 (weakest),3.43333,1.95292,6.03597,1.82662e-05,5576,41,True,,11,v2
+English prompts outside the gap data,OR en vs local at strength 0.848 (mean of models),1.43724,0.962375,2.14641,0.0763031,5576,41,True,,11,v2
+English prompts outside the gap data,OR en vs local at strength 1.000 (strongest),1.04679,0.538073,2.03648,0.892862,5576,41,True,,11,v2
+"all English prompts, + chrF",interaction: OR of en vs local per +0.1 strength,0.807966,0.66193,0.98622,0.0360488,5576,41,True,,11,v2
+"all English prompts, + chrF",OR en vs local at strength 0.388 (weakest),3.59152,1.99535,6.46455,2.0116e-05,5576,41,True,,11,v2
+"all English prompts, + chrF",OR en vs local at strength 0.824 (mean of models),1.41768,0.944343,2.12828,0.0922377,5576,41,True,,11,v2
+"all English prompts, + chrF",OR en vs local at strength 0.996 (strongest),0.980679,0.479577,2.00537,0.957368,5576,41,True,,11,v2
+"all English prompts, + chrF","OR per +10 chrF, local arm",0.964463,0.777347,1.19662,0.742305,5576,41,True,,11,v2
+without claude-haiku-5.5,interaction: OR of en vs local per +0.1 strength,0.824169,0.687564,0.987916,0.0364873,4592,41,True,,10,v2
+without gemini-3.5-flash-lite,interaction: OR of en vs local per +0.1 strength,0.824603,0.694661,0.978852,0.0275049,4592,41,True,,10,v2
+without gemma4-e2b,interaction: OR of en vs local per +0.1 strength,0.815102,0.661236,1.00477,0.0554463,5248,41,True,,10,v2
+without gemma4-e4b,interaction: OR of en vs local per +0.1 strength,0.82731,0.671599,1.01912,0.0747638,5248,41,True,,10,v2
+without gpt-6-luna,interaction: OR of en vs local per +0.1 strength,0.820747,0.681243,0.988819,0.0376856,4592,41,True,,10,v2
+without llama3.1-8b,interaction: OR of en vs local per +0.1 strength,0.798284,0.665104,0.958132,0.0155533,5248,41,True,,10,v2
+without local-8,interaction: OR of en vs local per +0.1 strength,0.795263,0.653116,0.968346,0.0226007,5248,41,True,,10,v2
+without qwen3.5-0.8b,interaction: OR of en vs local per +0.1 strength,0.712202,0.501463,1.0115,0.0579508,5248,41,True,,10,v2
+without qwen3.5-2b,interaction: OR of en vs local per +0.1 strength,0.814661,0.669009,0.992024,0.0413856,5248,41,True,,10,v2
+without qwen3.5-4b,interaction: OR of en vs local per +0.1 strength,0.809197,0.654594,1.00031,0.0503405,5248,41,True,,10,v2
+without qwen3.5-9b,interaction: OR of en vs local per +0.1 strength,0.788036,0.644061,0.964195,0.020658,5248,41,True,,10,v2
+all English prompts,interaction: OR of en vs local per +0.1 strength,0.820301,0.681874,0.986829,0.0356796,5576,41,True,,11,v1
+all English prompts,OR en vs local at strength 0.375 (weakest),3.17766,1.77453,5.69025,0.000100491,5576,41,True,,11,v1
+all English prompts,OR en vs local at strength 0.812 (mean of models),1.33792,0.927978,1.92896,0.118869,5576,41,True,,11,v1
+all English prompts,OR en vs local at strength 0.994 (strongest),0.931752,0.482046,1.80099,0.833488,5576,41,True,,11,v1
+English prompts outside the gap data,interaction: OR of en vs local per +0.1 strength,0.825941,0.683921,0.997453,0.0469827,5576,41,True,,11,v1
+English prompts outside the gap data,OR en vs local at strength 0.422 (weakest),3.02077,1.69614,5.3799,0.000173902,5576,41,True,,11,v1
+English prompts outside the gap data,OR en vs local at strength 0.840 (mean of models),1.35783,0.94457,1.95191,0.0985359,5576,41,True,,11,v1
+English prompts outside the gap data,OR en vs local at strength 0.998 (strongest),1.00449,0.542789,1.85892,0.988617,5576,41,True,,11,v1
+"all English prompts, + chrF",interaction: OR of en vs local per +0.1 strength,0.820522,0.681998,0.987182,0.0360194,5576,41,True,,11,v1
+"all English prompts, + chrF",OR en vs local at strength 0.375 (weakest),3.17555,1.77314,5.68714,0.000101747,5576,41,True,,11,v1
+"all English prompts, + chrF",OR en vs local at strength 0.812 (mean of models),1.3386,0.928364,1.93013,0.118319,5576,41,True,,11,v1
+"all English prompts, + chrF",OR en vs local at strength 0.994 (strongest),0.932685,0.482379,1.80336,0.835889,5576,41,True,,11,v1
+"all English prompts, + chrF","OR per +10 chrF, local arm",0.965885,0.787395,1.18484,0.739154,5576,41,True,,11,v1
+without claude-haiku-5.5,interaction: OR of en vs local per +0.1 strength,0.843197,0.706875,1.00581,0.0580152,4592,41,True,,10,v1
+without gemini-3.5-flash-lite,interaction: OR of en vs local per +0.1 strength,0.820933,0.701035,0.961336,0.0143069,4592,41,True,,10,v1
+without gemma4-e2b,interaction: OR of en vs local per +0.1 strength,0.826411,0.6814,1.00228,0.0527673,5248,41,True,,10,v1
+without gemma4-e4b,interaction: OR of en vs local per +0.1 strength,0.835824,0.688809,1.01422,0.0692254,5248,41,True,,10,v1
+without gpt-6-luna,interaction: OR of en vs local per +0.1 strength,0.827072,0.694741,0.98461,0.0328171,4592,41,True,,10,v1
+without llama3.1-8b,interaction: OR of en vs local per +0.1 strength,0.832895,0.700781,0.989916,0.0379882,5248,41,True,,10,v1
+without local-8,interaction: OR of en vs local per +0.1 strength,0.810337,0.675803,0.971653,0.0231825,5248,41,True,,10,v1
+without qwen3.5-0.8b,interaction: OR of en vs local per +0.1 strength,0.743146,0.550933,1.00242,0.0518797,5248,41,True,,10,v1
+without qwen3.5-2b,interaction: OR of en vs local per +0.1 strength,0.820582,0.682479,0.986631,0.0354559,5248,41,True,,10,v1
+without qwen3.5-4b,interaction: OR of en vs local per +0.1 strength,0.821171,0.675378,0.998437,0.048195,5248,41,True,,10,v1
+without qwen3.5-9b,interaction: OR of en vs local per +0.1 strength,0.802257,0.665643,0.966909,0.0207073,5248,41,True,,10,v1

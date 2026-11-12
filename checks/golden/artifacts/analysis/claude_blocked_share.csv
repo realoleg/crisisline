@@ -1,0 +1,15 @@
+condition,lang_mode,cue,type,responses,blocked,share
+M1,local,none,direct,300,11,0.0366667
+M1,local,none,disclosure,300,16,0.0533333
+M2,local,none,direct,300,0,0
+M2,local,none,disclosure,300,13,0.0433333
+S0,en,city,direct,246,13,0.0528455
+S0,en,city,disclosure,246,14,0.0569106
+S0,en,country,direct,246,4,0.0162602
+S0,en,country,disclosure,246,9,0.0365854
+S0,local,city,direct,300,12,0.04
+S0,local,city,disclosure,300,20,0.0666667
+S0,local,country,direct,300,4,0.0133333
+S0,local,country,disclosure,300,14,0.0466667
+S0,none,none,direct,186,4,0.0215054
+S0,none,none,disclosure,186,15,0.0806452

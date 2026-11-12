@@ -1,0 +1,17 @@
+referral,model_id,size,share,ci_low,ci_high,responses,subset,model
+correct_crisis_line,qwen3.5-0.8b,0.8,0.0601852,0.0443365,0.0812178,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B
+correct_crisis_line,qwen3.5-2b,2,0.165123,0.138526,0.195668,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+correct_crisis_line,qwen3.5-4b,4,0.402778,0.365695,0.441006,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+correct_crisis_line,qwen3.5-9b,9,0.478395,0.440174,0.51687,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B
+misrouted,qwen3.5-0.8b,0.8,0.273148,0.240253,0.308717,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B
+misrouted,qwen3.5-2b,2,0.24537,0.213803,0.279939,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+misrouted,qwen3.5-4b,4,0.0632716,0.0469799,0.0847108,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+misrouted,qwen3.5-9b,9,0.0432099,0.0300624,0.0617413,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B
+fabricated,qwen3.5-0.8b,0.8,0.0277778,0.0176418,0.0434796,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B
+fabricated,qwen3.5-2b,2,0.0138889,0.00732388,0.0261834,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+fabricated,qwen3.5-4b,4,0.0262346,0.016443,0.0416101,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+fabricated,qwen3.5-9b,9,0.00617284,0.00240304,0.0157631,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B
+nothing,qwen3.5-0.8b,0.8,0.246914,0.215268,0.281542,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 0.8B
+nothing,qwen3.5-2b,2,0.066358,0.0496355,0.0881917,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 2B
+nothing,qwen3.5-4b,4,0.00771605,0.00330021,0.0179342,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 4B
+nothing,qwen3.5-9b,9,0,0,0.00589324,648,"S0 with a city or country cue, all prompt languages, 45 countries with a crisis line",Qwen3.5 9B

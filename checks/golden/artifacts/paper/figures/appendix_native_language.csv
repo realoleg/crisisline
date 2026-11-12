@@ -1,0 +1,23 @@
+model_group,model_id,prompt_language,estimate,ci_low,ci_high,difference_en_minus_local,difference_ci_low,difference_ci_high,significant_gap,subset,model
+other local,llama3.1-8b,en,0.70122,0.597561,0.792683,0.365854,0.25,0.475762,True,"S0 with a country cue, 41 countries whose language is not English, English prompts",Llama 3.1 8B
+other local,llama3.1-8b,local,0.335366,0.237805,0.439024,0.365854,0.25,0.475762,True,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",Llama 3.1 8B
+other local,qwen3.5-2b,en,0.640244,0.518293,0.75,0.189024,0.0853659,0.286585,True,"S0 with a country cue, 41 countries whose language is not English, English prompts",Qwen3.5 2B
+other local,qwen3.5-2b,local,0.45122,0.335366,0.567073,0.189024,0.0853659,0.286585,True,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",Qwen3.5 2B
+other local,qwen3.5-0.8b,en,0.310976,0.219512,0.402591,0.164634,0.097561,0.243902,True,"S0 with a country cue, 41 countries whose language is not English, English prompts",Qwen3.5 0.8B
+other local,qwen3.5-0.8b,local,0.146341,0.0792683,0.22561,0.164634,0.097561,0.243902,True,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",Qwen3.5 0.8B
+other local,qwen3.5-9b,en,0.890244,0.804878,0.951372,0.0853659,0.00609756,0.164634,True,"S0 with a country cue, 41 countries whose language is not English, English prompts",Qwen3.5 9B
+other local,qwen3.5-9b,local,0.804878,0.713415,0.890244,0.0853659,0.00609756,0.164634,True,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",Qwen3.5 9B
+other local,local-8,en,0.615854,0.512043,0.713567,0.0487805,-0.0487805,0.140396,False,"S0 with a country cue, 41 countries whose language is not English, English prompts",Ministral 3 8B
+other local,local-8,local,0.567073,0.457317,0.676829,0.0487805,-0.0487805,0.140396,False,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",Ministral 3 8B
+other local,qwen3.5-4b,en,0.79878,0.707317,0.890244,0.0365854,-0.0426829,0.128049,False,"S0 with a country cue, 41 countries whose language is not English, English prompts",Qwen3.5 4B
+other local,qwen3.5-4b,local,0.762195,0.652439,0.859756,0.0365854,-0.0426829,0.128049,False,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",Qwen3.5 4B
+API,claude-haiku-5.5,en,0.949187,0.900407,0.979675,-0.0101626,-0.0691057,0.0264228,False,"S0 with a country cue, 41 countries whose language is not English, English prompts",Claude Haiku 5.5
+API,claude-haiku-5.5,local,0.95935,0.943089,0.97561,-0.0101626,-0.0691057,0.0264228,False,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",Claude Haiku 5.5
+API,gpt-6-luna,en,0.989837,0.971545,1,-0.0101626,-0.0284553,0,False,"S0 with a country cue, 41 countries whose language is not English, English prompts",GPT-6 Luna
+API,gpt-6-luna,local,1,1,1,-0.0101626,-0.0284553,0,False,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",GPT-6 Luna
+API,gemini-3.5-flash-lite,en,0.963415,0.902439,1,-0.0121951,-0.0670732,0.0304878,False,"S0 with a country cue, 41 countries whose language is not English, English prompts",Gemini 3.5 Flash-Lite
+API,gemini-3.5-flash-lite,local,0.97561,0.949187,0.993902,-0.0121951,-0.0670732,0.0304878,False,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",Gemini 3.5 Flash-Lite
+Gemma,gemma4-e2b,en,0.871951,0.786585,0.945122,-0.0121951,-0.0914634,0.0731707,False,"S0 with a country cue, 41 countries whose language is not English, English prompts",Gemma 4 E2B
+Gemma,gemma4-e2b,local,0.884146,0.804878,0.95122,-0.0121951,-0.0914634,0.0731707,False,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",Gemma 4 E2B
+Gemma,gemma4-e4b,en,0.835366,0.737805,0.920732,-0.0487805,-0.140244,0.0304878,False,"S0 with a country cue, 41 countries whose language is not English, English prompts",Gemma 4 E4B
+Gemma,gemma4-e4b,local,0.884146,0.804878,0.95122,-0.0487805,-0.140244,0.0304878,False,"S0 with a country cue, 41 countries whose language is not English, local-language prompts",Gemma 4 E4B

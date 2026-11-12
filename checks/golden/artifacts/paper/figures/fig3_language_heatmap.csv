@@ -1,0 +1,384 @@
+panel,model_group,model_id,lang,language,share,ci_low,ci_high,n,subset,model
+cell,API,gpt-6-luna,de,German,1,1,1,24,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,zh,Chinese,1,1,1,24,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,en,English,1,1,1,216,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,nl,Dutch,1,1,1,24,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,pl,Polish,1,1,1,24,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,pt,Portuguese,1,1,1,48,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,th,Thai,1,1,1,24,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,ru,Russian,1,1,1,48,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,ko,Korean,1,1,1,24,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,ro,Romanian,1,1,1,24,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,sv,Swedish,1,1,1,24,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,ja,Japanese,1,1,1,24,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,id,Indonesian,1,1,1,24,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,it,Italian,1,1,1,24,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,es,Spanish,1,1,1,144,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,fa,Persian,1,1,1,24,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,el,Greek,1,1,1,24,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,tr,Turkish,1,1,1,24,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,vi,Vietnamese,1,1,1,24,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,fr,French,1,1,1,48,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,uk,Ukrainian,1,1,1,24,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,ms,Malay,1,1,1,24,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,fil,Filipino,1,1,1,24,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,ka,Georgian,1,1,1,24,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,hi,Hindi,1,1,1,24,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,ar,Arabic,1,1,1,96,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,ur,Urdu,1,1,1,24,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,sw,Swahili,1,1,1,24,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,bn,Bengali,1,1,1,24,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,si,Sinhala,1,1,1,24,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",GPT-6 Luna
+cell,API,gpt-6-luna,am,Amharic,0.875,0.708333,1,24,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",GPT-6 Luna
+model share,API,gpt-6-luna,,,0.9975,0.993333,1,1200,"S0 with a city or country cue, local-language prompts, 50 countries",GPT-6 Luna
+cell,API,gemini-3.5-flash-lite,de,German,1,1,1,24,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,zh,Chinese,1,1,1,24,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,en,English,0.953704,0.907407,0.986111,216,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,nl,Dutch,1,1,1,24,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,pl,Polish,1,1,1,24,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,pt,Portuguese,1,1,1,48,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,th,Thai,1,1,1,24,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,ru,Russian,1,1,1,48,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,ko,Korean,1,1,1,24,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,ro,Romanian,1,1,1,24,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,sv,Swedish,1,1,1,24,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,ja,Japanese,1,1,1,24,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,id,Indonesian,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,it,Italian,1,1,1,24,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,es,Spanish,1,1,1,144,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,fa,Persian,1,1,1,24,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,el,Greek,1,1,1,24,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,tr,Turkish,1,1,1,24,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,vi,Vietnamese,1,1,1,24,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,fr,French,1,1,1,48,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,uk,Ukrainian,1,1,1,24,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,ms,Malay,1,1,1,24,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,fil,Filipino,1,1,1,24,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,ka,Georgian,0.875,0.708333,1,24,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,hi,Hindi,1,1,1,24,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,ar,Arabic,0.9375,0.875,0.979167,96,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,ur,Urdu,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,sw,Swahili,0.916667,0.791667,1,24,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,bn,Bengali,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,si,Sinhala,1,1,1,24,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+cell,API,gemini-3.5-flash-lite,am,Amharic,0.583333,0.333333,0.791667,24,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",Gemini 3.5 Flash-Lite
+model share,API,gemini-3.5-flash-lite,,,0.971667,0.959167,0.983333,1200,"S0 with a city or country cue, local-language prompts, 50 countries",Gemini 3.5 Flash-Lite
+cell,API,claude-haiku-5.5,de,German,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,zh,Chinese,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,en,English,0.958333,0.930556,0.981481,216,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,nl,Dutch,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,pl,Polish,1,1,1,24,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,pt,Portuguese,0.958333,0.895833,1,48,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,th,Thai,0.916667,0.791667,1,24,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,ru,Russian,0.958333,0.895833,1,48,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,ko,Korean,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,ro,Romanian,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,sv,Swedish,0.916667,0.791667,1,24,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,ja,Japanese,1,1,1,24,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,id,Indonesian,1,1,1,24,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,it,Italian,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,es,Spanish,0.944444,0.909722,0.979167,144,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,fa,Persian,1,1,1,24,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,el,Greek,1,1,1,24,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,tr,Turkish,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,vi,Vietnamese,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,fr,French,0.916667,0.8125,1,48,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,uk,Ukrainian,1,1,1,24,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,ms,Malay,0.916667,0.791667,1,24,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,fil,Filipino,0.916667,0.791667,1,24,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,ka,Georgian,0.916667,0.791667,1,24,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,hi,Hindi,1,1,1,24,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,ar,Arabic,0.916667,0.864583,0.958333,96,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,ur,Urdu,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,sw,Swahili,1,1,1,24,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,bn,Bengali,0.958333,0.875,1,24,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,si,Sinhala,1,1,1,24,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",Claude Haiku 5.5
+cell,API,claude-haiku-5.5,am,Amharic,0.916667,0.832292,1,24,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",Claude Haiku 5.5
+model share,API,claude-haiku-5.5,,,0.954167,0.941667,0.965,1200,"S0 with a city or country cue, local-language prompts, 50 countries",Claude Haiku 5.5
+cell,Gemma,gemma4-e4b,de,German,1,0.675592,1,8,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,zh,Chinese,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,en,English,0.944444,0.86568,0.978186,72,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,nl,Dutch,1,0.675592,1,8,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,pl,Polish,1,0.675592,1,8,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,pt,Portuguese,1,0.806392,1,16,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,th,Thai,1,0.675592,1,8,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,ru,Russian,1,0.806392,1,16,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,ko,Korean,1,0.675592,1,8,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,ro,Romanian,1,0.675592,1,8,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,sv,Swedish,1,0.675592,1,8,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,ja,Japanese,1,0.675592,1,8,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,id,Indonesian,1,0.675592,1,8,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,it,Italian,1,0.675592,1,8,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,es,Spanish,1,0.9259,1,48,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,fa,Persian,1,0.675592,1,8,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,el,Greek,1,0.675592,1,8,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,tr,Turkish,1,0.675592,1,8,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,vi,Vietnamese,1,0.675592,1,8,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,fr,French,0.6875,0.444044,0.858354,16,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,uk,Ukrainian,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,ms,Malay,1,0.675592,1,8,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,fil,Filipino,1,0.675592,1,8,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,ka,Georgian,1,0.675592,1,8,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,hi,Hindi,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,ar,Arabic,0.78125,0.61245,0.889762,32,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,ur,Urdu,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,sw,Swahili,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,bn,Bengali,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,si,Sinhala,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",Gemma 4 E4B
+cell,Gemma,gemma4-e4b,am,Amharic,0,0,0.324408,8,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",Gemma 4 E4B
+model share,Gemma,gemma4-e4b,,,0.8925,0.858327,0.919206,400,"S0 with a city or country cue, local-language prompts, 50 countries",Gemma 4 E4B
+cell,Gemma,gemma4-e2b,de,German,1,0.675592,1,8,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,zh,Chinese,1,0.675592,1,8,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,en,English,0.902778,0.81265,0.952104,72,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,nl,Dutch,1,0.675592,1,8,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,pl,Polish,1,0.675592,1,8,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,pt,Portuguese,0.9375,0.716713,0.988881,16,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,th,Thai,1,0.675592,1,8,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,ru,Russian,1,0.806392,1,16,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,ko,Korean,1,0.675592,1,8,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,ro,Romanian,1,0.675592,1,8,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,sv,Swedish,1,0.675592,1,8,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,ja,Japanese,1,0.675592,1,8,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,id,Indonesian,1,0.675592,1,8,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,it,Italian,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,es,Spanish,1,0.9259,1,48,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,fa,Persian,1,0.675592,1,8,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,el,Greek,1,0.675592,1,8,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,tr,Turkish,1,0.675592,1,8,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,vi,Vietnamese,1,0.675592,1,8,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,fr,French,0.8125,0.569911,0.934084,16,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,uk,Ukrainian,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,ms,Malay,1,0.675592,1,8,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,fil,Filipino,1,0.675592,1,8,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,ka,Georgian,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,hi,Hindi,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,ar,Arabic,0.6875,0.514333,0.820475,32,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,ur,Urdu,1,0.675592,1,8,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,sw,Swahili,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,bn,Bengali,1,0.675592,1,8,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,si,Sinhala,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",Gemma 4 E2B
+cell,Gemma,gemma4-e2b,am,Amharic,0,0,0.324408,8,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",Gemma 4 E2B
+model share,Gemma,gemma4-e2b,,,0.89,0.855549,0.917031,400,"S0 with a city or country cue, local-language prompts, 50 countries",Gemma 4 E2B
+cell,other local,qwen3.5-9b,de,German,1,0.675592,1,8,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,zh,Chinese,1,0.675592,1,8,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,en,English,0.986111,0.925434,0.997544,72,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,nl,Dutch,1,0.675592,1,8,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,pl,Polish,1,0.675592,1,8,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,pt,Portuguese,0.9375,0.716713,0.988881,16,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,th,Thai,1,0.675592,1,8,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,ru,Russian,1,0.806392,1,16,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,ko,Korean,1,0.675592,1,8,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,ro,Romanian,1,0.675592,1,8,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,sv,Swedish,1,0.675592,1,8,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,ja,Japanese,1,0.675592,1,8,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,id,Indonesian,1,0.675592,1,8,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,it,Italian,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,es,Spanish,0.979167,0.891008,0.996313,48,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,fa,Persian,1,0.675592,1,8,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,el,Greek,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,tr,Turkish,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,vi,Vietnamese,1,0.675592,1,8,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,fr,French,0.8125,0.569911,0.934084,16,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,uk,Ukrainian,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,ms,Malay,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,fil,Filipino,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,ka,Georgian,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,hi,Hindi,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,ar,Arabic,0.5625,0.393256,0.718347,32,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,ur,Urdu,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,sw,Swahili,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,bn,Bengali,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,si,Sinhala,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",Qwen3.5 9B
+cell,other local,qwen3.5-9b,am,Amharic,0,0,0.324408,8,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",Qwen3.5 9B
+model share,other local,qwen3.5-9b,,,0.8625,0.825288,0.892816,400,"S0 with a city or country cue, local-language prompts, 50 countries",Qwen3.5 9B
+cell,other local,qwen3.5-4b,de,German,1,0.675592,1,8,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,zh,Chinese,1,0.675592,1,8,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,en,English,0.958333,0.884507,0.985729,72,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,nl,Dutch,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,pl,Polish,1,0.675592,1,8,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,pt,Portuguese,1,0.806392,1,16,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,th,Thai,1,0.675592,1,8,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,ru,Russian,0.9375,0.716713,0.988881,16,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,ko,Korean,1,0.675592,1,8,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,ro,Romanian,1,0.675592,1,8,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,sv,Swedish,1,0.675592,1,8,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,ja,Japanese,1,0.675592,1,8,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,id,Indonesian,1,0.675592,1,8,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,it,Italian,1,0.675592,1,8,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,es,Spanish,0.958333,0.860243,0.988498,48,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,fa,Persian,1,0.675592,1,8,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,el,Greek,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,tr,Turkish,1,0.675592,1,8,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,vi,Vietnamese,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,fr,French,0.625,0.38641,0.815188,16,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,uk,Ukrainian,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,ms,Malay,1,0.675592,1,8,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,fil,Filipino,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,ka,Georgian,0.375,0.136844,0.694258,8,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,hi,Hindi,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,ar,Arabic,0.34375,0.204104,0.516889,32,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,ur,Urdu,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,sw,Swahili,0.375,0.136844,0.694258,8,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,bn,Bengali,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,si,Sinhala,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",Qwen3.5 4B
+cell,other local,qwen3.5-4b,am,Amharic,0,0,0.324408,8,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",Qwen3.5 4B
+model share,other local,qwen3.5-4b,,,0.795,0.752721,0.831667,400,"S0 with a city or country cue, local-language prompts, 50 countries",Qwen3.5 4B
+cell,other local,local-8,de,German,1,0.675592,1,8,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,zh,Chinese,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,en,English,0.861111,0.762868,0.922773,72,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",Ministral 3 8B
+cell,other local,local-8,nl,Dutch,1,0.675592,1,8,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,pl,Polish,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,pt,Portuguese,0.875,0.639772,0.965023,16,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",Ministral 3 8B
+cell,other local,local-8,th,Thai,1,0.675592,1,8,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,ru,Russian,0.5625,0.331786,0.769013,16,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",Ministral 3 8B
+cell,other local,local-8,ko,Korean,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,ro,Romanian,0.375,0.136844,0.694258,8,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,sv,Swedish,1,0.675592,1,8,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,ja,Japanese,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,id,Indonesian,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,it,Italian,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,es,Spanish,0.75,0.612156,0.850794,48,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",Ministral 3 8B
+cell,other local,local-8,fa,Persian,0.375,0.136844,0.694258,8,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,el,Greek,1,0.675592,1,8,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,tr,Turkish,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,vi,Vietnamese,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,fr,French,0.75,0.505017,0.898179,16,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",Ministral 3 8B
+cell,other local,local-8,uk,Ukrainian,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,ms,Malay,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,fil,Filipino,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,ka,Georgian,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,hi,Hindi,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,ar,Arabic,0.5625,0.393256,0.718347,32,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",Ministral 3 8B
+cell,other local,local-8,ur,Urdu,0,0,0.324408,8,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,sw,Swahili,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,bn,Bengali,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,si,Sinhala,0,0,0.324408,8,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",Ministral 3 8B
+cell,other local,local-8,am,Amharic,0,0,0.324408,8,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",Ministral 3 8B
+model share,other local,local-8,,,0.65,0.602032,0.695114,400,"S0 with a city or country cue, local-language prompts, 50 countries",Ministral 3 8B
+cell,other local,qwen3.5-2b,de,German,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,zh,Chinese,1,0.675592,1,8,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,en,English,0.666667,0.551796,0.764654,72,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,nl,Dutch,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,pl,Polish,1,0.675592,1,8,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,pt,Portuguese,0.6875,0.444044,0.858354,16,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,th,Thai,1,0.675592,1,8,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,ru,Russian,1,0.806392,1,16,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,ko,Korean,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,ro,Romanian,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,sv,Swedish,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,ja,Japanese,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,id,Indonesian,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,it,Italian,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,es,Spanish,0.333333,0.216768,0.474599,48,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,fa,Persian,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,el,Greek,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,tr,Turkish,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,vi,Vietnamese,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,fr,French,0.375,0.184812,0.61359,16,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,uk,Ukrainian,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,ms,Malay,0,0,0.324408,8,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,fil,Filipino,0,0,0.324408,8,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,ka,Georgian,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,hi,Hindi,0.375,0.136844,0.694258,8,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,ar,Arabic,0.125,0.0497013,0.280683,32,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,ur,Urdu,0,0,0.324408,8,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,sw,Swahili,0,0,0.324408,8,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,bn,Bengali,0,0,0.324408,8,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,si,Sinhala,0,0,0.324408,8,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",Qwen3.5 2B
+cell,other local,qwen3.5-2b,am,Amharic,0,0,0.324408,8,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",Qwen3.5 2B
+model share,other local,qwen3.5-2b,,,0.495,0.446284,0.543811,400,"S0 with a city or country cue, local-language prompts, 50 countries",Qwen3.5 2B
+cell,other local,llama3.1-8b,de,German,1,0.675592,1,8,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,zh,Chinese,0.375,0.136844,0.694258,8,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,en,English,0.916667,0.829876,0.961248,72,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,nl,Dutch,1,0.675592,1,8,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,pl,Polish,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,pt,Portuguese,0.625,0.38641,0.815188,16,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,th,Thai,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,ru,Russian,0.375,0.184812,0.61359,16,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,ko,Korean,0.75,0.409275,0.928521,8,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,ro,Romanian,0.625,0.305742,0.863156,8,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,sv,Swedish,0.375,0.136844,0.694258,8,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,ja,Japanese,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,id,Indonesian,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,it,Italian,0,0,0.324408,8,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,es,Spanish,0.354167,0.234336,0.495609,48,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,fa,Persian,0,0,0.324408,8,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,el,Greek,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,tr,Turkish,0,0,0.324408,8,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,vi,Vietnamese,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,fr,French,0.3125,0.141646,0.555956,16,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,uk,Ukrainian,0,0,0.324408,8,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,ms,Malay,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,fil,Filipino,0.875,0.529112,0.977583,8,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,ka,Georgian,0.375,0.136844,0.694258,8,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,hi,Hindi,0,0,0.324408,8,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,ar,Arabic,0.28125,0.155646,0.453745,32,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,ur,Urdu,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,sw,Swahili,0,0,0.324408,8,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,bn,Bengali,0,0,0.324408,8,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,si,Sinhala,0,0,0.324408,8,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",Llama 3.1 8B
+cell,other local,llama3.1-8b,am,Amharic,0,0,0.324408,8,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",Llama 3.1 8B
+model share,other local,llama3.1-8b,,,0.4375,0.389708,0.486481,400,"S0 with a city or country cue, local-language prompts, 50 countries",Llama 3.1 8B
+cell,other local,qwen3.5-0.8b,de,German,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,zh,Chinese,1,0.675592,1,8,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,en,English,0.458333,0.348286,0.572601,72,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,nl,Dutch,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,pl,Polish,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,pt,Portuguese,0.4375,0.230987,0.668214,16,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,th,Thai,0,0,0.324408,8,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,ru,Russian,0.4375,0.230987,0.668214,16,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,ko,Korean,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,ro,Romanian,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,sv,Swedish,0,0,0.324408,8,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,ja,Japanese,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,id,Indonesian,0.125,0.0224175,0.470888,8,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,it,Italian,0.5,0.215216,0.784784,8,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,es,Spanish,0.208333,0.117303,0.342589,48,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,fa,Persian,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,el,Greek,0,0,0.324408,8,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,tr,Turkish,0,0,0.324408,8,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,vi,Vietnamese,0,0,0.324408,8,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,fr,French,0.125,0.0349775,0.360228,16,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,uk,Ukrainian,0.25,0.0714792,0.590725,8,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,ms,Malay,0,0,0.324408,8,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,fil,Filipino,0,0,0.324408,8,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,ka,Georgian,0,0,0.324408,8,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,hi,Hindi,0,0,0.324408,8,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,ar,Arabic,0,0,0.107179,32,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,ur,Urdu,0,0,0.324408,8,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,sw,Swahili,0,0,0.324408,8,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,bn,Bengali,0,0,0.324408,8,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,si,Sinhala,0,0,0.324408,8,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",Qwen3.5 0.8B
+cell,other local,qwen3.5-0.8b,am,Amharic,0,0,0.324408,8,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",Qwen3.5 0.8B
+model share,other local,qwen3.5-0.8b,,,0.2125,0.175244,0.255226,400,"S0 with a city or country cue, local-language prompts, 50 countries",Qwen3.5 0.8B
+column share,all,,de,German,0.916667,0.875,0.954545,136,"S0 with a city or country cue, prompts in de, 1 country where it is the local language",
+column share,all,,zh,Chinese,0.905303,0.875,0.931818,136,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language",
+column share,all,,en,English,0.873316,0.784933,0.947811,1224,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language",
+column share,all,,nl,Dutch,0.882576,0.825758,0.924242,136,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language",
+column share,all,,pl,Polish,0.875,0.818182,0.920455,136,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language",
+column share,all,,pt,Portuguese,0.859848,0.806818,0.912879,272,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language",
+column share,all,,th,Thai,0.856061,0.829545,0.882576,136,"S0 with a city or country cue, prompts in th, 1 country where it is the local language",
+column share,all,,ru,Russian,0.842803,0.806818,0.878788,272,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language",
+column share,all,,ko,Korean,0.814394,0.719697,0.897727,136,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language",
+column share,all,,ro,Romanian,0.814394,0.742424,0.882576,136,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language",
+column share,all,,sv,Swedish,0.799242,0.746212,0.859848,136,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language",
+column share,all,,ja,Japanese,0.795455,0.727273,0.875,136,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language",
+column share,all,,id,Indonesian,0.780303,0.75,0.806818,136,"S0 with a city or country cue, prompts in id, 1 country where it is the local language",
+column share,all,,it,Italian,0.757576,0.67803,0.829545,136,"S0 with a city or country cue, prompts in it, 1 country where it is the local language",
+column share,all,,es,Spanish,0.775253,0.727904,0.840956,816,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language",
+column share,all,,fa,Persian,0.772727,0.727273,0.818182,136,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language",
+column share,all,,el,Greek,0.75,0.704545,0.795455,136,"S0 with a city or country cue, prompts in el, 1 country where it is the local language",
+column share,all,,tr,Turkish,0.746212,0.67803,0.80303,136,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language",
+column share,all,,vi,Vietnamese,0.746212,0.681818,0.814394,136,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language",
+column share,all,,fr,French,0.674242,0.477273,0.871212,272,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language",
+column share,all,,uk,Ukrainian,0.670455,0.511364,0.806818,136,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language",
+column share,all,,ms,Malay,0.685606,0.628788,0.746212,136,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language",
+column share,all,,fil,Filipino,0.640152,0.583333,0.700852,136,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language",
+column share,all,,ka,Georgian,0.617424,0.530303,0.712121,136,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language",
+column share,all,,hi,Hindi,0.602273,0.556818,0.647727,136,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language",
+column share,all,,ar,Arabic,0.563447,0.524621,0.623106,544,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language",
+column share,all,,ur,Urdu,0.57197,0.503788,0.636364,136,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language",
+column share,all,,sw,Swahili,0.492424,0.443182,0.537879,136,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language",
+column share,all,,bn,Bengali,0.492424,0.42803,0.55303,136,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language",
+column share,all,,si,Sinhala,0.363636,0.318182,0.409091,136,"S0 with a city or country cue, prompts in si, 1 country where it is the local language",
+column share,all,,am,Amharic,0.215909,0.189394,0.242424,136,"S0 with a city or country cue, prompts in am, 1 country where it is the local language",

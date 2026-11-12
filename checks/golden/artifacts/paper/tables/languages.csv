@@ -1,0 +1,305 @@
+lang,model_group,measure,value,ci_low,ci_high,n,subset
+am,API,correct_local,0.791667,0.708333,0.888889,72,"S0 with a city or country cue, prompts in am, 1 country where it is the local language"
+am,Gemma,correct_local,0,0,0,16,"S0 with a city or country cue, prompts in am, 1 country where it is the local language"
+am,other local,correct_local,0,0,0,48,"S0 with a city or country cue, prompts in am, 1 country where it is the local language"
+am,all,correct_local,0.215909,0.189394,0.242424,136,"S0 with a city or country cue, prompts in am, 1 country where it is the local language"
+am,all,correct_local_english_prompt,0.257576,,,,"S0 with a country cue, 1 country where am is the local language, English and local-language prompts"
+am,all,correct_local_local_prompt,0.219697,,,,"S0 with a country cue, 1 country where am is the local language, English and local-language prompts"
+am,all,english_minus_local,0.0378788,0.00757576,0.0757576,,"S0 with a country cue, 1 country where am is the local language, English and local-language prompts"
+am,all,median_chrf_of_translation,80.935,,,,all prompts translated into am
+am,all,translation_flag_rate,0,,,,all prompts translated into am
+am,all,countries,1,,,,"S0 with a country cue, 1 country where am is the local language, English and local-language prompts"
+ar,API,correct_local,0.951389,0.9375,0.965278,288,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language"
+ar,Gemma,correct_local,0.734375,0.546875,0.90625,64,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language"
+ar,other local,correct_local,0.3125,0.223958,0.401042,192,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language"
+ar,all,correct_local,0.563447,0.524621,0.623106,544,"S0 with a city or country cue, prompts in ar, 4 countries where it is the local language"
+ar,all,correct_local_english_prompt,0.708333,,,,"S0 with a country cue, 4 countries where ar is the local language, English and local-language prompts"
+ar,all,correct_local_local_prompt,0.537879,,,,"S0 with a country cue, 4 countries where ar is the local language, English and local-language prompts"
+ar,all,english_minus_local,0.170455,0.117424,0.223485,,"S0 with a country cue, 4 countries where ar is the local language, English and local-language prompts"
+ar,all,median_chrf_of_translation,86.78,,,,all prompts translated into ar
+ar,all,translation_flag_rate,0,,,,all prompts translated into ar
+ar,all,countries,4,,,,"S0 with a country cue, 4 countries where ar is the local language, English and local-language prompts"
+bn,API,correct_local,0.972222,0.930556,1,72,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language"
+bn,Gemma,correct_local,0.625,0.5,0.8125,16,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language"
+bn,other local,correct_local,0.208333,0.125,0.291667,48,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language"
+bn,all,correct_local,0.492424,0.42803,0.55303,136,"S0 with a city or country cue, prompts in bn, 1 country where it is the local language"
+bn,all,correct_local_english_prompt,0.666667,,,,"S0 with a country cue, 1 country where bn is the local language, English and local-language prompts"
+bn,all,correct_local_local_prompt,0.469697,,,,"S0 with a country cue, 1 country where bn is the local language, English and local-language prompts"
+bn,all,english_minus_local,0.19697,0.0984848,0.295455,,"S0 with a country cue, 1 country where bn is the local language, English and local-language prompts"
+bn,all,median_chrf_of_translation,85.315,,,,all prompts translated into bn
+bn,all,translation_flag_rate,0,,,,all prompts translated into bn
+bn,all,countries,1,,,,"S0 with a country cue, 1 country where bn is the local language, English and local-language prompts"
+de,API,correct_local,0.986111,0.958333,1,72,"S0 with a city or country cue, prompts in de, 1 country where it is the local language"
+de,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in de, 1 country where it is the local language"
+de,other local,correct_local,0.854167,0.791667,0.916667,48,"S0 with a city or country cue, prompts in de, 1 country where it is the local language"
+de,all,correct_local,0.916667,0.875,0.954545,136,"S0 with a city or country cue, prompts in de, 1 country where it is the local language"
+de,all,correct_local_english_prompt,0.931818,,,,"S0 with a country cue, 1 country where de is the local language, English and local-language prompts"
+de,all,correct_local_local_prompt,0.931818,,,,"S0 with a country cue, 1 country where de is the local language, English and local-language prompts"
+de,all,english_minus_local,0,-0.113636,0.0909091,,"S0 with a country cue, 1 country where de is the local language, English and local-language prompts"
+de,all,median_chrf_of_translation,78.88,,,,all prompts translated into de
+de,all,translation_flag_rate,0,,,,all prompts translated into de
+de,all,countries,1,,,,"S0 with a country cue, 1 country where de is the local language, English and local-language prompts"
+el,API,correct_local,1,1,1,72,"S0 with a city or country cue, prompts in el, 1 country where it is the local language"
+el,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in el, 1 country where it is the local language"
+el,other local,correct_local,0.541667,0.458333,0.625,48,"S0 with a city or country cue, prompts in el, 1 country where it is the local language"
+el,all,correct_local,0.75,0.704545,0.795455,136,"S0 with a city or country cue, prompts in el, 1 country where it is the local language"
+el,all,correct_local_english_prompt,0.909091,,,,"S0 with a country cue, 1 country where el is the local language, English and local-language prompts"
+el,all,correct_local_local_prompt,0.75,,,,"S0 with a country cue, 1 country where el is the local language, English and local-language prompts"
+el,all,english_minus_local,0.159091,0.113636,0.181818,,"S0 with a country cue, 1 country where el is the local language, English and local-language prompts"
+el,all,median_chrf_of_translation,82.13,,,,all prompts translated into el
+el,all,translation_flag_rate,0,,,,all prompts translated into el
+el,all,countries,1,,,,"S0 with a country cue, 1 country where el is the local language, English and local-language prompts"
+en,API,correct_local,0.970679,0.95216,0.986111,648,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language"
+en,Gemma,correct_local,0.923611,0.8125,1,144,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language"
+en,other local,correct_local,0.80787,0.69213,0.914352,432,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language"
+en,all,correct_local,0.873316,0.784933,0.947811,1224,"S0 with a city or country cue, prompts in en, 9 countries where it is the local language"
+es,API,correct_local,0.981481,0.976852,0.986111,432,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language"
+es,Gemma,correct_local,1,1,1,96,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language"
+es,other local,correct_local,0.597222,0.513889,0.708333,288,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language"
+es,all,correct_local,0.775253,0.727904,0.840956,816,"S0 with a city or country cue, prompts in es, 6 countries where it is the local language"
+es,all,correct_local_english_prompt,0.834596,,,,"S0 with a country cue, 6 countries where es is the local language, English and local-language prompts"
+es,all,correct_local_local_prompt,0.766414,,,,"S0 with a country cue, 6 countries where es is the local language, English and local-language prompts"
+es,all,english_minus_local,0.0681818,0.030303,0.111111,,"S0 with a country cue, 6 countries where es is the local language, English and local-language prompts"
+es,all,median_chrf_of_translation,80.16,,,,all prompts translated into es
+es,all,translation_flag_rate,0,,,,all prompts translated into es
+es,all,countries,6,,,,"S0 with a country cue, 6 countries where es is the local language, English and local-language prompts"
+fa,API,correct_local,1,1,1,72,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language"
+fa,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language"
+fa,other local,correct_local,0.583333,0.520833,0.666667,48,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language"
+fa,all,correct_local,0.772727,0.727273,0.818182,136,"S0 with a city or country cue, prompts in fa, 1 country where it is the local language"
+fa,all,correct_local_english_prompt,0.75,,,,"S0 with a country cue, 1 country where fa is the local language, English and local-language prompts"
+fa,all,correct_local_local_prompt,0.772727,,,,"S0 with a country cue, 1 country where fa is the local language, English and local-language prompts"
+fa,all,english_minus_local,-0.0227273,-0.136364,0.113636,,"S0 with a country cue, 1 country where fa is the local language, English and local-language prompts"
+fa,all,median_chrf_of_translation,84.25,,,,all prompts translated into fa
+fa,all,translation_flag_rate,0,,,,all prompts translated into fa
+fa,all,countries,1,,,,"S0 with a country cue, 1 country where fa is the local language, English and local-language prompts"
+fil,API,correct_local,0.972222,0.944444,1,72,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language"
+fil,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language"
+fil,other local,correct_local,0.354167,0.25,0.458333,48,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language"
+fil,all,correct_local,0.640152,0.583333,0.700852,136,"S0 with a city or country cue, prompts in fil, 1 country where it is the local language"
+fil,all,correct_local_english_prompt,0.780303,,,,"S0 with a country cue, 1 country where fil is the local language, English and local-language prompts"
+fil,all,correct_local_local_prompt,0.628788,,,,"S0 with a country cue, 1 country where fil is the local language, English and local-language prompts"
+fil,all,english_minus_local,0.151515,-0.0757576,0.378788,,"S0 with a country cue, 1 country where fil is the local language, English and local-language prompts"
+fil,all,median_chrf_of_translation,75.56,,,,all prompts translated into fil
+fil,all,translation_flag_rate,0,,,,all prompts translated into fil
+fil,all,countries,1,,,,"S0 with a country cue, 1 country where fil is the local language, English and local-language prompts"
+fr,API,correct_local,0.972222,0.958333,0.986111,144,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language"
+fr,Gemma,correct_local,0.75,0.5,1,32,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language"
+fr,other local,correct_local,0.5,0.229167,0.770833,96,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language"
+fr,all,correct_local,0.674242,0.477273,0.871212,272,"S0 with a city or country cue, prompts in fr, 2 countries where it is the local language"
+fr,all,correct_local_english_prompt,0.738636,,,,"S0 with a country cue, 2 countries where fr is the local language, English and local-language prompts"
+fr,all,correct_local_local_prompt,0.723485,,,,"S0 with a country cue, 2 countries where fr is the local language, English and local-language prompts"
+fr,all,english_minus_local,0.0151515,-0.0606061,0.0909091,,"S0 with a country cue, 2 countries where fr is the local language, English and local-language prompts"
+fr,all,median_chrf_of_translation,82.14,,,,all prompts translated into fr
+fr,all,translation_flag_rate,0,,,,all prompts translated into fr
+fr,all,countries,2,,,,"S0 with a country cue, 2 countries where fr is the local language, English and local-language prompts"
+hi,API,correct_local,1,1,1,72,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language"
+hi,Gemma,correct_local,0.8125,0.625,0.9375,16,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language"
+hi,other local,correct_local,0.333333,0.25,0.416667,48,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language"
+hi,all,correct_local,0.602273,0.556818,0.647727,136,"S0 with a city or country cue, prompts in hi, 1 country where it is the local language"
+hi,all,correct_local_english_prompt,0.810606,,,,"S0 with a country cue, 1 country where hi is the local language, English and local-language prompts"
+hi,all,correct_local_local_prompt,0.590909,,,,"S0 with a country cue, 1 country where hi is the local language, English and local-language prompts"
+hi,all,english_minus_local,0.219697,0.136364,0.30303,,"S0 with a country cue, 1 country where hi is the local language, English and local-language prompts"
+hi,all,median_chrf_of_translation,85.27,,,,all prompts translated into hi
+hi,all,translation_flag_rate,0,,,,all prompts translated into hi
+hi,all,countries,1,,,,"S0 with a country cue, 1 country where hi is the local language, English and local-language prompts"
+id,API,correct_local,0.986111,0.958333,1,72,"S0 with a city or country cue, prompts in id, 1 country where it is the local language"
+id,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in id, 1 country where it is the local language"
+id,other local,correct_local,0.604167,0.541667,0.645833,48,"S0 with a city or country cue, prompts in id, 1 country where it is the local language"
+id,all,correct_local,0.780303,0.75,0.806818,136,"S0 with a city or country cue, prompts in id, 1 country where it is the local language"
+id,all,correct_local_english_prompt,0.704545,,,,"S0 with a country cue, 1 country where id is the local language, English and local-language prompts"
+id,all,correct_local_local_prompt,0.772727,,,,"S0 with a country cue, 1 country where id is the local language, English and local-language prompts"
+id,all,english_minus_local,-0.0681818,-0.227273,0.113636,,"S0 with a country cue, 1 country where id is the local language, English and local-language prompts"
+id,all,median_chrf_of_translation,84.585,,,,all prompts translated into id
+id,all,translation_flag_rate,0.0833333,,,,all prompts translated into id
+id,all,countries,1,,,,"S0 with a country cue, 1 country where id is the local language, English and local-language prompts"
+it,API,correct_local,0.986111,0.958333,1,72,"S0 with a city or country cue, prompts in it, 1 country where it is the local language"
+it,Gemma,correct_local,0.875,0.6875,1,16,"S0 with a city or country cue, prompts in it, 1 country where it is the local language"
+it,other local,correct_local,0.604167,0.5,0.6875,48,"S0 with a city or country cue, prompts in it, 1 country where it is the local language"
+it,all,correct_local,0.757576,0.67803,0.829545,136,"S0 with a city or country cue, prompts in it, 1 country where it is the local language"
+it,all,correct_local_english_prompt,0.886364,,,,"S0 with a country cue, 1 country where it is the local language, English and local-language prompts"
+it,all,correct_local_local_prompt,0.719697,,,,"S0 with a country cue, 1 country where it is the local language, English and local-language prompts"
+it,all,english_minus_local,0.166667,0.0909091,0.242424,,"S0 with a country cue, 1 country where it is the local language, English and local-language prompts"
+it,all,median_chrf_of_translation,81.38,,,,all prompts translated into it
+it,all,translation_flag_rate,0,,,,all prompts translated into it
+it,all,countries,1,,,,"S0 with a country cue, 1 country where it is the local language, English and local-language prompts"
+ja,API,correct_local,1,1,1,72,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language"
+ja,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language"
+ja,other local,correct_local,0.625,0.5,0.770833,48,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language"
+ja,all,correct_local,0.795455,0.727273,0.875,136,"S0 with a city or country cue, prompts in ja, 1 country where it is the local language"
+ja,all,correct_local_english_prompt,0.863636,,,,"S0 with a country cue, 1 country where ja is the local language, English and local-language prompts"
+ja,all,correct_local_local_prompt,0.818182,,,,"S0 with a country cue, 1 country where ja is the local language, English and local-language prompts"
+ja,all,english_minus_local,0.0454545,-0.0454545,0.136364,,"S0 with a country cue, 1 country where ja is the local language, English and local-language prompts"
+ja,all,median_chrf_of_translation,61.235,,,,all prompts translated into ja
+ja,all,translation_flag_rate,0.0833333,,,,all prompts translated into ja
+ja,all,countries,1,,,,"S0 with a country cue, 1 country where ja is the local language, English and local-language prompts"
+ka,API,correct_local,0.930556,0.875,0.986111,72,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language"
+ka,Gemma,correct_local,0.9375,0.8125,1,16,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language"
+ka,other local,correct_local,0.354167,0.25,0.5,48,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language"
+ka,all,correct_local,0.617424,0.530303,0.712121,136,"S0 with a city or country cue, prompts in ka, 1 country where it is the local language"
+ka,all,correct_local_english_prompt,0.159091,,,,"S0 with a country cue, 1 country where ka is the local language, English and local-language prompts"
+ka,all,correct_local_local_prompt,0.598485,,,,"S0 with a country cue, 1 country where ka is the local language, English and local-language prompts"
+ka,all,english_minus_local,-0.439394,-0.515152,-0.378788,,"S0 with a country cue, 1 country where ka is the local language, English and local-language prompts"
+ka,all,median_chrf_of_translation,77.93,,,,all prompts translated into ka
+ka,all,translation_flag_rate,0,,,,all prompts translated into ka
+ka,all,countries,1,,,,"S0 with a country cue, 1 country where ka is the local language, English and local-language prompts"
+ko,API,correct_local,0.986111,0.958333,1,72,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language"
+ko,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language"
+ko,other local,correct_local,0.666667,0.5,0.833333,48,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language"
+ko,all,correct_local,0.814394,0.719697,0.897727,136,"S0 with a city or country cue, prompts in ko, 1 country where it is the local language"
+ko,all,correct_local_english_prompt,0.863636,,,,"S0 with a country cue, 1 country where ko is the local language, English and local-language prompts"
+ko,all,correct_local_local_prompt,0.765152,,,,"S0 with a country cue, 1 country where ko is the local language, English and local-language prompts"
+ko,all,english_minus_local,0.0984848,0,0.19697,,"S0 with a country cue, 1 country where ko is the local language, English and local-language prompts"
+ko,all,median_chrf_of_translation,74.49,,,,all prompts translated into ko
+ko,all,translation_flag_rate,0.166667,,,,all prompts translated into ko
+ko,all,countries,1,,,,"S0 with a country cue, 1 country where ko is the local language, English and local-language prompts"
+ms,API,correct_local,0.972222,0.930556,1,72,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language"
+ms,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language"
+ms,other local,correct_local,0.4375,0.354167,0.541667,48,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language"
+ms,all,correct_local,0.685606,0.628788,0.746212,136,"S0 with a city or country cue, prompts in ms, 1 country where it is the local language"
+ms,all,correct_local_english_prompt,0.886364,,,,"S0 with a country cue, 1 country where ms is the local language, English and local-language prompts"
+ms,all,correct_local_local_prompt,0.651515,,,,"S0 with a country cue, 1 country where ms is the local language, English and local-language prompts"
+ms,all,english_minus_local,0.234848,0.136364,0.333333,,"S0 with a country cue, 1 country where ms is the local language, English and local-language prompts"
+ms,all,median_chrf_of_translation,79.335,,,,all prompts translated into ms
+ms,all,translation_flag_rate,0.0833333,,,,all prompts translated into ms
+ms,all,countries,1,,,,"S0 with a country cue, 1 country where ms is the local language, English and local-language prompts"
+nl,API,correct_local,0.986111,0.958333,1,72,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language"
+nl,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language"
+nl,other local,correct_local,0.791667,0.6875,0.875,48,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language"
+nl,all,correct_local,0.882576,0.825758,0.924242,136,"S0 with a city or country cue, prompts in nl, 1 country where it is the local language"
+nl,all,correct_local_english_prompt,0.954545,,,,"S0 with a country cue, 1 country where nl is the local language, English and local-language prompts"
+nl,all,correct_local_local_prompt,0.863636,,,,"S0 with a country cue, 1 country where nl is the local language, English and local-language prompts"
+nl,all,english_minus_local,0.0909091,-0.0454545,0.227273,,"S0 with a country cue, 1 country where nl is the local language, English and local-language prompts"
+nl,all,median_chrf_of_translation,80.29,,,,all prompts translated into nl
+nl,all,translation_flag_rate,0,,,,all prompts translated into nl
+nl,all,countries,1,,,,"S0 with a country cue, 1 country where nl is the local language, English and local-language prompts"
+pl,API,correct_local,1,1,1,72,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language"
+pl,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language"
+pl,other local,correct_local,0.770833,0.666667,0.854167,48,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language"
+pl,all,correct_local,0.875,0.818182,0.920455,136,"S0 with a city or country cue, prompts in pl, 1 country where it is the local language"
+pl,all,correct_local_english_prompt,0.901515,,,,"S0 with a country cue, 1 country where pl is the local language, English and local-language prompts"
+pl,all,correct_local_local_prompt,0.909091,,,,"S0 with a country cue, 1 country where pl is the local language, English and local-language prompts"
+pl,all,english_minus_local,-0.00757576,-0.0681818,0.0606061,,"S0 with a country cue, 1 country where pl is the local language, English and local-language prompts"
+pl,all,median_chrf_of_translation,81.955,,,,all prompts translated into pl
+pl,all,translation_flag_rate,0,,,,all prompts translated into pl
+pl,all,countries,1,,,,"S0 with a country cue, 1 country where pl is the local language, English and local-language prompts"
+pt,API,correct_local,0.986111,0.972222,1,144,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language"
+pt,Gemma,correct_local,0.96875,0.9375,1,32,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language"
+pt,other local,correct_local,0.760417,0.666667,0.854167,96,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language"
+pt,all,correct_local,0.859848,0.806818,0.912879,272,"S0 with a city or country cue, prompts in pt, 2 countries where it is the local language"
+pt,all,correct_local_english_prompt,0.905303,,,,"S0 with a country cue, 2 countries where pt is the local language, English and local-language prompts"
+pt,all,correct_local_local_prompt,0.875,,,,"S0 with a country cue, 2 countries where pt is the local language, English and local-language prompts"
+pt,all,english_minus_local,0.030303,0.0227273,0.0378788,,"S0 with a country cue, 2 countries where pt is the local language, English and local-language prompts"
+pt,all,median_chrf_of_translation,86.61,,,,all prompts translated into pt
+pt,all,translation_flag_rate,0,,,,all prompts translated into pt
+pt,all,countries,2,,,,"S0 with a country cue, 2 countries where pt is the local language, English and local-language prompts"
+ro,API,correct_local,0.986111,0.958333,1,72,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language"
+ro,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language"
+ro,other local,correct_local,0.666667,0.541667,0.791667,48,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language"
+ro,all,correct_local,0.814394,0.742424,0.882576,136,"S0 with a city or country cue, prompts in ro, 1 country where it is the local language"
+ro,all,correct_local_english_prompt,0.886364,,,,"S0 with a country cue, 1 country where ro is the local language, English and local-language prompts"
+ro,all,correct_local_local_prompt,0.833333,,,,"S0 with a country cue, 1 country where ro is the local language, English and local-language prompts"
+ro,all,english_minus_local,0.0530303,-0.0454545,0.143939,,"S0 with a country cue, 1 country where ro is the local language, English and local-language prompts"
+ro,all,median_chrf_of_translation,85.895,,,,all prompts translated into ro
+ro,all,translation_flag_rate,0,,,,all prompts translated into ro
+ro,all,countries,1,,,,"S0 with a country cue, 1 country where ro is the local language, English and local-language prompts"
+ru,API,correct_local,0.986111,0.972222,1,144,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language"
+ru,Gemma,correct_local,1,1,1,32,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language"
+ru,other local,correct_local,0.71875,0.645833,0.791667,96,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language"
+ru,all,correct_local,0.842803,0.806818,0.878788,272,"S0 with a city or country cue, prompts in ru, 2 countries where it is the local language"
+ru,all,correct_local_english_prompt,0.886364,,,,"S0 with a country cue, 2 countries where ru is the local language, English and local-language prompts"
+ru,all,correct_local_local_prompt,0.829545,,,,"S0 with a country cue, 2 countries where ru is the local language, English and local-language prompts"
+ru,all,english_minus_local,0.0568182,0,0.113636,,"S0 with a country cue, 2 countries where ru is the local language, English and local-language prompts"
+ru,all,median_chrf_of_translation,83.25,,,,all prompts translated into ru
+ru,all,translation_flag_rate,0,,,,all prompts translated into ru
+ru,all,countries,2,,,,"S0 with a country cue, 2 countries where ru is the local language, English and local-language prompts"
+si,API,correct_local,1,1,1,72,"S0 with a city or country cue, prompts in si, 1 country where it is the local language"
+si,Gemma,correct_local,0.375,0.125,0.625,16,"S0 with a city or country cue, prompts in si, 1 country where it is the local language"
+si,other local,correct_local,0.0416667,0,0.104167,48,"S0 with a city or country cue, prompts in si, 1 country where it is the local language"
+si,all,correct_local,0.363636,0.318182,0.409091,136,"S0 with a city or country cue, prompts in si, 1 country where it is the local language"
+si,all,correct_local_english_prompt,0.477273,,,,"S0 with a country cue, 1 country where si is the local language, English and local-language prompts"
+si,all,correct_local_local_prompt,0.363636,,,,"S0 with a country cue, 1 country where si is the local language, English and local-language prompts"
+si,all,english_minus_local,0.113636,0,0.227273,,"S0 with a country cue, 1 country where si is the local language, English and local-language prompts"
+si,all,median_chrf_of_translation,71.305,,,,all prompts translated into si
+si,all,translation_flag_rate,0.166667,,,,all prompts translated into si
+si,all,countries,1,,,,"S0 with a country cue, 1 country where si is the local language, English and local-language prompts"
+sv,API,correct_local,0.972222,0.930556,1,72,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language"
+sv,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language"
+sv,other local,correct_local,0.645833,0.5625,0.729167,48,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language"
+sv,all,correct_local,0.799242,0.746212,0.859848,136,"S0 with a city or country cue, prompts in sv, 1 country where it is the local language"
+sv,all,correct_local_english_prompt,0.856061,,,,"S0 with a country cue, 1 country where sv is the local language, English and local-language prompts"
+sv,all,correct_local_local_prompt,0.787879,,,,"S0 with a country cue, 1 country where sv is the local language, English and local-language prompts"
+sv,all,english_minus_local,0.0681818,-0.0454545,0.181818,,"S0 with a country cue, 1 country where sv is the local language, English and local-language prompts"
+sv,all,median_chrf_of_translation,81.665,,,,all prompts translated into sv
+sv,all,translation_flag_rate,0,,,,all prompts translated into sv
+sv,all,countries,1,,,,"S0 with a country cue, 1 country where sv is the local language, English and local-language prompts"
+sw,API,correct_local,0.972222,0.944444,1,72,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language"
+sw,Gemma,correct_local,0.5625,0.375,0.75,16,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language"
+sw,other local,correct_local,0.229167,0.145833,0.333333,48,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language"
+sw,all,correct_local,0.492424,0.443182,0.537879,136,"S0 with a city or country cue, prompts in sw, 1 country where it is the local language"
+sw,all,correct_local_english_prompt,0.719697,,,,"S0 with a country cue, 1 country where sw is the local language, English and local-language prompts"
+sw,all,correct_local_local_prompt,0.515152,,,,"S0 with a country cue, 1 country where sw is the local language, English and local-language prompts"
+sw,all,english_minus_local,0.204545,0.0984848,0.318182,,"S0 with a country cue, 1 country where sw is the local language, English and local-language prompts"
+sw,all,median_chrf_of_translation,83.705,,,,all prompts translated into sw
+sw,all,translation_flag_rate,0,,,,all prompts translated into sw
+sw,all,countries,1,,,,"S0 with a country cue, 1 country where sw is the local language, English and local-language prompts"
+th,API,correct_local,0.972222,0.930556,1,72,"S0 with a city or country cue, prompts in th, 1 country where it is the local language"
+th,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in th, 1 country where it is the local language"
+th,other local,correct_local,0.75,0.6875,0.8125,48,"S0 with a city or country cue, prompts in th, 1 country where it is the local language"
+th,all,correct_local,0.856061,0.829545,0.882576,136,"S0 with a city or country cue, prompts in th, 1 country where it is the local language"
+th,all,correct_local_english_prompt,0.863636,,,,"S0 with a country cue, 1 country where th is the local language, English and local-language prompts"
+th,all,correct_local_local_prompt,0.863636,,,,"S0 with a country cue, 1 country where th is the local language, English and local-language prompts"
+th,all,english_minus_local,0,0,0,,"S0 with a country cue, 1 country where th is the local language, English and local-language prompts"
+th,all,median_chrf_of_translation,74.115,,,,all prompts translated into th
+th,all,translation_flag_rate,0,,,,all prompts translated into th
+th,all,countries,1,,,,"S0 with a country cue, 1 country where th is the local language, English and local-language prompts"
+tr,API,correct_local,0.986111,0.958333,1,72,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language"
+tr,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language"
+tr,other local,correct_local,0.541667,0.416667,0.645833,48,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language"
+tr,all,correct_local,0.746212,0.67803,0.80303,136,"S0 with a city or country cue, prompts in tr, 1 country where it is the local language"
+tr,all,correct_local_english_prompt,0.810606,,,,"S0 with a country cue, 1 country where tr is the local language, English and local-language prompts"
+tr,all,correct_local_local_prompt,0.75,,,,"S0 with a country cue, 1 country where tr is the local language, English and local-language prompts"
+tr,all,english_minus_local,0.0606061,-0.0681818,0.25,,"S0 with a country cue, 1 country where tr is the local language, English and local-language prompts"
+tr,all,median_chrf_of_translation,78.195,,,,all prompts translated into tr
+tr,all,translation_flag_rate,0,,,,all prompts translated into tr
+tr,all,countries,1,,,,"S0 with a country cue, 1 country where tr is the local language, English and local-language prompts"
+uk,API,correct_local,1,1,1,72,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language"
+uk,Gemma,correct_local,0.8125,0.5625,1,16,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language"
+uk,other local,correct_local,0.458333,0.229167,0.666667,48,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language"
+uk,all,correct_local,0.670455,0.511364,0.806818,136,"S0 with a city or country cue, prompts in uk, 1 country where it is the local language"
+uk,all,correct_local_english_prompt,0.681818,,,,"S0 with a country cue, 1 country where uk is the local language, English and local-language prompts"
+uk,all,correct_local_local_prompt,0.636364,,,,"S0 with a country cue, 1 country where uk is the local language, English and local-language prompts"
+uk,all,english_minus_local,0.0454545,-0.227273,0.318182,,"S0 with a country cue, 1 country where uk is the local language, English and local-language prompts"
+uk,all,median_chrf_of_translation,85.605,,,,all prompts translated into uk
+uk,all,translation_flag_rate,0,,,,all prompts translated into uk
+uk,all,countries,1,,,,"S0 with a country cue, 1 country where uk is the local language, English and local-language prompts"
+ur,API,correct_local,0.972222,0.944444,1,72,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language"
+ur,Gemma,correct_local,0.9375,0.8125,1,16,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language"
+ur,other local,correct_local,0.25,0.125,0.354167,48,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language"
+ur,all,correct_local,0.57197,0.503788,0.636364,136,"S0 with a city or country cue, prompts in ur, 1 country where it is the local language"
+ur,all,correct_local_english_prompt,0.643939,,,,"S0 with a country cue, 1 country where ur is the local language, English and local-language prompts"
+ur,all,correct_local_local_prompt,0.583333,,,,"S0 with a country cue, 1 country where ur is the local language, English and local-language prompts"
+ur,all,english_minus_local,0.0606061,-0.0530303,0.204545,,"S0 with a country cue, 1 country where ur is the local language, English and local-language prompts"
+ur,all,median_chrf_of_translation,82.78,,,,all prompts translated into ur
+ur,all,translation_flag_rate,0,,,,all prompts translated into ur
+ur,all,countries,1,,,,"S0 with a country cue, 1 country where ur is the local language, English and local-language prompts"
+vi,API,correct_local,0.986111,0.958333,1,72,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language"
+vi,Gemma,correct_local,1,1,1,16,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language"
+vi,other local,correct_local,0.541667,0.4375,0.645833,48,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language"
+vi,all,correct_local,0.746212,0.681818,0.814394,136,"S0 with a city or country cue, prompts in vi, 1 country where it is the local language"
+vi,all,correct_local_english_prompt,0.795455,,,,"S0 with a country cue, 1 country where vi is the local language, English and local-language prompts"
+vi,all,correct_local_local_prompt,0.674242,,,,"S0 with a country cue, 1 country where vi is the local language, English and local-language prompts"
+vi,all,english_minus_local,0.121212,0.0909091,0.159091,,"S0 with a country cue, 1 country where vi is the local language, English and local-language prompts"
+vi,all,median_chrf_of_translation,82.25,,,,all prompts translated into vi
+vi,all,translation_flag_rate,0.0833333,,,,all prompts translated into vi
+vi,all,countries,1,,,,"S0 with a country cue, 1 country where vi is the local language, English and local-language prompts"
+zh,API,correct_local,0.986111,0.958333,1,72,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language"
+zh,Gemma,correct_local,0.9375,0.8125,1,16,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language"
+zh,other local,correct_local,0.854167,0.833333,0.895833,48,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language"
+zh,all,correct_local,0.905303,0.875,0.931818,136,"S0 with a city or country cue, prompts in zh, 1 country where it is the local language"
+zh,all,correct_local_english_prompt,0.969697,,,,"S0 with a country cue, 1 country where zh is the local language, English and local-language prompts"
+zh,all,correct_local_local_prompt,0.886364,,,,"S0 with a country cue, 1 country where zh is the local language, English and local-language prompts"
+zh,all,english_minus_local,0.0833333,0.0681818,0.0909091,,"S0 with a country cue, 1 country where zh is the local language, English and local-language prompts"
+zh,all,median_chrf_of_translation,74.885,,,,all prompts translated into zh
+zh,all,translation_flag_rate,0,,,,all prompts translated into zh
+zh,all,countries,1,,,,"S0 with a country cue, 1 country where zh is the local language, English and local-language prompts"

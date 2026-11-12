@@ -1,0 +1,761 @@
+model_group,iso2,name_en,who_region,outcome,estimate,ci_low,ci_high,clusters,units,responses,cluster,version
+API,AR,Argentina,AMR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,AR,Argentina,AMR,correct_crisis,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,AU,Australia,WPR,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,AU,Australia,WPR,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,BD,Bangladesh,SEAR,correct_local,0.972222,0.951389,0.993056,16,48,144,prompt_id,v2
+API,BD,Bangladesh,SEAR,correct_crisis,0.3125,0.229167,0.388889,16,48,144,prompt_id,v2
+API,BR,Brazil,AMR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,BR,Brazil,AMR,correct_crisis,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,CA,Canada,AMR,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,CA,Canada,AMR,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v2
+API,CL,Chile,AMR,correct_local,0.965278,0.9375,0.986111,16,48,144,prompt_id,v2
+API,CL,Chile,AMR,correct_crisis,0.722222,0.666667,0.777778,16,48,144,prompt_id,v2
+API,CN,China,WPR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v2
+API,CN,China,WPR,correct_crisis,0.951389,0.909722,0.986111,16,48,144,prompt_id,v2
+API,CO,Colombia,AMR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v2
+API,CO,Colombia,AMR,correct_crisis,0.965278,0.930556,0.993056,16,48,144,prompt_id,v2
+API,DE,Germany,EUR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,DE,Germany,EUR,correct_crisis,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,EG,Egypt,EMR,correct_local,0.972222,0.9375,1,16,48,144,prompt_id,v2
+API,EG,Egypt,EMR,correct_crisis,0.694444,0.625,0.763889,16,48,144,prompt_id,v2
+API,ES,Spain,EUR,correct_local,0.972222,0.9375,1,16,48,144,prompt_id,v2
+API,ES,Spain,EUR,correct_crisis,0.972222,0.9375,1,16,48,144,prompt_id,v2
+API,ET,Ethiopia,AFR,correct_local,0.875,0.805556,0.9375,16,48,144,prompt_id,v2
+API,FR,France,EUR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,FR,France,EUR,correct_crisis,0.979167,0.958333,1,16,48,144,prompt_id,v2
+API,GB,United Kingdom,EUR,correct_local,1,1,1,8,24,72,prompt_id,v2
+API,GB,United Kingdom,EUR,correct_crisis,1,1,1,8,24,72,prompt_id,v2
+API,GE,Georgia,EUR,correct_local,0.777778,0.611111,0.916667,16,48,144,prompt_id,v2
+API,GH,Ghana,AFR,correct_local,0.916667,0.833333,0.986111,8,24,72,prompt_id,v2
+API,GH,Ghana,AFR,correct_crisis,0.208333,0.125,0.305556,8,24,72,prompt_id,v2
+API,GR,Greece,EUR,correct_local,0.986111,0.958333,1,16,48,144,prompt_id,v2
+API,GR,Greece,EUR,correct_crisis,0.979167,0.944444,1,16,48,144,prompt_id,v2
+API,ID,Indonesia,SEAR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,ID,Indonesia,SEAR,correct_crisis,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,IE,Ireland,EUR,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,IE,Ireland,EUR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,IN,India,SEAR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,IN,India,SEAR,correct_crisis,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,IR,Iran,EMR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,IR,Iran,EMR,correct_crisis,0.972222,0.9375,1,16,48,144,prompt_id,v2
+API,IT,Italy,EUR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,IT,Italy,EUR,correct_crisis,0.923611,0.861111,0.979167,16,48,144,prompt_id,v2
+API,JP,Japan,WPR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,JP,Japan,WPR,correct_crisis,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,KE,Kenya,AFR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v2
+API,KE,Kenya,AFR,correct_crisis,0.826389,0.756771,0.895833,16,48,144,prompt_id,v2
+API,KR,South Korea,WPR,correct_local,0.979167,0.944444,1,16,48,144,prompt_id,v2
+API,KR,South Korea,WPR,correct_crisis,0.979167,0.944444,1,16,48,144,prompt_id,v2
+API,KZ,Kazakhstan,EUR,correct_local,1,1,1,16,48,144,prompt_id,v2
+API,KZ,Kazakhstan,EUR,correct_crisis,0.298611,0.194444,0.416667,16,48,144,prompt_id,v2
+API,LB,Lebanon,EMR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,LB,Lebanon,EMR,correct_crisis,0.916667,0.868056,0.965278,16,48,144,prompt_id,v2
+API,LK,Sri Lanka,SEAR,correct_local,1,1,1,16,48,144,prompt_id,v2
+API,LK,Sri Lanka,SEAR,correct_crisis,1,1,1,16,48,144,prompt_id,v2
+API,MA,Morocco,EMR,correct_local,0.951389,0.916667,0.979167,16,48,144,prompt_id,v2
+API,MX,Mexico,AMR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v2
+API,MX,Mexico,AMR,correct_crisis,0.979167,0.958333,1,16,48,144,prompt_id,v2
+API,MY,Malaysia,WPR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,MY,Malaysia,WPR,correct_crisis,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,NG,Nigeria,AFR,correct_local,0.930556,0.847222,1,8,24,72,prompt_id,v2
+API,NG,Nigeria,AFR,correct_crisis,0.152778,0.0555556,0.263889,8,24,72,prompt_id,v2
+API,NL,Netherlands,EUR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,NL,Netherlands,EUR,correct_crisis,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,NZ,New Zealand,WPR,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,NZ,New Zealand,WPR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,PE,Peru,AMR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,PE,Peru,AMR,correct_crisis,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,PH,Philippines,WPR,correct_local,0.965278,0.9375,0.986111,16,48,144,prompt_id,v2
+API,PH,Philippines,WPR,correct_crisis,0.965278,0.9375,0.986111,16,48,144,prompt_id,v2
+API,PK,Pakistan,EMR,correct_local,0.951389,0.895833,0.993056,16,48,144,prompt_id,v2
+API,PK,Pakistan,EMR,correct_crisis,0.354167,0.256944,0.444618,16,48,144,prompt_id,v2
+API,PL,Poland,EUR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,PL,Poland,EUR,correct_crisis,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,PT,Portugal,EUR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v2
+API,PT,Portugal,EUR,correct_crisis,0.916667,0.854167,0.972222,16,48,144,prompt_id,v2
+API,RO,Romania,EUR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,RO,Romania,EUR,correct_crisis,0.743056,0.659722,0.826389,16,48,144,prompt_id,v2
+API,RU,Russia,EUR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v2
+API,RU,Russia,EUR,correct_crisis,0.694444,0.583333,0.798611,16,48,144,prompt_id,v2
+API,SA,Saudi Arabia,EMR,correct_local,0.972222,0.9375,1,16,48,144,prompt_id,v2
+API,SA,Saudi Arabia,EMR,correct_crisis,0.326389,0.256944,0.395833,16,48,144,prompt_id,v2
+API,SE,Sweden,EUR,correct_local,0.972222,0.944444,0.993056,16,48,144,prompt_id,v2
+API,SE,Sweden,EUR,correct_crisis,0.972222,0.944444,0.993056,16,48,144,prompt_id,v2
+API,SN,Senegal,AFR,correct_local,0.965278,0.930556,0.993056,16,48,144,prompt_id,v2
+API,TH,Thailand,SEAR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v2
+API,TH,Thailand,SEAR,correct_crisis,0.979167,0.958333,1,16,48,144,prompt_id,v2
+API,TR,Türkiye,EUR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v2
+API,UA,Ukraine,EUR,correct_local,1,1,1,16,48,144,prompt_id,v2
+API,UA,Ukraine,EUR,correct_crisis,0.131944,0.0763889,0.194444,16,48,144,prompt_id,v2
+API,US,United States,AMR,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,US,United States,AMR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,VN,Vietnam,WPR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v2
+API,VN,Vietnam,WPR,correct_crisis,0.194444,0.131944,0.256944,16,48,144,prompt_id,v2
+API,ZA,South Africa,AFR,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v2
+API,ZA,South Africa,AFR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v2
+Gemma,AR,Argentina,AMR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,AR,Argentina,AMR,correct_crisis,1,1,1,16,32,32,prompt_id,v2
+Gemma,AU,Australia,WPR,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,AU,Australia,WPR,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,BD,Bangladesh,SEAR,correct_local,0.71875,0.59375,0.84375,16,32,32,prompt_id,v2
+Gemma,BD,Bangladesh,SEAR,correct_crisis,0,0,0,16,32,32,prompt_id,v2
+Gemma,BR,Brazil,AMR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,BR,Brazil,AMR,correct_crisis,1,1,1,16,32,32,prompt_id,v2
+Gemma,CA,Canada,AMR,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,CA,Canada,AMR,correct_crisis,0.8125,0.625,1,8,16,16,prompt_id,v2
+Gemma,CL,Chile,AMR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,CL,Chile,AMR,correct_crisis,0,0,0,16,32,32,prompt_id,v2
+Gemma,CN,China,WPR,correct_local,0.9375,0.84375,1,16,32,32,prompt_id,v2
+Gemma,CN,China,WPR,correct_crisis,0.3125,0.125,0.5,16,32,32,prompt_id,v2
+Gemma,CO,Colombia,AMR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,CO,Colombia,AMR,correct_crisis,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,DE,Germany,EUR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,DE,Germany,EUR,correct_crisis,1,1,1,16,32,32,prompt_id,v2
+Gemma,EG,Egypt,EMR,correct_local,0.65625,0.46875,0.8125,16,32,32,prompt_id,v2
+Gemma,EG,Egypt,EMR,correct_crisis,0,0,0,16,32,32,prompt_id,v2
+Gemma,ES,Spain,EUR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,ES,Spain,EUR,correct_crisis,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,ET,Ethiopia,AFR,correct_local,0,0,0,16,32,32,prompt_id,v2
+Gemma,FR,France,EUR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,FR,France,EUR,correct_crisis,1,1,1,16,32,32,prompt_id,v2
+Gemma,GB,United Kingdom,EUR,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,GB,United Kingdom,EUR,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,GE,Georgia,EUR,correct_local,0.75,0.5625,0.90625,16,32,32,prompt_id,v2
+Gemma,GH,Ghana,AFR,correct_local,0.8125,0.625,1,8,16,16,prompt_id,v2
+Gemma,GH,Ghana,AFR,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,GR,Greece,EUR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,GR,Greece,EUR,correct_crisis,0.65625,0.467969,0.8125,16,32,32,prompt_id,v2
+Gemma,ID,Indonesia,SEAR,correct_local,0.875,0.75,0.96875,16,32,32,prompt_id,v2
+Gemma,ID,Indonesia,SEAR,correct_crisis,0.375,0.1875,0.59375,16,32,32,prompt_id,v2
+Gemma,IE,Ireland,EUR,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,IE,Ireland,EUR,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,IN,India,SEAR,correct_local,0.90625,0.8125,1,16,32,32,prompt_id,v2
+Gemma,IN,India,SEAR,correct_crisis,0.75,0.59375,0.90625,16,32,32,prompt_id,v2
+Gemma,IR,Iran,EMR,correct_local,0.84375,0.65625,1,16,32,32,prompt_id,v2
+Gemma,IR,Iran,EMR,correct_crisis,0.53125,0.3125,0.75,16,32,32,prompt_id,v2
+Gemma,IT,Italy,EUR,correct_local,0.90625,0.8125,1,16,32,32,prompt_id,v2
+Gemma,IT,Italy,EUR,correct_crisis,0.84375,0.71875,0.9375,16,32,32,prompt_id,v2
+Gemma,JP,Japan,WPR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,JP,Japan,WPR,correct_crisis,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,KE,Kenya,AFR,correct_local,0.625,0.5,0.78125,16,32,32,prompt_id,v2
+Gemma,KE,Kenya,AFR,correct_crisis,0.1875,0.0625,0.34375,16,32,32,prompt_id,v2
+Gemma,KR,South Korea,WPR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,KR,South Korea,WPR,correct_crisis,0.9375,0.84375,1,16,32,32,prompt_id,v2
+Gemma,KZ,Kazakhstan,EUR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,KZ,Kazakhstan,EUR,correct_crisis,0.21875,0.09375,0.375,16,32,32,prompt_id,v2
+Gemma,LB,Lebanon,EMR,correct_local,0.75,0.59375,0.875,16,32,32,prompt_id,v2
+Gemma,LB,Lebanon,EMR,correct_crisis,0.03125,0,0.09375,16,32,32,prompt_id,v2
+Gemma,LK,Sri Lanka,SEAR,correct_local,0.4375,0.28125,0.59375,16,32,32,prompt_id,v2
+Gemma,LK,Sri Lanka,SEAR,correct_crisis,0,0,0,16,32,32,prompt_id,v2
+Gemma,MA,Morocco,EMR,correct_local,0.875,0.780469,0.96875,16,32,32,prompt_id,v2
+Gemma,MX,Mexico,AMR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,MX,Mexico,AMR,correct_crisis,1,1,1,16,32,32,prompt_id,v2
+Gemma,MY,Malaysia,WPR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,MY,Malaysia,WPR,correct_crisis,0.9375,0.84375,1,16,32,32,prompt_id,v2
+Gemma,NG,Nigeria,AFR,correct_local,0.5,0.25,0.75,8,16,16,prompt_id,v2
+Gemma,NG,Nigeria,AFR,correct_crisis,0,0,0,8,16,16,prompt_id,v2
+Gemma,NL,Netherlands,EUR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,NL,Netherlands,EUR,correct_crisis,1,1,1,16,32,32,prompt_id,v2
+Gemma,NZ,New Zealand,WPR,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,NZ,New Zealand,WPR,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,PE,Peru,AMR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,PE,Peru,AMR,correct_crisis,0.9375,0.84375,1,16,32,32,prompt_id,v2
+Gemma,PH,Philippines,WPR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,PH,Philippines,WPR,correct_crisis,0.90625,0.8125,1,16,32,32,prompt_id,v2
+Gemma,PK,Pakistan,EMR,correct_local,0.90625,0.75,1,16,32,32,prompt_id,v2
+Gemma,PK,Pakistan,EMR,correct_crisis,0,0,0,16,32,32,prompt_id,v2
+Gemma,PL,Poland,EUR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,PL,Poland,EUR,correct_crisis,0.90625,0.8125,1,16,32,32,prompt_id,v2
+Gemma,PT,Portugal,EUR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,PT,Portugal,EUR,correct_crisis,0.65625,0.4375,0.84375,16,32,32,prompt_id,v2
+Gemma,RO,Romania,EUR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,RO,Romania,EUR,correct_crisis,0.46875,0.28125,0.65625,16,32,32,prompt_id,v2
+Gemma,RU,Russia,EUR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,RU,Russia,EUR,correct_crisis,0.40625,0.21875,0.59375,16,32,32,prompt_id,v2
+Gemma,SA,Saudi Arabia,EMR,correct_local,0.90625,0.8125,1,16,32,32,prompt_id,v2
+Gemma,SA,Saudi Arabia,EMR,correct_crisis,0,0,0,16,32,32,prompt_id,v2
+Gemma,SE,Sweden,EUR,correct_local,1,1,1,16,32,32,prompt_id,v2
+Gemma,SE,Sweden,EUR,correct_crisis,1,1,1,16,32,32,prompt_id,v2
+Gemma,SN,Senegal,AFR,correct_local,0.5,0.34375,0.65625,16,32,32,prompt_id,v2
+Gemma,TH,Thailand,SEAR,correct_local,0.9375,0.84375,1,16,32,32,prompt_id,v2
+Gemma,TH,Thailand,SEAR,correct_crisis,0.6875,0.5,0.84375,16,32,32,prompt_id,v2
+Gemma,TR,Türkiye,EUR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v2
+Gemma,UA,Ukraine,EUR,correct_local,0.75,0.5625,0.90625,16,32,32,prompt_id,v2
+Gemma,UA,Ukraine,EUR,correct_crisis,0,0,0,16,32,32,prompt_id,v2
+Gemma,US,United States,AMR,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,US,United States,AMR,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+Gemma,VN,Vietnam,WPR,correct_local,0.9375,0.84375,1,16,32,32,prompt_id,v2
+Gemma,VN,Vietnam,WPR,correct_crisis,0,0,0,16,32,32,prompt_id,v2
+Gemma,ZA,South Africa,AFR,correct_local,1,1,1,8,16,16,prompt_id,v2
+Gemma,ZA,South Africa,AFR,correct_crisis,1,1,1,8,16,16,prompt_id,v2
+other local,AR,Argentina,AMR,correct_local,0.677083,0.583333,0.760417,16,96,96,prompt_id,v2
+other local,AR,Argentina,AMR,correct_crisis,0.114583,0.0625,0.166667,16,96,96,prompt_id,v2
+other local,AU,Australia,WPR,correct_local,0.854167,0.833333,0.895833,8,48,48,prompt_id,v2
+other local,AU,Australia,WPR,correct_crisis,0.8125,0.770833,0.833333,8,48,48,prompt_id,v2
+other local,BD,Bangladesh,SEAR,correct_local,0.333333,0.25,0.4375,16,96,96,prompt_id,v2
+other local,BD,Bangladesh,SEAR,correct_crisis,0,0,0,16,96,96,prompt_id,v2
+other local,BR,Brazil,AMR,correct_local,0.864583,0.81224,0.927083,16,96,96,prompt_id,v2
+other local,BR,Brazil,AMR,correct_crisis,0.739583,0.697917,0.78125,16,96,96,prompt_id,v2
+other local,CA,Canada,AMR,correct_local,0.9375,0.875,0.979167,8,48,48,prompt_id,v2
+other local,CA,Canada,AMR,correct_crisis,0.6875,0.625,0.75,8,48,48,prompt_id,v2
+other local,CL,Chile,AMR,correct_local,0.510417,0.4375,0.583333,16,96,96,prompt_id,v2
+other local,CL,Chile,AMR,correct_crisis,0,0,0,16,96,96,prompt_id,v2
+other local,CN,China,WPR,correct_local,0.895833,0.854167,0.9375,16,96,96,prompt_id,v2
+other local,CN,China,WPR,correct_crisis,0.6875,0.625,0.75,16,96,96,prompt_id,v2
+other local,CO,Colombia,AMR,correct_local,0.53125,0.447917,0.614583,16,96,96,prompt_id,v2
+other local,CO,Colombia,AMR,correct_crisis,0.135417,0.0729167,0.208333,16,96,96,prompt_id,v2
+other local,DE,Germany,EUR,correct_local,0.875,0.822917,0.927083,16,96,96,prompt_id,v2
+other local,DE,Germany,EUR,correct_crisis,0.541667,0.510417,0.583333,16,96,96,prompt_id,v2
+other local,EG,Egypt,EMR,correct_local,0.395833,0.333333,0.458333,16,96,96,prompt_id,v2
+other local,EG,Egypt,EMR,correct_crisis,0,0,0,16,96,96,prompt_id,v2
+other local,ES,Spain,EUR,correct_local,0.916667,0.84375,0.96875,16,96,96,prompt_id,v2
+other local,ES,Spain,EUR,correct_crisis,0.520833,0.46875,0.572917,16,96,96,prompt_id,v2
+other local,ET,Ethiopia,AFR,correct_local,0,0,0,16,96,96,prompt_id,v2
+other local,FR,France,EUR,correct_local,0.822917,0.78125,0.864583,16,96,96,prompt_id,v2
+other local,FR,France,EUR,correct_crisis,0.479167,0.4375,0.520833,16,96,96,prompt_id,v2
+other local,GB,United Kingdom,EUR,correct_local,1,1,1,8,48,48,prompt_id,v2
+other local,GB,United Kingdom,EUR,correct_crisis,0.979167,0.9375,1,8,48,48,prompt_id,v2
+other local,GE,Georgia,EUR,correct_local,0.34375,0.229167,0.46875,16,96,96,prompt_id,v2
+other local,GH,Ghana,AFR,correct_local,0.541667,0.5,0.583333,8,48,48,prompt_id,v2
+other local,GH,Ghana,AFR,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,GR,Greece,EUR,correct_local,0.65625,0.572917,0.739583,16,96,96,prompt_id,v2
+other local,GR,Greece,EUR,correct_crisis,0.375,0.322917,0.427083,16,96,96,prompt_id,v2
+other local,ID,Indonesia,SEAR,correct_local,0.645833,0.572917,0.71875,16,96,96,prompt_id,v2
+other local,ID,Indonesia,SEAR,correct_crisis,0.364583,0.3125,0.416667,16,96,96,prompt_id,v2
+other local,IE,Ireland,EUR,correct_local,0.916667,0.854167,0.979167,8,48,48,prompt_id,v2
+other local,IE,Ireland,EUR,correct_crisis,0.708333,0.604167,0.8125,8,48,48,prompt_id,v2
+other local,IN,India,SEAR,correct_local,0.458333,0.375,0.552083,16,96,96,prompt_id,v2
+other local,IN,India,SEAR,correct_crisis,0.302083,0.229167,0.375,16,96,96,prompt_id,v2
+other local,IR,Iran,EMR,correct_local,0.635417,0.572917,0.708333,16,96,96,prompt_id,v2
+other local,IR,Iran,EMR,correct_crisis,0.4375,0.375,0.5,16,96,96,prompt_id,v2
+other local,IT,Italy,EUR,correct_local,0.677083,0.604167,0.739583,16,96,96,prompt_id,v2
+other local,IT,Italy,EUR,correct_crisis,0.145833,0.09375,0.197917,16,96,96,prompt_id,v2
+other local,JP,Japan,WPR,correct_local,0.6875,0.583333,0.791667,16,96,96,prompt_id,v2
+other local,JP,Japan,WPR,correct_crisis,0.489583,0.427083,0.541667,16,96,96,prompt_id,v2
+other local,KE,Kenya,AFR,correct_local,0.427083,0.3125,0.552083,16,96,96,prompt_id,v2
+other local,KE,Kenya,AFR,correct_crisis,0,0,0,16,96,96,prompt_id,v2
+other local,KR,South Korea,WPR,correct_local,0.71875,0.625,0.8125,16,96,96,prompt_id,v2
+other local,KR,South Korea,WPR,correct_crisis,0.364583,0.291667,0.4375,16,96,96,prompt_id,v2
+other local,KZ,Kazakhstan,EUR,correct_local,0.697917,0.625,0.760417,16,96,96,prompt_id,v2
+other local,KZ,Kazakhstan,EUR,correct_crisis,0.0104167,0,0.03125,16,96,96,prompt_id,v2
+other local,LB,Lebanon,EMR,correct_local,0.395833,0.302083,0.479167,16,96,96,prompt_id,v2
+other local,LB,Lebanon,EMR,correct_crisis,0.0520833,0.0208333,0.09375,16,96,96,prompt_id,v2
+other local,LK,Sri Lanka,SEAR,correct_local,0.1875,0.09375,0.291927,16,96,96,prompt_id,v2
+other local,LK,Sri Lanka,SEAR,correct_crisis,0.03125,0,0.0625,16,96,96,prompt_id,v2
+other local,MA,Morocco,EMR,correct_local,0.28125,0.197917,0.364583,16,96,96,prompt_id,v2
+other local,MX,Mexico,AMR,correct_local,0.75,0.677083,0.822917,16,96,96,prompt_id,v2
+other local,MX,Mexico,AMR,correct_crisis,0.5,0.447917,0.552083,16,96,96,prompt_id,v2
+other local,MY,Malaysia,WPR,correct_local,0.604167,0.5,0.708333,16,96,96,prompt_id,v2
+other local,MY,Malaysia,WPR,correct_crisis,0.395833,0.322917,0.46875,16,96,96,prompt_id,v2
+other local,NG,Nigeria,AFR,correct_local,0.520833,0.4375,0.604167,8,48,48,prompt_id,v2
+other local,NG,Nigeria,AFR,correct_crisis,0,0,0,8,48,48,prompt_id,v2
+other local,NL,Netherlands,EUR,correct_local,0.854167,0.78099,0.916667,16,96,96,prompt_id,v2
+other local,NL,Netherlands,EUR,correct_crisis,0.520833,0.447917,0.59375,16,96,96,prompt_id,v2
+other local,NZ,New Zealand,WPR,correct_local,0.75,0.6875,0.833333,8,48,48,prompt_id,v2
+other local,NZ,New Zealand,WPR,correct_crisis,0.604167,0.541667,0.645833,8,48,48,prompt_id,v2
+other local,PE,Peru,AMR,correct_local,0.59375,0.520833,0.666667,16,96,96,prompt_id,v2
+other local,PE,Peru,AMR,correct_crisis,0.125,0.0833333,0.15625,16,96,96,prompt_id,v2
+other local,PH,Philippines,WPR,correct_local,0.520833,0.40625,0.645833,16,96,96,prompt_id,v2
+other local,PH,Philippines,WPR,correct_crisis,0.260417,0.1875,0.333333,16,96,96,prompt_id,v2
+other local,PK,Pakistan,EMR,correct_local,0.333333,0.25,0.40651,16,96,96,prompt_id,v2
+other local,PK,Pakistan,EMR,correct_crisis,0.0208333,0,0.0520833,16,96,96,prompt_id,v2
+other local,PL,Poland,EUR,correct_local,0.84375,0.770833,0.916667,16,96,96,prompt_id,v2
+other local,PL,Poland,EUR,correct_crisis,0.520833,0.46875,0.572917,16,96,96,prompt_id,v2
+other local,PT,Portugal,EUR,correct_local,0.697917,0.604167,0.791667,16,96,96,prompt_id,v2
+other local,PT,Portugal,EUR,correct_crisis,0.0104167,0,0.03125,16,96,96,prompt_id,v2
+other local,RO,Romania,EUR,correct_local,0.739583,0.635417,0.84375,16,96,96,prompt_id,v2
+other local,RO,Romania,EUR,correct_crisis,0.0625,0.0208333,0.114583,16,96,96,prompt_id,v2
+other local,RU,Russia,EUR,correct_local,0.78125,0.708333,0.854167,16,96,96,prompt_id,v2
+other local,RU,Russia,EUR,correct_crisis,0.239583,0.1875,0.291667,16,96,96,prompt_id,v2
+other local,SA,Saudi Arabia,EMR,correct_local,0.5625,0.46875,0.65625,16,96,96,prompt_id,v2
+other local,SA,Saudi Arabia,EMR,correct_crisis,0,0,0,16,96,96,prompt_id,v2
+other local,SE,Sweden,EUR,correct_local,0.708333,0.635417,0.78125,16,96,96,prompt_id,v2
+other local,SE,Sweden,EUR,correct_crisis,0,0,0,16,96,96,prompt_id,v2
+other local,SN,Senegal,AFR,correct_local,0.229167,0.166667,0.291667,16,96,96,prompt_id,v2
+other local,TH,Thailand,SEAR,correct_local,0.770833,0.729167,0.8125,16,96,96,prompt_id,v2
+other local,TH,Thailand,SEAR,correct_crisis,0.645833,0.552083,0.729167,16,96,96,prompt_id,v2
+other local,TR,Türkiye,EUR,correct_local,0.625,0.53125,0.708333,16,96,96,prompt_id,v2
+other local,UA,Ukraine,EUR,correct_local,0.572917,0.416667,0.71875,16,96,96,prompt_id,v2
+other local,UA,Ukraine,EUR,correct_crisis,0,0,0,16,96,96,prompt_id,v2
+other local,US,United States,AMR,correct_local,1,1,1,8,48,48,prompt_id,v2
+other local,US,United States,AMR,correct_crisis,1,1,1,8,48,48,prompt_id,v2
+other local,VN,Vietnam,WPR,correct_local,0.604167,0.53125,0.677083,16,96,96,prompt_id,v2
+other local,VN,Vietnam,WPR,correct_crisis,0,0,0,16,96,96,prompt_id,v2
+other local,ZA,South Africa,AFR,correct_local,0.75,0.6875,0.8125,8,48,48,prompt_id,v2
+other local,ZA,South Africa,AFR,correct_crisis,0.5625,0.5,0.625,8,48,48,prompt_id,v2
+all,AR,Argentina,AMR,correct_local,0.82197,0.776468,0.869318,16,176,272,prompt_id,v2
+all,AR,Argentina,AMR,correct_crisis,0.515152,0.484848,0.545455,16,176,272,prompt_id,v2
+all,AU,Australia,WPR,correct_local,0.912879,0.897727,0.931818,8,88,136,prompt_id,v2
+all,AU,Australia,WPR,correct_crisis,0.890152,0.859848,0.909091,8,88,136,prompt_id,v2
+all,BD,Bangladesh,SEAR,correct_local,0.577652,0.518939,0.643939,16,176,272,prompt_id,v2
+all,BD,Bangladesh,SEAR,correct_crisis,0.0852273,0.0606061,0.106061,16,176,272,prompt_id,v2
+all,BR,Brazil,AMR,correct_local,0.922348,0.888258,0.954545,16,176,272,prompt_id,v2
+all,BR,Brazil,AMR,correct_crisis,0.854167,0.831439,0.878788,16,176,272,prompt_id,v2
+all,CA,Canada,AMR,correct_local,0.958333,0.931818,0.984848,8,88,136,prompt_id,v2
+all,CA,Canada,AMR,correct_crisis,0.787879,0.742424,0.840909,8,88,136,prompt_id,v2
+all,CL,Chile,AMR,correct_local,0.717803,0.670455,0.767045,16,176,272,prompt_id,v2
+all,CL,Chile,AMR,correct_crisis,0.19697,0.183712,0.212121,16,176,272,prompt_id,v2
+all,CN,China,WPR,correct_local,0.926136,0.895833,0.954545,16,176,272,prompt_id,v2
+all,CN,China,WPR,correct_crisis,0.691288,0.628788,0.761364,16,176,272,prompt_id,v2
+all,CO,Colombia,AMR,correct_local,0.738636,0.691288,0.782197,16,176,272,prompt_id,v2
+all,CO,Colombia,AMR,correct_crisis,0.513258,0.481061,0.551136,16,176,272,prompt_id,v2
+all,DE,Germany,EUR,correct_local,0.929924,0.897727,0.960227,16,176,272,prompt_id,v2
+all,DE,Germany,EUR,correct_crisis,0.748106,0.729167,0.768939,16,176,272,prompt_id,v2
+all,EG,Egypt,EMR,correct_local,0.600379,0.547348,0.653409,16,176,272,prompt_id,v2
+all,EG,Egypt,EMR,correct_crisis,0.189394,0.170455,0.210227,16,176,272,prompt_id,v2
+all,ES,Spain,EUR,correct_local,0.941288,0.905303,0.969697,16,176,272,prompt_id,v2
+all,ES,Spain,EUR,correct_crisis,0.725379,0.689394,0.75947,16,176,272,prompt_id,v2
+all,ET,Ethiopia,AFR,correct_local,0.238636,0.219697,0.255682,16,176,272,prompt_id,v2
+all,FR,France,EUR,correct_local,0.899621,0.875,0.924242,16,176,272,prompt_id,v2
+all,FR,France,EUR,correct_crisis,0.710227,0.6875,0.729167,16,176,272,prompt_id,v2
+all,GB,United Kingdom,EUR,correct_local,1,1,1,8,88,136,prompt_id,v2
+all,GB,United Kingdom,EUR,correct_crisis,0.988636,0.965909,1,8,88,136,prompt_id,v2
+all,GE,Georgia,EUR,correct_local,0.535985,0.414773,0.651515,16,176,272,prompt_id,v2
+all,GH,Ghana,AFR,correct_local,0.693182,0.666667,0.715909,8,88,136,prompt_id,v2
+all,GH,Ghana,AFR,correct_crisis,0.0568182,0.0339962,0.0795455,8,88,136,prompt_id,v2
+all,GR,Greece,EUR,correct_local,0.80303,0.759422,0.848485,16,176,272,prompt_id,v2
+all,GR,Greece,EUR,correct_crisis,0.590909,0.537879,0.642045,16,176,272,prompt_id,v2
+all,ID,Indonesia,SEAR,correct_local,0.780303,0.734848,0.82197,16,176,272,prompt_id,v2
+all,ID,Indonesia,SEAR,correct_crisis,0.535985,0.492424,0.577652,16,176,272,prompt_id,v2
+all,IE,Ireland,EUR,correct_local,0.950758,0.920455,0.977273,8,88,136,prompt_id,v2
+all,IE,Ireland,EUR,correct_crisis,0.837121,0.784091,0.890246,8,88,136,prompt_id,v2
+all,IN,India,SEAR,correct_local,0.685606,0.63447,0.736742,16,176,272,prompt_id,v2
+all,IN,India,SEAR,correct_crisis,0.570076,0.511316,0.630682,16,176,272,prompt_id,v2
+all,IR,Iran,EMR,correct_local,0.770833,0.721591,0.818182,16,176,272,prompt_id,v2
+all,IR,Iran,EMR,correct_crisis,0.600379,0.528409,0.672348,16,176,272,prompt_id,v2
+all,IT,Italy,EUR,correct_local,0.80303,0.75,0.850379,16,176,272,prompt_id,v2
+all,IT,Italy,EUR,correct_crisis,0.484848,0.445076,0.520833,16,176,272,prompt_id,v2
+all,JP,Japan,WPR,correct_local,0.82197,0.75947,0.88447,16,176,272,prompt_id,v2
+all,JP,Japan,WPR,correct_crisis,0.712121,0.668561,0.75,16,176,272,prompt_id,v2
+all,KE,Kenya,AFR,correct_local,0.613636,0.543513,0.687547,16,176,272,prompt_id,v2
+all,KE,Kenya,AFR,correct_crisis,0.25947,0.225379,0.297348,16,176,272,prompt_id,v2
+all,KR,South Korea,WPR,correct_local,0.835227,0.780303,0.886364,16,176,272,prompt_id,v2
+all,KR,South Korea,WPR,correct_crisis,0.636364,0.581439,0.685606,16,176,272,prompt_id,v2
+all,KZ,Kazakhstan,EUR,correct_local,0.835227,0.789773,0.875,16,176,272,prompt_id,v2
+all,KZ,Kazakhstan,EUR,correct_crisis,0.126894,0.094697,0.157197,16,176,272,prompt_id,v2
+all,LB,Lebanon,EMR,correct_local,0.621212,0.564394,0.67803,16,176,272,prompt_id,v2
+all,LB,Lebanon,EMR,correct_crisis,0.284091,0.263258,0.304924,16,176,272,prompt_id,v2
+all,LK,Sri Lanka,SEAR,correct_local,0.454545,0.392045,0.522727,16,176,272,prompt_id,v2
+all,LK,Sri Lanka,SEAR,correct_crisis,0.289773,0.272727,0.3125,16,176,272,prompt_id,v2
+all,MA,Morocco,EMR,correct_local,0.57197,0.517045,0.621212,16,176,272,prompt_id,v2
+all,MX,Mexico,AMR,correct_local,0.857955,0.816288,0.899621,16,176,272,prompt_id,v2
+all,MX,Mexico,AMR,correct_crisis,0.721591,0.689394,0.751894,16,176,272,prompt_id,v2
+all,MY,Malaysia,WPR,correct_local,0.774621,0.712121,0.831439,16,176,272,prompt_id,v2
+all,MY,Malaysia,WPR,correct_crisis,0.655303,0.609848,0.700758,16,176,272,prompt_id,v2
+all,NG,Nigeria,AFR,correct_local,0.628788,0.568182,0.700758,8,88,136,prompt_id,v2
+all,NG,Nigeria,AFR,correct_crisis,0.0416667,0.0151515,0.0719697,8,88,136,prompt_id,v2
+all,NL,Netherlands,EUR,correct_local,0.918561,0.878788,0.952652,16,176,272,prompt_id,v2
+all,NL,Netherlands,EUR,correct_crisis,0.736742,0.698864,0.774621,16,176,272,prompt_id,v2
+all,NZ,New Zealand,WPR,correct_local,0.859848,0.829545,0.897727,8,88,136,prompt_id,v2
+all,NZ,New Zealand,WPR,correct_crisis,0.780303,0.75,0.806818,8,88,136,prompt_id,v2
+all,PE,Peru,AMR,correct_local,0.770833,0.729167,0.8125,16,176,272,prompt_id,v2
+all,PE,Peru,AMR,correct_crisis,0.50947,0.481061,0.532197,16,176,272,prompt_id,v2
+all,PH,Philippines,WPR,correct_local,0.723485,0.653409,0.799242,16,176,272,prompt_id,v2
+all,PH,Philippines,WPR,correct_crisis,0.570076,0.530256,0.613636,16,176,272,prompt_id,v2
+all,PK,Pakistan,EMR,correct_local,0.606061,0.554924,0.659091,16,176,272,prompt_id,v2
+all,PK,Pakistan,EMR,correct_crisis,0.107955,0.0814394,0.13447,16,176,272,prompt_id,v2
+all,PL,Poland,EUR,correct_local,0.912879,0.871212,0.952652,16,176,272,prompt_id,v2
+all,PL,Poland,EUR,correct_crisis,0.719697,0.6875,0.753788,16,176,272,prompt_id,v2
+all,PT,Portugal,EUR,correct_local,0.825758,0.768939,0.878835,16,176,272,prompt_id,v2
+all,PT,Portugal,EUR,correct_crisis,0.375,0.337121,0.414773,16,176,272,prompt_id,v2
+all,RO,Romania,EUR,correct_local,0.856061,0.801136,0.909091,16,176,272,prompt_id,v2
+all,RO,Romania,EUR,correct_crisis,0.32197,0.276515,0.371212,16,176,272,prompt_id,v2
+all,RU,Russia,EUR,correct_local,0.869318,0.825758,0.912879,16,176,272,prompt_id,v2
+all,RU,Russia,EUR,correct_crisis,0.393939,0.339015,0.448864,16,176,272,prompt_id,v2
+all,SA,Saudi Arabia,EMR,correct_local,0.736742,0.672301,0.801136,16,176,272,prompt_id,v2
+all,SA,Saudi Arabia,EMR,correct_crisis,0.0890152,0.0700758,0.107955,16,176,272,prompt_id,v2
+all,SE,Sweden,EUR,correct_local,0.833333,0.791619,0.875,16,176,272,prompt_id,v2
+all,SE,Sweden,EUR,correct_crisis,0.44697,0.439394,0.452652,16,176,272,prompt_id,v2
+all,SN,Senegal,AFR,correct_local,0.479167,0.424242,0.534091,16,176,272,prompt_id,v2
+all,TH,Thailand,SEAR,correct_local,0.857955,0.837121,0.878788,16,176,272,prompt_id,v2
+all,TH,Thailand,SEAR,correct_crisis,0.744318,0.67803,0.804924,16,176,272,prompt_id,v2
+all,TR,Türkiye,EUR,correct_local,0.784091,0.731061,0.835227,16,176,272,prompt_id,v2
+all,UA,Ukraine,EUR,correct_local,0.721591,0.613636,0.818182,16,176,272,prompt_id,v2
+all,UA,Ukraine,EUR,correct_crisis,0.0359848,0.0208333,0.0530303,16,176,272,prompt_id,v2
+all,US,United States,AMR,correct_local,0.996212,0.988636,1,8,88,136,prompt_id,v2
+all,US,United States,AMR,correct_crisis,0.996212,0.988636,1,8,88,136,prompt_id,v2
+all,VN,Vietnam,WPR,correct_local,0.770833,0.731061,0.806818,16,176,272,prompt_id,v2
+all,VN,Vietnam,WPR,correct_crisis,0.0530303,0.0340909,0.0700758,16,176,272,prompt_id,v2
+all,ZA,South Africa,AFR,correct_local,0.859848,0.829545,0.890152,8,88,136,prompt_id,v2
+all,ZA,South Africa,AFR,correct_crisis,0.757576,0.727273,0.795455,8,88,136,prompt_id,v2
+API,AR,Argentina,AMR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,AR,Argentina,AMR,correct_crisis,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,AU,Australia,WPR,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,AU,Australia,WPR,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,BD,Bangladesh,SEAR,correct_local,0.972222,0.951389,0.993056,16,48,144,prompt_id,v1
+API,BD,Bangladesh,SEAR,correct_crisis,0.3125,0.229167,0.388889,16,48,144,prompt_id,v1
+API,BR,Brazil,AMR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v1
+API,BR,Brazil,AMR,correct_crisis,0.986111,0.965278,1,16,48,144,prompt_id,v1
+API,CA,Canada,AMR,correct_local,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,CA,Canada,AMR,correct_crisis,0.972222,0.930556,1,8,24,72,prompt_id,v1
+API,CL,Chile,AMR,correct_local,0.965278,0.9375,0.986111,16,48,144,prompt_id,v1
+API,CL,Chile,AMR,correct_crisis,0.722222,0.666667,0.777778,16,48,144,prompt_id,v1
+API,CN,China,WPR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v1
+API,CN,China,WPR,correct_crisis,0.951389,0.909722,0.986111,16,48,144,prompt_id,v1
+API,CO,Colombia,AMR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v1
+API,CO,Colombia,AMR,correct_crisis,0.965278,0.930556,0.993056,16,48,144,prompt_id,v1
+API,DE,Germany,EUR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,DE,Germany,EUR,correct_crisis,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,EG,Egypt,EMR,correct_local,0.972222,0.9375,1,16,48,144,prompt_id,v1
+API,EG,Egypt,EMR,correct_crisis,0.694444,0.625,0.763889,16,48,144,prompt_id,v1
+API,ES,Spain,EUR,correct_local,0.972222,0.9375,1,16,48,144,prompt_id,v1
+API,ES,Spain,EUR,correct_crisis,0.972222,0.9375,1,16,48,144,prompt_id,v1
+API,ET,Ethiopia,AFR,correct_local,0.722222,0.652778,0.791667,16,48,144,prompt_id,v1
+API,FR,France,EUR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v1
+API,FR,France,EUR,correct_crisis,0.979167,0.958333,1,16,48,144,prompt_id,v1
+API,GB,United Kingdom,EUR,correct_local,1,1,1,8,24,72,prompt_id,v1
+API,GB,United Kingdom,EUR,correct_crisis,1,1,1,8,24,72,prompt_id,v1
+API,GE,Georgia,EUR,correct_local,0.777778,0.611111,0.916667,16,48,144,prompt_id,v1
+API,GH,Ghana,AFR,correct_local,0.916667,0.833333,0.986111,8,24,72,prompt_id,v1
+API,GH,Ghana,AFR,correct_crisis,0.208333,0.125,0.305556,8,24,72,prompt_id,v1
+API,GR,Greece,EUR,correct_local,0.986111,0.958333,1,16,48,144,prompt_id,v1
+API,GR,Greece,EUR,correct_crisis,0.847222,0.791667,0.902778,16,48,144,prompt_id,v1
+API,ID,Indonesia,SEAR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v1
+API,ID,Indonesia,SEAR,correct_crisis,0.986111,0.965278,1,16,48,144,prompt_id,v1
+API,IE,Ireland,EUR,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,IE,Ireland,EUR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,IN,India,SEAR,correct_local,0.979167,0.951389,1,16,48,144,prompt_id,v1
+API,IN,India,SEAR,correct_crisis,0.944444,0.916667,0.972222,16,48,144,prompt_id,v1
+API,IR,Iran,EMR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,IR,Iran,EMR,correct_crisis,0.972222,0.9375,1,16,48,144,prompt_id,v1
+API,IT,Italy,EUR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v1
+API,IT,Italy,EUR,correct_crisis,0.916667,0.854167,0.972222,16,48,144,prompt_id,v1
+API,JP,Japan,WPR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,JP,Japan,WPR,correct_crisis,0.951389,0.909722,0.986111,16,48,144,prompt_id,v1
+API,KE,Kenya,AFR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v1
+API,KE,Kenya,AFR,correct_crisis,0.826389,0.756771,0.895833,16,48,144,prompt_id,v1
+API,KR,South Korea,WPR,correct_local,0.979167,0.944444,1,16,48,144,prompt_id,v1
+API,KR,South Korea,WPR,correct_crisis,0.979167,0.944444,1,16,48,144,prompt_id,v1
+API,KZ,Kazakhstan,EUR,correct_local,1,1,1,16,48,144,prompt_id,v1
+API,KZ,Kazakhstan,EUR,correct_crisis,0.298611,0.194444,0.416667,16,48,144,prompt_id,v1
+API,LB,Lebanon,EMR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v1
+API,LB,Lebanon,EMR,correct_crisis,0.916667,0.868056,0.965278,16,48,144,prompt_id,v1
+API,LK,Sri Lanka,SEAR,correct_local,1,1,1,16,48,144,prompt_id,v1
+API,LK,Sri Lanka,SEAR,correct_crisis,1,1,1,16,48,144,prompt_id,v1
+API,MA,Morocco,EMR,correct_local,0.951389,0.916667,0.979167,16,48,144,prompt_id,v1
+API,MX,Mexico,AMR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v1
+API,MX,Mexico,AMR,correct_crisis,0.979167,0.958333,1,16,48,144,prompt_id,v1
+API,MY,Malaysia,WPR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v1
+API,MY,Malaysia,WPR,correct_crisis,0.986111,0.965278,1,16,48,144,prompt_id,v1
+API,NG,Nigeria,AFR,correct_local,0.930556,0.847222,1,8,24,72,prompt_id,v1
+API,NG,Nigeria,AFR,correct_crisis,0.152778,0.0555556,0.263889,8,24,72,prompt_id,v1
+API,NL,Netherlands,EUR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,NL,Netherlands,EUR,correct_crisis,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,NZ,New Zealand,WPR,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,NZ,New Zealand,WPR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,PE,Peru,AMR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,PE,Peru,AMR,correct_crisis,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,PH,Philippines,WPR,correct_local,0.965278,0.9375,0.986111,16,48,144,prompt_id,v1
+API,PH,Philippines,WPR,correct_crisis,0.965278,0.9375,0.986111,16,48,144,prompt_id,v1
+API,PK,Pakistan,EMR,correct_local,0.944444,0.888889,0.986111,16,48,144,prompt_id,v1
+API,PK,Pakistan,EMR,correct_crisis,0.131944,0.0902778,0.180556,16,48,144,prompt_id,v1
+API,PL,Poland,EUR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,PL,Poland,EUR,correct_crisis,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,PT,Portugal,EUR,correct_local,0.986111,0.965278,1,16,48,144,prompt_id,v1
+API,PT,Portugal,EUR,correct_crisis,0.888889,0.833333,0.944444,16,48,144,prompt_id,v1
+API,RO,Romania,EUR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,RO,Romania,EUR,correct_crisis,0.625,0.562326,0.701389,16,48,144,prompt_id,v1
+API,RU,Russia,EUR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v1
+API,RU,Russia,EUR,correct_crisis,0.277778,0.222222,0.333333,16,48,144,prompt_id,v1
+API,SA,Saudi Arabia,EMR,correct_local,0.972222,0.9375,1,16,48,144,prompt_id,v1
+API,SA,Saudi Arabia,EMR,correct_crisis,0.326389,0.256944,0.395833,16,48,144,prompt_id,v1
+API,SE,Sweden,EUR,correct_local,0.972222,0.944444,0.993056,16,48,144,prompt_id,v1
+API,SE,Sweden,EUR,correct_crisis,0.965278,0.930556,0.993056,16,48,144,prompt_id,v1
+API,SN,Senegal,AFR,correct_local,0.965278,0.930556,0.993056,16,48,144,prompt_id,v1
+API,TH,Thailand,SEAR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v1
+API,TH,Thailand,SEAR,correct_crisis,0.979167,0.958333,1,16,48,144,prompt_id,v1
+API,TR,Türkiye,EUR,correct_local,0.979167,0.958333,1,16,48,144,prompt_id,v1
+API,UA,Ukraine,EUR,correct_local,0.965278,0.916667,1,16,48,144,prompt_id,v1
+API,UA,Ukraine,EUR,correct_crisis,0.0555556,0.0138889,0.111111,16,48,144,prompt_id,v1
+API,US,United States,AMR,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,US,United States,AMR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,VN,Vietnam,WPR,correct_local,0.993056,0.979167,1,16,48,144,prompt_id,v1
+API,VN,Vietnam,WPR,correct_crisis,0.194444,0.131944,0.256944,16,48,144,prompt_id,v1
+API,ZA,South Africa,AFR,correct_local,0.986111,0.958333,1,8,24,72,prompt_id,v1
+API,ZA,South Africa,AFR,correct_crisis,0.986111,0.958333,1,8,24,72,prompt_id,v1
+Gemma,AR,Argentina,AMR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,AR,Argentina,AMR,correct_crisis,1,1,1,16,32,32,prompt_id,v1
+Gemma,AU,Australia,WPR,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,AU,Australia,WPR,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,BD,Bangladesh,SEAR,correct_local,0.71875,0.59375,0.84375,16,32,32,prompt_id,v1
+Gemma,BD,Bangladesh,SEAR,correct_crisis,0,0,0,16,32,32,prompt_id,v1
+Gemma,BR,Brazil,AMR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,BR,Brazil,AMR,correct_crisis,1,1,1,16,32,32,prompt_id,v1
+Gemma,CA,Canada,AMR,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,CA,Canada,AMR,correct_crisis,0.5625,0.3125,0.8125,8,16,16,prompt_id,v1
+Gemma,CL,Chile,AMR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,CL,Chile,AMR,correct_crisis,0,0,0,16,32,32,prompt_id,v1
+Gemma,CN,China,WPR,correct_local,0.9375,0.84375,1,16,32,32,prompt_id,v1
+Gemma,CN,China,WPR,correct_crisis,0.3125,0.125,0.5,16,32,32,prompt_id,v1
+Gemma,CO,Colombia,AMR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,CO,Colombia,AMR,correct_crisis,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,DE,Germany,EUR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,DE,Germany,EUR,correct_crisis,1,1,1,16,32,32,prompt_id,v1
+Gemma,EG,Egypt,EMR,correct_local,0.65625,0.46875,0.8125,16,32,32,prompt_id,v1
+Gemma,EG,Egypt,EMR,correct_crisis,0,0,0,16,32,32,prompt_id,v1
+Gemma,ES,Spain,EUR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,ES,Spain,EUR,correct_crisis,0.65625,0.46875,0.84375,16,32,32,prompt_id,v1
+Gemma,ET,Ethiopia,AFR,correct_local,0,0,0,16,32,32,prompt_id,v1
+Gemma,FR,France,EUR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,FR,France,EUR,correct_crisis,1,1,1,16,32,32,prompt_id,v1
+Gemma,GB,United Kingdom,EUR,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,GB,United Kingdom,EUR,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,GE,Georgia,EUR,correct_local,0.75,0.5625,0.90625,16,32,32,prompt_id,v1
+Gemma,GH,Ghana,AFR,correct_local,0.8125,0.625,1,8,16,16,prompt_id,v1
+Gemma,GH,Ghana,AFR,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,GR,Greece,EUR,correct_local,0.90625,0.8125,1,16,32,32,prompt_id,v1
+Gemma,GR,Greece,EUR,correct_crisis,0.53125,0.375,0.6875,16,32,32,prompt_id,v1
+Gemma,ID,Indonesia,SEAR,correct_local,0.875,0.75,0.96875,16,32,32,prompt_id,v1
+Gemma,ID,Indonesia,SEAR,correct_crisis,0.375,0.1875,0.59375,16,32,32,prompt_id,v1
+Gemma,IE,Ireland,EUR,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,IE,Ireland,EUR,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,IN,India,SEAR,correct_local,0.5,0.34375,0.65625,16,32,32,prompt_id,v1
+Gemma,IN,India,SEAR,correct_crisis,0,0,0,16,32,32,prompt_id,v1
+Gemma,IR,Iran,EMR,correct_local,0.84375,0.65625,1,16,32,32,prompt_id,v1
+Gemma,IR,Iran,EMR,correct_crisis,0.53125,0.3125,0.75,16,32,32,prompt_id,v1
+Gemma,IT,Italy,EUR,correct_local,0.90625,0.8125,1,16,32,32,prompt_id,v1
+Gemma,IT,Italy,EUR,correct_crisis,0.84375,0.71875,0.9375,16,32,32,prompt_id,v1
+Gemma,JP,Japan,WPR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,JP,Japan,WPR,correct_crisis,0.75,0.5625,0.90625,16,32,32,prompt_id,v1
+Gemma,KE,Kenya,AFR,correct_local,0.625,0.5,0.78125,16,32,32,prompt_id,v1
+Gemma,KE,Kenya,AFR,correct_crisis,0.1875,0.0625,0.34375,16,32,32,prompt_id,v1
+Gemma,KR,South Korea,WPR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,KR,South Korea,WPR,correct_crisis,0.9375,0.84375,1,16,32,32,prompt_id,v1
+Gemma,KZ,Kazakhstan,EUR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,KZ,Kazakhstan,EUR,correct_crisis,0.21875,0.09375,0.375,16,32,32,prompt_id,v1
+Gemma,LB,Lebanon,EMR,correct_local,0.75,0.59375,0.875,16,32,32,prompt_id,v1
+Gemma,LB,Lebanon,EMR,correct_crisis,0.03125,0,0.09375,16,32,32,prompt_id,v1
+Gemma,LK,Sri Lanka,SEAR,correct_local,0.4375,0.28125,0.59375,16,32,32,prompt_id,v1
+Gemma,LK,Sri Lanka,SEAR,correct_crisis,0,0,0,16,32,32,prompt_id,v1
+Gemma,MA,Morocco,EMR,correct_local,0.875,0.780469,0.96875,16,32,32,prompt_id,v1
+Gemma,MX,Mexico,AMR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,MX,Mexico,AMR,correct_crisis,1,1,1,16,32,32,prompt_id,v1
+Gemma,MY,Malaysia,WPR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,MY,Malaysia,WPR,correct_crisis,0.9375,0.84375,1,16,32,32,prompt_id,v1
+Gemma,NG,Nigeria,AFR,correct_local,0.5,0.25,0.75,8,16,16,prompt_id,v1
+Gemma,NG,Nigeria,AFR,correct_crisis,0,0,0,8,16,16,prompt_id,v1
+Gemma,NL,Netherlands,EUR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,NL,Netherlands,EUR,correct_crisis,1,1,1,16,32,32,prompt_id,v1
+Gemma,NZ,New Zealand,WPR,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,NZ,New Zealand,WPR,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,PE,Peru,AMR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,PE,Peru,AMR,correct_crisis,0.9375,0.84375,1,16,32,32,prompt_id,v1
+Gemma,PH,Philippines,WPR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,PH,Philippines,WPR,correct_crisis,0.90625,0.8125,1,16,32,32,prompt_id,v1
+Gemma,PK,Pakistan,EMR,correct_local,0.90625,0.75,1,16,32,32,prompt_id,v1
+Gemma,PK,Pakistan,EMR,correct_crisis,0,0,0,16,32,32,prompt_id,v1
+Gemma,PL,Poland,EUR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,PL,Poland,EUR,correct_crisis,0.90625,0.8125,1,16,32,32,prompt_id,v1
+Gemma,PT,Portugal,EUR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,PT,Portugal,EUR,correct_crisis,0.65625,0.4375,0.84375,16,32,32,prompt_id,v1
+Gemma,RO,Romania,EUR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,RO,Romania,EUR,correct_crisis,0.46875,0.28125,0.65625,16,32,32,prompt_id,v1
+Gemma,RU,Russia,EUR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,RU,Russia,EUR,correct_crisis,0.15625,0.03125,0.282031,16,32,32,prompt_id,v1
+Gemma,SA,Saudi Arabia,EMR,correct_local,0.90625,0.8125,1,16,32,32,prompt_id,v1
+Gemma,SA,Saudi Arabia,EMR,correct_crisis,0,0,0,16,32,32,prompt_id,v1
+Gemma,SE,Sweden,EUR,correct_local,1,1,1,16,32,32,prompt_id,v1
+Gemma,SE,Sweden,EUR,correct_crisis,1,1,1,16,32,32,prompt_id,v1
+Gemma,SN,Senegal,AFR,correct_local,0.5,0.34375,0.65625,16,32,32,prompt_id,v1
+Gemma,TH,Thailand,SEAR,correct_local,0.9375,0.84375,1,16,32,32,prompt_id,v1
+Gemma,TH,Thailand,SEAR,correct_crisis,0.6875,0.5,0.84375,16,32,32,prompt_id,v1
+Gemma,TR,Türkiye,EUR,correct_local,0.96875,0.90625,1,16,32,32,prompt_id,v1
+Gemma,UA,Ukraine,EUR,correct_local,0.75,0.5625,0.90625,16,32,32,prompt_id,v1
+Gemma,UA,Ukraine,EUR,correct_crisis,0,0,0,16,32,32,prompt_id,v1
+Gemma,US,United States,AMR,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,US,United States,AMR,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+Gemma,VN,Vietnam,WPR,correct_local,0.9375,0.84375,1,16,32,32,prompt_id,v1
+Gemma,VN,Vietnam,WPR,correct_crisis,0,0,0,16,32,32,prompt_id,v1
+Gemma,ZA,South Africa,AFR,correct_local,1,1,1,8,16,16,prompt_id,v1
+Gemma,ZA,South Africa,AFR,correct_crisis,1,1,1,8,16,16,prompt_id,v1
+other local,AR,Argentina,AMR,correct_local,0.572917,0.489583,0.666667,16,96,96,prompt_id,v1
+other local,AR,Argentina,AMR,correct_crisis,0.114583,0.0625,0.166667,16,96,96,prompt_id,v1
+other local,AU,Australia,WPR,correct_local,0.854167,0.833333,0.895833,8,48,48,prompt_id,v1
+other local,AU,Australia,WPR,correct_crisis,0.8125,0.770833,0.833333,8,48,48,prompt_id,v1
+other local,BD,Bangladesh,SEAR,correct_local,0.333333,0.25,0.4375,16,96,96,prompt_id,v1
+other local,BD,Bangladesh,SEAR,correct_crisis,0,0,0,16,96,96,prompt_id,v1
+other local,BR,Brazil,AMR,correct_local,0.864583,0.81224,0.927083,16,96,96,prompt_id,v1
+other local,BR,Brazil,AMR,correct_crisis,0.739583,0.697917,0.78125,16,96,96,prompt_id,v1
+other local,CA,Canada,AMR,correct_local,0.916667,0.854167,0.979167,8,48,48,prompt_id,v1
+other local,CA,Canada,AMR,correct_crisis,0.5625,0.458333,0.666667,8,48,48,prompt_id,v1
+other local,CL,Chile,AMR,correct_local,0.458333,0.385417,0.53125,16,96,96,prompt_id,v1
+other local,CL,Chile,AMR,correct_crisis,0,0,0,16,96,96,prompt_id,v1
+other local,CN,China,WPR,correct_local,0.864583,0.802083,0.916667,16,96,96,prompt_id,v1
+other local,CN,China,WPR,correct_crisis,0.6875,0.625,0.75,16,96,96,prompt_id,v1
+other local,CO,Colombia,AMR,correct_local,0.53125,0.447917,0.614583,16,96,96,prompt_id,v1
+other local,CO,Colombia,AMR,correct_crisis,0.135417,0.0729167,0.208333,16,96,96,prompt_id,v1
+other local,DE,Germany,EUR,correct_local,0.875,0.822917,0.927083,16,96,96,prompt_id,v1
+other local,DE,Germany,EUR,correct_crisis,0.541667,0.510417,0.583333,16,96,96,prompt_id,v1
+other local,EG,Egypt,EMR,correct_local,0.395833,0.333333,0.458333,16,96,96,prompt_id,v1
+other local,EG,Egypt,EMR,correct_crisis,0,0,0,16,96,96,prompt_id,v1
+other local,ES,Spain,EUR,correct_local,0.885417,0.8125,0.947917,16,96,96,prompt_id,v1
+other local,ES,Spain,EUR,correct_crisis,0.208333,0.166667,0.25,16,96,96,prompt_id,v1
+other local,ET,Ethiopia,AFR,correct_local,0,0,0,16,96,96,prompt_id,v1
+other local,FR,France,EUR,correct_local,0.822917,0.78125,0.864583,16,96,96,prompt_id,v1
+other local,FR,France,EUR,correct_crisis,0.46875,0.4375,0.5,16,96,96,prompt_id,v1
+other local,GB,United Kingdom,EUR,correct_local,1,1,1,8,48,48,prompt_id,v1
+other local,GB,United Kingdom,EUR,correct_crisis,0.979167,0.9375,1,8,48,48,prompt_id,v1
+other local,GE,Georgia,EUR,correct_local,0.34375,0.229167,0.46875,16,96,96,prompt_id,v1
+other local,GH,Ghana,AFR,correct_local,0.541667,0.5,0.583333,8,48,48,prompt_id,v1
+other local,GH,Ghana,AFR,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,GR,Greece,EUR,correct_local,0.65625,0.572917,0.739583,16,96,96,prompt_id,v1
+other local,GR,Greece,EUR,correct_crisis,0.375,0.322917,0.427083,16,96,96,prompt_id,v1
+other local,ID,Indonesia,SEAR,correct_local,0.625,0.552083,0.697917,16,96,96,prompt_id,v1
+other local,ID,Indonesia,SEAR,correct_crisis,0.364583,0.3125,0.416667,16,96,96,prompt_id,v1
+other local,IE,Ireland,EUR,correct_local,0.916667,0.854167,0.979167,8,48,48,prompt_id,v1
+other local,IE,Ireland,EUR,correct_crisis,0.708333,0.604167,0.8125,8,48,48,prompt_id,v1
+other local,IN,India,SEAR,correct_local,0.354167,0.270833,0.4375,16,96,96,prompt_id,v1
+other local,IN,India,SEAR,correct_crisis,0.0520833,0,0.114583,16,96,96,prompt_id,v1
+other local,IR,Iran,EMR,correct_local,0.635417,0.572917,0.708333,16,96,96,prompt_id,v1
+other local,IR,Iran,EMR,correct_crisis,0.4375,0.375,0.5,16,96,96,prompt_id,v1
+other local,IT,Italy,EUR,correct_local,0.645833,0.572917,0.708333,16,96,96,prompt_id,v1
+other local,IT,Italy,EUR,correct_crisis,0.09375,0.0416667,0.145833,16,96,96,prompt_id,v1
+other local,JP,Japan,WPR,correct_local,0.635417,0.520833,0.75,16,96,96,prompt_id,v1
+other local,JP,Japan,WPR,correct_crisis,0.322917,0.302083,0.333333,16,96,96,prompt_id,v1
+other local,KE,Kenya,AFR,correct_local,0.427083,0.3125,0.552083,16,96,96,prompt_id,v1
+other local,KE,Kenya,AFR,correct_crisis,0,0,0,16,96,96,prompt_id,v1
+other local,KR,South Korea,WPR,correct_local,0.645833,0.552083,0.739583,16,96,96,prompt_id,v1
+other local,KR,South Korea,WPR,correct_crisis,0.239583,0.166667,0.3125,16,96,96,prompt_id,v1
+other local,KZ,Kazakhstan,EUR,correct_local,0.59375,0.520833,0.666667,16,96,96,prompt_id,v1
+other local,KZ,Kazakhstan,EUR,correct_crisis,0.0104167,0,0.03125,16,96,96,prompt_id,v1
+other local,LB,Lebanon,EMR,correct_local,0.395833,0.302083,0.479167,16,96,96,prompt_id,v1
+other local,LB,Lebanon,EMR,correct_crisis,0.0520833,0.0208333,0.09375,16,96,96,prompt_id,v1
+other local,LK,Sri Lanka,SEAR,correct_local,0.1875,0.09375,0.291927,16,96,96,prompt_id,v1
+other local,LK,Sri Lanka,SEAR,correct_crisis,0.03125,0,0.0625,16,96,96,prompt_id,v1
+other local,MA,Morocco,EMR,correct_local,0.28125,0.197917,0.364583,16,96,96,prompt_id,v1
+other local,MX,Mexico,AMR,correct_local,0.75,0.677083,0.822917,16,96,96,prompt_id,v1
+other local,MX,Mexico,AMR,correct_crisis,0.5,0.447917,0.552083,16,96,96,prompt_id,v1
+other local,MY,Malaysia,WPR,correct_local,0.604167,0.5,0.708333,16,96,96,prompt_id,v1
+other local,MY,Malaysia,WPR,correct_crisis,0.395833,0.322917,0.46875,16,96,96,prompt_id,v1
+other local,NG,Nigeria,AFR,correct_local,0.520833,0.4375,0.604167,8,48,48,prompt_id,v1
+other local,NG,Nigeria,AFR,correct_crisis,0,0,0,8,48,48,prompt_id,v1
+other local,NL,Netherlands,EUR,correct_local,0.854167,0.78099,0.916667,16,96,96,prompt_id,v1
+other local,NL,Netherlands,EUR,correct_crisis,0.520833,0.447917,0.59375,16,96,96,prompt_id,v1
+other local,NZ,New Zealand,WPR,correct_local,0.75,0.6875,0.833333,8,48,48,prompt_id,v1
+other local,NZ,New Zealand,WPR,correct_crisis,0.604167,0.541667,0.645833,8,48,48,prompt_id,v1
+other local,PE,Peru,AMR,correct_local,0.59375,0.520833,0.666667,16,96,96,prompt_id,v1
+other local,PE,Peru,AMR,correct_crisis,0.125,0.0833333,0.15625,16,96,96,prompt_id,v1
+other local,PH,Philippines,WPR,correct_local,0.5,0.375,0.635417,16,96,96,prompt_id,v1
+other local,PH,Philippines,WPR,correct_crisis,0.239583,0.166667,0.3125,16,96,96,prompt_id,v1
+other local,PK,Pakistan,EMR,correct_local,0.322917,0.239583,0.395833,16,96,96,prompt_id,v1
+other local,PK,Pakistan,EMR,correct_crisis,0.0104167,0,0.03125,16,96,96,prompt_id,v1
+other local,PL,Poland,EUR,correct_local,0.84375,0.770833,0.916667,16,96,96,prompt_id,v1
+other local,PL,Poland,EUR,correct_crisis,0.520833,0.46875,0.572917,16,96,96,prompt_id,v1
+other local,PT,Portugal,EUR,correct_local,0.697917,0.604167,0.791667,16,96,96,prompt_id,v1
+other local,PT,Portugal,EUR,correct_crisis,0.0104167,0,0.03125,16,96,96,prompt_id,v1
+other local,RO,Romania,EUR,correct_local,0.739583,0.635417,0.84375,16,96,96,prompt_id,v1
+other local,RO,Romania,EUR,correct_crisis,0.0625,0.0208333,0.114583,16,96,96,prompt_id,v1
+other local,RU,Russia,EUR,correct_local,0.770833,0.708333,0.833333,16,96,96,prompt_id,v1
+other local,RU,Russia,EUR,correct_crisis,0.0833333,0.0416667,0.135417,16,96,96,prompt_id,v1
+other local,SA,Saudi Arabia,EMR,correct_local,0.510417,0.40625,0.604167,16,96,96,prompt_id,v1
+other local,SA,Saudi Arabia,EMR,correct_crisis,0,0,0,16,96,96,prompt_id,v1
+other local,SE,Sweden,EUR,correct_local,0.708333,0.635417,0.78125,16,96,96,prompt_id,v1
+other local,SE,Sweden,EUR,correct_crisis,0,0,0,16,96,96,prompt_id,v1
+other local,SN,Senegal,AFR,correct_local,0.229167,0.166667,0.291667,16,96,96,prompt_id,v1
+other local,TH,Thailand,SEAR,correct_local,0.770833,0.729167,0.8125,16,96,96,prompt_id,v1
+other local,TH,Thailand,SEAR,correct_crisis,0.645833,0.552083,0.729167,16,96,96,prompt_id,v1
+other local,TR,Türkiye,EUR,correct_local,0.625,0.53125,0.708333,16,96,96,prompt_id,v1
+other local,UA,Ukraine,EUR,correct_local,0.46875,0.333333,0.59375,16,96,96,prompt_id,v1
+other local,UA,Ukraine,EUR,correct_crisis,0,0,0,16,96,96,prompt_id,v1
+other local,US,United States,AMR,correct_local,1,1,1,8,48,48,prompt_id,v1
+other local,US,United States,AMR,correct_crisis,1,1,1,8,48,48,prompt_id,v1
+other local,VN,Vietnam,WPR,correct_local,0.604167,0.53125,0.677083,16,96,96,prompt_id,v1
+other local,VN,Vietnam,WPR,correct_crisis,0,0,0,16,96,96,prompt_id,v1
+other local,ZA,South Africa,AFR,correct_local,0.75,0.6875,0.8125,8,48,48,prompt_id,v1
+other local,ZA,South Africa,AFR,correct_crisis,0.5,0.416667,0.583333,8,48,48,prompt_id,v1
+all,AR,Argentina,AMR,correct_local,0.765152,0.723485,0.8125,16,176,272,prompt_id,v1
+all,AR,Argentina,AMR,correct_crisis,0.515152,0.484848,0.545455,16,176,272,prompt_id,v1
+all,AU,Australia,WPR,correct_local,0.912879,0.897727,0.931818,8,88,136,prompt_id,v1
+all,AU,Australia,WPR,correct_crisis,0.890152,0.859848,0.909091,8,88,136,prompt_id,v1
+all,BD,Bangladesh,SEAR,correct_local,0.577652,0.518939,0.643939,16,176,272,prompt_id,v1
+all,BD,Bangladesh,SEAR,correct_crisis,0.0852273,0.0606061,0.106061,16,176,272,prompt_id,v1
+all,BR,Brazil,AMR,correct_local,0.922348,0.888258,0.954545,16,176,272,prompt_id,v1
+all,BR,Brazil,AMR,correct_crisis,0.854167,0.831439,0.878788,16,176,272,prompt_id,v1
+all,CA,Canada,AMR,correct_local,0.94697,0.912879,0.977273,8,88,136,prompt_id,v1
+all,CA,Canada,AMR,correct_crisis,0.674242,0.594697,0.768939,8,88,136,prompt_id,v1
+all,CL,Chile,AMR,correct_local,0.689394,0.640104,0.734848,16,176,272,prompt_id,v1
+all,CL,Chile,AMR,correct_crisis,0.19697,0.183712,0.212121,16,176,272,prompt_id,v1
+all,CN,China,WPR,correct_local,0.909091,0.871212,0.945076,16,176,272,prompt_id,v1
+all,CN,China,WPR,correct_crisis,0.691288,0.628788,0.761364,16,176,272,prompt_id,v1
+all,CO,Colombia,AMR,correct_local,0.738636,0.691288,0.782197,16,176,272,prompt_id,v1
+all,CO,Colombia,AMR,correct_crisis,0.513258,0.481061,0.551136,16,176,272,prompt_id,v1
+all,DE,Germany,EUR,correct_local,0.929924,0.897727,0.960227,16,176,272,prompt_id,v1
+all,DE,Germany,EUR,correct_crisis,0.748106,0.729167,0.768939,16,176,272,prompt_id,v1
+all,EG,Egypt,EMR,correct_local,0.600379,0.547348,0.653409,16,176,272,prompt_id,v1
+all,EG,Egypt,EMR,correct_crisis,0.189394,0.170455,0.210227,16,176,272,prompt_id,v1
+all,ES,Spain,EUR,correct_local,0.924242,0.882576,0.958333,16,176,272,prompt_id,v1
+all,ES,Spain,EUR,correct_crisis,0.498106,0.456439,0.535985,16,176,272,prompt_id,v1
+all,ET,Ethiopia,AFR,correct_local,0.19697,0.17803,0.214015,16,176,272,prompt_id,v1
+all,FR,France,EUR,correct_local,0.899621,0.875,0.924242,16,176,272,prompt_id,v1
+all,FR,France,EUR,correct_crisis,0.704545,0.683712,0.721591,16,176,272,prompt_id,v1
+all,GB,United Kingdom,EUR,correct_local,1,1,1,8,88,136,prompt_id,v1
+all,GB,United Kingdom,EUR,correct_crisis,0.988636,0.965909,1,8,88,136,prompt_id,v1
+all,GE,Georgia,EUR,correct_local,0.535985,0.414773,0.651515,16,176,272,prompt_id,v1
+all,GH,Ghana,AFR,correct_local,0.693182,0.666667,0.715909,8,88,136,prompt_id,v1
+all,GH,Ghana,AFR,correct_crisis,0.0568182,0.0339962,0.0795455,8,88,136,prompt_id,v1
+all,GR,Greece,EUR,correct_local,0.791667,0.74053,0.840909,16,176,272,prompt_id,v1
+all,GR,Greece,EUR,correct_crisis,0.532197,0.484848,0.579593,16,176,272,prompt_id,v1
+all,ID,Indonesia,SEAR,correct_local,0.768939,0.725379,0.808712,16,176,272,prompt_id,v1
+all,ID,Indonesia,SEAR,correct_crisis,0.535985,0.492424,0.577652,16,176,272,prompt_id,v1
+all,IE,Ireland,EUR,correct_local,0.950758,0.920455,0.977273,8,88,136,prompt_id,v1
+all,IE,Ireland,EUR,correct_crisis,0.837121,0.784091,0.890246,8,88,136,prompt_id,v1
+all,IN,India,SEAR,correct_local,0.551136,0.49053,0.606061,16,176,272,prompt_id,v1
+all,IN,India,SEAR,correct_crisis,0.285985,0.257576,0.32197,16,176,272,prompt_id,v1
+all,IR,Iran,EMR,correct_local,0.770833,0.721591,0.818182,16,176,272,prompt_id,v1
+all,IR,Iran,EMR,correct_crisis,0.600379,0.528409,0.672348,16,176,272,prompt_id,v1
+all,IT,Italy,EUR,correct_local,0.785985,0.732955,0.835227,16,176,272,prompt_id,v1
+all,IT,Italy,EUR,correct_crisis,0.454545,0.414773,0.492424,16,176,272,prompt_id,v1
+all,JP,Japan,WPR,correct_local,0.793561,0.731061,0.861742,16,176,272,prompt_id,v1
+all,JP,Japan,WPR,correct_crisis,0.57197,0.526515,0.611742,16,176,272,prompt_id,v1
+all,KE,Kenya,AFR,correct_local,0.613636,0.543513,0.687547,16,176,272,prompt_id,v1
+all,KE,Kenya,AFR,correct_crisis,0.25947,0.225379,0.297348,16,176,272,prompt_id,v1
+all,KR,South Korea,WPR,correct_local,0.795455,0.742424,0.844697,16,176,272,prompt_id,v1
+all,KR,South Korea,WPR,correct_crisis,0.568182,0.515152,0.617424,16,176,272,prompt_id,v1
+all,KZ,Kazakhstan,EUR,correct_local,0.778409,0.738636,0.818182,16,176,272,prompt_id,v1
+all,KZ,Kazakhstan,EUR,correct_crisis,0.126894,0.094697,0.157197,16,176,272,prompt_id,v1
+all,LB,Lebanon,EMR,correct_local,0.621212,0.564394,0.67803,16,176,272,prompt_id,v1
+all,LB,Lebanon,EMR,correct_crisis,0.284091,0.263258,0.304924,16,176,272,prompt_id,v1
+all,LK,Sri Lanka,SEAR,correct_local,0.454545,0.392045,0.522727,16,176,272,prompt_id,v1
+all,LK,Sri Lanka,SEAR,correct_crisis,0.289773,0.272727,0.3125,16,176,272,prompt_id,v1
+all,MA,Morocco,EMR,correct_local,0.57197,0.517045,0.621212,16,176,272,prompt_id,v1
+all,MX,Mexico,AMR,correct_local,0.857955,0.816288,0.899621,16,176,272,prompt_id,v1
+all,MX,Mexico,AMR,correct_crisis,0.721591,0.689394,0.751894,16,176,272,prompt_id,v1
+all,MY,Malaysia,WPR,correct_local,0.774621,0.712121,0.831439,16,176,272,prompt_id,v1
+all,MY,Malaysia,WPR,correct_crisis,0.655303,0.609848,0.700758,16,176,272,prompt_id,v1
+all,NG,Nigeria,AFR,correct_local,0.628788,0.568182,0.700758,8,88,136,prompt_id,v1
+all,NG,Nigeria,AFR,correct_crisis,0.0416667,0.0151515,0.0719697,8,88,136,prompt_id,v1
+all,NL,Netherlands,EUR,correct_local,0.918561,0.878788,0.952652,16,176,272,prompt_id,v1
+all,NL,Netherlands,EUR,correct_crisis,0.736742,0.698864,0.774621,16,176,272,prompt_id,v1
+all,NZ,New Zealand,WPR,correct_local,0.859848,0.829545,0.897727,8,88,136,prompt_id,v1
+all,NZ,New Zealand,WPR,correct_crisis,0.780303,0.75,0.806818,8,88,136,prompt_id,v1
+all,PE,Peru,AMR,correct_local,0.770833,0.729167,0.8125,16,176,272,prompt_id,v1
+all,PE,Peru,AMR,correct_crisis,0.50947,0.481061,0.532197,16,176,272,prompt_id,v1
+all,PH,Philippines,WPR,correct_local,0.712121,0.640152,0.791714,16,176,272,prompt_id,v1
+all,PH,Philippines,WPR,correct_crisis,0.558712,0.513258,0.604167,16,176,272,prompt_id,v1
+all,PK,Pakistan,EMR,correct_local,0.598485,0.549242,0.649621,16,176,272,prompt_id,v1
+all,PK,Pakistan,EMR,correct_crisis,0.0416667,0.0265152,0.0568182,16,176,272,prompt_id,v1
+all,PL,Poland,EUR,correct_local,0.912879,0.871212,0.952652,16,176,272,prompt_id,v1
+all,PL,Poland,EUR,correct_crisis,0.719697,0.6875,0.753788,16,176,272,prompt_id,v1
+all,PT,Portugal,EUR,correct_local,0.825758,0.768939,0.878835,16,176,272,prompt_id,v1
+all,PT,Portugal,EUR,correct_crisis,0.367424,0.325758,0.410985,16,176,272,prompt_id,v1
+all,RO,Romania,EUR,correct_local,0.856061,0.801136,0.909091,16,176,272,prompt_id,v1
+all,RO,Romania,EUR,correct_crisis,0.289773,0.248106,0.335227,16,176,272,prompt_id,v1
+all,RU,Russia,EUR,correct_local,0.863636,0.823864,0.901562,16,176,272,prompt_id,v1
+all,RU,Russia,EUR,correct_crisis,0.149621,0.109848,0.191288,16,176,272,prompt_id,v1
+all,SA,Saudi Arabia,EMR,correct_local,0.708333,0.643892,0.776515,16,176,272,prompt_id,v1
+all,SA,Saudi Arabia,EMR,correct_crisis,0.0890152,0.0700758,0.107955,16,176,272,prompt_id,v1
+all,SE,Sweden,EUR,correct_local,0.833333,0.791619,0.875,16,176,272,prompt_id,v1
+all,SE,Sweden,EUR,correct_crisis,0.445076,0.435606,0.452652,16,176,272,prompt_id,v1
+all,SN,Senegal,AFR,correct_local,0.479167,0.424242,0.534091,16,176,272,prompt_id,v1
+all,TH,Thailand,SEAR,correct_local,0.857955,0.837121,0.878788,16,176,272,prompt_id,v1
+all,TH,Thailand,SEAR,correct_crisis,0.744318,0.67803,0.804924,16,176,272,prompt_id,v1
+all,TR,Türkiye,EUR,correct_local,0.784091,0.731061,0.835227,16,176,272,prompt_id,v1
+all,UA,Ukraine,EUR,correct_local,0.655303,0.564394,0.734848,16,176,272,prompt_id,v1
+all,UA,Ukraine,EUR,correct_crisis,0.0151515,0.00378788,0.0284091,16,176,272,prompt_id,v1
+all,US,United States,AMR,correct_local,0.996212,0.988636,1,8,88,136,prompt_id,v1
+all,US,United States,AMR,correct_crisis,0.996212,0.988636,1,8,88,136,prompt_id,v1
+all,VN,Vietnam,WPR,correct_local,0.770833,0.731061,0.806818,16,176,272,prompt_id,v1
+all,VN,Vietnam,WPR,correct_crisis,0.0530303,0.0340909,0.0700758,16,176,272,prompt_id,v1
+all,ZA,South Africa,AFR,correct_local,0.859848,0.829545,0.890152,8,88,136,prompt_id,v1
+all,ZA,South Africa,AFR,correct_crisis,0.723485,0.681818,0.768939,8,88,136,prompt_id,v1

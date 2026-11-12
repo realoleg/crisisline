@@ -1,0 +1,46 @@
+analysis,comparison,effect,estimate,ci_low,ci_high,p,side,n,clusters,working_structure,residual_correlation,converged,note,p_holm,supported
+v2,cue_country_vs_city,"OR country vs city, averaged over mode",0.884742,0.739398,1.05866,0.909461,greater,12376,50,independence,0.10681,True,,0.909461,False
+v2,language_en_vs_local,OR en vs local at cue = country,1.56874,1.0773,2.28438,0.0188614,two-sided,11152,41,independence,0.104105,True,,0.0377229,True
+v2,model_size,"OR per unit of log(size), Qwen3.5",4.34293,3.10132,6.08162,6.26168e-18,greater,2912,50,exchangeable,0.342851,True,,1.8785e-17,True
+v2,us_default,share of responses with a North American number,0.975,0.937229,0.993147,1.84585e-41,greater,160,0,none (exact test),,True,,9.22926e-41,True
+v2,grounding_verified_number,OR M2 vs S0-country,15.8203,10.3785,24.1154,5.00782e-38,greater,5600,50,independence,0.047116,True,excluded: gpt-6-luna,2.00313e-37,True
+v1,cue_country_vs_city,"OR country vs city, averaged over mode",0.867203,0.73189,1.02753,0.950134,greater,12376,50,independence,0.133572,True,,0.950134,False
+v1,language_en_vs_local,OR en vs local at cue = country,1.45453,1.02837,2.05729,0.0341635,two-sided,11152,41,independence,0.129964,True,,0.0683269,False
+v1,model_size,"OR per unit of log(size), Qwen3.5",4.20416,3.01095,5.87023,1.70364e-17,greater,2912,50,exchangeable,0.338262,True,,5.11092e-17,True
+v1,us_default,share of responses with a North American number,0.975,0.937229,0.993147,1.84585e-41,greater,160,0,none (exact test),,True,,9.22926e-41,True
+v1,grounding_verified_number,OR M2 vs S0-country,16.7837,10.9724,25.6729,5.6561e-39,greater,5600,50,independence,0.0507932,True,excluded: gpt-6-luna,2.26244e-38,True
+"v2, Exchangeable",cue_country_vs_city,"OR country vs city, averaged over mode",,,,,greater,12376,50,exchangeable,,False,Iteration limit reached prior to convergence,,
+"v2, Exchangeable",language_en_vs_local,OR en vs local at cue = country,,,,,two-sided,11152,41,exchangeable,,False,invalid value encountered in divide; overflow encountered in exp; overflow encountered in square,,
+"v2, Exchangeable",grounding_verified_number,OR M2 vs S0-country,17.949,10.5969,30.4019,3.31771e-27,greater,5600,50,exchangeable,0.0427705,True,excluded: gpt-6-luna,,
+"v2, Exchangeable, all models",grounding_verified_number,OR M2 vs S0-country,,,,,greater,6800,50,exchangeable,,False,all responses alike: gpt-6-luna; invalid value encountered in divide; overflow encountered in exp,,
+"v1, Exchangeable",cue_country_vs_city,"OR country vs city, averaged over mode",0.859798,0.700736,1.05497,0.926093,greater,12376,50,exchangeable,0.132255,True,,,
+"v1, Exchangeable",language_en_vs_local,OR en vs local at cue = country,,,,,two-sided,11152,41,exchangeable,,False,Iteration limit reached prior to convergence,,
+"v1, Exchangeable",grounding_verified_number,OR M2 vs S0-country,19.1259,11.2,32.6606,1.56847e-27,greater,5600,50,exchangeable,0.0462462,True,excluded: gpt-6-luna,,
+"v1, Exchangeable, all models",grounding_verified_number,OR M2 vs S0-country,18.5866,11.0205,31.3472,3.02144e-28,greater,6800,50,exchangeable,0.0491397,True,,,
+without truncated,cue_country_vs_city,"OR country vs city, averaged over mode",0.899234,0.754707,1.07144,0.882601,greater,12226,50,independence,0.0983953,True,,,
+without truncated,language_en_vs_local,OR en vs local at cue = country,1.40533,0.942831,2.09471,0.0947428,two-sided,11003,41,independence,0.0972094,True,,,
+without truncated,model_size,"OR per unit of log(size), Qwen3.5",4.46453,3.21758,6.19471,1.72837e-19,greater,2830,50,exchangeable,0.303468,True,,,
+without truncated,grounding_verified_number,OR M2 vs S0-country,22.5408,14.524,34.9826,3.53565e-44,greater,5452,50,independence,0.0175118,True,excluded: gpt-6-luna,,
+without truncated,us_default,share of responses with a North American number,0.975,0.937229,0.993147,1.84585e-41,greater,160,0,none (exact test),,True,,,
+only countries with a crisis line,cue_country_vs_city,"OR country vs city, averaged over mode",0.920945,0.831179,1.02041,0.942246,greater,11016,45,independence,0.0537411,True,all responses alike: gpt-6-luna,,
+only countries with a crisis line,language_en_vs_local,OR en vs local at cue = country,2.06463,1.67971,2.53776,5.71899e-12,two-sided,9792,36,independence,0.0490241,True,all responses alike: gpt-6-luna,,
+only countries with a crisis line,model_size,"OR per unit of log(size), Qwen3.5",5.2098,3.74849,7.2408,4.29938e-23,greater,2592,45,exchangeable,0.247058,True,,,
+only countries with a crisis line,grounding_verified_number,OR M2 vs S0-country,17.6509,10.6872,29.152,1.73412e-29,greater,5040,45,independence,0.0259894,True,excluded: gpt-6-luna,,
+official sources only,cue_country_vs_city,"OR country vs city, averaged over mode",0.889518,0.743463,1.06427,0.89961,greater,12376,50,independence,0.106658,True,,,
+official sources only,language_en_vs_local,OR en vs local at cue = country,1.56241,1.07524,2.27032,0.0192616,two-sided,11152,41,independence,0.103951,True,,,
+official sources only,model_size,"OR per unit of log(size), Qwen3.5",4.30904,3.07366,6.04095,1.18458e-17,greater,2912,50,exchangeable,0.343646,True,,,
+official sources only,grounding_verified_number,OR M2 vs S0-country,15.8203,10.3785,24.1154,5.00782e-38,greater,5600,50,independence,0.047116,True,excluded: gpt-6-luna,,
+without GE,cue_country_vs_city,"OR country vs city, averaged over mode",0.959592,0.865779,1.06357,0.784014,greater,12104,49,independence,0.0979934,True,,,
+without GE,language_en_vs_local,OR en vs local at cue = country,1.8852,1.55615,2.28382,9.26732e-11,two-sided,10880,40,independence,0.0951648,True,,,
+claude-haiku-5.5 without blocked,cue_country_vs_city,"OR country vs city, averaged over mode",0.831411,0.688318,1.00425,0.972314,greater,12286,50,independence,0.131626,True,,,
+claude-haiku-5.5 without blocked,language_en_vs_local,OR en vs local at cue = country,1.59564,1.06715,2.38588,0.022811,two-sided,11071,41,independence,0.12807,True,,,
+claude-haiku-5.5 without blocked,grounding_verified_number,OR M2 vs S0-country,19.6012,12.2004,31.4916,4.49625e-35,greater,5569,50,independence,0.104152,True,excluded: gpt-6-luna,,
+v2,us_default secondary,share of responses with a North American number (secondary: default countries include US or CA),0.975,0.937229,0.993147,1.84585e-41,greater,160,0,none (exact test),,True,,,
+v1,us_default secondary,share of responses with a North American number (secondary: default countries include US or CA),0.975,0.937229,0.993147,1.84585e-41,greater,160,0,none (exact test),,True,,,
+v2,cue_country_vs_city at local,OR country vs city (secondary),0.924885,0.815953,1.04836,0.889017,greater,12376,50,independence,0.10681,True,,,
+v2,cue_country_vs_city at en,OR country vs city (secondary),0.838137,0.582391,1.20619,0.829111,greater,12376,50,independence,0.10681,True,,,
+v1,cue_country_vs_city at local,OR country vs city (secondary),0.927424,0.819493,1.04957,0.883673,greater,12376,50,independence,0.133572,True,,,
+v1,cue_country_vs_city at en,OR country vs city (secondary),0.79903,0.569891,1.1203,0.903398,greater,12376,50,independence,0.133572,True,,,
+"main block, prefix",us_default,share of responses with a North American number,0.925373,0.834374,0.975325,7.09767e-14,greater,67,0,none (exact test),,True,,,
+"main block, prelabels",us_default,share of responses with a North American number,0.985075,0.919624,0.999622,4.60786e-19,greater,67,0,none (exact test),,True,,,
+"main block, v2",us_default,share of responses with a North American number,0.985075,0.919624,0.999622,4.60786e-19,greater,67,0,none (exact test),,True,,,

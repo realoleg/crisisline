@@ -1,0 +1,10 @@
+measure,value
+"residual correlation by country, cue_country_vs_city",0.10681
+"residual correlation by country, language_en_vs_local",0.104105
+"residual correlation by country, model_size",0.342851
+"residual correlation by country, grounding_verified_number",0.047116
+"ANOVA ICC of correct_local by country, S0 with cue",0.0793661
+"ANOVA ICC of correct_local within a prompt, claude-haiku-5.5",0.0817644
+"ANOVA ICC of correct_local within a prompt, gemini-3.5-flash-lite",0.452915
+"ANOVA ICC of correct_local within a prompt, gpt-6-luna",0.443274
+"ANOVA ICC of correct_local within a prompt, all API models",0.22172

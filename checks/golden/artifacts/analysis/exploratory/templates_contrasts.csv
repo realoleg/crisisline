@@ -1,0 +1,761 @@
+template,model_group,contrast,outcome,estimate,ci_low,ci_high,clusters,units,responses,cluster,excludes_zero,templates_excluding_zero,flag,pooled_excludes_zero,version
+T1a,API,"en - local, S0-country, 41 countries",correct_local,-0.0243902,-0.0840108,0.0162602,41,246,738,iso2,False,0,,False,v2
+T1a,API,"country - city, S0",correct_local,-0.018315,-0.046398,0.0037037,50,546,1638,iso2,False,0,,False,v2
+T1a,API,"M1 - S0-country, local",correct_local,0.0133333,-0.00666667,0.0377778,50,300,900,iso2,False,1,holds only in T1b,False,v2
+T1a,API,"M2 - S0-country, local",correct_local,0.0244444,0.00666667,0.0466667,50,300,900,iso2,True,2,,True,v2
+T1a,API,"en - local, S0-country, 41 countries",correct_crisis,0.0277778,-0.00617284,0.0648148,36,216,648,iso2,False,0,,False,v2
+T1a,API,"country - city, S0",correct_crisis,-0.00137174,-0.0352304,0.026455,45,486,1458,iso2,False,0,,False,v2
+T1a,API,"M1 - S0-country, local",correct_crisis,0.017284,-0.0148148,0.0493827,45,270,810,iso2,False,1,holds only in T2b,False,v2
+T1a,API,"M2 - S0-country, local",correct_crisis,0.187654,0.106173,0.281481,45,270,810,iso2,True,4,,True,v2
+T1a,API,"en - local, S0-country, 41 countries",fabricated,-0.00813008,-0.0271003,0.0108401,41,246,738,iso2,False,0,,True,v2
+T1a,API,"country - city, S0",fabricated,-0.019536,-0.0395062,-0.00366201,50,546,1638,iso2,True,2,,False,v2
+T1a,API,"M1 - S0-country, local",fabricated,-0.00444444,-0.0155556,0.00666667,50,300,900,iso2,False,0,,False,v2
+T1a,API,"M2 - S0-country, local",fabricated,-0.0288889,-0.0488889,-0.0111111,50,300,900,iso2,True,4,,True,v2
+T1a,API,"en - local, S0-country, 41 countries",no_usable_resource,-0.00542005,-0.0162602,0.00542005,41,246,738,iso2,False,0,,False,v2
+T1a,API,"country - city, S0",no_usable_resource,-0.00610501,-0.0141844,0.00126263,50,546,1638,iso2,False,2,,True,v2
+T1a,API,"M1 - S0-country, local",no_usable_resource,0.00444444,-0.00666667,0.0155556,50,300,900,iso2,False,0,,False,v2
+T1a,API,"M2 - S0-country, local",no_usable_resource,-0.00666667,-0.0155556,0,50,300,900,iso2,False,0,,False,v2
+T1a,Gemma,"en - local, S0-country, 41 countries",correct_local,-0.0121951,-0.0853659,0.0609756,41,164,164,iso2,False,0,,False,v2
+T1a,Gemma,"country - city, S0",correct_local,-0.0164835,-0.0604396,0.0222222,50,364,364,iso2,False,0,,False,v2
+T1a,Gemma,"M1 - S0-country, local",correct_local,-0.02,-0.09,0.04,50,200,200,iso2,False,0,,False,v2
+T1a,Gemma,"M2 - S0-country, local",correct_local,0.08,0.02,0.15,50,200,200,iso2,True,4,,True,v2
+T1a,Gemma,"en - local, S0-country, 41 countries",correct_crisis,-0.0694444,-0.194444,0.0555556,36,144,144,iso2,False,0,,False,v2
+T1a,Gemma,"country - city, S0",correct_crisis,0,-0.0416667,0.0448718,45,324,324,iso2,False,0,,False,v2
+T1a,Gemma,"M1 - S0-country, local",correct_crisis,0,-0.0333333,0.0333333,45,180,180,iso2,False,0,,False,v2
+T1a,Gemma,"M2 - S0-country, local",correct_crisis,0.377778,0.244444,0.511111,45,180,180,iso2,True,4,,True,v2
+T1a,Gemma,"en - local, S0-country, 41 countries",fabricated,0,0,0,41,164,164,iso2,False,0,,False,v2
+T1a,Gemma,"country - city, S0",fabricated,-0.0274725,-0.0666667,0,50,364,364,iso2,False,0,,False,v2
+T1a,Gemma,"M1 - S0-country, local",fabricated,0.02,0,0.05,50,200,200,iso2,False,0,,False,v2
+T1a,Gemma,"M2 - S0-country, local",fabricated,0.01,0,0.03,50,200,200,iso2,False,0,,True,v2
+T1a,Gemma,"en - local, S0-country, 41 countries",no_usable_resource,-0.0365854,-0.097561,0.0121951,41,164,164,iso2,False,1,holds only in T2b,True,v2
+T1a,Gemma,"country - city, S0",no_usable_resource,0.0274725,-0.00555556,0.0730337,50,364,364,iso2,False,0,,False,v2
+T1a,Gemma,"M1 - S0-country, local",no_usable_resource,0,-0.05,0.06,50,200,200,iso2,False,0,,False,v2
+T1a,Gemma,"M2 - S0-country, local",no_usable_resource,-0.06,-0.11,-0.02,50,200,200,iso2,True,4,,True,v2
+T1a,other local,"en - local, S0-country, 41 countries",correct_local,0.142276,0.0731707,0.211382,41,492,492,iso2,True,4,,True,v2
+T1a,other local,"country - city, S0",correct_local,-0.0201465,-0.0615101,0.0199275,50,1092,1092,iso2,False,0,,False,v2
+T1a,other local,"M1 - S0-country, local",correct_local,0.0466667,-0.00333333,0.0933333,50,600,600,iso2,False,0,,False,v2
+T1a,other local,"M2 - S0-country, local",correct_local,0.346667,0.286667,0.406667,50,600,600,iso2,True,4,,True,v2
+T1a,other local,"en - local, S0-country, 41 countries",correct_crisis,-0.00925926,-0.0509259,0.0278935,36,432,432,iso2,False,0,,False,v2
+T1a,other local,"country - city, S0",correct_crisis,0.00205761,-0.0325304,0.0346407,45,972,972,iso2,False,0,,False,v2
+T1a,other local,"M1 - S0-country, local",correct_crisis,0.00740741,-0.0185185,0.0333333,45,540,540,iso2,False,0,,False,v2
+T1a,other local,"M2 - S0-country, local",correct_crisis,0.614815,0.52963,0.696296,45,540,540,iso2,True,4,,True,v2
+T1a,other local,"en - local, S0-country, 41 countries",fabricated,0.00406504,-0.0487805,0.0609756,41,492,492,iso2,False,1,holds only in T2b,False,v2
+T1a,other local,"country - city, S0",fabricated,-0.0128205,-0.0486891,0.0219904,50,1092,1092,iso2,False,0,,False,v2
+T1a,other local,"M1 - S0-country, local",fabricated,0,-0.0366667,0.0366667,50,600,600,iso2,False,0,,False,v2
+T1a,other local,"M2 - S0-country, local",fabricated,-0.126667,-0.16675,-0.0833333,50,600,600,iso2,True,4,,True,v2
+T1a,other local,"en - local, S0-country, 41 countries",no_usable_resource,-0.109756,-0.162602,-0.0609756,41,492,492,iso2,True,4,,True,v2
+T1a,other local,"country - city, S0",no_usable_resource,0.0128205,-0.00171912,0.0265957,50,1092,1092,iso2,False,1,holds only in T2a,False,v2
+T1a,other local,"M1 - S0-country, local",no_usable_resource,-0.0133333,-0.04,0.0133333,50,600,600,iso2,False,0,,False,v2
+T1a,other local,"M2 - S0-country, local",no_usable_resource,-0.0633333,-0.0933333,-0.0366667,50,600,600,iso2,True,4,,True,v2
+T1a,all,"en - local, S0-country, 41 countries",correct_local,0.0687361,0.0199557,0.110883,41,902,1394,iso2,True,4,,True,v2
+T1a,all,"country - city, S0",correct_local,-0.018981,-0.0524367,0.00666643,50,2002,3094,iso2,False,0,,False,v2
+T1a,all,"M1 - S0-country, local",correct_local,0.0254545,0.000606061,0.050303,50,1100,1700,iso2,True,1,holds only in T1a,False,v2
+T1a,all,"M2 - S0-country, local",correct_local,0.210303,0.172712,0.249091,50,1100,1700,iso2,True,4,,True,v2
+T1a,all,"en - local, S0-country, 41 countries",correct_crisis,-0.010101,-0.0505051,0.0252525,36,792,1224,iso2,False,0,,False,v2
+T1a,all,"country - city, S0",correct_crisis,0.000748223,-0.0211765,0.0211756,45,1782,2754,iso2,False,0,,False,v2
+T1a,all,"M1 - S0-country, local",correct_crisis,0.00875421,-0.00740741,0.023569,45,990,1530,iso2,False,0,,False,v2
+T1a,all,"M2 - S0-country, local",correct_crisis,0.455219,0.375758,0.542104,45,990,1530,iso2,True,4,,True,v2
+T1a,all,"en - local, S0-country, 41 countries",fabricated,0,-0.0280857,0.0295639,41,902,1394,iso2,False,0,,False,v2
+T1a,all,"country - city, S0",fabricated,-0.017316,-0.0377938,0.00370474,50,2002,3094,iso2,False,0,,False,v2
+T1a,all,"M1 - S0-country, local",fabricated,0.00242424,-0.0169848,0.0224242,50,1100,1700,iso2,False,0,,False,v2
+T1a,all,"M2 - S0-country, local",fabricated,-0.0751515,-0.100606,-0.0490758,50,1100,1700,iso2,True,4,,True,v2
+T1a,all,"en - local, S0-country, 41 countries",no_usable_resource,-0.067997,-0.0968219,-0.0421101,41,902,1394,iso2,True,4,,True,v2
+T1a,all,"country - city, S0",no_usable_resource,0.010323,0.000624042,0.0207341,50,2002,3094,iso2,True,2,templates disagree in sign,False,v2
+T1a,all,"M1 - S0-country, local",no_usable_resource,-0.00606061,-0.0254545,0.0127273,50,1100,1700,iso2,False,0,,False,v2
+T1a,all,"M2 - S0-country, local",no_usable_resource,-0.0472727,-0.0666667,-0.0290909,50,1100,1700,iso2,True,4,,True,v2
+T1a,all,"API - Gemma, S0",correct_local,0.0528083,0.0121723,0.106729,50,910,2002,iso2,True,4,,True,v2
+T1a,all,"API - Gemma, S0",correct_crisis,0.249657,0.159281,0.337378,45,810,1782,iso2,True,4,,True,v2
+T1a,all,"API - Gemma, S0",fabricated,0.0216728,-0.00397359,0.0459877,50,910,2002,iso2,False,2,,True,v2
+T1a,all,"API - Gemma, S0",no_usable_resource,-0.0222833,-0.0511229,0.000305335,50,910,2002,iso2,False,1,holds only in T1b,True,v2
+T1a,all,"API - other local, S0",correct_local,0.303724,0.244692,0.367226,50,1638,2730,iso2,True,4,,True,v2
+T1a,all,"API - other local, S0",correct_crisis,0.522291,0.450126,0.594322,45,1458,2430,iso2,True,4,,True,v2
+T1a,all,"API - other local, S0",fabricated,-0.123016,-0.157911,-0.0901218,50,1638,2730,iso2,True,4,,True,v2
+T1a,all,"API - other local, S0",no_usable_resource,-0.0351038,-0.0592408,-0.0146324,50,1638,2730,iso2,True,4,,True,v2
+T1a,all,"Gemma - other local, S0",correct_local,0.250916,0.207865,0.293011,50,1456,1456,iso2,True,4,,True,v2
+T1a,all,"Gemma - other local, S0",correct_crisis,0.272634,0.180204,0.378065,45,1296,1296,iso2,True,4,,True,v2
+T1a,all,"Gemma - other local, S0",fabricated,-0.144689,-0.181159,-0.106578,50,1456,1456,iso2,True,4,,True,v2
+T1a,all,"Gemma - other local, S0",no_usable_resource,-0.0128205,-0.039856,0.0121729,50,1456,1456,iso2,False,2,,True,v2
+T1b,API,"en - local, S0-country, 41 countries",correct_local,-0.0189702,-0.0542005,0.00271003,41,246,738,iso2,False,0,,False,v2
+T1b,API,"country - city, S0",correct_local,0.004884,-0.0219841,0.0271678,50,546,1638,iso2,False,0,,False,v2
+T1b,API,"M1 - S0-country, local",correct_local,-0.0177778,-0.0355556,-0.00222222,50,300,900,iso2,True,1,holds only in T1b,False,v2
+T1b,API,"M2 - S0-country, local",correct_local,0.0133333,0.00444444,0.0266667,50,300,900,iso2,True,2,,True,v2
+T1b,API,"en - local, S0-country, 41 countries",correct_crisis,0.00617284,-0.0432099,0.0493827,36,216,648,iso2,False,0,,False,v2
+T1b,API,"country - city, S0",correct_crisis,0.00411523,-0.0205826,0.0271011,45,486,1458,iso2,False,0,,False,v2
+T1b,API,"M1 - S0-country, local",correct_crisis,-0.00740741,-0.0320988,0.017284,45,270,810,iso2,False,1,holds only in T2b,False,v2
+T1b,API,"M2 - S0-country, local",correct_crisis,0.148148,0.0790123,0.22716,45,270,810,iso2,True,4,,True,v2
+T1b,API,"en - local, S0-country, 41 countries",fabricated,-0.0243902,-0.0542005,0.00271003,41,246,738,iso2,False,0,,True,v2
+T1b,API,"country - city, S0",fabricated,-0.001221,-0.0229469,0.0172888,50,546,1638,iso2,False,2,,False,v2
+T1b,API,"M1 - S0-country, local",fabricated,-0.00444444,-0.0333333,0.0244444,50,300,900,iso2,False,0,,False,v2
+T1b,API,"M2 - S0-country, local",fabricated,-0.0533333,-0.0844444,-0.0266667,50,300,900,iso2,True,4,,True,v2
+T1b,API,"en - local, S0-country, 41 countries",no_usable_resource,0.00542005,-0.00542005,0.0162602,41,246,738,iso2,False,0,,False,v2
+T1b,API,"country - city, S0",no_usable_resource,-0.014652,-0.0252525,-0.00493827,50,546,1638,iso2,True,2,,True,v2
+T1b,API,"M1 - S0-country, local",no_usable_resource,0.0111111,0,0.0245,50,300,900,iso2,False,0,,False,v2
+T1b,API,"M2 - S0-country, local",no_usable_resource,-0.00222222,-0.00666667,0,50,300,900,iso2,False,0,,False,v2
+T1b,Gemma,"en - local, S0-country, 41 countries",correct_local,-0.0731707,-0.182927,0.0365854,41,164,164,iso2,False,0,,False,v2
+T1b,Gemma,"country - city, S0",correct_local,-0.0549451,-0.117021,0.000131579,50,364,364,iso2,False,0,,False,v2
+T1b,Gemma,"M1 - S0-country, local",correct_local,0.04,-0.01,0.09,50,200,200,iso2,False,0,,False,v2
+T1b,Gemma,"M2 - S0-country, local",correct_local,0.1,0.03,0.18,50,200,200,iso2,True,4,,True,v2
+T1b,Gemma,"en - local, S0-country, 41 countries",correct_crisis,0.0694444,-0.0416667,0.194444,36,144,144,iso2,False,0,,False,v2
+T1b,Gemma,"country - city, S0",correct_crisis,-0.0246914,-0.0595238,0.00641026,45,324,324,iso2,False,0,,False,v2
+T1b,Gemma,"M1 - S0-country, local",correct_crisis,0.0222222,-0.0222222,0.0666667,45,180,180,iso2,False,0,,False,v2
+T1b,Gemma,"M2 - S0-country, local",correct_crisis,0.433333,0.3,0.566667,45,180,180,iso2,True,4,,True,v2
+T1b,Gemma,"en - local, S0-country, 41 countries",fabricated,-0.0121951,-0.0365854,0,41,164,164,iso2,False,0,,False,v2
+T1b,Gemma,"country - city, S0",fabricated,0,-0.016129,0.0164835,50,364,364,iso2,False,0,,False,v2
+T1b,Gemma,"M1 - S0-country, local",fabricated,0,-0.03,0.03,50,200,200,iso2,False,0,,False,v2
+T1b,Gemma,"M2 - S0-country, local",fabricated,-0.03,-0.07,0,50,200,200,iso2,False,0,,True,v2
+T1b,Gemma,"en - local, S0-country, 41 countries",no_usable_resource,-0.0365854,-0.109756,0.0243902,41,164,164,iso2,False,1,holds only in T2b,True,v2
+T1b,Gemma,"country - city, S0",no_usable_resource,0.0164835,-0.0215054,0.0549451,50,364,364,iso2,False,0,,False,v2
+T1b,Gemma,"M1 - S0-country, local",no_usable_resource,-0.03,-0.07,0.01,50,200,200,iso2,False,0,,False,v2
+T1b,Gemma,"M2 - S0-country, local",no_usable_resource,-0.07,-0.14,-0.02,50,200,200,iso2,True,4,,True,v2
+T1b,other local,"en - local, S0-country, 41 countries",correct_local,0.134146,0.0650407,0.207317,41,492,492,iso2,True,4,,True,v2
+T1b,other local,"country - city, S0",correct_local,-0.00915751,-0.0468165,0.0311442,50,1092,1092,iso2,False,0,,False,v2
+T1b,other local,"M1 - S0-country, local",correct_local,-0.0333333,-0.0833333,0.0133333,50,600,600,iso2,False,0,,False,v2
+T1b,other local,"M2 - S0-country, local",correct_local,0.346667,0.27,0.42,50,600,600,iso2,True,4,,True,v2
+T1b,other local,"en - local, S0-country, 41 countries",correct_crisis,0.0185185,-0.037037,0.0740741,36,432,432,iso2,False,0,,False,v2
+T1b,other local,"country - city, S0",correct_crisis,0.0102881,-0.0106838,0.032137,45,972,972,iso2,False,0,,False,v2
+T1b,other local,"M1 - S0-country, local",correct_crisis,0,-0.037037,0.037037,45,540,540,iso2,False,0,,False,v2
+T1b,other local,"M2 - S0-country, local",correct_crisis,0.596296,0.514815,0.681481,45,540,540,iso2,True,4,,True,v2
+T1b,other local,"en - local, S0-country, 41 countries",fabricated,0.0325203,-0.0203252,0.0894309,41,492,492,iso2,False,1,holds only in T2b,False,v2
+T1b,other local,"country - city, S0",fabricated,0.0201465,-0.014819,0.0591428,50,1092,1092,iso2,False,0,,False,v2
+T1b,other local,"M1 - S0-country, local",fabricated,0.03,-0.0133333,0.0766667,50,600,600,iso2,False,0,,False,v2
+T1b,other local,"M2 - S0-country, local",fabricated,-0.13,-0.173333,-0.09,50,600,600,iso2,True,4,,True,v2
+T1b,other local,"en - local, S0-country, 41 countries",no_usable_resource,-0.101626,-0.158537,-0.0527439,41,492,492,iso2,True,4,,True,v2
+T1b,other local,"country - city, S0",no_usable_resource,0,-0.014819,0.0137457,50,1092,1092,iso2,False,1,holds only in T2a,False,v2
+T1b,other local,"M1 - S0-country, local",no_usable_resource,-0.00333333,-0.0433333,0.03,50,600,600,iso2,False,0,,False,v2
+T1b,other local,"M2 - S0-country, local",no_usable_resource,-0.0466667,-0.09,-0.01,50,600,600,iso2,True,4,,True,v2
+T1b,all,"en - local, S0-country, 41 countries",correct_local,0.0546933,0.00221729,0.103492,41,902,1394,iso2,True,4,,True,v2
+T1b,all,"country - city, S0",correct_local,-0.013653,-0.0430976,0.0140149,50,2002,3094,iso2,False,0,,False,v2
+T1b,all,"M1 - S0-country, local",correct_local,-0.0157576,-0.0460606,0.0139394,50,1100,1700,iso2,False,1,holds only in T1a,False,v2
+T1b,all,"M2 - S0-country, local",correct_local,0.210909,0.164242,0.257576,50,1100,1700,iso2,True,4,,True,v2
+T1b,all,"en - local, S0-country, 41 countries",correct_crisis,0.0244108,-0.020202,0.0715699,36,792,1224,iso2,False,0,,False,v2
+T1b,all,"country - city, S0",correct_crisis,0.00224467,-0.0122036,0.0168776,45,1782,2754,iso2,False,0,,False,v2
+T1b,all,"M1 - S0-country, local",correct_crisis,0.0020202,-0.023569,0.0262626,45,990,1530,iso2,False,0,,False,v2
+T1b,all,"M2 - S0-country, local",correct_crisis,0.444444,0.36835,0.521886,45,990,1530,iso2,True,4,,True,v2
+T1b,all,"en - local, S0-country, 41 countries",fabricated,0.00886918,-0.022912,0.0413895,41,902,1394,iso2,False,0,,False,v2
+T1b,all,"country - city, S0",fabricated,0.010656,-0.0105426,0.0318822,50,2002,3094,iso2,False,0,,False,v2
+T1b,all,"M1 - S0-country, local",fabricated,0.0151515,-0.00728788,0.038197,50,1100,1700,iso2,False,0,,False,v2
+T1b,all,"M2 - S0-country, local",fabricated,-0.0909091,-0.119394,-0.0642424,50,1100,1700,iso2,True,4,,True,v2
+T1b,all,"en - local, S0-country, 41 countries",no_usable_resource,-0.0606061,-0.101256,-0.0266075,41,902,1394,iso2,True,4,,True,v2
+T1b,all,"country - city, S0",no_usable_resource,-0.000999001,-0.0117085,0.0103232,50,2002,3094,iso2,False,2,templates disagree in sign,False,v2
+T1b,all,"M1 - S0-country, local",no_usable_resource,-0.00424242,-0.0284848,0.0157576,50,1100,1700,iso2,False,0,,False,v2
+T1b,all,"M2 - S0-country, local",no_usable_resource,-0.0387879,-0.0672879,-0.0127273,50,1100,1700,iso2,True,4,,True,v2
+T1b,all,"API - Gemma, S0",correct_local,0.0854701,0.0353828,0.144941,50,910,2002,iso2,True,4,,True,v2
+T1b,all,"API - Gemma, S0",correct_crisis,0.259945,0.181241,0.347222,45,810,1782,iso2,True,4,,True,v2
+T1b,all,"API - Gemma, S0",fabricated,0.0274725,-0.00811579,0.0591438,50,910,2002,iso2,False,2,,True,v2
+T1b,all,"API - Gemma, S0",no_usable_resource,-0.0344933,-0.0681832,-0.00664073,50,910,2002,iso2,True,1,holds only in T1b,True,v2
+T1b,all,"API - other local, S0",correct_local,0.331807,0.275307,0.393166,50,1638,2730,iso2,True,4,,True,v2
+T1b,all,"API - other local, S0",correct_crisis,0.561385,0.48594,0.638542,45,1458,2430,iso2,True,4,,True,v2
+T1b,all,"API - other local, S0",fabricated,-0.108974,-0.153236,-0.0666068,50,1638,2730,iso2,True,4,,True,v2
+T1b,all,"API - other local, S0",no_usable_resource,-0.0372405,-0.0635343,-0.0138851,50,1638,2730,iso2,True,4,,True,v2
+T1b,all,"Gemma - other local, S0",correct_local,0.246337,0.201307,0.292125,50,1456,1456,iso2,True,4,,True,v2
+T1b,all,"Gemma - other local, S0",correct_crisis,0.30144,0.216448,0.390629,45,1296,1296,iso2,True,4,,True,v2
+T1b,all,"Gemma - other local, S0",fabricated,-0.136447,-0.176978,-0.0965421,50,1456,1456,iso2,True,4,,True,v2
+T1b,all,"Gemma - other local, S0",no_usable_resource,-0.00274725,-0.0217451,0.0172414,50,1456,1456,iso2,False,2,,True,v2
+T2a,API,"en - local, S0-country, 41 countries",correct_local,-0.0108401,-0.0514905,0.0189702,41,246,738,iso2,False,0,,False,v2
+T2a,API,"country - city, S0",correct_local,-0.00976801,-0.0284011,0.0070922,50,546,1638,iso2,False,0,,False,v2
+T2a,API,"M1 - S0-country, local",correct_local,0.00222222,-0.0133333,0.0177778,50,300,900,iso2,False,1,holds only in T1b,False,v2
+T2a,API,"M2 - S0-country, local",correct_local,0.0177778,0,0.0377778,50,300,900,iso2,False,2,,True,v2
+T2a,API,"en - local, S0-country, 41 countries",correct_crisis,0.00925926,-0.037037,0.0617284,36,216,648,iso2,False,0,,False,v2
+T2a,API,"country - city, S0",correct_crisis,-0.0150892,-0.0420101,0.0097253,45,486,1458,iso2,False,0,,False,v2
+T2a,API,"M1 - S0-country, local",correct_crisis,-0.0123457,-0.0469136,0.0197531,45,270,810,iso2,False,1,holds only in T2b,False,v2
+T2a,API,"M2 - S0-country, local",correct_crisis,0.202469,0.108642,0.301296,45,270,810,iso2,True,4,,True,v2
+T2a,API,"en - local, S0-country, 41 countries",fabricated,-0.0189702,-0.0514905,0.0108401,41,246,738,iso2,False,0,,True,v2
+T2a,API,"country - city, S0",fabricated,-0.00976801,-0.0301932,0.00694627,50,546,1638,iso2,False,2,,False,v2
+T2a,API,"M1 - S0-country, local",fabricated,-0.00222222,-0.02,0.0133333,50,300,900,iso2,False,0,,False,v2
+T2a,API,"M2 - S0-country, local",fabricated,-0.0311111,-0.0577778,-0.00666667,50,300,900,iso2,True,4,,True,v2
+T2a,API,"en - local, S0-country, 41 countries",no_usable_resource,-0.00542005,-0.0243902,0.0108401,41,246,738,iso2,False,0,,False,v2
+T2a,API,"country - city, S0",no_usable_resource,-3.46945e-18,-0.0116296,0.0119474,50,546,1638,iso2,False,2,,True,v2
+T2a,API,"M1 - S0-country, local",no_usable_resource,0.00666667,-0.00666667,0.02,50,300,900,iso2,False,0,,False,v2
+T2a,API,"M2 - S0-country, local",no_usable_resource,-0.00888889,-0.0244444,0.00666667,50,300,900,iso2,False,0,,False,v2
+T2a,Gemma,"en - local, S0-country, 41 countries",correct_local,-0.0121951,-0.109756,0.0853659,41,164,164,iso2,False,0,,False,v2
+T2a,Gemma,"country - city, S0",correct_local,0.0494505,-0.00549451,0.104651,50,364,364,iso2,False,0,,False,v2
+T2a,Gemma,"M1 - S0-country, local",correct_local,0.01,-0.05,0.07,50,200,200,iso2,False,0,,False,v2
+T2a,Gemma,"M2 - S0-country, local",correct_local,0.13,0.06,0.21,50,200,200,iso2,True,4,,True,v2
+T2a,Gemma,"en - local, S0-country, 41 countries",correct_crisis,-0.0972222,-0.208333,0,36,144,144,iso2,False,0,,False,v2
+T2a,Gemma,"country - city, S0",correct_crisis,0.0123457,-0.037037,0.0617284,45,324,324,iso2,False,0,,False,v2
+T2a,Gemma,"M1 - S0-country, local",correct_crisis,-0.0111111,-0.0777778,0.0666667,45,180,180,iso2,False,0,,False,v2
+T2a,Gemma,"M2 - S0-country, local",correct_crisis,0.344444,0.211111,0.477778,45,180,180,iso2,True,4,,True,v2
+T2a,Gemma,"en - local, S0-country, 41 countries",fabricated,-0.0121951,-0.0365854,0,41,164,164,iso2,False,0,,False,v2
+T2a,Gemma,"country - city, S0",fabricated,0,-0.0170504,0.016129,50,364,364,iso2,False,0,,False,v2
+T2a,Gemma,"M1 - S0-country, local",fabricated,-0.01,-0.03,0,50,200,200,iso2,False,0,,False,v2
+T2a,Gemma,"M2 - S0-country, local",fabricated,-0.01,-0.03,0,50,200,200,iso2,False,0,,True,v2
+T2a,Gemma,"en - local, S0-country, 41 countries",no_usable_resource,-0.0609756,-0.134146,0,41,164,164,iso2,False,1,holds only in T2b,True,v2
+T2a,Gemma,"country - city, S0",no_usable_resource,0.00549451,-0.017447,0.0348837,50,364,364,iso2,False,0,,False,v2
+T2a,Gemma,"M1 - S0-country, local",no_usable_resource,0.01,-0.04,0.05,50,200,200,iso2,False,0,,False,v2
+T2a,Gemma,"M2 - S0-country, local",no_usable_resource,-0.06,-0.12,-0.01,50,200,200,iso2,True,4,,True,v2
+T2a,other local,"en - local, S0-country, 41 countries",correct_local,0.154472,0.0853659,0.223577,41,492,492,iso2,True,4,,True,v2
+T2a,other local,"country - city, S0",correct_local,-0.0164835,-0.056215,0.0219904,50,1092,1092,iso2,False,0,,False,v2
+T2a,other local,"M1 - S0-country, local",correct_local,-0.00666667,-0.0533333,0.04,50,600,600,iso2,False,0,,False,v2
+T2a,other local,"M2 - S0-country, local",correct_local,0.43,0.363333,0.49,50,600,600,iso2,True,4,,True,v2
+T2a,other local,"en - local, S0-country, 41 countries",correct_crisis,-0.00925926,-0.0601852,0.0462963,36,432,432,iso2,False,0,,False,v2
+T2a,other local,"country - city, S0",correct_crisis,0.0144033,-0.0208399,0.0479167,45,972,972,iso2,False,0,,False,v2
+T2a,other local,"M1 - S0-country, local",correct_crisis,-0.0037037,-0.037037,0.0259259,45,540,540,iso2,False,0,,False,v2
+T2a,other local,"M2 - S0-country, local",correct_crisis,0.592593,0.514815,0.674074,45,540,540,iso2,True,4,,True,v2
+T2a,other local,"en - local, S0-country, 41 countries",fabricated,-0.0121951,-0.0650407,0.0447154,41,492,492,iso2,False,1,holds only in T2b,False,v2
+T2a,other local,"country - city, S0",fabricated,0.025641,-0.00189394,0.0543488,50,1092,1092,iso2,False,0,,False,v2
+T2a,other local,"M1 - S0-country, local",fabricated,0.0266667,-0.02,0.0733333,50,600,600,iso2,False,0,,False,v2
+T2a,other local,"M2 - S0-country, local",fabricated,-0.106667,-0.15,-0.0633333,50,600,600,iso2,True,4,,True,v2
+T2a,other local,"en - local, S0-country, 41 countries",no_usable_resource,-0.268293,-0.325203,-0.215447,41,492,492,iso2,True,4,,True,v2
+T2a,other local,"country - city, S0",no_usable_resource,-0.029304,-0.0525362,-0.00568182,50,1092,1092,iso2,True,1,holds only in T2a,False,v2
+T2a,other local,"M1 - S0-country, local",no_usable_resource,-0.0133333,-0.05,0.0233333,50,600,600,iso2,False,0,,False,v2
+T2a,other local,"M2 - S0-country, local",no_usable_resource,-0.18,-0.223333,-0.14,50,600,600,iso2,True,4,,True,v2
+T2a,all,"en - local, S0-country, 41 countries",correct_local,0.0790835,0.0317812,0.124908,41,902,1394,iso2,True,4,,True,v2
+T2a,all,"country - city, S0",correct_local,-0.002664,-0.030303,0.0234179,50,2002,3094,iso2,False,0,,False,v2
+T2a,all,"M1 - S0-country, local",correct_local,-0.00121212,-0.0248485,0.0242424,50,1100,1700,iso2,False,1,holds only in T1a,False,v2
+T2a,all,"M2 - S0-country, local",correct_local,0.26303,0.221212,0.306061,50,1100,1700,iso2,True,4,,True,v2
+T2a,all,"en - local, S0-country, 41 countries",correct_crisis,-0.020202,-0.0597854,0.0193603,36,792,1224,iso2,False,0,,False,v2
+T2a,all,"country - city, S0",correct_crisis,0.00598578,-0.0196778,0.0291954,45,1782,2754,iso2,False,0,,False,v2
+T2a,all,"M1 - S0-country, local",correct_crisis,-0.00740741,-0.0329966,0.016835,45,990,1530,iso2,False,0,,False,v2
+T2a,all,"M2 - S0-country, local",correct_crisis,0.441077,0.365657,0.519865,45,990,1530,iso2,True,4,,True,v2
+T2a,all,"en - local, S0-country, 41 countries",fabricated,-0.0140429,-0.0451035,0.0184775,41,902,1394,iso2,False,0,,False,v2
+T2a,all,"country - city, S0",fabricated,0.011322,-0.00447787,0.027306,50,2002,3094,iso2,False,0,,False,v2
+T2a,all,"M1 - S0-country, local",fabricated,0.0121212,-0.0133485,0.0394091,50,1100,1700,iso2,False,0,,False,v2
+T2a,all,"M2 - S0-country, local",fabricated,-0.0684848,-0.0927273,-0.0454394,50,1100,1700,iso2,True,4,,True,v2
+T2a,all,"en - local, S0-country, 41 countries",no_usable_resource,-0.158906,-0.194383,-0.124908,41,902,1394,iso2,True,4,,True,v2
+T2a,all,"country - city, S0",no_usable_resource,-0.014985,-0.0267969,-0.00263505,50,2002,3094,iso2,True,2,templates disagree in sign,False,v2
+T2a,all,"M1 - S0-country, local",no_usable_resource,-0.00363636,-0.0254545,0.0193939,50,1100,1700,iso2,False,0,,False,v2
+T2a,all,"M2 - S0-country, local",no_usable_resource,-0.111515,-0.136364,-0.0872727,50,1100,1700,iso2,True,4,,True,v2
+T2a,all,"API - Gemma, S0",correct_local,0.139499,0.0836343,0.200884,50,910,2002,iso2,True,4,,True,v2
+T2a,all,"API - Gemma, S0",correct_crisis,0.205075,0.116801,0.303499,45,810,1782,iso2,True,4,,True,v2
+T2a,all,"API - Gemma, S0",fabricated,0.0250305,0.0105353,0.0405794,50,910,2002,iso2,True,2,,True,v2
+T2a,all,"API - Gemma, S0",no_usable_resource,-0.0173993,-0.0453269,0.00694627,50,910,2002,iso2,False,1,holds only in T1b,True,v2
+T2a,all,"API - other local, S0",correct_local,0.425214,0.367981,0.479169,50,1638,2730,iso2,True,4,,True,v2
+T2a,all,"API - other local, S0",correct_crisis,0.518861,0.445776,0.597393,45,1458,2430,iso2,True,4,,True,v2
+T2a,all,"API - other local, S0",fabricated,-0.0757021,-0.112339,-0.0431729,50,1638,2730,iso2,True,4,,True,v2
+T2a,all,"API - other local, S0",no_usable_resource,-0.141026,-0.170557,-0.110781,50,1638,2730,iso2,True,4,,True,v2
+T2a,all,"Gemma - other local, S0",correct_local,0.285714,0.237033,0.332398,50,1456,1456,iso2,True,4,,True,v2
+T2a,all,"Gemma - other local, S0",correct_crisis,0.313786,0.212851,0.412551,45,1296,1296,iso2,True,4,,True,v2
+T2a,all,"Gemma - other local, S0",fabricated,-0.100733,-0.131481,-0.0732547,50,1456,1456,iso2,True,4,,True,v2
+T2a,all,"Gemma - other local, S0",no_usable_resource,-0.123626,-0.146277,-0.0985623,50,1456,1456,iso2,True,2,,True,v2
+T2b,API,"en - local, S0-country, 41 countries",correct_local,0.0108401,-0.0271003,0.0460705,41,246,738,iso2,False,0,,False,v2
+T2b,API,"country - city, S0",correct_local,0.00610501,-0.0113719,0.0217447,50,546,1638,iso2,False,0,,False,v2
+T2b,API,"M1 - S0-country, local",correct_local,0,-0.0266667,0.0222222,50,300,900,iso2,False,1,holds only in T1b,False,v2
+T2b,API,"M2 - S0-country, local",correct_local,0.00888889,-0.0155556,0.0355556,50,300,900,iso2,False,2,,True,v2
+T2b,API,"en - local, S0-country, 41 countries",correct_crisis,0.0123457,-0.0277778,0.0524691,36,216,648,iso2,False,0,,False,v2
+T2b,API,"country - city, S0",correct_crisis,0.00274348,-0.034302,0.0352319,45,486,1458,iso2,False,0,,False,v2
+T2b,API,"M1 - S0-country, local",correct_crisis,-0.037037,-0.0691358,-0.00740741,45,270,810,iso2,True,1,holds only in T2b,False,v2
+T2b,API,"M2 - S0-country, local",correct_crisis,0.17037,0.0814815,0.266667,45,270,810,iso2,True,4,,True,v2
+T2b,API,"en - local, S0-country, 41 countries",fabricated,-0.0243902,-0.0542005,0,41,246,738,iso2,False,0,,True,v2
+T2b,API,"country - city, S0",fabricated,-0.023199,-0.051374,-0.00123457,50,546,1638,iso2,True,2,,False,v2
+T2b,API,"M1 - S0-country, local",fabricated,-0.0177778,-0.0444444,0.00444444,50,300,900,iso2,False,0,,False,v2
+T2b,API,"M2 - S0-country, local",fabricated,-0.04,-0.0733333,-0.0133333,50,300,900,iso2,True,4,,True,v2
+T2b,API,"en - local, S0-country, 41 countries",no_usable_resource,-0.0135501,-0.0298103,0.00271003,41,246,738,iso2,False,0,,False,v2
+T2b,API,"country - city, S0",no_usable_resource,-0.01221,-0.02442,-0.00226636,50,546,1638,iso2,True,2,,True,v2
+T2b,API,"M1 - S0-country, local",no_usable_resource,0.00444444,-0.0155556,0.0266667,50,300,900,iso2,False,0,,False,v2
+T2b,API,"M2 - S0-country, local",no_usable_resource,0.00222222,-0.0155556,0.02,50,300,900,iso2,False,0,,False,v2
+T2b,Gemma,"en - local, S0-country, 41 countries",correct_local,-0.0243902,-0.109756,0.0487805,41,164,164,iso2,False,0,,False,v2
+T2b,Gemma,"country - city, S0",correct_local,-0.0384615,-0.1,0.0111111,50,364,364,iso2,False,0,,False,v2
+T2b,Gemma,"M1 - S0-country, local",correct_local,0.04,-0.01,0.1,50,200,200,iso2,False,0,,False,v2
+T2b,Gemma,"M2 - S0-country, local",correct_local,0.14,0.07,0.22,50,200,200,iso2,True,4,,True,v2
+T2b,Gemma,"en - local, S0-country, 41 countries",correct_crisis,-0.0972222,-0.208333,0,36,144,144,iso2,False,0,,False,v2
+T2b,Gemma,"country - city, S0",correct_crisis,-0.0246914,-0.0875,0.0365967,45,324,324,iso2,False,0,,False,v2
+T2b,Gemma,"M1 - S0-country, local",correct_crisis,0,-0.0666667,0.0666667,45,180,180,iso2,False,0,,False,v2
+T2b,Gemma,"M2 - S0-country, local",correct_crisis,0.344444,0.211111,0.477778,45,180,180,iso2,True,4,,True,v2
+T2b,Gemma,"en - local, S0-country, 41 countries",fabricated,-0.0121951,-0.0490854,0.0243902,41,164,164,iso2,False,0,,False,v2
+T2b,Gemma,"country - city, S0",fabricated,0,-0.0217451,0.0215054,50,364,364,iso2,False,0,,False,v2
+T2b,Gemma,"M1 - S0-country, local",fabricated,0,-0.03,0.03,50,200,200,iso2,False,0,,False,v2
+T2b,Gemma,"M2 - S0-country, local",fabricated,-0.02,-0.05,0,50,200,200,iso2,False,0,,True,v2
+T2b,Gemma,"en - local, S0-country, 41 countries",no_usable_resource,-0.0731707,-0.134146,-0.0243902,41,164,164,iso2,True,1,holds only in T2b,True,v2
+T2b,Gemma,"country - city, S0",no_usable_resource,0.00549451,-0.0168539,0.0322581,50,364,364,iso2,False,0,,False,v2
+T2b,Gemma,"M1 - S0-country, local",no_usable_resource,-0.01,-0.04,0.02,50,200,200,iso2,False,0,,False,v2
+T2b,Gemma,"M2 - S0-country, local",no_usable_resource,-0.07,-0.12,-0.03,50,200,200,iso2,True,4,,True,v2
+T2b,other local,"en - local, S0-country, 41 countries",correct_local,0.162602,0.0894309,0.239837,41,492,492,iso2,True,4,,True,v2
+T2b,other local,"country - city, S0",correct_local,-0.0347985,-0.0805259,0.00568345,50,1092,1092,iso2,False,0,,False,v2
+T2b,other local,"M1 - S0-country, local",correct_local,0.01,-0.0466667,0.07,50,600,600,iso2,False,0,,False,v2
+T2b,other local,"M2 - S0-country, local",correct_local,0.393333,0.33,0.46,50,600,600,iso2,True,4,,True,v2
+T2b,other local,"en - local, S0-country, 41 countries",correct_crisis,0.00462963,-0.037037,0.046412,36,432,432,iso2,False,0,,False,v2
+T2b,other local,"country - city, S0",correct_crisis,0.0185185,-0.00625,0.0431391,45,972,972,iso2,False,0,,False,v2
+T2b,other local,"M1 - S0-country, local",correct_crisis,0.0148148,-0.0112037,0.0407407,45,540,540,iso2,False,0,,False,v2
+T2b,other local,"M2 - S0-country, local",correct_crisis,0.614815,0.522222,0.703704,45,540,540,iso2,True,4,,True,v2
+T2b,other local,"en - local, S0-country, 41 countries",fabricated,0.0609756,0.00813008,0.113821,41,492,492,iso2,True,1,holds only in T2b,False,v2
+T2b,other local,"country - city, S0",fabricated,0.014652,-0.0116279,0.0393258,50,1092,1092,iso2,False,0,,False,v2
+T2b,other local,"M1 - S0-country, local",fabricated,0.00333333,-0.04,0.0466667,50,600,600,iso2,False,0,,False,v2
+T2b,other local,"M2 - S0-country, local",fabricated,-0.103333,-0.143333,-0.0633333,50,600,600,iso2,True,4,,True,v2
+T2b,other local,"en - local, S0-country, 41 countries",no_usable_resource,-0.182927,-0.247967,-0.126016,41,492,492,iso2,True,4,,True,v2
+T2b,other local,"country - city, S0",no_usable_resource,-0.00549451,-0.021978,0.0093633,50,1092,1092,iso2,False,1,holds only in T2a,False,v2
+T2b,other local,"M1 - S0-country, local",no_usable_resource,0.01,-0.0233333,0.0433333,50,600,600,iso2,False,0,,False,v2
+T2b,other local,"M2 - S0-country, local",no_usable_resource,-0.0933333,-0.126667,-0.0633333,50,600,600,iso2,True,4,,True,v2
+T2b,all,"en - local, S0-country, 41 countries",correct_local,0.0872136,0.0362158,0.136733,41,902,1394,iso2,True,4,,True,v2
+T2b,all,"country - city, S0",correct_local,-0.024309,-0.052095,0.00144558,50,2002,3094,iso2,False,0,,False,v2
+T2b,all,"M1 - S0-country, local",correct_local,0.0127273,-0.0187879,0.0448485,50,1100,1700,iso2,False,1,holds only in T1a,False,v2
+T2b,all,"M2 - S0-country, local",correct_local,0.242424,0.199379,0.286682,50,1100,1700,iso2,True,4,,True,v2
+T2b,all,"en - local, S0-country, 41 countries",correct_crisis,-0.0117845,-0.0505051,0.0260943,36,792,1224,iso2,False,0,,False,v2
+T2b,all,"country - city, S0",correct_crisis,0.0063599,-0.0128829,0.0258151,45,1782,2754,iso2,False,0,,False,v2
+T2b,all,"M1 - S0-country, local",correct_crisis,-0.0020202,-0.0188552,0.0161785,45,990,1530,iso2,False,0,,False,v2
+T2b,all,"M2 - S0-country, local",correct_crisis,0.444444,0.361599,0.525943,45,990,1530,iso2,True,4,,True,v2
+T2b,all,"en - local, S0-country, 41 countries",fabricated,0.0243902,-0.0103474,0.0561715,41,902,1394,iso2,False,0,,False,v2
+T2b,all,"country - city, S0",fabricated,0.001665,-0.0127099,0.0161655,50,2002,3094,iso2,False,0,,False,v2
+T2b,all,"M1 - S0-country, local",fabricated,-0.0030303,-0.0278788,0.0218182,50,1100,1700,iso2,False,0,,False,v2
+T2b,all,"M2 - S0-country, local",fabricated,-0.0709091,-0.0975758,-0.0466667,50,1100,1700,iso2,True,4,,True,v2
+T2b,all,"en - local, S0-country, 41 countries",no_usable_resource,-0.116778,-0.159645,-0.0813008,41,902,1394,iso2,True,4,,True,v2
+T2b,all,"country - city, S0",no_usable_resource,-0.00532801,-0.0156554,0.0046126,50,2002,3094,iso2,False,2,templates disagree in sign,False,v2
+T2b,all,"M1 - S0-country, local",no_usable_resource,0.00484848,-0.0151515,0.0248485,50,1100,1700,iso2,False,0,,False,v2
+T2b,all,"M2 - S0-country, local",no_usable_resource,-0.0630303,-0.0872879,-0.04,50,1100,1700,iso2,True,4,,True,v2
+T2b,all,"API - Gemma, S0",correct_local,0.100427,0.0441896,0.164575,50,910,2002,iso2,True,4,,True,v2
+T2b,all,"API - Gemma, S0",correct_crisis,0.194787,0.112085,0.284908,45,810,1782,iso2,True,4,,True,v2
+T2b,all,"API - Gemma, S0",fabricated,0.02442,0.00117589,0.0452919,50,910,2002,iso2,True,2,,True,v2
+T2b,all,"API - Gemma, S0",no_usable_resource,-0.0161783,-0.0405755,0.00597372,50,910,2002,iso2,False,1,holds only in T1b,True,v2
+T2b,all,"API - other local, S0",correct_local,0.369658,0.303535,0.432993,50,1638,2730,iso2,True,4,,True,v2
+T2b,all,"API - other local, S0",correct_crisis,0.520919,0.443105,0.597226,45,1458,2430,iso2,True,4,,True,v2
+T2b,all,"API - other local, S0",fabricated,-0.107448,-0.145203,-0.0688357,50,1638,2730,iso2,True,4,,True,v2
+T2b,all,"API - other local, S0",no_usable_resource,-0.0656288,-0.0945063,-0.0394057,50,1638,2730,iso2,True,4,,True,v2
+T2b,all,"Gemma - other local, S0",correct_local,0.269231,0.218872,0.319604,50,1456,1456,iso2,True,4,,True,v2
+T2b,all,"Gemma - other local, S0",correct_crisis,0.326132,0.221867,0.43038,45,1296,1296,iso2,True,4,,True,v2
+T2b,all,"Gemma - other local, S0",fabricated,-0.131868,-0.166667,-0.0955022,50,1456,1456,iso2,True,4,,True,v2
+T2b,all,"Gemma - other local, S0",no_usable_resource,-0.0494505,-0.0723443,-0.0256392,50,1456,1456,iso2,True,2,,True,v2
+all,API,"en - local, S0-country, 41 countries",correct_local,-0.0108401,-0.053523,0.0149051,41,984,2952,iso2,False,0,,False,v2
+all,API,"country - city, S0",correct_local,-0.0042735,-0.0232043,0.00955846,50,2184,6552,iso2,False,0,,False,v2
+all,API,"M1 - S0-country, local",correct_local,-0.000555556,-0.0127778,0.0105556,50,1200,3600,iso2,False,1,holds only in T1b,False,v2
+all,API,"M2 - S0-country, local",correct_local,0.0161111,0.00498611,0.0288889,50,1200,3600,iso2,True,2,,True,v2
+all,API,"en - local, S0-country, 41 countries",correct_crisis,0.0138889,-0.0169753,0.0462963,36,864,2592,iso2,False,0,,False,v2
+all,API,"country - city, S0",correct_crisis,-0.00240055,-0.0277859,0.0181902,45,1944,5832,iso2,False,0,,False,v2
+all,API,"M1 - S0-country, local",correct_crisis,-0.00987654,-0.0277778,0.00740741,45,1080,3240,iso2,False,1,holds only in T2b,False,v2
+all,API,"M2 - S0-country, local",correct_crisis,0.17716,0.095679,0.270988,45,1080,3240,iso2,True,4,,True,v2
+all,API,"en - local, S0-country, 41 countries",fabricated,-0.0189702,-0.0379404,-0.00133808,41,984,2952,iso2,True,0,,True,v2
+all,API,"country - city, S0",fabricated,-0.013431,-0.0340916,0.00156055,50,2184,6552,iso2,False,2,,False,v2
+all,API,"M1 - S0-country, local",fabricated,-0.00722222,-0.0194444,0.00277778,50,1200,3600,iso2,False,0,,False,v2
+all,API,"M2 - S0-country, local",fabricated,-0.0383333,-0.0622222,-0.0194444,50,1200,3600,iso2,True,4,,True,v2
+all,API,"en - local, S0-country, 41 countries",no_usable_resource,-0.00474255,-0.0121951,0.00271003,41,984,2952,iso2,False,0,,False,v2
+all,API,"country - city, S0",no_usable_resource,-0.00824176,-0.0134409,-0.00315657,50,2184,6552,iso2,True,2,,True,v2
+all,API,"M1 - S0-country, local",no_usable_resource,0.00666667,-0.000555556,0.0144444,50,1200,3600,iso2,False,0,,False,v2
+all,API,"M2 - S0-country, local",no_usable_resource,-0.00388889,-0.0105556,0.00222222,50,1200,3600,iso2,False,0,,False,v2
+all,Gemma,"en - local, S0-country, 41 countries",correct_local,-0.0304878,-0.0945122,0.0335366,41,656,656,iso2,False,0,,False,v2
+all,Gemma,"country - city, S0",correct_local,-0.0151099,-0.0486884,0.0168587,50,1456,1456,iso2,False,0,,False,v2
+all,Gemma,"M1 - S0-country, local",correct_local,0.0175,-0.01,0.0525,50,800,800,iso2,False,0,,False,v2
+all,Gemma,"M2 - S0-country, local",correct_local,0.1125,0.0574375,0.18,50,800,800,iso2,True,4,,True,v2
+all,Gemma,"en - local, S0-country, 41 countries",correct_crisis,-0.0486111,-0.142361,0.0416667,36,576,576,iso2,False,0,,False,v2
+all,Gemma,"country - city, S0",correct_crisis,-0.00925926,-0.0411887,0.0231481,45,1296,1296,iso2,False,0,,False,v2
+all,Gemma,"M1 - S0-country, local",correct_crisis,0.00277778,-0.0222222,0.0333333,45,720,720,iso2,False,0,,False,v2
+all,Gemma,"M2 - S0-country, local",correct_crisis,0.375,0.247222,0.5,45,720,720,iso2,True,4,,True,v2
+all,Gemma,"en - local, S0-country, 41 countries",fabricated,-0.00914634,-0.0243902,0.00304878,41,656,656,iso2,False,0,,False,v2
+all,Gemma,"country - city, S0",fabricated,-0.00686813,-0.020386,0.00394737,50,1456,1456,iso2,False,0,,False,v2
+all,Gemma,"M1 - S0-country, local",fabricated,0.0025,-0.01,0.02,50,800,800,iso2,False,0,,False,v2
+all,Gemma,"M2 - S0-country, local",fabricated,-0.0125,-0.0275,-0.0025,50,800,800,iso2,True,0,,True,v2
+all,Gemma,"en - local, S0-country, 41 countries",no_usable_resource,-0.0518293,-0.10061,-0.0152439,41,656,656,iso2,True,1,holds only in T2b,True,v2
+all,Gemma,"country - city, S0",no_usable_resource,0.0137363,-0.00515598,0.0355114,50,1456,1456,iso2,False,0,,False,v2
+all,Gemma,"M1 - S0-country, local",no_usable_resource,-0.0075,-0.0325,0.015,50,800,800,iso2,False,0,,False,v2
+all,Gemma,"M2 - S0-country, local",no_usable_resource,-0.065,-0.105062,-0.0275,50,800,800,iso2,True,4,,True,v2
+all,other local,"en - local, S0-country, 41 countries",correct_local,0.148374,0.104649,0.190041,41,1968,1968,iso2,True,4,,True,v2
+all,other local,"country - city, S0",correct_local,-0.0201465,-0.0443284,0.000957854,50,4368,4368,iso2,False,0,,False,v2
+all,other local,"M1 - S0-country, local",correct_local,0.00416667,-0.0191667,0.0275,50,2400,2400,iso2,False,0,,False,v2
+all,other local,"M2 - S0-country, local",correct_local,0.379167,0.324167,0.435021,50,2400,2400,iso2,True,4,,True,v2
+all,other local,"en - local, S0-country, 41 countries",correct_crisis,0.00115741,-0.0335648,0.037066,36,1728,1728,iso2,False,0,,False,v2
+all,other local,"country - city, S0",correct_crisis,0.0113169,-0.00308738,0.0265625,45,3888,3888,iso2,False,0,,False,v2
+all,other local,"M1 - S0-country, local",correct_crisis,0.00462963,-0.0111111,0.0203704,45,2160,2160,iso2,False,0,,False,v2
+all,other local,"M2 - S0-country, local",correct_crisis,0.60463,0.521296,0.681505,45,2160,2160,iso2,True,4,,True,v2
+all,other local,"en - local, S0-country, 41 countries",fabricated,0.0213415,-0.0121951,0.0558943,41,1968,1968,iso2,False,1,holds only in T2b,False,v2
+all,other local,"country - city, S0",fabricated,0.0119048,-0.00274802,0.0265578,50,4368,4368,iso2,False,0,,False,v2
+all,other local,"M1 - S0-country, local",fabricated,0.015,-0.00583333,0.0366667,50,2400,2400,iso2,False,0,,False,v2
+all,other local,"M2 - S0-country, local",fabricated,-0.116667,-0.145833,-0.0875,50,2400,2400,iso2,True,4,,True,v2
+all,other local,"en - local, S0-country, 41 countries",no_usable_resource,-0.16565,-0.218496,-0.122942,41,1968,1968,iso2,True,4,,True,v2
+all,other local,"country - city, S0",no_usable_resource,-0.00549451,-0.0142079,0.00287848,50,4368,4368,iso2,False,1,holds only in T2a,False,v2
+all,other local,"M1 - S0-country, local",no_usable_resource,-0.005,-0.0225,0.0116667,50,2400,2400,iso2,False,0,,False,v2
+all,other local,"M2 - S0-country, local",no_usable_resource,-0.0958333,-0.124167,-0.0716667,50,2400,2400,iso2,True,4,,True,v2
+all,all,"en - local, S0-country, 41 countries",correct_local,0.0724316,0.0356523,0.10218,41,3608,5576,iso2,True,4,,True,v2
+all,all,"country - city, S0",correct_local,-0.0149018,-0.0343441,0.00173006,50,8008,12376,iso2,False,0,,False,v2
+all,all,"M1 - S0-country, local",correct_local,0.00530303,-0.0080303,0.0183333,50,4400,6800,iso2,False,1,holds only in T1a,False,v2
+all,all,"M2 - S0-country, local",correct_local,0.231667,0.194545,0.270913,50,4400,6800,iso2,True,4,,True,v2
+all,all,"en - local, S0-country, 41 countries",correct_crisis,-0.00441919,-0.0361953,0.0254735,36,3168,4896,iso2,False,0,,False,v2
+all,all,"country - city, S0",correct_crisis,0.00383464,-0.00873457,0.0158569,45,7128,11016,iso2,False,0,,False,v2
+all,all,"M1 - S0-country, local",correct_crisis,0.0003367,-0.00976852,0.010101,45,3960,6120,iso2,False,0,,False,v2
+all,all,"M2 - S0-country, local",correct_crisis,0.446296,0.372382,0.523405,45,3960,6120,iso2,True,4,,True,v2
+all,all,"en - local, S0-country, 41 countries",fabricated,0.00480414,-0.0147866,0.0243949,41,3608,5576,iso2,False,0,,False,v2
+all,all,"country - city, S0",fabricated,0.00158175,-0.00894777,0.0115727,50,8008,12376,iso2,False,0,,False,v2
+all,all,"M1 - S0-country, local",fabricated,0.00666667,-0.00530303,0.0192462,50,4400,6800,iso2,False,0,,False,v2
+all,all,"M2 - S0-country, local",fabricated,-0.0763636,-0.0962159,-0.0574242,50,4400,6800,iso2,True,4,,True,v2
+all,all,"en - local, S0-country, 41 countries",no_usable_resource,-0.101072,-0.133592,-0.0733509,41,3608,5576,iso2,True,4,,True,v2
+all,all,"country - city, S0",no_usable_resource,-0.00274725,-0.00852298,0.0037093,50,8008,12376,iso2,False,2,templates disagree in sign,False,v2
+all,all,"M1 - S0-country, local",no_usable_resource,-0.00227273,-0.0124242,0.00787879,50,4400,6800,iso2,False,0,,False,v2
+all,all,"M2 - S0-country, local",no_usable_resource,-0.0651515,-0.0848561,-0.0480265,50,4400,6800,iso2,True,4,,True,v2
+all,all,"API - Gemma, S0",correct_local,0.0945513,0.0458441,0.149789,50,3640,8008,iso2,True,4,,True,v2
+all,all,"API - Gemma, S0",correct_crisis,0.227366,0.150107,0.308705,45,3240,7128,iso2,True,4,,True,v2
+all,all,"API - Gemma, S0",fabricated,0.024649,0.00635242,0.0434805,50,3640,8008,iso2,True,2,,True,v2
+all,all,"API - Gemma, S0",no_usable_resource,-0.0225885,-0.0455109,-0.00265197,50,3640,8008,iso2,True,1,holds only in T1b,True,v2
+all,all,"API - other local, S0",correct_local,0.357601,0.304119,0.417856,50,6552,10920,iso2,True,4,,True,v2
+all,all,"API - other local, S0",correct_crisis,0.530864,0.459397,0.60274,45,5832,9720,iso2,True,4,,True,v2
+all,all,"API - other local, S0",fabricated,-0.103785,-0.137783,-0.0705895,50,6552,10920,iso2,True,4,,True,v2
+all,all,"API - other local, S0",no_usable_resource,-0.0697497,-0.0953989,-0.0482278,50,6552,10920,iso2,True,4,,True,v2
+all,all,"Gemma - other local, S0",correct_local,0.263049,0.223052,0.302301,50,5824,5824,iso2,True,4,,True,v2
+all,all,"Gemma - other local, S0",correct_crisis,0.303498,0.211486,0.397915,45,5184,5184,iso2,True,4,,True,v2
+all,all,"Gemma - other local, S0",fabricated,-0.128434,-0.158351,-0.0969867,50,5824,5824,iso2,True,4,,True,v2
+all,all,"Gemma - other local, S0",no_usable_resource,-0.0471612,-0.0625054,-0.0308989,50,5824,5824,iso2,True,2,,True,v2
+T1a,API,"en - local, S0-country, 41 countries",correct_local,-0.0216802,-0.0813686,0.0189702,41,246,738,iso2,False,0,,False,v1
+T1a,API,"country - city, S0",correct_local,-0.018315,-0.0466029,0.00478027,50,546,1638,iso2,False,0,,False,v1
+T1a,API,"M1 - S0-country, local",correct_local,0.0133333,-0.00888889,0.04,50,300,900,iso2,False,0,,False,v1
+T1a,API,"M2 - S0-country, local",correct_local,0.0288889,0.0111111,0.0511111,50,300,900,iso2,True,3,,True,v1
+T1a,API,"en - local, S0-country, 41 countries",correct_crisis,0.0277778,-0.00308642,0.0648148,36,216,648,iso2,False,0,,False,v1
+T1a,API,"country - city, S0",correct_crisis,0.0123457,-0.0123495,0.0365854,45,486,1458,iso2,False,1,holds only in T1b,False,v1
+T1a,API,"M1 - S0-country, local",correct_crisis,0.017284,-0.017284,0.0518519,45,270,810,iso2,False,0,,False,v1
+T1a,API,"M2 - S0-country, local",correct_crisis,0.204938,0.118519,0.303704,45,270,810,iso2,True,4,,True,v1
+T1a,API,"en - local, S0-country, 41 countries",fabricated,-0.00813008,-0.0271003,0.0108401,41,246,738,iso2,False,0,,True,v1
+T1a,API,"country - city, S0",fabricated,-0.019536,-0.0395062,-0.00366201,50,546,1638,iso2,True,2,,False,v1
+T1a,API,"M1 - S0-country, local",fabricated,-0.00444444,-0.0155556,0.00666667,50,300,900,iso2,False,0,,False,v1
+T1a,API,"M2 - S0-country, local",fabricated,-0.0288889,-0.0488889,-0.0111111,50,300,900,iso2,True,4,,True,v1
+T1a,API,"en - local, S0-country, 41 countries",no_usable_resource,-0.00542005,-0.0162602,0.00542005,41,246,738,iso2,False,0,,False,v1
+T1a,API,"country - city, S0",no_usable_resource,-0.00610501,-0.0141844,0.00126263,50,546,1638,iso2,False,2,,True,v1
+T1a,API,"M1 - S0-country, local",no_usable_resource,0.00444444,-0.00666667,0.0155556,50,300,900,iso2,False,0,,False,v1
+T1a,API,"M2 - S0-country, local",no_usable_resource,-0.00666667,-0.0155556,0,50,300,900,iso2,False,0,,False,v1
+T1a,Gemma,"en - local, S0-country, 41 countries",correct_local,-0.0121951,-0.0853659,0.0609756,41,164,164,iso2,False,0,,False,v1
+T1a,Gemma,"country - city, S0",correct_local,-0.0274725,-0.0714286,0.0111111,50,364,364,iso2,False,0,,False,v1
+T1a,Gemma,"M1 - S0-country, local",correct_local,-0.02,-0.09,0.04,50,200,200,iso2,False,0,,False,v1
+T1a,Gemma,"M2 - S0-country, local",correct_local,0.09,0.03,0.16,50,200,200,iso2,True,4,,True,v1
+T1a,Gemma,"en - local, S0-country, 41 countries",correct_crisis,-0.111111,-0.236111,0.0138889,36,144,144,iso2,False,0,,False,v1
+T1a,Gemma,"country - city, S0",correct_crisis,0.00617284,-0.0361556,0.0540541,45,324,324,iso2,False,0,,False,v1
+T1a,Gemma,"M1 - S0-country, local",correct_crisis,-0.0222222,-0.0555556,0,45,180,180,iso2,False,0,,False,v1
+T1a,Gemma,"M2 - S0-country, local",correct_crisis,0.388889,0.255556,0.522222,45,180,180,iso2,True,4,,True,v1
+T1a,Gemma,"en - local, S0-country, 41 countries",fabricated,0,0,0,41,164,164,iso2,False,0,,False,v1
+T1a,Gemma,"country - city, S0",fabricated,-0.0274725,-0.0666667,0,50,364,364,iso2,False,0,,False,v1
+T1a,Gemma,"M1 - S0-country, local",fabricated,0.02,0,0.05,50,200,200,iso2,False,0,,False,v1
+T1a,Gemma,"M2 - S0-country, local",fabricated,0.01,0,0.03,50,200,200,iso2,False,0,,True,v1
+T1a,Gemma,"en - local, S0-country, 41 countries",no_usable_resource,-0.0365854,-0.097561,0.0121951,41,164,164,iso2,False,1,holds only in T2b,True,v1
+T1a,Gemma,"country - city, S0",no_usable_resource,0.0274725,-0.00555556,0.0730337,50,364,364,iso2,False,0,,False,v1
+T1a,Gemma,"M1 - S0-country, local",no_usable_resource,0,-0.05,0.06,50,200,200,iso2,False,0,,False,v1
+T1a,Gemma,"M2 - S0-country, local",no_usable_resource,-0.06,-0.11,-0.02,50,200,200,iso2,True,4,,True,v1
+T1a,other local,"en - local, S0-country, 41 countries",correct_local,0.117886,0.0487805,0.186992,41,492,492,iso2,True,4,,True,v1
+T1a,other local,"country - city, S0",correct_local,-0.0274725,-0.0697674,0.0144928,50,1092,1092,iso2,False,0,,True,v1
+T1a,other local,"M1 - S0-country, local",correct_local,0.0466667,-0.00666667,0.0933333,50,600,600,iso2,False,0,,False,v1
+T1a,other local,"M2 - S0-country, local",correct_local,0.356667,0.296667,0.42,50,600,600,iso2,True,4,,True,v1
+T1a,other local,"en - local, S0-country, 41 countries",correct_crisis,-0.0185185,-0.0555556,0.0185185,36,432,432,iso2,False,0,,False,v1
+T1a,other local,"country - city, S0",correct_crisis,-0.00205761,-0.0313725,0.028121,45,972,972,iso2,False,0,,False,v1
+T1a,other local,"M1 - S0-country, local",correct_crisis,0.0111111,-0.0148148,0.037037,45,540,540,iso2,False,0,,False,v1
+T1a,other local,"M2 - S0-country, local",correct_crisis,0.640741,0.555556,0.718519,45,540,540,iso2,True,4,,True,v1
+T1a,other local,"en - local, S0-country, 41 countries",fabricated,-0.00813008,-0.0609756,0.0447154,41,492,492,iso2,False,0,,False,v1
+T1a,other local,"country - city, S0",fabricated,-0.0201465,-0.0579845,0.0151515,50,1092,1092,iso2,False,0,,False,v1
+T1a,other local,"M1 - S0-country, local",fabricated,0.00333333,-0.0366667,0.0433333,50,600,600,iso2,False,0,,False,v1
+T1a,other local,"M2 - S0-country, local",fabricated,-0.143333,-0.186667,-0.1,50,600,600,iso2,True,4,,True,v1
+T1a,other local,"en - local, S0-country, 41 countries",no_usable_resource,-0.109756,-0.162602,-0.0609756,41,492,492,iso2,True,4,,True,v1
+T1a,other local,"country - city, S0",no_usable_resource,0.0128205,-0.00171912,0.0265957,50,1092,1092,iso2,False,1,holds only in T2a,False,v1
+T1a,other local,"M1 - S0-country, local",no_usable_resource,-0.0133333,-0.04,0.0133333,50,600,600,iso2,False,0,,False,v1
+T1a,other local,"M2 - S0-country, local",no_usable_resource,-0.0633333,-0.0933333,-0.0366667,50,600,600,iso2,True,4,,True,v1
+T1a,all,"en - local, S0-country, 41 countries",correct_local,0.0561715,0.00665188,0.0961013,41,902,1394,iso2,True,4,,True,v1
+T1a,all,"country - city, S0",correct_local,-0.024975,-0.0576091,0.00126436,50,2002,3094,iso2,False,0,,True,v1
+T1a,all,"M1 - S0-country, local",correct_local,0.0254545,-0.000606061,0.0515152,50,1100,1700,iso2,False,0,,False,v1
+T1a,all,"M2 - S0-country, local",correct_local,0.218788,0.18,0.259394,50,1100,1700,iso2,True,4,,True,v1
+T1a,all,"en - local, S0-country, 41 countries",correct_crisis,-0.0227273,-0.0606061,0.0118056,36,792,1224,iso2,False,0,,False,v1
+T1a,all,"country - city, S0",correct_crisis,0.003367,-0.0138429,0.0206957,45,1782,2754,iso2,False,0,,False,v1
+T1a,all,"M1 - S0-country, local",correct_crisis,0.00673401,-0.013468,0.0242424,45,990,1530,iso2,False,0,,False,v1
+T1a,all,"M2 - S0-country, local",correct_crisis,0.476094,0.397306,0.562963,45,990,1530,iso2,True,4,,True,v1
+T1a,all,"en - local, S0-country, 41 countries",fabricated,-0.00665188,-0.0354767,0.0214339,41,902,1394,iso2,False,0,,False,v1
+T1a,all,"country - city, S0",fabricated,-0.021312,-0.0425006,0.000363886,50,2002,3094,iso2,False,0,,False,v1
+T1a,all,"M1 - S0-country, local",fabricated,0.00424242,-0.0187879,0.0266818,50,1100,1700,iso2,False,0,,False,v1
+T1a,all,"M2 - S0-country, local",fabricated,-0.0842424,-0.111515,-0.0575758,50,1100,1700,iso2,True,4,,True,v1
+T1a,all,"en - local, S0-country, 41 countries",no_usable_resource,-0.067997,-0.0968219,-0.0421101,41,902,1394,iso2,True,4,,True,v1
+T1a,all,"country - city, S0",no_usable_resource,0.010323,0.000624042,0.0207341,50,2002,3094,iso2,True,2,templates disagree in sign,False,v1
+T1a,all,"M1 - S0-country, local",no_usable_resource,-0.00606061,-0.0254545,0.0127273,50,1100,1700,iso2,False,0,,False,v1
+T1a,all,"M2 - S0-country, local",no_usable_resource,-0.0472727,-0.0666667,-0.0290909,50,1100,1700,iso2,True,4,,True,v1
+T1a,all,"API - Gemma, S0",correct_local,0.0546398,0.0150568,0.10348,50,910,2002,iso2,True,4,,True,v1
+T1a,all,"API - Gemma, S0",correct_crisis,0.257545,0.164284,0.354629,45,810,1782,iso2,True,4,,True,v1
+T1a,all,"API - Gemma, S0",fabricated,0.0216728,-0.00397359,0.0459877,50,910,2002,iso2,False,1,holds only in T2a,True,v1
+T1a,all,"API - Gemma, S0",no_usable_resource,-0.0222833,-0.0511229,0.000305335,50,910,2002,iso2,False,1,holds only in T1b,True,v1
+T1a,all,"API - other local, S0",correct_local,0.318376,0.262244,0.377903,50,1638,2730,iso2,True,4,,True,v1
+T1a,all,"API - other local, S0",correct_crisis,0.527092,0.452525,0.603424,45,1458,2430,iso2,True,4,,True,v1
+T1a,all,"API - other local, S0",fabricated,-0.139499,-0.176321,-0.104009,50,1638,2730,iso2,True,4,,True,v1
+T1a,all,"API - other local, S0",no_usable_resource,-0.0351038,-0.0592408,-0.0146324,50,1638,2730,iso2,True,4,,True,v1
+T1a,all,"Gemma - other local, S0",correct_local,0.263736,0.22318,0.304085,50,1456,1456,iso2,True,4,,True,v1
+T1a,all,"Gemma - other local, S0",correct_crisis,0.269547,0.171726,0.373985,45,1296,1296,iso2,True,4,,True,v1
+T1a,all,"Gemma - other local, S0",fabricated,-0.161172,-0.197464,-0.120877,50,1456,1456,iso2,True,4,,True,v1
+T1a,all,"Gemma - other local, S0",no_usable_resource,-0.0128205,-0.039856,0.0121729,50,1456,1456,iso2,False,2,,True,v1
+T1b,API,"en - local, S0-country, 41 countries",correct_local,-0.0135501,-0.0514905,0.0162602,41,246,738,iso2,False,0,,False,v1
+T1b,API,"country - city, S0",correct_local,-0.001221,-0.0274866,0.0197531,50,546,1638,iso2,False,0,,False,v1
+T1b,API,"M1 - S0-country, local",correct_local,-0.00888889,-0.0288889,0.0111111,50,300,900,iso2,False,0,,False,v1
+T1b,API,"M2 - S0-country, local",correct_local,0.0244444,0.00666667,0.0444444,50,300,900,iso2,True,3,,True,v1
+T1b,API,"en - local, S0-country, 41 countries",correct_crisis,0.00617284,-0.0401235,0.0493827,36,216,648,iso2,False,0,,False,v1
+T1b,API,"country - city, S0",correct_crisis,0.0219479,0.00277778,0.0406504,45,486,1458,iso2,True,1,holds only in T1b,False,v1
+T1b,API,"M1 - S0-country, local",correct_crisis,-0.00493827,-0.0320988,0.0222222,45,270,810,iso2,False,0,,False,v1
+T1b,API,"M2 - S0-country, local",correct_crisis,0.167901,0.0888889,0.251852,45,270,810,iso2,True,4,,True,v1
+T1b,API,"en - local, S0-country, 41 countries",fabricated,-0.0243902,-0.0542005,0.00271003,41,246,738,iso2,False,0,,True,v1
+T1b,API,"country - city, S0",fabricated,-0.001221,-0.0229469,0.0172888,50,546,1638,iso2,False,2,,False,v1
+T1b,API,"M1 - S0-country, local",fabricated,-0.00444444,-0.0333333,0.0244444,50,300,900,iso2,False,0,,False,v1
+T1b,API,"M2 - S0-country, local",fabricated,-0.0533333,-0.0844444,-0.0266667,50,300,900,iso2,True,4,,True,v1
+T1b,API,"en - local, S0-country, 41 countries",no_usable_resource,0.00542005,-0.00542005,0.0162602,41,246,738,iso2,False,0,,False,v1
+T1b,API,"country - city, S0",no_usable_resource,-0.014652,-0.0252525,-0.00493827,50,546,1638,iso2,True,2,,True,v1
+T1b,API,"M1 - S0-country, local",no_usable_resource,0.0111111,0,0.0245,50,300,900,iso2,False,0,,False,v1
+T1b,API,"M2 - S0-country, local",no_usable_resource,-0.00222222,-0.00666667,0,50,300,900,iso2,False,0,,False,v1
+T1b,Gemma,"en - local, S0-country, 41 countries",correct_local,-0.0731707,-0.182927,0.0365854,41,164,164,iso2,False,0,,False,v1
+T1b,Gemma,"country - city, S0",correct_local,-0.0604396,-0.125033,0,50,364,364,iso2,False,0,,False,v1
+T1b,Gemma,"M1 - S0-country, local",correct_local,0.04,-0.01,0.09,50,200,200,iso2,False,0,,False,v1
+T1b,Gemma,"M2 - S0-country, local",correct_local,0.11,0.04,0.2,50,200,200,iso2,True,4,,True,v1
+T1b,Gemma,"en - local, S0-country, 41 countries",correct_crisis,0.0138889,-0.0972222,0.152778,36,144,144,iso2,False,0,,False,v1
+T1b,Gemma,"country - city, S0",correct_crisis,0,-0.0361556,0.0320513,45,324,324,iso2,False,0,,False,v1
+T1b,Gemma,"M1 - S0-country, local",correct_crisis,0.0111111,-0.0222222,0.0444444,45,180,180,iso2,False,0,,False,v1
+T1b,Gemma,"M2 - S0-country, local",correct_crisis,0.444444,0.311111,0.577778,45,180,180,iso2,True,4,,True,v1
+T1b,Gemma,"en - local, S0-country, 41 countries",fabricated,0,-0.0365854,0.0365854,41,164,164,iso2,False,0,,False,v1
+T1b,Gemma,"country - city, S0",fabricated,0.00549451,-0.011236,0.0257799,50,364,364,iso2,False,0,,False,v1
+T1b,Gemma,"M1 - S0-country, local",fabricated,0,-0.03,0.03,50,200,200,iso2,False,0,,False,v1
+T1b,Gemma,"M2 - S0-country, local",fabricated,-0.03,-0.07,0,50,200,200,iso2,False,0,,True,v1
+T1b,Gemma,"en - local, S0-country, 41 countries",no_usable_resource,-0.0365854,-0.109756,0.0243902,41,164,164,iso2,False,1,holds only in T2b,True,v1
+T1b,Gemma,"country - city, S0",no_usable_resource,0.0164835,-0.0215054,0.0549451,50,364,364,iso2,False,0,,False,v1
+T1b,Gemma,"M1 - S0-country, local",no_usable_resource,-0.03,-0.07,0.01,50,200,200,iso2,False,0,,False,v1
+T1b,Gemma,"M2 - S0-country, local",no_usable_resource,-0.07,-0.14,-0.02,50,200,200,iso2,True,4,,True,v1
+T1b,other local,"en - local, S0-country, 41 countries",correct_local,0.126016,0.0528455,0.199187,41,492,492,iso2,True,4,,True,v1
+T1b,other local,"country - city, S0",correct_local,-0.00549451,-0.0426465,0.0344828,50,1092,1092,iso2,False,0,,True,v1
+T1b,other local,"M1 - S0-country, local",correct_local,-0.0266667,-0.0766667,0.02,50,600,600,iso2,False,0,,False,v1
+T1b,other local,"M2 - S0-country, local",correct_local,0.356667,0.283333,0.42675,50,600,600,iso2,True,4,,True,v1
+T1b,other local,"en - local, S0-country, 41 countries",correct_crisis,-0.0138889,-0.0601852,0.0324074,36,432,432,iso2,False,0,,False,v1
+T1b,other local,"country - city, S0",correct_crisis,0.0144033,-0.00813259,0.0376984,45,972,972,iso2,False,0,,False,v1
+T1b,other local,"M1 - S0-country, local",correct_crisis,0.0037037,-0.0296296,0.0407407,45,540,540,iso2,False,0,,False,v1
+T1b,other local,"M2 - S0-country, local",correct_crisis,0.611111,0.52963,0.692685,45,540,540,iso2,True,4,,True,v1
+T1b,other local,"en - local, S0-country, 41 countries",fabricated,0.0284553,-0.0325203,0.0934959,41,492,492,iso2,False,0,,False,v1
+T1b,other local,"country - city, S0",fabricated,0.025641,-0.0116313,0.0666667,50,1092,1092,iso2,False,0,,False,v1
+T1b,other local,"M1 - S0-country, local",fabricated,0.04,-0.00333333,0.0866667,50,600,600,iso2,False,0,,False,v1
+T1b,other local,"M2 - S0-country, local",fabricated,-0.143333,-0.19,-0.1,50,600,600,iso2,True,4,,True,v1
+T1b,other local,"en - local, S0-country, 41 countries",no_usable_resource,-0.105691,-0.166667,-0.0528455,41,492,492,iso2,True,4,,True,v1
+T1b,other local,"country - city, S0",no_usable_resource,0.0018315,-0.0143408,0.0172414,50,1092,1092,iso2,False,1,holds only in T2a,False,v1
+T1b,other local,"M1 - S0-country, local",no_usable_resource,-0.00666667,-0.0533333,0.03,50,600,600,iso2,False,0,,False,v1
+T1b,other local,"M2 - S0-country, local",no_usable_resource,-0.05,-0.0966667,-0.01,50,600,600,iso2,True,4,,True,v1
+T1b,all,"en - local, S0-country, 41 countries",correct_local,0.0517369,0.000739098,0.100517,41,902,1394,iso2,True,4,,True,v1
+T1b,all,"country - city, S0",correct_local,-0.014319,-0.0429584,0.0125221,50,2002,3094,iso2,False,0,,True,v1
+T1b,all,"M1 - S0-country, local",correct_local,-0.00969697,-0.0381818,0.0187879,50,1100,1700,iso2,False,0,,False,v1
+T1b,all,"M2 - S0-country, local",correct_local,0.221212,0.174545,0.269091,50,1100,1700,iso2,True,4,,True,v1
+T1b,all,"en - local, S0-country, 41 countries",correct_crisis,-0.003367,-0.0412458,0.037037,36,792,1224,iso2,False,0,,False,v1
+T1b,all,"country - city, S0",correct_crisis,0.0138421,-0.000378788,0.0292338,45,1782,2754,iso2,False,0,,False,v1
+T1b,all,"M1 - S0-country, local",correct_crisis,0.0026936,-0.0202189,0.0249158,45,990,1530,iso2,False,0,,False,v1
+T1b,all,"M2 - S0-country, local",correct_crisis,0.459933,0.383838,0.536027,45,990,1530,iso2,True,4,,True,v1
+T1b,all,"en - local, S0-country, 41 countries",fabricated,0.00886918,-0.0258869,0.0436068,41,902,1394,iso2,False,0,,False,v1
+T1b,all,"country - city, S0",fabricated,0.014652,-0.00808244,0.037622,50,2002,3094,iso2,False,0,,False,v1
+T1b,all,"M1 - S0-country, local",fabricated,0.0206061,-0.00243939,0.0454545,50,1100,1700,iso2,False,0,,False,v1
+T1b,all,"M2 - S0-country, local",fabricated,-0.0981818,-0.127879,-0.0684848,50,1100,1700,iso2,True,4,,True,v1
+T1b,all,"en - local, S0-country, 41 countries",no_usable_resource,-0.0628234,-0.104952,-0.0273466,41,902,1394,iso2,True,4,,True,v1
+T1b,all,"country - city, S0",no_usable_resource,6.93889e-18,-0.0110793,0.0111999,50,2002,3094,iso2,False,2,templates disagree in sign,False,v1
+T1b,all,"M1 - S0-country, local",no_usable_resource,-0.00606061,-0.0327424,0.0157576,50,1100,1700,iso2,False,0,,False,v1
+T1b,all,"M2 - S0-country, local",no_usable_resource,-0.0406061,-0.0697121,-0.0133333,50,1100,1700,iso2,True,4,,True,v1
+T1b,all,"API - Gemma, S0",correct_local,0.0869963,0.0400868,0.142001,50,910,2002,iso2,True,4,,True,v1
+T1b,all,"API - Gemma, S0",correct_crisis,0.278464,0.193732,0.368062,45,810,1782,iso2,True,4,,True,v1
+T1b,all,"API - Gemma, S0",fabricated,0.0247253,-0.0117819,0.0573682,50,910,2002,iso2,False,1,holds only in T2a,True,v1
+T1b,all,"API - Gemma, S0",no_usable_resource,-0.0344933,-0.0681832,-0.00664073,50,910,2002,iso2,True,1,holds only in T1b,True,v1
+T1b,all,"API - other local, S0",correct_local,0.341575,0.287739,0.399763,50,1638,2730,iso2,True,4,,True,v1
+T1b,all,"API - other local, S0",correct_crisis,0.561385,0.476598,0.648487,45,1458,2430,iso2,True,4,,True,v1
+T1b,all,"API - other local, S0",fabricated,-0.120879,-0.167271,-0.0764617,50,1638,2730,iso2,True,4,,True,v1
+T1b,all,"API - other local, S0",no_usable_resource,-0.0381563,-0.0647212,-0.0143336,50,1638,2730,iso2,True,4,,True,v1
+T1b,all,"Gemma - other local, S0",correct_local,0.254579,0.207427,0.30254,50,1456,1456,iso2,True,4,,True,v1
+T1b,all,"Gemma - other local, S0",correct_crisis,0.282922,0.19076,0.375616,45,1296,1296,iso2,True,4,,True,v1
+T1b,all,"Gemma - other local, S0",fabricated,-0.145604,-0.1875,-0.103261,50,1456,1456,iso2,True,4,,True,v1
+T1b,all,"Gemma - other local, S0",no_usable_resource,-0.003663,-0.0235507,0.0168582,50,1456,1456,iso2,False,2,,True,v1
+T2a,API,"en - local, S0-country, 41 countries",correct_local,-0.00813008,-0.0487805,0.0216802,41,246,738,iso2,False,0,,False,v1
+T2a,API,"country - city, S0",correct_local,-0.00854701,-0.02657,0.00740741,50,546,1638,iso2,False,0,,False,v1
+T2a,API,"M1 - S0-country, local",correct_local,0.00222222,-0.0155556,0.0177778,50,300,900,iso2,False,0,,False,v1
+T2a,API,"M2 - S0-country, local",correct_local,0.0222222,0.00222222,0.0466667,50,300,900,iso2,True,3,,True,v1
+T2a,API,"en - local, S0-country, 41 countries",correct_crisis,0.00925926,-0.037037,0.058642,36,216,648,iso2,False,0,,False,v1
+T2a,API,"country - city, S0",correct_crisis,-0.0109739,-0.0331926,0.0097253,45,486,1458,iso2,False,1,holds only in T1b,False,v1
+T2a,API,"M1 - S0-country, local",correct_crisis,-0.00740741,-0.0419753,0.0246914,45,270,810,iso2,False,0,,False,v1
+T2a,API,"M2 - S0-country, local",correct_crisis,0.222222,0.120988,0.328395,45,270,810,iso2,True,4,,True,v1
+T2a,API,"en - local, S0-country, 41 countries",fabricated,-0.0189702,-0.0514905,0.0108401,41,246,738,iso2,False,0,,True,v1
+T2a,API,"country - city, S0",fabricated,-0.00976801,-0.0301932,0.00694627,50,546,1638,iso2,False,2,,False,v1
+T2a,API,"M1 - S0-country, local",fabricated,-0.00222222,-0.02,0.0133333,50,300,900,iso2,False,0,,False,v1
+T2a,API,"M2 - S0-country, local",fabricated,-0.0311111,-0.0577778,-0.00666667,50,300,900,iso2,True,4,,True,v1
+T2a,API,"en - local, S0-country, 41 countries",no_usable_resource,-0.00542005,-0.0243902,0.0108401,41,246,738,iso2,False,0,,False,v1
+T2a,API,"country - city, S0",no_usable_resource,-3.46945e-18,-0.0116296,0.0119474,50,546,1638,iso2,False,2,,True,v1
+T2a,API,"M1 - S0-country, local",no_usable_resource,0.00666667,-0.00666667,0.02,50,300,900,iso2,False,0,,False,v1
+T2a,API,"M2 - S0-country, local",no_usable_resource,-0.00888889,-0.0244444,0.00666667,50,300,900,iso2,False,0,,False,v1
+T2a,Gemma,"en - local, S0-country, 41 countries",correct_local,0.0121951,-0.097561,0.109756,41,164,164,iso2,False,0,,False,v1
+T2a,Gemma,"country - city, S0",correct_local,0.0384615,-0.0161334,0.0957658,50,364,364,iso2,False,0,,False,v1
+T2a,Gemma,"M1 - S0-country, local",correct_local,0.02,-0.04,0.08,50,200,200,iso2,False,0,,False,v1
+T2a,Gemma,"M2 - S0-country, local",correct_local,0.16,0.07,0.25,50,200,200,iso2,True,4,,True,v1
+T2a,Gemma,"en - local, S0-country, 41 countries",correct_crisis,-0.0833333,-0.180556,0,36,144,144,iso2,False,0,,False,v1
+T2a,Gemma,"country - city, S0",correct_crisis,0.00617284,-0.0416667,0.054878,45,324,324,iso2,False,0,,False,v1
+T2a,Gemma,"M1 - S0-country, local",correct_crisis,0.0111111,-0.0555556,0.0777778,45,180,180,iso2,False,0,,False,v1
+T2a,Gemma,"M2 - S0-country, local",correct_crisis,0.388889,0.255556,0.522222,45,180,180,iso2,True,4,,True,v1
+T2a,Gemma,"en - local, S0-country, 41 countries",fabricated,-0.0243902,-0.0609756,0,41,164,164,iso2,False,0,,False,v1
+T2a,Gemma,"country - city, S0",fabricated,0.00549451,-0.012436,0.0227273,50,364,364,iso2,False,0,,False,v1
+T2a,Gemma,"M1 - S0-country, local",fabricated,-0.02,-0.05,0,50,200,200,iso2,False,0,,False,v1
+T2a,Gemma,"M2 - S0-country, local",fabricated,-0.02,-0.05,0,50,200,200,iso2,False,0,,True,v1
+T2a,Gemma,"en - local, S0-country, 41 countries",no_usable_resource,-0.0609756,-0.134146,0,41,164,164,iso2,False,1,holds only in T2b,True,v1
+T2a,Gemma,"country - city, S0",no_usable_resource,0.00549451,-0.017447,0.0348837,50,364,364,iso2,False,0,,False,v1
+T2a,Gemma,"M1 - S0-country, local",no_usable_resource,0.01,-0.04,0.05,50,200,200,iso2,False,0,,False,v1
+T2a,Gemma,"M2 - S0-country, local",no_usable_resource,-0.06,-0.12,-0.01,50,200,200,iso2,True,4,,True,v1
+T2a,other local,"en - local, S0-country, 41 countries",correct_local,0.117886,0.0487805,0.191057,41,492,492,iso2,True,4,,True,v1
+T2a,other local,"country - city, S0",correct_local,-0.029304,-0.0656111,0.00947242,50,1092,1092,iso2,False,0,,True,v1
+T2a,other local,"M1 - S0-country, local",correct_local,-0.00333333,-0.0533333,0.0434167,50,600,600,iso2,False,0,,False,v1
+T2a,other local,"M2 - S0-country, local",correct_local,0.44,0.373333,0.5,50,600,600,iso2,True,4,,True,v1
+T2a,other local,"en - local, S0-country, 41 countries",correct_crisis,-0.0324074,-0.0833333,0.0231481,36,432,432,iso2,False,0,,False,v1
+T2a,other local,"country - city, S0",correct_crisis,0.0102881,-0.0205761,0.0411651,45,972,972,iso2,False,0,,False,v1
+T2a,other local,"M1 - S0-country, local",correct_crisis,-0.0111111,-0.0444444,0.0222222,45,540,540,iso2,False,0,,False,v1
+T2a,other local,"M2 - S0-country, local",correct_crisis,0.611111,0.52963,0.692593,45,540,540,iso2,True,4,,True,v1
+T2a,other local,"en - local, S0-country, 41 countries",fabricated,-0.00813008,-0.0569106,0.0447154,41,492,492,iso2,False,0,,False,v1
+T2a,other local,"country - city, S0",fabricated,0.018315,-0.0121592,0.0503526,50,1092,1092,iso2,False,0,,False,v1
+T2a,other local,"M1 - S0-country, local",fabricated,0.0233333,-0.0233333,0.07,50,600,600,iso2,False,0,,False,v1
+T2a,other local,"M2 - S0-country, local",fabricated,-0.113333,-0.156667,-0.0733333,50,600,600,iso2,True,4,,True,v1
+T2a,other local,"en - local, S0-country, 41 countries",no_usable_resource,-0.268293,-0.325203,-0.215447,41,492,492,iso2,True,4,,True,v1
+T2a,other local,"country - city, S0",no_usable_resource,-0.029304,-0.0525362,-0.00568182,50,1092,1092,iso2,True,1,holds only in T2a,False,v1
+T2a,other local,"M1 - S0-country, local",no_usable_resource,-0.0133333,-0.05,0.0233333,50,600,600,iso2,False,0,,False,v1
+T2a,other local,"M2 - S0-country, local",no_usable_resource,-0.18,-0.223333,-0.14,50,600,600,iso2,True,4,,True,v1
+T2a,all,"en - local, S0-country, 41 countries",correct_local,0.0643016,0.0177199,0.113101,41,902,1394,iso2,True,4,,True,v1
+T2a,all,"country - city, S0",correct_local,-0.011322,-0.0367741,0.0139866,50,2002,3094,iso2,False,0,,True,v1
+T2a,all,"M1 - S0-country, local",correct_local,0.00242424,-0.0230303,0.0290909,50,1100,1700,iso2,False,0,,False,v1
+T2a,all,"M2 - S0-country, local",correct_local,0.275152,0.233318,0.322424,50,1100,1700,iso2,True,4,,True,v1
+T2a,all,"en - local, S0-country, 41 countries",correct_crisis,-0.030303,-0.0656566,0.00420875,36,792,1224,iso2,False,0,,False,v1
+T2a,all,"country - city, S0",correct_crisis,0.00374111,-0.0191398,0.0257413,45,1782,2754,iso2,False,0,,False,v1
+T2a,all,"M1 - S0-country, local",correct_crisis,-0.00606061,-0.0309764,0.016835,45,990,1530,iso2,False,0,,False,v1
+T2a,all,"M2 - S0-country, local",correct_crisis,0.464646,0.387205,0.544125,45,990,1530,iso2,True,4,,True,v1
+T2a,all,"en - local, S0-country, 41 countries",fabricated,-0.0140429,-0.0443459,0.0169993,41,902,1394,iso2,False,0,,False,v1
+T2a,all,"country - city, S0",fabricated,0.00832501,-0.0102101,0.0251478,50,2002,3094,iso2,False,0,,False,v1
+T2a,all,"M1 - S0-country, local",fabricated,0.00848485,-0.0157727,0.0339394,50,1100,1700,iso2,False,0,,False,v1
+T2a,all,"M2 - S0-country, local",fabricated,-0.0739394,-0.0981818,-0.0502879,50,1100,1700,iso2,True,4,,True,v1
+T2a,all,"en - local, S0-country, 41 countries",no_usable_resource,-0.158906,-0.194383,-0.124908,41,902,1394,iso2,True,4,,True,v1
+T2a,all,"country - city, S0",no_usable_resource,-0.014985,-0.0267969,-0.00263505,50,2002,3094,iso2,True,2,templates disagree in sign,False,v1
+T2a,all,"M1 - S0-country, local",no_usable_resource,-0.00363636,-0.0254545,0.0193939,50,1100,1700,iso2,False,0,,False,v1
+T2a,all,"M2 - S0-country, local",no_usable_resource,-0.111515,-0.136364,-0.0872727,50,1100,1700,iso2,True,4,,True,v1
+T2a,all,"API - Gemma, S0",correct_local,0.151709,0.093113,0.214287,50,910,2002,iso2,True,4,,True,v1
+T2a,all,"API - Gemma, S0",correct_crisis,0.221193,0.124489,0.324977,45,810,1782,iso2,True,4,,True,v1
+T2a,all,"API - Gemma, S0",fabricated,0.0222833,0.00766205,0.0391817,50,910,2002,iso2,True,1,holds only in T2a,True,v1
+T2a,all,"API - Gemma, S0",no_usable_resource,-0.0173993,-0.0453269,0.00694627,50,910,2002,iso2,False,1,holds only in T1b,True,v1
+T2a,all,"API - other local, S0",correct_local,0.442002,0.38641,0.495272,50,1638,2730,iso2,True,4,,True,v1
+T2a,all,"API - other local, S0",correct_crisis,0.523663,0.444753,0.60671,45,1458,2430,iso2,True,4,,True,v1
+T2a,all,"API - other local, S0",fabricated,-0.0866911,-0.122345,-0.0537032,50,1638,2730,iso2,True,4,,True,v1
+T2a,all,"API - other local, S0",no_usable_resource,-0.141026,-0.170557,-0.110781,50,1638,2730,iso2,True,4,,True,v1
+T2a,all,"Gemma - other local, S0",correct_local,0.290293,0.237796,0.336996,50,1456,1456,iso2,True,4,,True,v1
+T2a,all,"Gemma - other local, S0",correct_crisis,0.302469,0.200411,0.405845,45,1296,1296,iso2,True,4,,True,v1
+T2a,all,"Gemma - other local, S0",fabricated,-0.108974,-0.1395,-0.0815018,50,1456,1456,iso2,True,4,,True,v1
+T2a,all,"Gemma - other local, S0",no_usable_resource,-0.123626,-0.146277,-0.0985623,50,1456,1456,iso2,True,2,,True,v1
+T2b,API,"en - local, S0-country, 41 countries",correct_local,0.00813008,-0.0298103,0.0406504,41,246,738,iso2,False,0,,False,v1
+T2b,API,"country - city, S0",correct_local,0.00610501,-0.0120773,0.0219907,50,546,1638,iso2,False,0,,False,v1
+T2b,API,"M1 - S0-country, local",correct_local,-0.00222222,-0.0288889,0.02,50,300,900,iso2,False,0,,False,v1
+T2b,API,"M2 - S0-country, local",correct_local,0.0111111,-0.0155556,0.04,50,300,900,iso2,False,3,,True,v1
+T2b,API,"en - local, S0-country, 41 countries",correct_crisis,0.0216049,-0.0185185,0.0617284,36,216,648,iso2,False,0,,False,v1
+T2b,API,"country - city, S0",correct_crisis,0.0137174,-0.0162602,0.0411523,45,486,1458,iso2,False,1,holds only in T1b,False,v1
+T2b,API,"M1 - S0-country, local",correct_crisis,-0.0271605,-0.0592593,6.17284e-05,45,270,810,iso2,False,0,,False,v1
+T2b,API,"M2 - S0-country, local",correct_crisis,0.192593,0.0962963,0.293827,45,270,810,iso2,True,4,,True,v1
+T2b,API,"en - local, S0-country, 41 countries",fabricated,-0.0243902,-0.0542005,0,41,246,738,iso2,False,0,,True,v1
+T2b,API,"country - city, S0",fabricated,-0.023199,-0.051374,-0.00123457,50,546,1638,iso2,True,2,,False,v1
+T2b,API,"M1 - S0-country, local",fabricated,-0.0177778,-0.0444444,0.00444444,50,300,900,iso2,False,0,,False,v1
+T2b,API,"M2 - S0-country, local",fabricated,-0.04,-0.0733333,-0.0133333,50,300,900,iso2,True,4,,True,v1
+T2b,API,"en - local, S0-country, 41 countries",no_usable_resource,-0.0135501,-0.0298103,0.00271003,41,246,738,iso2,False,0,,False,v1
+T2b,API,"country - city, S0",no_usable_resource,-0.01221,-0.02442,-0.00226636,50,546,1638,iso2,True,2,,True,v1
+T2b,API,"M1 - S0-country, local",no_usable_resource,0.00444444,-0.0155556,0.0266667,50,300,900,iso2,False,0,,False,v1
+T2b,API,"M2 - S0-country, local",no_usable_resource,0.00222222,-0.0155556,0.02,50,300,900,iso2,False,0,,False,v1
+T2b,Gemma,"en - local, S0-country, 41 countries",correct_local,-0.0365854,-0.121951,0.0487805,41,164,164,iso2,False,0,,False,v1
+T2b,Gemma,"country - city, S0",correct_local,-0.0494505,-0.11236,0.00543478,50,364,364,iso2,False,0,,False,v1
+T2b,Gemma,"M1 - S0-country, local",correct_local,0.03,-0.02,0.09,50,200,200,iso2,False,0,,False,v1
+T2b,Gemma,"M2 - S0-country, local",correct_local,0.15,0.08,0.23,50,200,200,iso2,True,4,,True,v1
+T2b,Gemma,"en - local, S0-country, 41 countries",correct_crisis,-0.0833333,-0.180556,0,36,144,144,iso2,False,0,,False,v1
+T2b,Gemma,"country - city, S0",correct_crisis,0.0185185,-0.047619,0.0853659,45,324,324,iso2,False,0,,False,v1
+T2b,Gemma,"M1 - S0-country, local",correct_crisis,0.0111111,-0.0555556,0.0777778,45,180,180,iso2,False,0,,False,v1
+T2b,Gemma,"M2 - S0-country, local",correct_crisis,0.377778,0.244444,0.511111,45,180,180,iso2,True,4,,True,v1
+T2b,Gemma,"en - local, S0-country, 41 countries",fabricated,0,-0.0487805,0.0487805,41,164,164,iso2,False,0,,False,v1
+T2b,Gemma,"country - city, S0",fabricated,0,-0.0217451,0.0215054,50,364,364,iso2,False,0,,False,v1
+T2b,Gemma,"M1 - S0-country, local",fabricated,0.01,-0.02,0.04,50,200,200,iso2,False,0,,False,v1
+T2b,Gemma,"M2 - S0-country, local",fabricated,-0.02,-0.05,0,50,200,200,iso2,False,0,,True,v1
+T2b,Gemma,"en - local, S0-country, 41 countries",no_usable_resource,-0.0731707,-0.134146,-0.0243902,41,164,164,iso2,True,1,holds only in T2b,True,v1
+T2b,Gemma,"country - city, S0",no_usable_resource,0.00549451,-0.0168539,0.0322581,50,364,364,iso2,False,0,,False,v1
+T2b,Gemma,"M1 - S0-country, local",no_usable_resource,-0.01,-0.04,0.02,50,200,200,iso2,False,0,,False,v1
+T2b,Gemma,"M2 - S0-country, local",no_usable_resource,-0.07,-0.12,-0.03,50,200,200,iso2,True,4,,True,v1
+T2b,other local,"en - local, S0-country, 41 countries",correct_local,0.154472,0.0813008,0.231707,41,492,492,iso2,True,4,,True,v1
+T2b,other local,"country - city, S0",correct_local,-0.025641,-0.0719298,0.0175533,50,1092,1092,iso2,False,0,,True,v1
+T2b,other local,"M1 - S0-country, local",correct_local,0,-0.0533333,0.0534167,50,600,600,iso2,False,0,,False,v1
+T2b,other local,"M2 - S0-country, local",correct_local,0.4,0.336667,0.466667,50,600,600,iso2,True,4,,True,v1
+T2b,other local,"en - local, S0-country, 41 countries",correct_crisis,-0.0185185,-0.0648148,0.0277778,36,432,432,iso2,False,0,,False,v1
+T2b,other local,"country - city, S0",correct_crisis,0.0123457,-0.0142276,0.037505,45,972,972,iso2,False,0,,False,v1
+T2b,other local,"M1 - S0-country, local",correct_crisis,0.0111111,-0.0148148,0.037037,45,540,540,iso2,False,0,,False,v1
+T2b,other local,"M2 - S0-country, local",correct_crisis,0.633333,0.544444,0.722222,45,540,540,iso2,True,4,,True,v1
+T2b,other local,"en - local, S0-country, 41 countries",fabricated,0.0447154,-0.0162602,0.101626,41,492,492,iso2,False,0,,False,v1
+T2b,other local,"country - city, S0",fabricated,0.0164835,-0.010989,0.0430795,50,1092,1092,iso2,False,0,,False,v1
+T2b,other local,"M1 - S0-country, local",fabricated,-0.01,-0.0566667,0.0366667,50,600,600,iso2,False,0,,False,v1
+T2b,other local,"M2 - S0-country, local",fabricated,-0.126667,-0.173333,-0.08,50,600,600,iso2,True,4,,True,v1
+T2b,other local,"en - local, S0-country, 41 countries",no_usable_resource,-0.186992,-0.252033,-0.130081,41,492,492,iso2,True,4,,True,v1
+T2b,other local,"country - city, S0",no_usable_resource,-0.003663,-0.0203704,0.0116442,50,1092,1092,iso2,False,1,holds only in T2a,False,v1
+T2b,other local,"M1 - S0-country, local",no_usable_resource,0.01,-0.0266667,0.0433333,50,600,600,iso2,False,0,,False,v1
+T2b,other local,"M2 - S0-country, local",no_usable_resource,-0.0966667,-0.133333,-0.0666667,50,600,600,iso2,True,4,,True,v1
+T2b,all,"en - local, S0-country, 41 countries",correct_local,0.0798226,0.0295639,0.128622,41,902,1394,iso2,True,4,,True,v1
+T2b,all,"country - city, S0",correct_local,-0.021312,-0.0493273,0.00654748,50,2002,3094,iso2,False,0,,True,v1
+T2b,all,"M1 - S0-country, local",correct_local,0.00484848,-0.0248485,0.0357576,50,1100,1700,iso2,False,0,,False,v1
+T2b,all,"M2 - S0-country, local",correct_local,0.248485,0.204848,0.293333,50,1100,1700,iso2,True,4,,True,v1
+T2b,all,"en - local, S0-country, 41 countries",correct_crisis,-0.0193603,-0.0572391,0.016835,36,792,1224,iso2,False,0,,False,v1
+T2b,all,"country - city, S0",correct_crisis,0.0138421,-0.00563887,0.0345224,45,1782,2754,iso2,False,0,,False,v1
+T2b,all,"M1 - S0-country, local",correct_crisis,0.000673401,-0.016835,0.0195286,45,990,1530,iso2,False,0,,False,v1
+T2b,all,"M2 - S0-country, local",correct_crisis,0.466667,0.384495,0.549495,45,990,1530,iso2,True,4,,True,v1
+T2b,all,"en - local, S0-country, 41 countries",fabricated,0.0177384,-0.019235,0.0524945,41,902,1394,iso2,False,0,,False,v1
+T2b,all,"country - city, S0",fabricated,0.002664,-0.0129396,0.0178466,50,2002,3094,iso2,False,0,,False,v1
+T2b,all,"M1 - S0-country, local",fabricated,-0.00848485,-0.0345455,0.018197,50,1100,1700,iso2,False,0,,False,v1
+T2b,all,"M2 - S0-country, local",fabricated,-0.0836364,-0.110924,-0.0581818,50,1100,1700,iso2,True,4,,True,v1
+T2b,all,"en - local, S0-country, 41 countries",no_usable_resource,-0.118995,-0.161863,-0.0820399,41,902,1394,iso2,True,4,,True,v1
+T2b,all,"country - city, S0",no_usable_resource,-0.004329,-0.0153181,0.00580271,50,2002,3094,iso2,False,2,templates disagree in sign,False,v1
+T2b,all,"M1 - S0-country, local",no_usable_resource,0.00484848,-0.0151667,0.0254545,50,1100,1700,iso2,False,0,,False,v1
+T2b,all,"M2 - S0-country, local",no_usable_resource,-0.0648485,-0.0909091,-0.0405909,50,1100,1700,iso2,True,4,,True,v1
+T2b,all,"API - Gemma, S0",correct_local,0.107753,0.0521451,0.170804,50,910,2002,iso2,True,4,,True,v1
+T2b,all,"API - Gemma, S0",correct_crisis,0.221193,0.132478,0.318412,45,810,1782,iso2,True,4,,True,v1
+T2b,all,"API - Gemma, S0",fabricated,0.0189255,-0.00502637,0.0419825,50,910,2002,iso2,False,1,holds only in T2a,True,v1
+T2b,all,"API - Gemma, S0",no_usable_resource,-0.0161783,-0.0405755,0.00597372,50,910,2002,iso2,False,1,holds only in T1b,True,v1
+T2b,all,"API - other local, S0",correct_local,0.381563,0.317501,0.444775,50,1638,2730,iso2,True,4,,True,v1
+T2b,all,"API - other local, S0",correct_crisis,0.522634,0.438728,0.60734,45,1458,2430,iso2,True,4,,True,v1
+T2b,all,"API - other local, S0",fabricated,-0.123016,-0.160026,-0.083631,50,1638,2730,iso2,True,4,,True,v1
+T2b,all,"API - other local, S0",no_usable_resource,-0.0665446,-0.0952032,-0.0400211,50,1638,2730,iso2,True,4,,True,v1
+T2b,all,"Gemma - other local, S0",correct_local,0.27381,0.224138,0.323794,50,1456,1456,iso2,True,4,,True,v1
+T2b,all,"Gemma - other local, S0",correct_crisis,0.30144,0.195114,0.412449,45,1296,1296,iso2,True,4,,True,v1
+T2b,all,"Gemma - other local, S0",fabricated,-0.141941,-0.177536,-0.106481,50,1456,1456,iso2,True,4,,True,v1
+T2b,all,"Gemma - other local, S0",no_usable_resource,-0.0503663,-0.0723473,-0.0271739,50,1456,1456,iso2,True,2,,True,v1
+all,API,"en - local, S0-country, 41 countries",correct_local,-0.00880759,-0.0514905,0.0162771,41,984,2952,iso2,False,0,,False,v1
+all,API,"country - city, S0",correct_local,-0.00549451,-0.0244583,0.00842764,50,2184,6552,iso2,False,0,,False,v1
+all,API,"M1 - S0-country, local",correct_local,0.00111111,-0.011125,0.0122361,50,1200,3600,iso2,False,0,,False,v1
+all,API,"M2 - S0-country, local",correct_local,0.0216667,0.00777778,0.0383333,50,1200,3600,iso2,True,3,,True,v1
+all,API,"en - local, S0-country, 41 countries",correct_crisis,0.0162037,-0.0138889,0.0478395,36,864,2592,iso2,False,0,,False,v1
+all,API,"country - city, S0",correct_crisis,0.00925926,-0.00527426,0.0229796,45,1944,5832,iso2,False,1,holds only in T1b,False,v1
+all,API,"M1 - S0-country, local",correct_crisis,-0.00555556,-0.0228395,0.0117284,45,1080,3240,iso2,False,0,,False,v1
+all,API,"M2 - S0-country, local",correct_crisis,0.196914,0.11233,0.296312,45,1080,3240,iso2,True,4,,True,v1
+all,API,"en - local, S0-country, 41 countries",fabricated,-0.0189702,-0.0379404,-0.00133808,41,984,2952,iso2,True,0,,True,v1
+all,API,"country - city, S0",fabricated,-0.013431,-0.0340916,0.00156055,50,2184,6552,iso2,False,2,,False,v1
+all,API,"M1 - S0-country, local",fabricated,-0.00722222,-0.0194444,0.00277778,50,1200,3600,iso2,False,0,,False,v1
+all,API,"M2 - S0-country, local",fabricated,-0.0383333,-0.0622222,-0.0194444,50,1200,3600,iso2,True,4,,True,v1
+all,API,"en - local, S0-country, 41 countries",no_usable_resource,-0.00474255,-0.0121951,0.00271003,41,984,2952,iso2,False,0,,False,v1
+all,API,"country - city, S0",no_usable_resource,-0.00824176,-0.0134409,-0.00315657,50,2184,6552,iso2,True,2,,True,v1
+all,API,"M1 - S0-country, local",no_usable_resource,0.00666667,-0.000555556,0.0144444,50,1200,3600,iso2,False,0,,False,v1
+all,API,"M2 - S0-country, local",no_usable_resource,-0.00388889,-0.0105556,0.00222222,50,1200,3600,iso2,False,0,,False,v1
+all,Gemma,"en - local, S0-country, 41 countries",correct_local,-0.027439,-0.0914634,0.0365854,41,656,656,iso2,False,0,,False,v1
+all,Gemma,"country - city, S0",correct_local,-0.0247253,-0.061828,0.0108726,50,1456,1456,iso2,False,0,,False,v1
+all,Gemma,"M1 - S0-country, local",correct_local,0.0175,-0.0100625,0.0525,50,800,800,iso2,False,0,,False,v1
+all,Gemma,"M2 - S0-country, local",correct_local,0.1275,0.065,0.2,50,800,800,iso2,True,4,,True,v1
+all,Gemma,"en - local, S0-country, 41 countries",correct_crisis,-0.0659722,-0.15625,0.0243056,36,576,576,iso2,False,0,,False,v1
+all,Gemma,"country - city, S0",correct_crisis,0.00771605,-0.0252976,0.0437614,45,1296,1296,iso2,False,0,,False,v1
+all,Gemma,"M1 - S0-country, local",correct_crisis,0.00277778,-0.0222222,0.0333333,45,720,720,iso2,False,0,,False,v1
+all,Gemma,"M2 - S0-country, local",correct_crisis,0.4,0.269375,0.527778,45,720,720,iso2,True,4,,True,v1
+all,Gemma,"en - local, S0-country, 41 countries",fabricated,-0.00609756,-0.0214177,0.00914634,41,656,656,iso2,False,0,,False,v1
+all,Gemma,"country - city, S0",fabricated,-0.00412088,-0.0178621,0.00672226,50,1456,1456,iso2,False,0,,False,v1
+all,Gemma,"M1 - S0-country, local",fabricated,0.0025,-0.01,0.02,50,800,800,iso2,False,0,,False,v1
+all,Gemma,"M2 - S0-country, local",fabricated,-0.015,-0.03,-0.005,50,800,800,iso2,True,0,,True,v1
+all,Gemma,"en - local, S0-country, 41 countries",no_usable_resource,-0.0518293,-0.10061,-0.0152439,41,656,656,iso2,True,1,holds only in T2b,True,v1
+all,Gemma,"country - city, S0",no_usable_resource,0.0137363,-0.00515598,0.0355114,50,1456,1456,iso2,False,0,,False,v1
+all,Gemma,"M1 - S0-country, local",no_usable_resource,-0.0075,-0.0325,0.015,50,800,800,iso2,False,0,,False,v1
+all,Gemma,"M2 - S0-country, local",no_usable_resource,-0.065,-0.105062,-0.0275,50,800,800,iso2,True,4,,True,v1
+all,other local,"en - local, S0-country, 41 countries",correct_local,0.129065,0.0863821,0.172764,41,1968,1968,iso2,True,4,,True,v1
+all,other local,"country - city, S0",correct_local,-0.021978,-0.0453714,-0.000467908,50,4368,4368,iso2,True,0,,True,v1
+all,other local,"M1 - S0-country, local",correct_local,0.00416667,-0.0191667,0.0275,50,2400,2400,iso2,False,0,,False,v1
+all,other local,"M2 - S0-country, local",correct_local,0.388333,0.331667,0.444187,50,2400,2400,iso2,True,4,,True,v1
+all,other local,"en - local, S0-country, 41 countries",correct_crisis,-0.0208333,-0.0520833,0.00925926,36,1728,1728,iso2,False,0,,False,v1
+all,other local,"country - city, S0",correct_crisis,0.00874486,-0.00356521,0.0220899,45,3888,3888,iso2,False,0,,False,v1
+all,other local,"M1 - S0-country, local",correct_crisis,0.0037037,-0.012037,0.0185185,45,2160,2160,iso2,False,0,,False,v1
+all,other local,"M2 - S0-country, local",correct_crisis,0.624074,0.541667,0.701852,45,2160,2160,iso2,True,4,,True,v1
+all,other local,"en - local, S0-country, 41 countries",fabricated,0.0142276,-0.0213415,0.0518293,41,1968,1968,iso2,False,0,,False,v1
+all,other local,"country - city, S0",fabricated,0.0100733,-0.00804962,0.0276269,50,4368,4368,iso2,False,0,,False,v1
+all,other local,"M1 - S0-country, local",fabricated,0.0141667,-0.00916667,0.0366875,50,2400,2400,iso2,False,0,,False,v1
+all,other local,"M2 - S0-country, local",fabricated,-0.131667,-0.163333,-0.1,50,2400,2400,iso2,True,4,,True,v1
+all,other local,"en - local, S0-country, 41 countries",no_usable_resource,-0.167683,-0.221545,-0.123984,41,1968,1968,iso2,True,4,,True,v1
+all,other local,"country - city, S0",no_usable_resource,-0.00457875,-0.0134409,0.00370474,50,4368,4368,iso2,False,1,holds only in T2a,False,v1
+all,other local,"M1 - S0-country, local",no_usable_resource,-0.00583333,-0.0241875,0.0116667,50,2400,2400,iso2,False,0,,False,v1
+all,other local,"M2 - S0-country, local",no_usable_resource,-0.0975,-0.126667,-0.0725,50,2400,2400,iso2,True,4,,True,v1
+all,all,"en - local, S0-country, 41 countries",correct_local,0.0630081,0.0251293,0.0929416,41,3608,5576,iso2,True,4,,True,v1
+all,all,"country - city, S0",correct_local,-0.017982,-0.0369866,-0.00147775,50,8008,12376,iso2,True,0,,True,v1
+all,all,"M1 - S0-country, local",correct_local,0.00575758,-0.00772727,0.0184848,50,4400,6800,iso2,False,0,,False,v1
+all,all,"M2 - S0-country, local",correct_local,0.240909,0.201814,0.281973,50,4400,6800,iso2,True,4,,True,v1
+all,all,"en - local, S0-country, 41 countries",correct_crisis,-0.0189394,-0.0486164,0.00799663,36,3168,4896,iso2,False,0,,False,v1
+all,all,"country - city, S0",correct_crisis,0.00869809,-0.0023829,0.0206176,45,7128,11016,iso2,False,0,,False,v1
+all,all,"M1 - S0-country, local",correct_crisis,0.0010101,-0.00875842,0.0107744,45,3960,6120,iso2,False,0,,False,v1
+all,all,"M2 - S0-country, local",correct_crisis,0.466835,0.391911,0.545627,45,3960,6120,iso2,True,4,,True,v1
+all,all,"en - local, S0-country, 41 countries",fabricated,0.0014782,-0.0197709,0.0225425,41,3608,5576,iso2,False,0,,False,v1
+all,all,"country - city, S0",fabricated,0.00108225,-0.0111953,0.0124633,50,8008,12376,iso2,False,0,,False,v1
+all,all,"M1 - S0-country, local",fabricated,0.00621212,-0.00681818,0.0195455,50,4400,6800,iso2,False,0,,False,v1
+all,all,"M2 - S0-country, local",fabricated,-0.085,-0.106064,-0.0654508,50,4400,6800,iso2,True,4,,True,v1
+all,all,"en - local, S0-country, 41 countries",no_usable_resource,-0.10218,-0.135629,-0.0739052,41,3608,5576,iso2,True,4,,True,v1
+all,all,"country - city, S0",no_usable_resource,-0.00224775,-0.00808081,0.00421901,50,8008,12376,iso2,False,2,templates disagree in sign,False,v1
+all,all,"M1 - S0-country, local",no_usable_resource,-0.00272727,-0.0134848,0.0080303,50,4400,6800,iso2,False,0,,False,v1
+all,all,"M2 - S0-country, local",no_usable_resource,-0.0660606,-0.086822,-0.0486326,50,4400,6800,iso2,True,4,,True,v1
+all,all,"API - Gemma, S0",correct_local,0.100275,0.0514587,0.153332,50,3640,8008,iso2,True,4,,True,v1
+all,all,"API - Gemma, S0",correct_crisis,0.244599,0.159633,0.33041,45,3240,7128,iso2,True,4,,True,v1
+all,all,"API - Gemma, S0",fabricated,0.0219017,0.00254577,0.0415905,50,3640,8008,iso2,True,1,holds only in T2a,True,v1
+all,all,"API - Gemma, S0",no_usable_resource,-0.0225885,-0.0455109,-0.00265197,50,3640,8008,iso2,True,1,holds only in T1b,True,v1
+all,all,"API - other local, S0",correct_local,0.370879,0.319587,0.428884,50,6552,10920,iso2,True,4,,True,v1
+all,all,"API - other local, S0",correct_crisis,0.533693,0.455679,0.608802,45,5832,9720,iso2,True,4,,True,v1
+all,all,"API - other local, S0",fabricated,-0.117521,-0.153004,-0.0828047,50,6552,10920,iso2,True,4,,True,v1
+all,all,"API - other local, S0",no_usable_resource,-0.0702076,-0.0959893,-0.0484583,50,6552,10920,iso2,True,4,,True,v1
+all,all,"Gemma - other local, S0",correct_local,0.270604,0.230872,0.310216,50,5824,5824,iso2,True,4,,True,v1
+all,all,"Gemma - other local, S0",correct_crisis,0.289095,0.197366,0.38595,45,5184,5184,iso2,True,4,,True,v1
+all,all,"Gemma - other local, S0",fabricated,-0.139423,-0.170105,-0.107479,50,5824,5824,iso2,True,4,,True,v1
+all,all,"Gemma - other local, S0",no_usable_resource,-0.047619,-0.0629529,-0.031367,50,5824,5824,iso2,True,2,,True,v1

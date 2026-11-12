@@ -1,0 +1,97 @@
+model_group,who_region,countries,outcome,estimate,ci_low,ci_high,clusters,units,responses,cluster,version
+API,AFR,6,correct_local,0.941358,0.902778,0.972222,6,216,648,iso2,v2
+API,AFR,6,correct_crisis,0.6,0.180556,0.87963,4,120,360,iso2,v2
+API,AMR,8,correct_local,0.982143,0.974824,0.988252,8,336,1008,iso2,v2
+API,AMR,8,correct_crisis,0.945437,0.869048,0.987963,8,336,1008,iso2,v2
+API,EMR,6,correct_local,0.971065,0.958333,0.983796,6,288,864,iso2,v2
+API,EMR,6,correct_crisis,0.652778,0.411111,0.894444,5,240,720,iso2,v2
+API,EUR,17,correct_local,0.974392,0.94593,0.990885,17,768,2304,iso2,v2
+API,EUR,17,correct_crisis,0.827381,0.676381,0.951924,15,672,2016,iso2,v2
+API,SEAR,5,correct_local,0.986111,0.977778,0.994444,5,240,720,iso2,v2
+API,SEAR,5,correct_crisis,0.852778,0.583333,0.993056,5,240,720,iso2,v2
+API,WPR,8,correct_local,0.982143,0.975198,0.988252,8,336,1008,iso2,v2
+API,WPR,8,correct_crisis,0.863095,0.639881,0.981151,8,336,1008,iso2,v2
+Gemma,AFR,6,correct_local,0.506944,0.25,0.757812,6,144,144,iso2,v2
+Gemma,AFR,6,correct_crisis,0.275,0,0.75,4,80,80,iso2,v2
+Gemma,AMR,8,correct_local,0.991071,0.980769,1,8,224,224,iso2,v2
+Gemma,AMR,8,correct_crisis,0.830357,0.544531,0.991071,8,224,224,iso2,v2
+Gemma,EMR,6,correct_local,0.822917,0.744792,0.890625,6,192,192,iso2,v2
+Gemma,EMR,6,correct_crisis,0.1125,0,0.325,5,160,160,iso2,v2
+Gemma,EUR,17,correct_local,0.953125,0.91129,0.987071,17,512,512,iso2,v2
+Gemma,EUR,17,correct_crisis,0.723214,0.5474,0.879823,15,448,448,iso2,v2
+Gemma,SEAR,5,correct_local,0.775,0.59375,0.9125,5,160,160,iso2,v2
+Gemma,SEAR,5,correct_crisis,0.3625,0.075,0.65,5,160,160,iso2,v2
+Gemma,WPR,8,correct_local,0.964286,0.950893,0.979167,8,224,224,iso2,v2
+Gemma,WPR,8,correct_crisis,0.723214,0.425714,0.956731,8,224,224,iso2,v2
+other local,AFR,6,correct_local,0.347222,0.168561,0.5625,6,432,432,iso2,v2
+other local,AFR,6,correct_crisis,0.1125,0,0.421875,4,240,240,iso2,v2
+other local,AMR,8,correct_local,0.699405,0.602778,0.814421,8,672,672,iso2,v2
+other local,AMR,8,correct_crisis,0.35119,0.158826,0.590294,8,672,672,iso2,v2
+other local,EMR,6,correct_local,0.434028,0.340234,0.536458,6,576,576,iso2,v2
+other local,EMR,6,correct_crisis,0.102083,0.00416667,0.272917,5,480,480,iso2,v2
+other local,EUR,17,correct_local,0.735677,0.662081,0.800134,17,1536,1536,iso2,v2
+other local,EUR,17,correct_crisis,0.30506,0.181227,0.435957,15,1344,1344,iso2,v2
+other local,SEAR,5,correct_local,0.479167,0.3,0.658333,5,480,480,iso2,v2
+other local,SEAR,5,correct_crisis,0.26875,0.0729167,0.466667,5,480,480,iso2,v2
+other local,WPR,8,correct_local,0.690476,0.609375,0.782233,8,672,672,iso2,v2
+other local,WPR,8,correct_crisis,0.415179,0.255556,0.587806,8,672,672,iso2,v2
+all,AFR,6,correct_local,0.5383,0.391873,0.708874,6,792,1224,iso2,v2
+all,AFR,6,correct_crisis,0.275,0.0492424,0.578598,4,440,680,iso2,v2
+all,AMR,8,correct_local,0.829545,0.775758,0.894496,8,1232,1904,iso2,v2
+all,AMR,8,correct_crisis,0.600379,0.436104,0.758669,8,1232,1904,iso2,v2
+all,EMR,6,correct_local,0.651199,0.595328,0.711806,6,1056,1632,iso2,v2
+all,EMR,6,correct_crisis,0.254167,0.120455,0.435985,5,880,1360,iso2,v2
+all,EUR,17,correct_local,0.840317,0.786091,0.885103,17,2816,4352,iso2,v2
+all,EUR,17,correct_crisis,0.523539,0.40408,0.644113,15,2464,3808,iso2,v2
+all,SEAR,5,correct_local,0.671212,0.535227,0.792424,5,880,1360,iso2,v2
+all,SEAR,5,correct_crisis,0.445076,0.223106,0.632955,5,880,1360,iso2,v2
+all,WPR,8,correct_local,0.819805,0.774891,0.870921,8,1232,1904,iso2,v2
+all,WPR,8,correct_crisis,0.593344,0.417229,0.723223,8,1232,1904,iso2,v2
+API,AFR,6,correct_local,0.907407,0.8125,0.972222,6,216,648,iso2,v1
+API,AFR,6,correct_crisis,0.6,0.180556,0.87963,4,120,360,iso2,v1
+API,AMR,8,correct_local,0.982143,0.974824,0.988252,8,336,1008,iso2,v1
+API,AMR,8,correct_crisis,0.945437,0.869048,0.987963,8,336,1008,iso2,v1
+API,EMR,6,correct_local,0.969907,0.95599,0.983796,6,288,864,iso2,v1
+API,EMR,6,correct_crisis,0.608333,0.288889,0.894444,5,240,720,iso2,v1
+API,EUR,17,correct_local,0.972222,0.944444,0.988715,17,768,2304,iso2,v1
+API,EUR,17,correct_crisis,0.771329,0.596683,0.917142,15,672,2016,iso2,v1
+API,SEAR,5,correct_local,0.983333,0.975,0.991667,5,240,720,iso2,v1
+API,SEAR,5,correct_crisis,0.844444,0.579167,0.990278,5,240,720,iso2,v1
+API,WPR,8,correct_local,0.982143,0.975198,0.988252,8,336,1008,iso2,v1
+API,WPR,8,correct_crisis,0.858135,0.635913,0.97686,8,336,1008,iso2,v1
+Gemma,AFR,6,correct_local,0.506944,0.25,0.757812,6,144,144,iso2,v1
+Gemma,AFR,6,correct_crisis,0.275,0,0.75,4,80,80,iso2,v1
+Gemma,AMR,8,correct_local,0.991071,0.980769,1,8,224,224,iso2,v1
+Gemma,AMR,8,correct_crisis,0.8125,0.508826,0.991071,8,224,224,iso2,v1
+Gemma,EMR,6,correct_local,0.822917,0.744792,0.890625,6,192,192,iso2,v1
+Gemma,EMR,6,correct_crisis,0.1125,0,0.325,5,160,160,iso2,v1
+Gemma,EUR,17,correct_local,0.949219,0.908066,0.983456,17,512,512,iso2,v1
+Gemma,EUR,17,correct_crisis,0.674107,0.491372,0.842672,15,448,448,iso2,v1
+Gemma,SEAR,5,correct_local,0.69375,0.51875,0.86875,5,160,160,iso2,v1
+Gemma,SEAR,5,correct_crisis,0.2125,0,0.4875,5,160,160,iso2,v1
+Gemma,WPR,8,correct_local,0.964286,0.950893,0.979167,8,224,224,iso2,v1
+Gemma,WPR,8,correct_crisis,0.691964,0.408281,0.923077,8,224,224,iso2,v1
+other local,AFR,6,correct_local,0.347222,0.168561,0.5625,6,432,432,iso2,v1
+other local,AFR,6,correct_crisis,0.1,0,0.375,4,240,240,iso2,v1
+other local,AMR,8,correct_local,0.675595,0.573611,0.796496,8,672,672,iso2,v1
+other local,AMR,8,correct_crisis,0.342262,0.154167,0.583333,8,672,672,iso2,v1
+other local,EMR,6,correct_local,0.423611,0.335069,0.522569,6,576,576,iso2,v1
+other local,EMR,6,correct_crisis,0.1,0.00208333,0.272917,5,480,480,iso2,v1
+other local,EUR,17,correct_local,0.718099,0.639778,0.786968,17,1536,1536,iso2,v1
+other local,EUR,17,correct_crisis,0.267113,0.145097,0.394027,15,1344,1344,iso2,v1
+other local,SEAR,5,correct_local,0.454167,0.279167,0.654167,5,480,480,iso2,v1
+other local,SEAR,5,correct_crisis,0.21875,0.0229167,0.466667,5,480,480,iso2,v1
+other local,WPR,8,correct_local,0.665179,0.590253,0.754836,8,672,672,iso2,v1
+other local,WPR,8,correct_crisis,0.370536,0.222187,0.559524,8,672,672,iso2,v1
+all,AFR,6,correct_local,0.52904,0.369146,0.708874,6,792,1224,iso2,v1
+all,AFR,6,correct_crisis,0.268182,0.0492424,0.55303,4,440,680,iso2,v1
+all,AMR,8,correct_local,0.816558,0.758367,0.886685,8,1232,1904,iso2,v1
+all,AMR,8,correct_crisis,0.592262,0.428784,0.744869,8,1232,1904,iso2,v1
+all,EMR,6,correct_local,0.645202,0.594066,0.706755,6,1056,1632,iso2,v1
+all,EMR,6,correct_crisis,0.240909,0.0996212,0.434848,5,880,1360,iso2,v1
+all,EUR,17,correct_local,0.829427,0.77394,0.87708,17,2816,4352,iso2,v1
+all,EUR,17,correct_crisis,0.478626,0.35892,0.605157,15,2464,3808,iso2,v1
+all,SEAR,5,correct_local,0.642045,0.517794,0.778788,5,880,1360,iso2,v1
+all,SEAR,5,correct_crisis,0.388258,0.206439,0.610985,5,880,1360,iso2,v1
+all,WPR,8,correct_local,0.806006,0.765398,0.855436,8,1232,1904,iso2,v1
+all,WPR,8,correct_crisis,0.561959,0.394432,0.697854,8,1232,1904,iso2,v1

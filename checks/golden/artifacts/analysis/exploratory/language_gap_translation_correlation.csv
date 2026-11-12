@@ -1,0 +1,9 @@
+measure,method,languages,correlation,ci_low,ci_high,p_two_sided,version
+median_chrf,spearman,30,0.0625278,-0.303455,0.411524,0.742724,v2
+median_chrf,pearson,30,0.113127,-0.151096,0.334753,0.551704,v2
+flag_rate,spearman,30,0.130885,-0.272504,0.4529,0.490572,v2
+flag_rate,pearson,30,0.106412,-0.191856,0.314384,0.575703,v2
+median_chrf,spearman,30,0.0322724,-0.324944,0.391101,0.865564,v1
+median_chrf,pearson,30,0.101089,-0.230109,0.312542,0.595053,v1
+flag_rate,spearman,30,0.121335,-0.29506,0.457482,0.523014,v1
+flag_rate,pearson,30,0.157561,-0.168317,0.390862,0.405669,v1
